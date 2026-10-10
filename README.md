@@ -3,6 +3,44 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## World-locked HUD and stereo menus (build 20261010.35)
+
+`WorldLockedHUD=1` places the game's HUD and menu passes on a stereo panel
+fixed in tracking space relative to your last recenter. Turn your head to look
+at the corners, or lean toward the panel to read it. **F8** places it in front
+of your current pose again. It is anchored to the VR recenter origin, not to
+Bayonetta's character or a location in the level. Normal full tracking is
+required; F7's fixed-pose diagnostic intentionally disables native movement.
+
+The default panel is 3.2 metres wide and 2 metres ahead. Change `HUDWidthMetres`
+or `HUDDistanceMetres` to adjust apparent size, and `HUDVerticalOffsetMetres`
+to move it up (positive) or down (negative), then restart the game. Width is
+clamped to 0.5..10m, distance to 0.5..10m, and height to -5..5m; nonfinite
+values use defaults. Panel proportions follow the game's viewport aspect.
+`WorldLockedHUD=0` with `ApplyToUI=0` restores the original screen-space HUD.
+The old `ApplyToUI` override is ignored while world-locked HUD is enabled.
+
+The Steam native stereo path captures the dedicated `Id` and `IdFont` passes
+once into transparent textures and projects those same pixels for both eyes.
+This covers menu backgrounds, fixed-function/pretransformed UI and font draws
+without relying on individual shader or blend-state identification. Scissor and
+stencil clipping happen in the flat UI texture before projection. The game's UI
+buffer swaps and texture/material cleanup run once, after the second eye; running
+them twice consumed menu data before the right eye could draw it. Both changes
+replace build .34's incomplete per-shader approach, which left menus head-locked
+and visible in only one eye.
+
+This uses the existing eye render poses and submission path. HUD size does not
+depend on game FOV or `WorldUnitsPerMetre`. Hook installation checks all six
+call targets against the supported Steam executable. Logs report `menu: captures`
+and per-eye composite totals. The old heuristic remains only for the legacy
+alternating-frame path, which does not have the dedicated native UI hooks.
+
+Validation: `tests/build_checks.cmd` includes HUD math checks and 12 D3D9 GPU
+render/readback cases covering both eyes, head turns, opaque UI, alpha edges,
+separate font layers, state restoration and resource recreation. Actual title,
+options and save-menu coverage still needs an in-headset check after installation.
+
 ## Separate compositor process (build 20261002.33)
 
 `ExternalCompositor=1` selects the new companion path. The proxy launches

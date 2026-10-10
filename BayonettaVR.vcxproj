@@ -44,6 +44,8 @@
   <ItemGroup><ClInclude Include="src\Config.h"/><ClInclude Include="src\D3D9Hooks.h"/><ClInclude Include="src\Log.h"/><ClInclude Include="src\Matrix.h"/><ClInclude Include="src\VR.h"/></ItemGroup>
   <ItemGroup><None Include="BayonettaVR.ini"/><None Include="README.md"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\TrackingMath.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\WorldHud.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\MenuPanel9.h"/><ClCompile Include="src\MenuPanel9.cpp"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\PoseSubmission.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ReferenceGrid.h"/><ClInclude Include="src\ReferenceGridRenderer.h"/><ClCompile Include="src\ReferenceGridRenderer.cpp"/></ItemGroup>

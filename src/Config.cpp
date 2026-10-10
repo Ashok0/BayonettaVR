@@ -22,6 +22,13 @@ static float ReadFloat(const wchar_t* path, const wchar_t* key, float value) {
     return end != text ? parsed : value;
 }
 
+static float ReadBoundedFloat(const wchar_t* path, const wchar_t* key,
+                              float fallback, float minimum, float maximum) {
+    const float value = ReadFloat(path, key, fallback);
+    if (!std::isfinite(value)) return fallback;
+    return value < minimum ? minimum : (value > maximum ? maximum : value);
+}
+
 void LoadConfig() {
     wchar_t path[MAX_PATH]{};
     GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), path, MAX_PATH);
@@ -46,6 +53,13 @@ void LoadConfig() {
         g_cfg.compositorTurnDegrees = 2.0f;
     if (g_cfg.compositorTurnDegrees > 45.0f) g_cfg.compositorTurnDegrees = 45.0f;
     g_cfg.applyToUi = ReadInt(path, L"ApplyToUI", 0) != 0;
+    g_cfg.worldLockedHud = ReadInt(path, L"WorldLockedHUD", 1) != 0;
+    g_cfg.hudDistanceMetres = ReadBoundedFloat(path, L"HUDDistanceMetres", 2.0f, 0.5f, 10.0f);
+    g_cfg.hudWidthMetres = ReadBoundedFloat(path, L"HUDWidthMetres", 3.2f, 0.5f, 10.0f);
+    g_cfg.hudVerticalOffsetMetres = ReadBoundedFloat(path, L"HUDVerticalOffsetMetres", 0.0f, -5.0f, 5.0f);
+    Log("hud: worldLocked=%d width=%.2fm distance=%.2fm verticalOffset=%.2fm; F8 reanchors",
+        g_cfg.worldLockedHud, g_cfg.hudWidthMetres, g_cfg.hudDistanceMetres,
+        g_cfg.hudVerticalOffsetMetres);
     g_cfg.swapEyes = ReadInt(path, L"SwapEyes", 0) != 0;
     g_cfg.mirrorSideBySide = ReadInt(path, L"MirrorSideBySide", 0) != 0;
     g_cfg.compositorPoseDiagnostic = ReadInt(path, L"CompositorPoseDiagnostic", 0) != 0;
@@ -56,7 +70,7 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20261002.33 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+    Log("config: build=20261010.35 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,

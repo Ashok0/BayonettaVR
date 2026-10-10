@@ -3,6 +3,8 @@
 #include "Log.h"
 #include "Matrix.h"
 #include "ShaderAnalysis.h"
+#include "WorldHud.h"
+#include "MenuPanel9.h"
 #include "ReferenceGridRenderer.h"
 #include "VR.h"
 #include "IndependentGrid.h"
@@ -42,6 +44,7 @@ using PresentFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, const RECT*, c
 using CreateVSFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, const DWORD*, IDirect3DVertexShader9**);
 using SetVSFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, IDirect3DVertexShader9*);
 using SetConstFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, UINT, const float*, UINT);
+using SetRenderTargetFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, DWORD, IDirect3DSurface9*);
 using DrawPrimitiveFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, UINT, UINT);
 using DrawIndexedFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, INT, UINT, UINT, UINT, UINT);
 using DrawPrimitiveUPFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, UINT, const void*, UINT);
@@ -56,6 +59,7 @@ PresentFn g_present = nullptr;
 CreateVSFn g_createVS = nullptr;
 SetVSFn g_setVS = nullptr;
 SetConstFn g_setConst = nullptr;
+SetRenderTargetFn g_setRenderTarget = nullptr;
 DrawPrimitiveFn g_drawPrimitive = nullptr;
 DrawIndexedFn g_drawIndexed = nullptr;
 DrawPrimitiveUPFn g_drawPrimitiveUP = nullptr;
@@ -67,6 +71,7 @@ SwapPresentFn g_swapPresent = nullptr;
 struct ShaderInfo {
     int matrixBase = -1;
     unsigned long long draws = 0;
+    unsigned long long hudDraws = 0;
     std::string assembly;
 };
 std::unordered_map<IDirect3DVertexShader9*, ShaderInfo> g_shaders;
@@ -74,11 +79,18 @@ IDirect3DVertexShader9* g_currentShader = nullptr;
 float g_constants[256][4]{};
 bool g_constantValid[256]{};
 unsigned long long g_adjustedDraws = 0;
+unsigned long long g_hudDraws = 0;
 thread_local bool g_insidePresent = false;
 thread_local bool g_insideNativeDraw = false;
+thread_local int g_capturingMenu = -1;
+thread_local bool g_compositingMenu = false;
+bool g_menuHooksInstalled = false;
+MenuPanel9 g_menuPanel;
+unsigned long long g_menuCaptures[2]{}, g_menuEyeDraws[2]{};
 struct ClipCacheEntry {
     UINT width = 0;
     UINT height = 0;
+    bool hud = false;
     Mat4 transform{};
 };
 ClipCacheEntry g_clipCache[2][8]{};
@@ -364,8 +376,8 @@ void DumpShaderDiagnostics() {
     const size_t count = std::min<size_t>(16, shaders.size());
     for (size_t i = 0; i < count; ++i) {
         const auto* info = shaders[i].second;
-        Log("shader stats: rank=%zu ptr=%p draws=%llu matrix=c%d", i + 1,
-            shaders[i].first, info->draws, info->matrixBase);
+        Log("shader stats: rank=%zu ptr=%p draws=%llu hud=%llu matrix=c%d", i + 1,
+            shaders[i].first, info->draws, info->hudDraws, info->matrixBase);
         if (info->assembly.empty()) continue;
         wchar_t path[MAX_PATH]{};
         GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), path, MAX_PATH);
@@ -384,13 +396,70 @@ void DumpShaderDiagnostics() {
     }
 }
 
-bool LooksOrthographic(const Mat4& m) {
-    return std::fabs(m.m[3][0]) < 1e-5f && std::fabs(m.m[3][1]) < 1e-5f &&
-           std::fabs(m.m[3][2]) < 1e-5f && std::fabs(m.m[3][3] - 1.0f) < 1e-4f;
+bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
+    // Orthographic matrices also occur in shadow maps and postprocessing.
+    // Restrict the panel to blended/alpha-tested, depth-disabled UI on the
+    // final backbuffer. Never move a render-target texture's fullscreen blit.
+    DWORD depth = 0, blend = 0, alphaTest = 0;
+    if (FAILED(device->GetRenderState(D3DRS_ZENABLE, &depth)) || depth != D3DZB_FALSE ||
+        FAILED(device->GetRenderState(D3DRS_ALPHABLENDENABLE, &blend)) ||
+        FAILED(device->GetRenderState(D3DRS_ALPHATESTENABLE, &alphaTest)) ||
+        (!blend && !alphaTest)) return false;
+    IDirect3DSurface9* target = nullptr;
+    IDirect3DSurface9* backbuffer = nullptr;
+    const HRESULT targetResult = device->GetRenderTarget(0, &target);
+    const HRESULT backResult = device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer);
+    D3DSURFACE_DESC desc{};
+    const bool finalTarget = SUCCEEDED(targetResult) && SUCCEEDED(backResult) &&
+        target && target == backbuffer && SUCCEEDED(target->GetDesc(&desc)) &&
+        viewport.X == 0 && viewport.Y == 0 && viewport.Width == desc.Width &&
+        viewport.Height == desc.Height;
+    if (target) target->Release();
+    if (backbuffer) backbuffer->Release();
+    if (!finalTarget) return false;
+    IDirect3DBaseTexture9* texture = nullptr;
+    if (FAILED(device->GetTexture(0, &texture))) return false;
+    bool renderTexture = false;
+    if (texture) {
+        renderTexture = texture->GetType() != D3DRTYPE_TEXTURE;
+        if (!renderTexture) {
+            D3DSURFACE_DESC textureDesc{};
+            renderTexture = FAILED(static_cast<IDirect3DTexture9*>(texture)->GetLevelDesc(0, &textureDesc)) ||
+                (textureDesc.Usage & (D3DUSAGE_RENDERTARGET | D3DUSAGE_DEPTHSTENCIL)) != 0;
+        }
+        texture->Release();
+    }
+    return !renderTexture;
 }
 
 template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
+    if (g_compositingMenu) return call();
+    if (g_capturingMenu >= 0) {
+        // Keep the game UI flat in its own texture. Correct the alpha channel
+        // to coverage rather than alpha squared, so replay uses premultiplied
+        // ONE/INVSRCALPHA blending. Preserve the game's RGB blending and state.
+        IDirect3DSurface9* target = nullptr;
+        device->GetRenderTarget(0, &target);
+        const bool captureTarget = target == g_menuPanel.CaptureTarget(g_capturingMenu);
+        if (target) target->Release();
+        if (!captureTarget) return call();
+        DWORD blend = FALSE, destination = D3DBLEND_INVSRCALPHA;
+        device->GetRenderState(D3DRS_ALPHABLENDENABLE, &blend);
+        device->GetRenderState(D3DRS_DESTBLEND, &destination);
+        if (!blend) return call();
+        const D3DRENDERSTATETYPE states[] = {D3DRS_SEPARATEALPHABLENDENABLE,
+            D3DRS_SRCBLENDALPHA, D3DRS_DESTBLENDALPHA, D3DRS_BLENDOPALPHA};
+        DWORD previous[4]{};
+        for (int i=0;i<4;++i) if (FAILED(device->GetRenderState(states[i], &previous[i]))) return call();
+        const bool additive = destination == D3DBLEND_ONE;
+        const DWORD values[] = {TRUE, DWORD(additive ? D3DBLEND_ZERO : D3DBLEND_ONE),
+            DWORD(additive ? D3DBLEND_ONE : D3DBLEND_INVSRCALPHA), D3DBLENDOP_ADD};
+        for (int i=0;i<4;++i) device->SetRenderState(states[i], values[i]);
+        const HRESULT result = call();
+        for (int i=0;i<4;++i) device->SetRenderState(states[i], previous[i]);
+        return result;
+    }
     int base = Cfg().matrixRegisterOverride;
     ShaderInfo* shaderInfo = nullptr;
     IDirect3DVertexShader9* liveShader = nullptr;
@@ -415,41 +484,86 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     // public Set* entry in the device vtable. Read the live device state at the
     // draw boundary; this is the authoritative matrix the shader will use.
     if (FAILED(device->GetVertexShaderConstantF(static_cast<UINT>(base), &original.m[0][0], 4))) return call();
-    if (!Cfg().applyToUi && LooksOrthographic(original)) return call();
-    VR().EnsureOrigin();
-
     D3DVIEWPORT9 viewport{};
     float aspect = 16.0f / 9.0f;
     if (SUCCEEDED(device->GetViewport(&viewport)) && viewport.Height) aspect = float(viewport.Width) / float(viewport.Height);
+    const bool orthographic = LooksOrthographic(original);
+    bool hud = false;
+    if (orthographic) {
+        if (Cfg().worldLockedHud) {
+            if (g_menuHooksInstalled) return call(); // Dedicated Id/IdFont capture owns UI.
+            // With native stereo, only change the draws captured into each
+            // eye. Do not project any later desktop-only UI a second time.
+            hud = (!Cfg().nativeStereo || g_insideNativeDraw) && viewport.Width &&
+                viewport.Height && IsHudDraw(device, viewport);
+            if (!hud) return call();
+        } else if (!Cfg().applyToUi) return call();
+    }
+    VR().EnsureOrigin();
     Mat4 clipTransform{};
     bool cached = false;
     if (g_insideNativeDraw && viewport.Height) {
         const int eye = VR().Eye();
         for (int i = 0; i < g_clipCacheCount[eye]; ++i) {
             if (g_clipCache[eye][i].width == viewport.Width &&
-                g_clipCache[eye][i].height == viewport.Height) {
+                g_clipCache[eye][i].height == viewport.Height &&
+                g_clipCache[eye][i].hud == hud) {
                 clipTransform = g_clipCache[eye][i].transform;
                 cached = true;
                 break;
             }
         }
         if (!cached) {
-            clipTransform = VR().ClipTransform(aspect);
+            clipTransform = hud ? VR().HudClipTransform(aspect) : VR().ClipTransform(aspect);
             cached = true;
             if (g_clipCacheCount[eye] < static_cast<int>(_countof(g_clipCache[eye]))) {
                 auto& entry = g_clipCache[eye][g_clipCacheCount[eye]++];
                 entry.width = viewport.Width;
                 entry.height = viewport.Height;
+                entry.hud = hud;
                 entry.transform = clipTransform;
             }
         }
     }
-    if (!cached) clipTransform = VR().ClipTransform(aspect);
+    if (!cached) clipTransform = hud ? VR().HudClipTransform(aspect) : VR().ClipTransform(aspect);
+    DWORD scissorEnabled = FALSE;
+    RECT oldScissor{};
+    bool restoreScissor = false;
+    if (hud) {
+        if (FAILED(device->GetRenderState(D3DRS_SCISSORTESTENABLE, &scissorEnabled))) return call();
+        if (scissorEnabled) {
+            if (FAILED(device->GetScissorRect(&oldScissor))) return call();
+            const float width = float(viewport.Width), height = float(viewport.Height);
+            float bounds[4]{};
+            ProjectHudScissor(clipTransform,
+                2.0f*float(oldScissor.left)/width - 1.0f,
+                1.0f - 2.0f*float(oldScissor.bottom)/height,
+                2.0f*float(oldScissor.right)/width - 1.0f,
+                1.0f - 2.0f*float(oldScissor.top)/height, bounds);
+            const RECT projected{
+                LONG(std::floor((bounds[0]+1.0f)*0.5f*width)),
+                LONG(std::floor((1.0f-bounds[3])*0.5f*height)),
+                LONG(std::ceil((bounds[2]+1.0f)*0.5f*width)),
+                LONG(std::ceil((1.0f-bounds[1])*0.5f*height))};
+            if (projected.left >= projected.right || projected.top >= projected.bottom) return D3D_OK;
+            if (FAILED(device->SetScissorRect(&projected))) return call();
+            restoreScissor = true;
+        }
+    }
     const Mat4 adjusted = Mul(clipTransform, original);
-    g_setConst(device, static_cast<UINT>(base), &adjusted.m[0][0], 4);
+    if (FAILED(g_setConst(device, static_cast<UINT>(base), &adjusted.m[0][0], 4))) {
+        if (restoreScissor) device->SetScissorRect(&oldScissor);
+        return call();
+    }
     ++g_adjustedDraws;
+    if (hud) {
+        ++g_hudDraws;
+        if (shaderInfo && shaderInfo->hudDraws++ == 0)
+            Log("hud: projecting shader=%p matrix=c%d onto recenter-space panel", liveShader, base);
+    }
     const HRESULT result = call();
     g_setConst(device, static_cast<UINT>(base), &original.m[0][0], 4);
+    if (restoreScissor) device->SetScissorRect(&oldScissor);
     return result;
 }
 
@@ -686,6 +800,90 @@ void* g_otDrawTrampoline = nullptr;
 unsigned char g_otDrawOriginal[6]{};
 bool CaptureAndSubmit(IDirect3DDevice9* device, bool early);
 
+using GameThisCall = void (__thiscall*)(void*);
+using GameCall = void (__cdecl*)();
+GameThisCall g_drawMenuList = nullptr;
+GameThisCall g_rotateUiBuffers = nullptr, g_rotateFontBuffers = nullptr, g_releaseUiTextures = nullptr;
+GameCall g_releaseMaterials = nullptr;
+
+void DrawMenuList(void* self, int layer) {
+    if (!g_insideNativeDraw || !Cfg().worldLockedHud || !g_device) { g_drawMenuList(self); return; }
+    if (VR().Eye() == 0 || !g_menuPanel.Ready(layer)) {
+        if (!g_menuPanel.Begin(g_device, layer)) {
+            static bool logged = false;
+            if (!logged) { Log("menu: capture allocation failed; rendering original UI in both eyes"); logged = true; }
+            g_drawMenuList(self); return;
+        }
+        g_capturingMenu = layer;
+        g_drawMenuList(self);
+        g_capturingMenu = -1;
+        g_menuPanel.End(g_device, layer);
+        ++g_menuCaptures[layer];
+    }
+    VR().EnsureOrigin();
+    g_compositingMenu = true;
+    const HRESULT hr = g_menuPanel.Draw(g_device, layer, VR().HudClipTransform(g_menuPanel.Aspect()));
+    g_compositingMenu = false;
+    if (SUCCEEDED(hr)) ++g_menuEyeDraws[VR().Eye()];
+    else Log("menu: layer=%d eye=%d composite failed 0x%08X", layer, VR().Eye(), hr);
+}
+void __fastcall HookIdList(void* self, void*) { DrawMenuList(self, 0); }
+void __fastcall HookIdFontList(void* self, void*) { DrawMenuList(self, 1); }
+bool FinishStereoFrame() { return !g_insideNativeDraw || VR().Eye() == 1; }
+void __fastcall HookRotateUiBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateUiBuffers(self); }
+void __fastcall HookRotateFontBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateFontBuffers(self); }
+void __fastcall HookReleaseUiTextures(void* self, void*) { if (FinishStereoFrame()) g_releaseUiTextures(self); }
+void __cdecl HookReleaseMaterials() { if (FinishStereoFrame()) g_releaseMaterials(); }
+
+struct MenuCallPatch { unsigned char* address = nullptr; unsigned char original[5]{}; };
+MenuCallPatch g_menuPatches[6]{};
+void RemoveMenuHooks() {
+    for (auto& patch : g_menuPatches) if (patch.address) {
+        DWORD old = 0;
+        if (VirtualProtect(patch.address, 5, PAGE_EXECUTE_READWRITE, &old)) {
+            memcpy(patch.address, patch.original, 5);
+            DWORD ignored = 0; VirtualProtect(patch.address, 5, old, &ignored);
+            FlushInstructionCache(GetCurrentProcess(), patch.address, 5);
+        }
+        patch = {};
+    }
+    g_menuHooksInstalled = false;
+}
+bool InstallMenuHooks(unsigned char* image) {
+    // Steam 0x591AD330 cOtManager::draw: explicit Id/IdFont passes followed
+    // by ClearBuffer and deferred texture/material releases. These call sites
+    // are checked before any mutation; no global function hook is necessary.
+    const uintptr_t sites[] = {0xE5358,0xE53E0,0xE5459,0xE5463,0xE54C3,0xE54C8};
+    const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50};
+    const void* hooks[] = {&HookIdList,&HookIdFontList,&HookRotateUiBuffers,
+        &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials};
+    for (int i=0;i<6;++i) {
+        auto* site = image + sites[i];
+        int32_t displacement = 0; memcpy(&displacement, site+1, 4);
+        if (site[0] != 0xE8 || site+5+displacement != image+targets[i]) {
+            Log("menu: call-site signature mismatch at RVA 0x%X", unsigned(sites[i])); return false;
+        }
+    }
+    g_drawMenuList = reinterpret_cast<GameThisCall>(image+targets[0]);
+    g_rotateUiBuffers = reinterpret_cast<GameThisCall>(image+targets[2]);
+    g_rotateFontBuffers = reinterpret_cast<GameThisCall>(image+targets[3]);
+    g_releaseUiTextures = reinterpret_cast<GameThisCall>(image+targets[4]);
+    g_releaseMaterials = reinterpret_cast<GameCall>(image+targets[5]);
+    for (int i=0;i<6;++i) {
+        auto* site = image + sites[i];
+        DWORD old = 0;
+        if (!VirtualProtect(site, 5, PAGE_EXECUTE_READWRITE, &old)) { RemoveMenuHooks(); return false; }
+        auto& patch = g_menuPatches[i]; patch.address = site; memcpy(patch.original, site, 5);
+        const int32_t displacement = static_cast<int32_t>(reinterpret_cast<const unsigned char*>(hooks[i])-(site+5));
+        memcpy(site+1, &displacement, 4);
+        DWORD ignored = 0; VirtualProtect(site, 5, old, &ignored);
+        FlushInstructionCache(GetCurrentProcess(), site, 5);
+    }
+    g_menuHooksInstalled = true;
+    Log("menu: Id/IdFont capture + stereo replay installed; UI buffer cleanup runs once per pair");
+    return true;
+}
+
 void __fastcall HookOtManagerDraw(void* self, void*) {
     if (!g_otDraw) return;
     if (g_insideNativeDraw || !Cfg().nativeStereo || !VR().Active() || !g_device) {
@@ -701,6 +899,7 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     if (!independent) VR().WaitForPose();
     g_pipeline.poseReady = PipelineSeconds();
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
+    g_menuPanel.BeginFrame();
 
     VR().SetEye(0);
     g_otDraw(self);
@@ -784,10 +983,13 @@ bool InstallNativeStereoHook() {
     VirtualProtect(g_otDrawTarget, sizeof(patch), oldProtect, &ignored);
     FlushInstructionCache(GetCurrentProcess(), g_otDrawTarget, sizeof(patch));
     Log("native stereo: cOtManager::draw dual-pass hook installed at %p", g_otDrawTarget);
+    InstallMenuHooks(image);
     return true;
 }
 
 void RemoveNativeStereoHook() {
+    RemoveMenuHooks();
+    g_menuPanel.Reset();
     if (g_otDrawTarget && g_otDrawTrampoline) {
         DWORD oldProtect = 0;
         if (VirtualProtect(g_otDrawTarget, sizeof(g_otDrawOriginal),
@@ -936,6 +1138,8 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
         previousReportFrame = presents;
         previousReportTick = reportTick;
         VR().LogFrameTiming();
+        if (g_menuHooksInstalled) Log("menu: captures=%llu/%llu eyeComposites=%llu/%llu",
+            g_menuCaptures[0], g_menuCaptures[1], g_menuEyeDraws[0], g_menuEyeDraws[1]);
         if (nativePair) Log("vr pipeline: early=%d wait=%.2fms pair=%.2fms queue=%.2fms transfer=%.2fms submit=%.2fms poseAgeAtSubmit=%.2fms",
             early, (g_pipeline.poseReady-g_pipeline.waitStart)*1000,
             (g_pipeline.pairReady-g_pipeline.poseReady)*1000,
@@ -944,7 +1148,7 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
     }
     static bool loggedTransforms = false;
     if (!loggedTransforms) {
-        Log("stereo: %llu transformed draws, %zu shaders inspected", g_adjustedDraws, g_shaders.size());
+        Log("stereo: %llu transformed draws (%llu HUD), %zu shaders inspected", g_adjustedDraws, g_hudDraws, g_shaders.size());
         loggedTransforms = true;
     }
 
@@ -1047,6 +1251,7 @@ void UncapPresentation(D3DPRESENT_PARAMETERS* parameters) {
 }
 
 HRESULT STDMETHODCALLTYPE HookReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* p) {
+    g_menuPanel.Reset();
     ReleaseTextures();
     UncapPresentation(p);
     return g_reset(d,p);
@@ -1068,6 +1273,11 @@ HRESULT STDMETHODCALLTYPE HookCreateVS(IDirect3DDevice9* d,const DWORD* code,IDi
     return hr;
 }
 HRESULT STDMETHODCALLTYPE HookSetVS(IDirect3DDevice9* d,IDirect3DVertexShader9* s) { g_currentShader=s; return g_setVS(d,s); }
+HRESULT STDMETHODCALLTYPE HookSetRenderTarget(IDirect3DDevice9* d,DWORD index,IDirect3DSurface9* target) {
+    if (g_capturingMenu >= 0 && index == 0 && target == g_menuPanel.SourceTarget())
+        target = g_menuPanel.CaptureTarget(g_capturingMenu);
+    return g_setRenderTarget(d,index,target);
+}
 HRESULT STDMETHODCALLTYPE HookSetConst(IDirect3DDevice9* d,UINT start,const float* data,UINT count) {
     if(data&&start<256){ UINT n=std::min(count,256u-start); memcpy(&g_constants[start][0],data,n*4*sizeof(float)); for(UINT i=0;i<n;++i)g_constantValid[start+i]=true; }
     return g_setConst(d,start,data,count);
@@ -1079,7 +1289,7 @@ HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE 
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     return PresentOnce(d, [&]{ return g_presentEx(d,a,b,c,e,f); });
 }
-HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
+HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
 HRESULT STDMETHODCALLTYPE HookSwapPresent(IDirect3DSwapChain9* swap,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     IDirect3DDevice9* device = nullptr;
     if (SUCCEEDED(swap->GetDevice(&device)) && device) {
@@ -1103,6 +1313,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     void** v = *reinterpret_cast<void***>(device);
     PatchVtable(v,16,&HookReset,g_reset);
     PatchVtable(v,17,&HookPresent,g_present);
+    PatchVtable(v,37,&HookSetRenderTarget,g_setRenderTarget);
     PatchVtable(v,81,&HookDrawPrimitive,g_drawPrimitive);
     PatchVtable(v,82,&HookDrawIndexed,g_drawIndexed);
     PatchVtable(v,83,&HookDrawPrimitiveUP,g_drawPrimitiveUP);

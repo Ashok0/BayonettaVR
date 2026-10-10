@@ -6,6 +6,7 @@ extern "C" IMAGE_DOS_HEADER __ImageBase;
 #include "Config.h"
 #include "Log.h"
 #include "TrackingMath.h"
+#include "WorldHud.h"
 #include <cmath>
 
 namespace bvr {
@@ -362,6 +363,15 @@ Mat4 VRRuntime::ClipTransform(float gameAspect) const {
     // Existing clip = Pgame * modelView * vertex. Replace the camera/projection
     // portion without needing Bayonetta's model or view matrices separately.
     return EyeViewProjection(eye_, Cfg().worldUnitsPerMetre, invGame);
+}
+
+Mat4 VRRuntime::HudClipTransform(float gameAspect) const {
+    if (!poseValid_ || !originValid_) return Identity();
+    const Mat4 panel = HudPanelFromClip(gameAspect, Cfg().hudWidthMetres,
+        Cfg().hudDistanceMetres, Cfg().hudVerticalOffsetMetres);
+    // Use the same eye pose as the scene and its submission metadata. The
+    // fixed panel is measured in metres, independent of game FOV/world scale.
+    return EyeViewProjection(eye_, 1.0f, panel);
 }
 
 int VRRuntime::DXGIAdapterIndex() const {

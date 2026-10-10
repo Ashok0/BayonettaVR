@@ -15,6 +15,10 @@ struct Config {
     bool nativeExplicitPose = true;
     float compositorTurnDegrees = 12.0f;
     bool applyToUi = false;
+    bool worldLockedHud = true;
+    float hudDistanceMetres = 2.0f;
+    float hudWidthMetres = 3.2f;
+    float hudVerticalOffsetMetres = 0.0f;
     bool swapEyes = false;
     bool mirrorSideBySide = false;
     bool compositorPoseDiagnostic = false;

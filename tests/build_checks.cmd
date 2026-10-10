@@ -8,6 +8,14 @@ cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\matrix_tests.cpp /Fobuild\test\m
 if errorlevel 1 exit /b 1
 build\test\matrix_tests.exe
 if errorlevel 1 exit /b 1
+cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\world_hud_tests.cpp /Fobuild\test\world_hud_tests.obj /Febuild\test\world_hud_tests.exe
+if errorlevel 1 exit /b 1
+build\test\world_hud_tests.exe
+if errorlevel 1 exit /b 1
+cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\menu_panel_tests.cpp src\MenuPanel9.cpp /Fobuild\test\ /Febuild\test\menu_panel_tests.exe /link d3d9.lib d3dcompiler.lib user32.lib
+if errorlevel 1 exit /b 1
+build\test\menu_panel_tests.exe
+if errorlevel 1 exit /b 1
 cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\shader_analysis_tests.cpp /Fobuild\test\shader_analysis_tests.obj /Febuild\test\shader_analysis_tests.exe
 if errorlevel 1 exit /b 1
 build\test\shader_analysis_tests.exe
