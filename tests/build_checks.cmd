@@ -8,6 +8,10 @@ cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\matrix_tests.cpp /Fobuild\test\m
 if errorlevel 1 exit /b 1
 build\test\matrix_tests.exe
 if errorlevel 1 exit /b 1
+cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\effect_stream_tests.cpp /Fobuild\test\effect_stream_tests.obj /Febuild\test\effect_stream_tests.exe
+if errorlevel 1 exit /b 1
+build\test\effect_stream_tests.exe
+if errorlevel 1 exit /b 1
 cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\world_hud_tests.cpp /Fobuild\test\world_hud_tests.obj /Febuild\test\world_hud_tests.exe
 if errorlevel 1 exit /b 1
 build\test\world_hud_tests.exe

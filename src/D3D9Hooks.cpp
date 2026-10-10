@@ -5,6 +5,7 @@
 #include "ShaderAnalysis.h"
 #include "WorldHud.h"
 #include "MenuPanel9.h"
+#include "EffectStreamReplay.h"
 #include "ReferenceGridRenderer.h"
 #include "VR.h"
 #include "IndependentGrid.h"
@@ -805,6 +806,20 @@ using GameCall = void (__cdecl*)();
 GameThisCall g_drawMenuList = nullptr;
 GameThisCall g_rotateUiBuffers = nullptr, g_rotateFontBuffers = nullptr, g_releaseUiTextures = nullptr;
 GameCall g_releaseMaterials = nullptr;
+GameThisCall g_clearEffectStream = nullptr;
+EffectStreamReplay<> g_effectStreams;
+bool g_effectHooksInstalled = false;
+unsigned long long g_effectStreamsRestored = 0, g_effectReplayFrames = 0;
+
+void __fastcall HookClearEffectStream(void* stream, void*) {
+    if (g_insideNativeDraw && VR().Eye() == 0 && !g_effectStreams.Remember(stream)) {
+        static bool logged = false;
+        if (!logged) { Log("effects: replay capacity exceeded; excess streams use original behavior"); logged = true; }
+    }
+    // Clear in BOTH eyes: subsequent passes in this eye must still see the
+    // engine's consumed state. Restore only at the boundary between eyes.
+    g_clearEffectStream(stream);
+}
 
 void DrawMenuList(void* self, int layer) {
     if (!g_insideNativeDraw || !Cfg().worldLockedHud || !g_device) { g_drawMenuList(self); return; }
@@ -836,6 +851,66 @@ void __fastcall HookReleaseUiTextures(void* self, void*) { if (FinishStereoFrame
 void __cdecl HookReleaseMaterials() { if (FinishStereoFrame()) g_releaseMaterials(); }
 
 struct MenuCallPatch { unsigned char* address = nullptr; unsigned char original[5]{}; };
+// Only post-draw clears in seven cEspDraw variants. Constructor/allocation
+// calls to the same reset function must retain their normal behavior.
+struct EffectClearSite { uintptr_t rva; unsigned char opcode; };
+constexpr EffectClearSite kEffectClearSites[] = {
+    {0x163803,0xE8},{0x16380D,0xE9},
+    {0x1680C3,0xE8},{0x1680CD,0xE9},
+    {0x16AF42,0xE8},{0x16AF49,0xE8},{0x16AF54,0xE9},
+    {0x16BE69,0xE8},{0x16BE74,0xE8},{0x16BE7B,0xE8},{0x16BE86,0xE9},
+    {0x16CD39,0xE8},{0x16CD44,0xE8},{0x16CD4B,0xE8},{0x16CD56,0xE9},
+    {0x16E988,0xE8},{0x16E98F,0xE8},
+    {0x175AE6,0xE8},{0x175AF1,0xE8},{0x175AF8,0xE8},{0x175B03,0xE9}
+};
+MenuCallPatch g_effectPatches[_countof(kEffectClearSites)]{};
+void RemoveEffectHooks() {
+    g_effectStreams.Reset();
+    for (auto& patch : g_effectPatches) if (patch.address) {
+        DWORD old = 0;
+        if (VirtualProtect(patch.address, 5, PAGE_EXECUTE_READWRITE, &old)) {
+            memcpy(patch.address, patch.original, 5);
+            DWORD ignored = 0; VirtualProtect(patch.address, 5, old, &ignored);
+            FlushInstructionCache(GetCurrentProcess(), patch.address, 5);
+        }
+        patch = {};
+    }
+    g_effectHooksInstalled = false;
+}
+bool InstallEffectHooks(unsigned char* image) {
+    // Verify the complete reset function as well as every CALL/tail-JMP.
+    const unsigned char resetCode[] = {0x33,0xC0,0x89,0x01,0x89,0x41,0x04,
+        0x89,0x41,0x08,0x89,0x41,0x0C,0x89,0x41,0x10,0x89,0x41,0x14,
+        0x89,0x41,0x18,0xC7,0x41,0x1C,0x00,0x10,0x00,0x00,0xC3};
+    auto* reset = image + 0x85F7A0;
+    if (memcmp(reset, resetCode, sizeof(resetCode)) != 0) {
+        Log("effects: stream reset signature mismatch"); return false;
+    }
+    for (const auto& entry : kEffectClearSites) {
+        auto* site = image + entry.rva;
+        int32_t displacement = 0; memcpy(&displacement, site + 1, 4);
+        if (site[0] != entry.opcode || site + 5 + displacement != reset) {
+            Log("effects: clear signature mismatch at RVA 0x%X", unsigned(entry.rva)); return false;
+        }
+    }
+    g_clearEffectStream = reinterpret_cast<GameThisCall>(reset);
+    for (size_t i = 0; i < _countof(kEffectClearSites); ++i) {
+        auto* site = image + kEffectClearSites[i].rva;
+        DWORD old = 0;
+        if (!VirtualProtect(site, 5, PAGE_EXECUTE_READWRITE, &old)) {
+            RemoveEffectHooks(); Log("effects: could not patch stream clear"); return false;
+        }
+        auto& patch = g_effectPatches[i]; patch.address = site; memcpy(patch.original, site, 5);
+        const int32_t displacement = static_cast<int32_t>(
+            reinterpret_cast<unsigned char*>(&HookClearEffectStream) - (site + 5));
+        memcpy(site + 1, &displacement, 4); // Preserve CALL versus tail-JMP.
+        DWORD ignored = 0; VirtualProtect(site, 5, old, &ignored);
+        FlushInstructionCache(GetCurrentProcess(), site, 5);
+    }
+    g_effectHooksInstalled = true;
+    Log("effects: stereo stream replay installed at %zu post-draw clear sites", _countof(kEffectClearSites));
+    return true;
+}
 MenuCallPatch g_menuPatches[6]{};
 void RemoveMenuHooks() {
     for (auto& patch : g_menuPatches) if (patch.address) {
@@ -900,12 +975,16 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     g_pipeline.poseReady = PipelineSeconds();
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
     g_menuPanel.BeginFrame();
+    if (g_effectHooksInstalled) g_effectStreams.BeginFrame();
 
     VR().SetEye(0);
     g_otDraw(self);
     const HRESULT left = independent ? E_PENDING : CaptureEye(g_device, 0);
 
     VR().SetEye(1);
+    const size_t restored = g_effectStreams.RestoreForRightEye();
+    g_effectStreamsRestored += restored;
+    if (restored) ++g_effectReplayFrames;
     g_otDraw(self);
     const HRESULT right = independent ? E_PENDING : CaptureEye(g_device, 1);
     g_pipeline.pairReady = PipelineSeconds();
@@ -983,11 +1062,14 @@ bool InstallNativeStereoHook() {
     VirtualProtect(g_otDrawTarget, sizeof(patch), oldProtect, &ignored);
     FlushInstructionCache(GetCurrentProcess(), g_otDrawTarget, sizeof(patch));
     Log("native stereo: cOtManager::draw dual-pass hook installed at %p", g_otDrawTarget);
-    InstallMenuHooks(image);
+    // This also defers cEspManager's heap-bank rotation until the right eye,
+    // keeping the GPU buffers referenced by restored descriptors alive.
+    if (InstallMenuHooks(image)) InstallEffectHooks(image);
     return true;
 }
 
 void RemoveNativeStereoHook() {
+    RemoveEffectHooks();
     RemoveMenuHooks();
     g_menuPanel.Reset();
     if (g_otDrawTarget && g_otDrawTrampoline) {
@@ -1140,6 +1222,8 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
         VR().LogFrameTiming();
         if (g_menuHooksInstalled) Log("menu: captures=%llu/%llu eyeComposites=%llu/%llu",
             g_menuCaptures[0], g_menuCaptures[1], g_menuEyeDraws[0], g_menuEyeDraws[1]);
+        if (g_effectHooksInstalled) Log("effects: replayFrames=%llu streamsRestored=%llu",
+            g_effectReplayFrames, g_effectStreamsRestored);
         if (nativePair) Log("vr pipeline: early=%d wait=%.2fms pair=%.2fms queue=%.2fms transfer=%.2fms submit=%.2fms poseAgeAtSubmit=%.2fms",
             early, (g_pipeline.poseReady-g_pipeline.waitStart)*1000,
             (g_pipeline.pairReady-g_pipeline.poseReady)*1000,
@@ -1251,6 +1335,7 @@ void UncapPresentation(D3DPRESENT_PARAMETERS* parameters) {
 }
 
 HRESULT STDMETHODCALLTYPE HookReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* p) {
+    g_effectStreams.Reset();
     g_menuPanel.Reset();
     ReleaseTextures();
     UncapPresentation(p);
@@ -1289,7 +1374,7 @@ HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE 
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     return PresentOnce(d, [&]{ return g_presentEx(d,a,b,c,e,f); });
 }
-HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
+HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
 HRESULT STDMETHODCALLTYPE HookSwapPresent(IDirect3DSwapChain9* swap,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     IDirect3DDevice9* device = nullptr;
     if (SUCCEEDED(swap->GetDevice(&device)) && device) {

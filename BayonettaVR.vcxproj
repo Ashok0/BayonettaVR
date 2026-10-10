@@ -47,6 +47,7 @@
   <ItemGroup><ClInclude Include="src\WorldHud.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MenuPanel9.h"/><ClCompile Include="src\MenuPanel9.cpp"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\EffectStreamReplay.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\PoseSubmission.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ReferenceGrid.h"/><ClInclude Include="src\ReferenceGridRenderer.h"/><ClCompile Include="src\ReferenceGridRenderer.cpp"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\FrameLoopWorker.h"/><ClInclude Include="src\IndependentGrid.h"/><ClCompile Include="src\IndependentGrid.cpp"/></ItemGroup>

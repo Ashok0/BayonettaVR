@@ -3,6 +3,34 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Stereo combat effects (build 20261010.36)
+
+Several `cEspDraw` variants clear their embedded vertex-stream descriptors after
+drawing. In native stereo, the left eye consumed those descriptors before the
+right eye could draw the same geometry. This is a concrete cause of one-eye-only
+effects and a likely explanation for the reported red slash.
+
+Build .36 snapshots descriptors at 21 post-draw clear sites across seven effect
+draw variants, lets the original clears run, then restores the first snapshot of
+each descriptor immediately before the right-eye render. Repeated passes within
+an eye still see the game's normal consumed state. The existing .35 end-of-frame
+hook keeps the effect buffer heap alive until both eyes finish. Initializers and
+allocation calls to the reset function are not patched. Signature checks verify
+each CALL/tail-JMP and the reset function body before installation.
+
+Replay uses bounded storage for 8,192 streams without render-time allocation;
+overflow leaves excess streams on the original path and emits a warning.
+Snapshots are discarded after restoration, on a new frame, and on device reset.
+Logs report `effects: stereo stream replay installed` and cumulative
+`effects: replayFrames` / `streamsRestored` counters. No settings change is needed.
+World-locked UI capture, panel placement and compositor submission are unchanged.
+
+Validation: Release/Win32 build, all 21 instruction signatures against the Steam
+executable, and `tests/build_checks.cmd`, including 100 simulated stereo frames
+with repeated passes, descriptor restoration, capacity overflow and reset.
+The existing 12 UI GPU readback cases also pass. The red slash and other combat
+effects still require in-headset confirmation; the user confirmed .35's UI works.
+
 ## World-locked HUD and stereo menus (build 20261010.35)
 
 `WorldLockedHUD=1` places the game's HUD and menu passes on a stereo panel
@@ -39,7 +67,7 @@ alternating-frame path, which does not have the dedicated native UI hooks.
 Validation: `tests/build_checks.cmd` includes HUD math checks and 12 D3D9 GPU
 render/readback cases covering both eyes, head turns, opaque UI, alpha edges,
 separate font layers, state restoration and resource recreation. Actual title,
-options and save-menu coverage still needs an in-headset check after installation.
+options and save-menu coverage was subsequently reported working by the user.
 
 ## Separate compositor process (build 20261002.33)
 
