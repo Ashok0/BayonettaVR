@@ -46,6 +46,7 @@ using CreateVSFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, const DWORD*,
 using SetVSFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, IDirect3DVertexShader9*);
 using SetConstFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, UINT, const float*, UINT);
 using SetRenderTargetFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, DWORD, IDirect3DSurface9*);
+using ClearFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, DWORD, const D3DRECT*, DWORD, D3DCOLOR, float, DWORD);
 using DrawPrimitiveFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, UINT, UINT);
 using DrawIndexedFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, INT, UINT, UINT, UINT, UINT);
 using DrawPrimitiveUPFn = HRESULT (STDMETHODCALLTYPE*)(IDirect3DDevice9*, D3DPRIMITIVETYPE, UINT, const void*, UINT);
@@ -61,6 +62,8 @@ CreateVSFn g_createVS = nullptr;
 SetVSFn g_setVS = nullptr;
 SetConstFn g_setConst = nullptr;
 SetRenderTargetFn g_setRenderTarget = nullptr;
+ClearFn g_clear = nullptr;
+MenuPanel9::CopyFn g_stretchRect = nullptr;
 DrawPrimitiveFn g_drawPrimitive = nullptr;
 DrawIndexedFn g_drawIndexed = nullptr;
 DrawPrimitiveUPFn g_drawPrimitiveUP = nullptr;
@@ -133,6 +136,12 @@ int g_submitSlot = 0;
 bool g_snapshotPending = false;
 bool g_snapshotSaved[2]{};
 unsigned g_snapshotSequence = 0;
+bool g_menuDiagnosticPending = false, g_menuDiagnosticActive = false;
+unsigned g_menuDiagnosticDraw = 0;
+struct MenuTextureDiagnostic { IDirect3DBaseTexture9* texture; };
+std::vector<MenuTextureDiagnostic> g_menuDiagnosticTextures;
+std::vector<IDirect3DVertexShader9*> g_menuDiagnosticVS;
+std::vector<IDirect3DPixelShader9*> g_menuDiagnosticPS;
 bool g_stackCapturePending = true;
 bool g_referenceGrid = false;
 ReferenceGridRenderer g_referenceRenderer;
@@ -275,6 +284,95 @@ std::string BaseRegister(std::string token) {
     const size_t mask = token.find('.');
     if (mask != std::string::npos) token.resize(mask);
     return token;
+}
+
+int QueueMenuTexture(IDirect3DBaseTexture9* texture,bool output=false) {
+    if (!texture) return -1;
+    for (size_t i=0;i<g_menuDiagnosticTextures.size();++i)
+        if (g_menuDiagnosticTextures[i].texture==texture) return int(i);
+    if (g_menuDiagnosticTextures.size()>=(output ? 32u : 28u)) return -2;
+    texture->AddRef();g_menuDiagnosticTextures.push_back({texture});
+    return int(g_menuDiagnosticTextures.size()-1);
+}
+template<class Shader> int QueueMenuShader(Shader* shader,std::vector<Shader*>& shaders) {
+    if(!shader) return -1;
+    for(size_t i=0;i<shaders.size();++i) if(shaders[i]==shader) return int(i);
+    if(shaders.size()>=32) return -2;
+    shader->AddRef();shaders.push_back(shader);return int(shaders.size()-1);
+}
+void RecordMenuDraw(IDirect3DDevice9* device) {
+    if (!g_menuDiagnosticActive || VR().Eye()!=0 || g_menuDiagnosticDraw>=160) return;
+    IDirect3DVertexShader9* vs=nullptr;IDirect3DPixelShader9* ps=nullptr;
+    device->GetVertexShader(&vs);device->GetPixelShader(&ps);
+    const int vi=QueueMenuShader(vs,g_menuDiagnosticVS),pi=QueueMenuShader(ps,g_menuDiagnosticPS);
+    if(vs)vs->Release();if(ps)ps->Release();
+    IDirect3DSurface9* target=nullptr;device->GetRenderTarget(0,&target);
+    D3DSURFACE_DESC desc{};if(target)target->GetDesc(&desc);
+    const bool redirected=target==g_menuPanel.CaptureTarget(g_capturingMenu);
+    if(target)target->Release();
+    const D3DRENDERSTATETYPE keys[]={D3DRS_ALPHABLENDENABLE,D3DRS_SRCBLEND,D3DRS_DESTBLEND,
+        D3DRS_BLENDOP,D3DRS_COLORWRITEENABLE,D3DRS_ALPHATESTENABLE,D3DRS_ALPHAFUNC,
+        D3DRS_ALPHAREF,D3DRS_ZENABLE,D3DRS_ZWRITEENABLE,D3DRS_STENCILENABLE,D3DRS_SCISSORTESTENABLE};
+    DWORD values[_countof(keys)]{};
+    for(size_t i=0;i<_countof(keys);++i)device->GetRenderState(keys[i],&values[i]);
+    Log("menu trace: draw=%u layer=%d vs=%d ps=%d target=%ux%u fmt=%u redirected=%d blend=%u/%u/%u/%u mask=%u alphaTest=%u/%u/%u depth=%u/%u stencil=%u scissor=%u",
+        ++g_menuDiagnosticDraw,g_capturingMenu,vi,pi,desc.Width,desc.Height,desc.Format,redirected,
+        values[0],values[1],values[2],values[3],values[4],values[5],values[6],values[7],values[8],values[9],values[10],values[11]);
+    for(int stage=0;stage<16;++stage) {
+        IDirect3DBaseTexture9* texture=nullptr;device->GetTexture(stage,&texture);
+        const int index=QueueMenuTexture(texture);
+        D3DSURFACE_DESC td{};
+        if(texture && texture->GetType()==D3DRTYPE_TEXTURE)static_cast<IDirect3DTexture9*>(texture)->GetLevelDesc(0,&td);
+        DWORD coordinate=0,transform=0;device->GetTextureStageState(stage,D3DTSS_TEXCOORDINDEX,&coordinate);
+        device->GetTextureStageState(stage,D3DTSS_TEXTURETRANSFORMFLAGS,&transform);
+        IDirect3DVertexBuffer9* buffer=nullptr;UINT offset=0,stride=0;
+        if(stage<4)device->GetStreamSource(stage,&buffer,&offset,&stride);
+        Log("menu trace: stage=%d texture=%d %ux%u fmt=%u usage=0x%X coord=%u transform=%u stream=%p offset=%u stride=%u",
+            stage,index,td.Width,td.Height,td.Format,td.Usage,coordinate,transform,buffer,offset,stride);
+        if(buffer)buffer->Release();if(texture)texture->Release();
+    }
+    float constants[8][4]{};device->GetPixelShaderConstantF(0,&constants[0][0],8);
+    for(int i=0;i<8;++i)Log("menu trace: pc%d %.6g %.6g %.6g %.6g",i,
+        constants[i][0],constants[i][1],constants[i][2],constants[i][3]);
+}
+void FinishMenuDiagnostic() {
+    if(!g_menuDiagnosticActive) return;
+    g_menuDiagnosticActive=false;
+    wchar_t directory[MAX_PATH]{};
+    GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase),directory,MAX_PATH);
+    if(wchar_t* slash=wcsrchr(directory,L'\\'))*(slash+1)=L'\0';
+    SYSTEMTIME now{};GetLocalTime(&now);
+    wchar_t name[96]{};swprintf_s(name,L"BayonettaVR_menu_%04u%02u%02u_%02u%02u%02u_%u",
+        now.wYear,now.wMonth,now.wDay,now.wHour,now.wMinute,now.wSecond,g_snapshotSequence);
+    wcscat_s(directory,name);
+    const bool folderReady=CreateDirectoryW(directory,nullptr)!=FALSE;
+    HMODULE d3dx=GetModuleHandleW(L"d3dx9_43.dll");
+    using SaveTextureFn=HRESULT(WINAPI*)(LPCWSTR,int,IDirect3DBaseTexture9*,const PALETTEENTRY*);
+    const auto save=d3dx ? reinterpret_cast<SaveTextureFn>(GetProcAddress(d3dx,"D3DXSaveTextureToFileW")) : nullptr;
+    for(size_t i=0;i<g_menuDiagnosticTextures.size();++i) {
+        wchar_t path[MAX_PATH]{};swprintf_s(path,L"%s\\texture%02zu.png",directory,i);
+        const HRESULT hr=folderReady && save ? save(path,3,g_menuDiagnosticTextures[i].texture,nullptr) : E_FAIL;
+        Log("menu trace: saved texture=%zu status=0x%08X",i,hr);
+        g_menuDiagnosticTextures[i].texture->Release();
+    }
+    auto saveShaders=[&](auto& shaders,const wchar_t* kind) {
+        for(size_t i=0;i<shaders.size();++i) {
+            UINT bytes=0;shaders[i]->GetFunction(nullptr,&bytes);
+            std::vector<DWORD> code((bytes+3)/4);
+            if(folderReady && bytes && SUCCEEDED(shaders[i]->GetFunction(code.data(),&bytes))) {
+                const auto assembly=DisassembleShader(code.data());
+                wchar_t path[MAX_PATH]{};swprintf_s(path,L"%s\\%s%02zu.asm",directory,kind,i);
+                HANDLE file=CreateFileW(path,GENERIC_WRITE,FILE_SHARE_READ,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr);
+                if(file!=INVALID_HANDLE_VALUE){DWORD written=0;WriteFile(file,assembly.data(),DWORD(assembly.size()),&written,nullptr);CloseHandle(file);}
+            }
+            shaders[i]->Release();
+        }
+        shaders.clear();
+    };
+    saveShaders(g_menuDiagnosticVS,L"vs");saveShaders(g_menuDiagnosticPS,L"ps");
+    Log("menu trace: complete draws=%u textures=%zu directory=%ls (textures saved at stereo-pair boundary)",
+        g_menuDiagnosticDraw,g_menuDiagnosticTextures.size(),directory);
+    g_menuDiagnosticTextures.clear();
 }
 
 int FindDp4Matrix(const std::string& text, const std::string& target) {
@@ -437,29 +535,8 @@ template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     if (g_compositingMenu) return call();
     if (g_capturingMenu >= 0) {
-        // Keep the game UI flat in its own texture. Correct the alpha channel
-        // to coverage rather than alpha squared, so replay uses premultiplied
-        // ONE/INVSRCALPHA blending. Preserve the game's RGB blending and state.
-        IDirect3DSurface9* target = nullptr;
-        device->GetRenderTarget(0, &target);
-        const bool captureTarget = target == g_menuPanel.CaptureTarget(g_capturingMenu);
-        if (target) target->Release();
-        if (!captureTarget) return call();
-        DWORD blend = FALSE, destination = D3DBLEND_INVSRCALPHA;
-        device->GetRenderState(D3DRS_ALPHABLENDENABLE, &blend);
-        device->GetRenderState(D3DRS_DESTBLEND, &destination);
-        if (!blend) return call();
-        const D3DRENDERSTATETYPE states[] = {D3DRS_SEPARATEALPHABLENDENABLE,
-            D3DRS_SRCBLENDALPHA, D3DRS_DESTBLENDALPHA, D3DRS_BLENDOPALPHA};
-        DWORD previous[4]{};
-        for (int i=0;i<4;++i) if (FAILED(device->GetRenderState(states[i], &previous[i]))) return call();
-        const bool additive = destination == D3DBLEND_ONE;
-        const DWORD values[] = {TRUE, DWORD(additive ? D3DBLEND_ZERO : D3DBLEND_ONE),
-            DWORD(additive ? D3DBLEND_ONE : D3DBLEND_INVSRCALPHA), D3DBLENDOP_ADD};
-        for (int i=0;i<4;++i) device->SetRenderState(states[i], values[i]);
-        const HRESULT result = call();
-        for (int i=0;i<4;++i) device->SetRenderState(states[i], previous[i]);
-        return result;
+        RecordMenuDraw(device);
+        return g_menuPanel.CaptureDraw(device, g_capturingMenu, call);
     }
     int base = Cfg().matrixRegisterOverride;
     ShaderInfo* shaderInfo = nullptr;
@@ -833,6 +910,9 @@ void DrawMenuList(void* self, int layer) {
         g_drawMenuList(self);
         g_capturingMenu = -1;
         g_menuPanel.End(g_device, layer);
+        if(g_menuDiagnosticActive && VR().Eye()==0) for(int basis=0;basis<2;++basis)
+            Log("menu trace: output layer=%d basis=%d texture=%d",layer,basis,
+                QueueMenuTexture(g_menuPanel.CaptureTexture(layer,basis),true));
         ++g_menuCaptures[layer];
     }
     VR().EnsureOrigin();
@@ -955,7 +1035,7 @@ bool InstallMenuHooks(unsigned char* image) {
         FlushInstructionCache(GetCurrentProcess(), site, 5);
     }
     g_menuHooksInstalled = true;
-    Log("menu: Id/IdFont capture + stereo replay installed; UI buffer cleanup runs once per pair");
+    Log("menu: Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair");
     return true;
 }
 
@@ -975,6 +1055,9 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     g_pipeline.poseReady = PipelineSeconds();
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
     g_menuPanel.BeginFrame();
+    g_menuDiagnosticActive=g_menuDiagnosticPending;
+    g_menuDiagnosticPending=false;
+    if(g_menuDiagnosticActive){g_menuDiagnosticDraw=0;Log("menu trace: begin capture=%u",g_snapshotSequence);}
     if (g_effectHooksInstalled) g_effectStreams.BeginFrame();
 
     VR().SetEye(0);
@@ -987,6 +1070,7 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     if (restored) ++g_effectReplayFrames;
     g_otDraw(self);
     const HRESULT right = independent ? E_PENDING : CaptureEye(g_device, 1);
+    FinishMenuDiagnostic();
     g_pipeline.pairReady = PipelineSeconds();
 
     g_nativePairReady = SUCCEEDED(left) && SUCCEEDED(right) &&
@@ -1121,6 +1205,7 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
             g_earlySubmitEnabled ? "early: immediately after stereo pair" : "late: desktop Present (.27)");
     }
     if (pressed[5]) {
+        g_menuDiagnosticPending=true;
         ++g_snapshotSequence;
         g_snapshotPending = true;
         g_snapshotSaved[0] = g_snapshotSaved[1] = false;
@@ -1363,6 +1448,17 @@ HRESULT STDMETHODCALLTYPE HookSetRenderTarget(IDirect3DDevice9* d,DWORD index,ID
         target = g_menuPanel.CaptureTarget(g_capturingMenu);
     return g_setRenderTarget(d,index,target);
 }
+HRESULT STDMETHODCALLTYPE HookClear(IDirect3DDevice9* d,DWORD count,const D3DRECT* rects,DWORD flags,D3DCOLOR color,float z,DWORD stencil) {
+    const auto call=[&]{return g_clear(d,count,rects,flags,color,z,stencil);};
+    return g_capturingMenu>=0 ? g_menuPanel.CaptureDraw(d,g_capturingMenu,call) : call();
+}
+HRESULT STDMETHODCALLTYPE HookStretchRect(IDirect3DDevice9* d,IDirect3DSurface9* source,const RECT* sourceRect,
+    IDirect3DSurface9* destination,const RECT* destinationRect,D3DTEXTUREFILTERTYPE filter) {
+    if(g_capturingMenu<0)return g_stretchRect(d,source,sourceRect,destination,destinationRect,filter);
+    const HRESULT hr=g_menuPanel.CaptureCopy(d,g_capturingMenu,source,sourceRect,destination,destinationRect,filter,g_stretchRect);
+    if(g_menuDiagnosticActive || FAILED(hr))Log("menu copy: layer=%d source=%p destination=%p status=0x%08X",g_capturingMenu,source,destination,hr);
+    return hr;
+}
 HRESULT STDMETHODCALLTYPE HookSetConst(IDirect3DDevice9* d,UINT start,const float* data,UINT count) {
     if(data&&start<256){ UINT n=std::min(count,256u-start); memcpy(&g_constants[start][0],data,n*4*sizeof(float)); for(UINT i=0;i<n;++i)g_constantValid[start+i]=true; }
     return g_setConst(d,start,data,count);
@@ -1399,6 +1495,8 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     PatchVtable(v,16,&HookReset,g_reset);
     PatchVtable(v,17,&HookPresent,g_present);
     PatchVtable(v,37,&HookSetRenderTarget,g_setRenderTarget);
+    PatchVtable(v,34,&HookStretchRect,g_stretchRect);
+    PatchVtable(v,43,&HookClear,g_clear);
     PatchVtable(v,81,&HookDrawPrimitive,g_drawPrimitive);
     PatchVtable(v,82,&HookDrawIndexed,g_drawIndexed);
     PatchVtable(v,83,&HookDrawPrimitiveUP,g_drawPrimitiveUP);

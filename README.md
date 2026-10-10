@@ -3,6 +3,77 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Menu blur framebuffer copies (build 20261010.39)
+
+The .38 F12 captures and the game's `cIdOtWork::drawBlur` path identify the
+missing step in .35's menu capture: unhighlighted labels use a two-pass blur
+with framebuffer snapshots between passes. Those copies read the engine's
+cached scene target, bypassing the redirected UI target. The blur then overwrites
+the letters with rectangular pieces of background. Highlighted labels skip it.
+
+During menu capture, StretchRect snapshots now read the captured UI. Each scratch
+texture has a matching white-background snapshot, substituted at any of the 16
+pixel samplers during the white draw (the game's blur uses sampler 14). Sampler
+bindings are restored afterward; unused companions are retired and device reset
+releases them. World-locked placement and effect-stream replay remain in place.
+F12 diagnostics now inspect all 16 pixel sampler slots.
+
+Validation uses the actual horizontal and vertical blur shaders from the user's
+F12 captures. The regression reproduces missing labels with the old copy path
+and compares corrected glyph/background pixels against normal rendering for
+both eyes, consecutive frames and resource recreation. Release/Win32 and the
+regression suite pass. Actual main-menu and nested-menu appearance still needs
+in-game confirmation.
+
+## Menu regression diagnostics (build 20261010.38)
+
+User testing found no visible improvement in .37. The user also clarified that
+the black menu blocks began with .35's stereo-menu capture, before the separate
+combat-effect fix. The actual menu regression is still unresolved; the synthetic
+blend comparisons are not evidence that the game's label path is fixed.
+
+F12 now records one native frame's actual Id/IdFont draw states, input textures,
+vertex/pixel shaders and captured output layers, alongside the existing eye
+screenshots. Diagnostics are written beside the game in a timestamped
+`BayonettaVR_menu_*` directory, with texture/shader indices in `BayonettaVR.log`.
+Capture is bounded to 160 draws, 28 input textures plus four output layers, and
+32 shaders per type. Texture files reflect contents at the end of the stereo
+pair; shader constants and stream bindings are logged at the individual draw.
+It is inactive during normal play and may briefly stall when F12 saves files.
+
+To collect the missing evidence, open the main menu with the blocks visible,
+press F12, move the highlight to another option, press F12 again, then exit.
+This build adds diagnostics without claiming another menu rendering fix.
+
+## Menu label blending (build 20261010.37)
+
+The user reported that unselected title-menu and nested-option labels disappeared
+into black rectangles, becoming readable only when highlighted. The game's UI
+blend table includes destination-color blending. A transparent-black capture
+cannot retain that contribution, and forcing framebuffer alpha to act as panel
+coverage also conflicts with RGB-only draws and the game's alpha masks.
+
+Build .37 captures each UI primitive over black and white floating-point targets,
+preserving the game's blend state and color-write masks. The difference retains
+per-channel background transmission; compositing applies that transmission and
+the emitted color to each eye's scene. Floating-point capture preserves additive
+and subtractive values. Both captures maintain independent depth/stencil buffers,
+and target switches restore viewport and scissor rectangles. Initial clears cover
+the entire capture even if the game left scissoring enabled. Game-issued UI clears
+are mirrored too. Game menu logic still runs once; only GPU draws are repeated.
+
+The panel remains world-locked, and build .36's effect-stream replay is unchanged.
+This adds a second capture per UI draw and uses more GPU memory. The reconstruction
+targets the tested alpha, additive, subtractive and destination-color modes;
+arbitrary nonlinear framebuffer effects are not guaranteed to match.
+
+Validation: Release/Win32 build and `tests/build_checks.cmd` pass, including the
+12 existing menu GPU cases and 32 direct-render-versus-panel comparisons covering
+both eyes, unselected/highlighted labels, RGB-only writes, overlapping option
+backgrounds, stencil masks and scissor clipping. The previous renderer fails the
+new unselected-label case. Actual title and nested menus still need user validation;
+Computer Use could not inspect them because its native pipe was unavailable.
+
 ## Stereo combat effects (build 20261010.36)
 
 Several `cEspDraw` variants clear their embedded vertex-stream descriptors after

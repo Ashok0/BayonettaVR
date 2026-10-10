@@ -13,10 +13,13 @@ static void Require(bool value,const char* message) {
     if(!value){std::printf("menu panel failed: %s\n",message);std::exit(1);}
 }
 static void Check(HRESULT hr,const char* message){if(FAILED(hr)){std::printf("HRESULT=%08lX ",hr);Require(false,message);}}
+static MenuPanel9* capturingPanel=nullptr;
+static int captureLayer=0;
 static void Rectangle(IDirect3DDevice9* d,float x,float y,float size,DWORD color) {
     struct V{float x,y,z,w;DWORD color;};
     const V v[]={{x,y,0,1,color},{x+size,y,0,1,color},{x,y+size,0,1,color},{x+size,y+size,0,1,color}};
-    Check(d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,v,sizeof(V)),"raw XYZRHW UI draw");
+    const auto draw=[&]{return d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,v,sizeof(V));};
+    Check(capturingPanel ? capturingPanel->CaptureDraw(d,captureLayer,draw) : draw(),"raw XYZRHW UI draw");
 }
 static void FlatUi(IDirect3DDevice9* d) {
     d->SetVertexShader(nullptr);d->SetPixelShader(nullptr);d->SetTexture(0,nullptr);
@@ -35,6 +38,7 @@ int main() {
     ComPtr<IDirect3D9Ex> d3d;Check(Direct3DCreate9Ex(D3D_SDK_VERSION,&d3d),"D3D9Ex");
     D3DPRESENT_PARAMETERS pp{};pp.Windowed=TRUE;pp.SwapEffect=D3DSWAPEFFECT_DISCARD;
     pp.hDeviceWindow=window;pp.BackBufferWidth=pp.BackBufferHeight=128;pp.BackBufferFormat=D3DFMT_X8R8G8B8;
+    pp.EnableAutoDepthStencil=TRUE;pp.AutoDepthStencilFormat=D3DFMT_D24S8;
     pp.PresentationInterval=D3DPRESENT_INTERVAL_IMMEDIATE;
     ComPtr<IDirect3DDevice9Ex> d;
     Check(d3d->CreateDeviceEx(D3DADAPTER_DEFAULT,D3DDEVTYPE_HAL,window,D3DCREATE_HARDWARE_VERTEXPROCESSING,&pp,nullptr,&d),"device");
@@ -47,6 +51,7 @@ int main() {
         panel.BeginFrame();
         Check(d->BeginScene(),"begin capture scene");
         Require(panel.Begin(d.Get(),0),"begin ID capture");
+        capturingPanel=&panel;captureLayer=0;
         FlatUi(d.Get());
         Rectangle(d.Get(),54,54,20,0xff00ff00); // Opaque menu icon.
         d->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
@@ -57,9 +62,12 @@ int main() {
         d->SetRenderState(D3DRS_DESTBLENDALPHA,D3DBLEND_INVSRCALPHA);
         Rectangle(d.Get(),10,54,20,0x80ff0000); // Half-transparent UI edge.
         panel.End(d.Get(),0);
+        capturingPanel=nullptr;
         Require(panel.Begin(d.Get(),1),"begin font capture");
+        capturingPanel=&panel;captureLayer=1;
         FlatUi(d.Get());Rectangle(d.Get(),54,10,20,0xffffffff);
         panel.End(d.Get(),1);
+        capturingPanel=nullptr;
         Check(d->EndScene(),"end capture scene");
         for(int turn=-1;turn<=1;++turn) for(int eye=0;eye<2;++eye) {
             Check(d->Clear(0,nullptr,D3DCLEAR_TARGET,0xff0000ff,1,0),"clear background");
@@ -103,6 +111,97 @@ int main() {
         panel.BeginFrame();Require(!panel.Ready(0)&&!panel.Ready(1),"no stale menus on next frame");
         panel.Reset();
     }
+    // Compare capture/composite with direct D3D9 rendering over the same scene.
+    // Unselected labels can multiply destination RGB; the previous transparent
+    // black capture erased that contribution and produced black rectangles.
+    struct BlendCase { DWORD src,dst,op,mask,color; const char* label; };
+    const BlendCase modes[]={
+        {D3DBLEND_DESTCOLOR,D3DBLEND_INVSRCALPHA,D3DBLENDOP_ADD,7,0xff808080,"unselected multiply label"},
+        {D3DBLEND_SRCALPHA,D3DBLEND_INVSRCALPHA,D3DBLENDOP_ADD,7,0x80ffffff,"highlighted label"},
+        {D3DBLEND_ZERO,D3DBLEND_SRCCOLOR,D3DBLENDOP_ADD,7,0xff4080c0,"colored transmission"},
+        {D3DBLEND_SRCALPHA,D3DBLEND_ONE,D3DBLENDOP_ADD,7,0x80c08040,"additive highlight"},
+        {D3DBLEND_SRCALPHA,D3DBLEND_ONE,D3DBLENDOP_REVSUBTRACT,7,0x40808080,"subtractive shade"},
+        {D3DBLEND_ONE,D3DBLEND_INVSRCALPHA,D3DBLENDOP_ADD,7,0x80402010,"premultiplied label"},
+        {D3DBLEND_DESTCOLOR,D3DBLEND_INVSRCALPHA,D3DBLENDOP_ADD,7,0x80cccccc,"bright destination-color label"},
+        {D3DBLEND_ONE,D3DBLEND_ZERO,D3DBLENDOP_ADD,7,0x00808080,"RGB-only opaque label"}
+    };
+    auto sample=[&](int x,int y) {
+        Check(d->GetRenderTargetData(back.Get(),read.Get()),"blend GPU readback");
+        D3DLOCKED_RECT locked{};Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY),"blend map");
+        DWORD pixel=0;std::memcpy(&pixel,static_cast<const unsigned char*>(locked.pBits)+y*locked.Pitch+x*4,4);
+        read->UnlockRect();return pixel;
+    };
+    auto drawLabel=[&](const BlendCase& mode,bool nested) {
+        FlatUi(d.Get());
+        d->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE);
+        d->SetRenderState(D3DRS_STENCILENABLE,FALSE);
+        d->SetRenderState(D3DRS_SEPARATEALPHABLENDENABLE,FALSE);
+        if(nested) {
+            d->SetRenderState(D3DRS_COLORWRITEENABLE,7);
+            d->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
+            d->SetRenderState(D3DRS_SRCBLEND,D3DBLEND_SRCALPHA);
+            d->SetRenderState(D3DRS_DESTBLEND,D3DBLEND_INVSRCALPHA);
+            d->SetRenderState(D3DRS_BLENDOP,D3DBLENDOP_ADD);
+            Rectangle(d.Get(),44,44,40,0x80402010); // Translucent option panel.
+            d->SetRenderState(D3DRS_COLORWRITEENABLE,0);
+            d->SetRenderState(D3DRS_STENCILENABLE,TRUE);
+            d->SetRenderState(D3DRS_STENCILFUNC,D3DCMP_ALWAYS);
+            d->SetRenderState(D3DRS_STENCILREF,1);
+            d->SetRenderState(D3DRS_STENCILMASK,255);
+            d->SetRenderState(D3DRS_STENCILWRITEMASK,255);
+            d->SetRenderState(D3DRS_STENCILFAIL,D3DSTENCILOP_KEEP);
+            d->SetRenderState(D3DRS_STENCILZFAIL,D3DSTENCILOP_KEEP);
+            d->SetRenderState(D3DRS_STENCILPASS,D3DSTENCILOP_REPLACE);
+            Rectangle(d.Get(),54,54,20,0xffffffff);
+            d->SetRenderState(D3DRS_STENCILFUNC,D3DCMP_EQUAL);
+            d->SetRenderState(D3DRS_STENCILPASS,D3DSTENCILOP_KEEP);
+            const RECT nestedClip={58,54,74,74};
+            d->SetScissorRect(&nestedClip);
+            d->SetRenderState(D3DRS_SCISSORTESTENABLE,TRUE);
+        }
+        d->SetRenderState(D3DRS_COLORWRITEENABLE,mode.mask);
+        d->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
+        d->SetRenderState(D3DRS_SRCBLEND,mode.src);
+        d->SetRenderState(D3DRS_DESTBLEND,mode.dst);
+        d->SetRenderState(D3DRS_BLENDOP,mode.op);
+        Rectangle(d.Get(),nested ? 44.0f : 54.0f,nested ? 44.0f : 54.0f,nested ? 40.0f : 20.0f,mode.color);
+    };
+    unsigned blendCases=0;
+    for(const auto& mode:modes) for(int nested=0;nested<2;++nested) {
+        const DWORD background=0xffb08050;
+        d->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE);
+        Check(d->Clear(0,nullptr,D3DCLEAR_TARGET|D3DCLEAR_STENCIL,background,1,0),"direct background");
+        Check(d->BeginScene(),"direct begin");drawLabel(mode,nested!=0);Check(d->EndScene(),"direct end");
+        const DWORD expected=sample(64,64);
+        const DWORD expectedEdge=sample(48,48);
+        const DWORD expectedClipped=sample(55,64);
+        panel.BeginFrame();
+        Check(d->BeginScene(),"basis begin");Require(panel.Begin(d.Get(),0),"basis target");
+        capturingPanel=&panel;captureLayer=0;drawLabel(mode,nested!=0);capturingPanel=nullptr;
+        DWORD restoredSrc=0,restoredMask=0;
+        d->GetRenderState(D3DRS_SRCBLEND,&restoredSrc);d->GetRenderState(D3DRS_COLORWRITEENABLE,&restoredMask);
+        Require(restoredSrc==mode.src && restoredMask==mode.mask,"game blend and RGB-only write mask preserved");
+        panel.End(d.Get(),0);Check(d->EndScene(),"basis end");
+        for(int eye=0;eye<2;++eye) {
+            d->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE);
+            Check(d->Clear(0,nullptr,D3DCLEAR_TARGET,background,1,0),"replay background");
+            Mat4 clip=Identity();clip.m[0][3]=eye ? 0.125f : -0.125f;
+            Check(d->BeginScene(),"blend eye begin");Check(panel.Draw(d.Get(),0,clip),"blend eye replay");Check(d->EndScene(),"blend eye end");
+            const DWORD actual=sample(eye ? 72 : 56,64);
+            const DWORD actualEdge=sample(eye ? 56 : 40,48);
+            const DWORD actualClipped=sample(eye ? 63 : 47,64);
+            for(int c=0;c<3;++c) if(std::abs(int((actual>>(8*c))&255)-int((expected>>(8*c))&255))>2) {
+                std::printf("blend mismatch: %s eye=%d expected=%08lX actual=%08lX\n",mode.label,eye,expected,actual);return 3;
+            }
+            for(int c=0;c<3;++c) Require(std::abs(int((actualEdge>>(8*c))&255)-int((expectedEdge>>(8*c))&255))<=2,
+                "stencil clip and overlapping option background match direct rendering");
+            for(int c=0;c<3;++c) Require(std::abs(int((actualClipped>>(8*c))&255)-int((expectedClipped>>(8*c))&255))<=2,
+                "scissor rectangle survives capture target switches");
+            Require((sample(4,4)&0xffffff)==(background&0xffffff),"outside menu remains scene colored");
+            ++blendCases;
+        }
+    }
     DestroyWindow(window);
     std::printf("menu panel: %u GPU readback cases passed (both eyes, head turns, opaque UI, alpha, font, state restore, recreation)\n",cases);
+    std::printf("menu blending: %u direct-versus-world-panel GPU cases passed (unselected/highlighted labels, multiply, additive, subtract, RGB-only writes, overlapping panels, stencil)\n",blendCases);
 }
