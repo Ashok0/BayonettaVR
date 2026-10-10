@@ -3,6 +3,49 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## DOF startup-crash correction (build 20261010.43)
+
+The user reported .42 crashing to desktop. Its log stopped immediately after
+replacing the first DOF shader (`B959E4D7`), before frame rendering. The .41 DLL
+was restored while investigating. No Windows crash dump was available; the exact
+faulting instruction was not established. The standalone GPU tests did not
+exercise the game's shader-loading path.
+
+Build .43 retains each original shader object and its bytecode/metadata. The
+creation hook only identifies the same four CRC/length pairs. During drawing,
+the proxy reads the actual bound pixel shader and suppresses the draw if it is
+one of those four and `DisableDepthOfField=1`. No replacement shader is compiled
+or returned to the engine. Reading actual device state also handles bindings
+restored through D3D9 state blocks. Other draws use the original path.
+
+Updated GPU tests verify original bytecode preservation, state-block restoration,
+setting-off behavior, unrelated shaders, and scene color/depth preservation in
+eight eye cases. An actual Steam launch of .43 (PID 29404) loaded all four
+identified shaders and continued rendering hundreds of stereo frames past the
+.42 startup-crash point. This verifies startup, not cutscene appearance or
+long-session stability; those still require headset testing.
+
+## Disable cutscene depth of field (build 20261010.42)
+
+`DisableDepthOfField=1` disables the game's four known DOF pixel-shader passes.
+The exact bytecode CRC32 and length pairs were verified against `shader.dat`
+extracted from the installed Steam `data13.cpk`: `B959E4D7` (4140 bytes),
+`548C7346` (4496), `FC2A113C` (4608), and `CB1D0471` (2376). Identification is
+credited to masterotaku's [optional Bayonetta DOF removal](https://helixmod.blogspot.com/2017/04/bayonetta.html).
+That mod's DLL is not installed or chained into this mod.
+
+The VR proxy replaces only those shaders with a discard shader that writes no
+color or depth. Unmatched shaders remain original. Replacement failure also
+keeps the original shader. Logs report `dof: disabled verified pixel shader`
+with each matching CRC. Set `DisableDepthOfField=0` and restart to restore DOF.
+This does not change .39's color/contrast or the menu blur used for labels, and
+retains .41's controller support. Blur baked into video files is unaffected.
+
+Validation: all four original shader fixtures match; eight GPU eye readback
+cases preserve scene color and depth; setting-off, unrelated shader, near-match
+and allocation-failure cases pass. The Release/Win32 build and existing VR
+regressions pass. Cutscene appearance still requires an in-headset check.
+
 ## Oculus Touch as Xbox input (build 20261010.41)
 
 `VRControllers=1` maps a pair of Oculus Touch controllers to Xbox 360 player one

@@ -1,0 +1,11 @@
+Original pixel-shader bytecode from the local Steam Bayonetta shader.dat (data13.cpk).
+Game executable timestamp: 0x591AD330.
+Used to verify exact identification and safe DOF suppression in tests/dof_tests.cpp.
+CRC identifiers independently match masterotaku's optional depth-of-field removal:
+https://helixmod.blogspot.com/2017/04/bayonetta.html
+https://s3.amazonaws.com/masterotaku/Bayonetta/Bayonetta_3D_Vision_fix_1.7z
+
+548C7346.bin: 4496 bytes; SHA256 53f5f8211391c98709c5a19fef468f22af0fc5048c1bad5f736f5dfd4775ca51
+B959E4D7.bin: 4140 bytes; SHA256 dc0601c527be6bed71a6dc19ec7d0adc2e83e1f328ca9186a770226e518f5e8c
+CB1D0471.bin: 2376 bytes; SHA256 6ef9ce6338110e59b6c4915a5ed2ed53716499e028f0c70b0232fff38c716187
+FC2A113C.bin: 4608 bytes; SHA256 d32e11e7380af9ed0ab6cfed2159a65097faba4c1ab70c672004c855a31650f3

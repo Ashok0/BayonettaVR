@@ -11,6 +11,7 @@
 #include "IndependentGrid.h"
 #include "SharedFrameTransport.h"
 #include "ControllerHooks.h"
+#include "DepthOfField.h"
 #include <d3d11.h>
 #include <dxgi.h>
 #include <windows.h>
@@ -60,6 +61,8 @@ CreateDeviceExFn g_createDeviceEx = nullptr;
 ResetFn g_reset = nullptr;
 PresentFn g_present = nullptr;
 CreateVSFn g_createVS = nullptr;
+CreatePixelShaderFn g_createPS = nullptr;
+DepthOfFieldFilter g_dofFilter;
 SetVSFn g_setVS = nullptr;
 SetConstFn g_setConst = nullptr;
 SetRenderTargetFn g_setRenderTarget = nullptr;
@@ -534,6 +537,11 @@ bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
 
 template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
+    if(g_dofFilter.ShouldSkip(device,Cfg().enabled&&Cfg().disableDepthOfField)) {
+        static unsigned skipped=0;
+        if(++skipped<=4||skipped%600==0)Log("dof: suppressed draws=%u",skipped);
+        return S_OK;
+    }
     if (g_compositingMenu) return call();
     if (g_capturingMenu >= 0) {
         RecordMenuDraw(device);
@@ -1443,6 +1451,14 @@ HRESULT STDMETHODCALLTYPE HookCreateVS(IDirect3DDevice9* d,const DWORD* code,IDi
     }
     return hr;
 }
+HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDirect3DPixelShader9** out) {
+    const HRESULT hr=g_createPS(d,code,out);
+    if(SUCCEEDED(hr)&&out&&*out) {
+        const auto hash=g_dofFilter.Register(*out);
+        if(hash)Log("dof: identified original pixel shader %08X (object unchanged)",hash);
+    }
+    return hr;
+}
 HRESULT STDMETHODCALLTYPE HookSetVS(IDirect3DDevice9* d,IDirect3DVertexShader9* s) { g_currentShader=s; return g_setVS(d,s); }
 HRESULT STDMETHODCALLTYPE HookSetRenderTarget(IDirect3DDevice9* d,DWORD index,IDirect3DSurface9* target) {
     if (g_capturingMenu >= 0 && index == 0 && target == g_menuPanel.SourceTarget())
@@ -1490,6 +1506,7 @@ void HookSwapChain(IDirect3DSwapChain9* swap) {
 }
 
 void HookDevice(IDirect3DDevice9Ex* device) {
+    g_dofFilter.Reset();
     g_device = device;
     g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
     void** v = *reinterpret_cast<void***>(device);
@@ -1503,6 +1520,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     PatchVtable(v,83,&HookDrawPrimitiveUP,g_drawPrimitiveUP);
     PatchVtable(v,84,&HookDrawIndexedUP,g_drawIndexedUP);
     PatchVtable(v,91,&HookCreateVS,g_createVS);
+    PatchVtable(v,106,&HookCreatePS,g_createPS);
     PatchVtable(v,92,&HookSetVS,g_setVS);
     PatchVtable(v,94,&HookSetConst,g_setConst);
     PatchVtable(v,121,&HookPresentEx,g_presentEx);
@@ -1539,6 +1557,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
+    g_dofFilter.Reset();
     RemoveNativeStereoHook();
     g_device = nullptr;
     ReleaseTextures();

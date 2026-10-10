@@ -1,4 +1,5 @@
 C:\dev\BayonettaVR\src\ControllerHooks.cpp;C:\dev\BayonettaVR\build\obj\Win32\Release\ControllerHooks.obj
+C:\dev\BayonettaVR\src\DepthOfField.cpp;C:\dev\BayonettaVR\build\obj\Win32\Release\DepthOfField.obj
 C:\dev\BayonettaVR\src\Config.cpp;C:\dev\BayonettaVR\build\obj\Win32\Release\Config.obj
 C:\dev\BayonettaVR\src\D3D9Hooks.cpp;C:\dev\BayonettaVR\build\obj\Win32\Release\D3D9Hooks.obj
 C:\dev\BayonettaVR\src\Log.cpp;C:\dev\BayonettaVR\build\obj\Win32\Release\Log.obj

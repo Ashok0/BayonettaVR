@@ -1,0 +1,3 @@
+//Depth of field PS.
+ps_3_0
+dcl_texcoord v0
