@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "re-mcp": {
+      "command": "re-mcp-ghidra",
+      "args": [
+        "stdio"
+      ],
+      "env": {
+        "GHIDRA_INSTALL_DIR": "C:\\Ghidra\\",
+        "GHIDRA_PROJECT_PATH": "C:\\dev\\Ghidra\\TombRaider456.gpr"
+      }
+    }
+  }
+}

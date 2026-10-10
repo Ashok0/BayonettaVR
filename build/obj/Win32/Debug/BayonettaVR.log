@@ -1,0 +1,7 @@
+﻿  Config.cpp
+  D3D9Hooks.cpp
+  Log.cpp
+  VR.cpp
+  d3d9_proxy.cpp
+     Creating library C:\dev\BayonettaVR\build\Win32\Debug\d3d9.lib and object C:\dev\BayonettaVR\build\Win32\Debug\d3d9.exp
+  BayonettaVR.vcxproj -> C:\dev\BayonettaVR\build\Win32\Debug\d3d9.dll
