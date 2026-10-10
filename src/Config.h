@@ -3,6 +3,7 @@
 namespace bvr {
 struct Config {
     bool enabled = true;
+    bool vrControllers = true;
     bool externalCompositor = false;
     bool nativeStereo = true;
     bool forceHalfRate = false;

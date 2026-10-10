@@ -1,6 +1,8 @@
 #include "VR.h"
 #include "IndependentGrid.h"
 #include "CompanionClient.h"
+#include "ControllerHooks.h"
+#include "TouchControllers.h"
 
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 #include "Config.h"
@@ -178,6 +180,7 @@ bool VRRuntime::StartIndependentGrid() {
 }
 
 void VRRuntime::Shutdown() {
+    UpdateControllerInput({});
     IndependentVRGrid().StopAndJoin();
     if (external_) Companion().Stop();
     if (system_ && g_shutdown) g_shutdown();
@@ -271,10 +274,11 @@ void VRRuntime::LogPoseDiagnostic() const {
 void VRRuntime::WaitForPose() {
     if (external_) {
         ipc::Control control{};
-        if (!Companion().Poll(control)) { poseValid_=false; return; }
+        if (!Companion().Poll(control)) { poseValid_=false;UpdateControllerInput({});return; }
         poseSample_=control.tracking.sample;
         poseValid_=control.tracking.valid && GetTickCount64()-control.tracking.tick<250;
         if(poseValid_)headPose_=FromVR(control.tracking.head);
+        ApplyControllers(control.controllers);
         return;
     }
     if (!compositor_) return;
@@ -286,16 +290,34 @@ void VRRuntime::WaitForPose() {
         poses, vr::k_unMaxTrackedDeviceCount, nullptr, 0);
     if (e != vr::VRCompositorError_None) {
         poseValid_ = false;
+        UpdateControllerInput({});
         Log("vr: WaitGetPoses error %d", static_cast<int>(e));
         return;
     }
     const auto& predicted = poses[vr::k_unTrackedDeviceIndex_Hmd];
     poseValid_ = predicted.bPoseIsValid;
     if (poseValid_) headPose_ = FromVR(predicted.mDeviceToAbsoluteTracking);
+    if(Cfg().vrControllers) {
+        static TouchControllers controllers;
+        DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
+        ApplyControllers(controllers.Poll(system_,poseValid_&&foreground==GetCurrentProcessId(),GetTickCount64()));
+    }
     if (poseValid_ && originValid_ && poseMode_ == 3 && automaticTurning_ &&
         FollowRenderAnchor(renderAnchor_, headPose_, Cfg().compositorTurnDegrees)) {
         ++renderRevision_;
         ++anchorTurns_;
+    }
+}
+
+void VRRuntime::ApplyControllers(const ControllerInput& input) {
+    if(!Cfg().vrControllers)return;
+    UpdateControllerInput(input);
+    if(input.recenterSequence!=controllerRecenterSequence_) {
+        controllerRecenterSequence_=input.recenterSequence;
+        const auto now=GetTickCount64();
+        if(poseValid_&&input.active&&now>=input.tick&&now-input.tick<=250) {
+            Recenter();Log("controllers: camera and HUD recentered");
+        }
     }
 }
 

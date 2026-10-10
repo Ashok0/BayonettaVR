@@ -2,6 +2,7 @@
 #include "SharedFrameTransport.h"
 #include "ReferenceGridRenderer.h"
 #include "Matrix.h"
+#include "TouchControllers.h"
 #include <cstdio>
 #include <cmath>
 
@@ -44,11 +45,14 @@ bool VerifyPixels(ID3D11Device* device,ID3D11DeviceContext* context,SharedFrameC
     }
     return true;
 }
-int Run(ipc::Session& session,HANDLE parent,const std::wstring& directory,bool test){
+int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& directory,bool test){
     ComPtr<IDXGIFactory1> factory;ComPtr<IDXGIAdapter1> adapter;
     ComPtr<ID3D11Device> device;ComPtr<ID3D11DeviceContext> context;
     ComPtr<ID3D11Texture2D> gridTextures[2][4];ComPtr<ID3D11RenderTargetView> gridTargets[2][4];ReferenceGridRenderer grid;
     SharedFrameConsumer consumer;
+    TouchControllers controllers;
+    const bool controllerInput=!test&&GetPrivateProfileIntW(L"VR",L"VRControllers",1,(directory+L"\\BayonettaVR.ini").c_str())!=0;
+    printf("controllers: build=20261010.41 enabled=%d; hold both sticks 1s to recenter; right System is runtime-reserved\n",controllerInput);
     // Shutdown OpenVR before releasing any textures it may still reference.
     Runtime runtime;vr::IVRSystem* system=nullptr;vr::IVRCompositor* compositor=nullptr;
     if(!test&&!runtime.Init(directory,system,compositor))return 1;
@@ -93,10 +97,16 @@ int Run(ipc::Session& session,HANDLE parent,const std::wstring& directory,bool t
             trackingValid=error==vr::VRCompositorError_None&&poses[0].bPoseIsValid;
         }
         ++sample;
+        ControllerInput input{};
+        if(controllerInput) {
+            DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
+            input=controllers.Poll(system,trackingValid&&foreground==parentId,GetTickCount64());
+        }
         if(session.Lock()){
             auto& c=session.Data()->control;c.heartbeat=GetTickCount64();c.tracking.sample=sample;
             c.tracking.tick=c.heartbeat;c.tracking.valid=trackingValid;c.tracking.head=poses[0].mDeviceToAbsoluteTracking;
             c.received=received;c.submitted=pairs;c.testFailures=failures;
+            c.controllers=input;
             session.Unlock();
         }
         if(!(test&&control.grid==2)&&consumer.Consume(*session.Data(),device.Get(),context.Get())){
@@ -157,7 +167,7 @@ int wmain(int argc,wchar_t** argv){
     FILE* output=nullptr;_wfreopen_s(&output,(directory+L"\\BayonettaVRHost-"+std::to_wstring(parentId)+L".log").c_str(),L"w",stdout);
     setvbuf(stdout,nullptr,_IONBF,0);
     ipc::Session session;if(!session.Open(argv[2],false)){CloseHandle(parent);return 23;}
-    int result=0;try{result=Run(session,parent,directory,test);}catch(...){result=24;}
+    int result=0;try{result=Run(session,parent,parentId,directory,test);}catch(...){result=24;}
     if(session.Lock(100)){session.Data()->control.error=result;session.Data()->control.ready=0;session.Unlock();}
     CloseHandle(parent);return result;
 }

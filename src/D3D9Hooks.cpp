@@ -10,6 +10,7 @@
 #include "VR.h"
 #include "IndependentGrid.h"
 #include "SharedFrameTransport.h"
+#include "ControllerHooks.h"
 #include <d3d11.h>
 #include <dxgi.h>
 #include <windows.h>
@@ -1513,6 +1514,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
         primary->Release();
     }
     VR().Init();
+    if(Cfg().enabled&&Cfg().vrControllers)InstallControllerHooks();
     InstallNativeStereoHook();
 }
 

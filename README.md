@@ -3,6 +3,48 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Oculus Touch as Xbox input (build 20261010.41)
+
+`VRControllers=1` maps a pair of Oculus Touch controllers to Xbox 360 player one
+inside Bayonetta. No virtual-controller driver is required. The game imports
+XInput 1.3 GetState/SetState by ordinals 2/3; the mod patches those import slots,
+supplies a pad when no physical controller is present, and merges physical input
+when a gamepad is connected. Other Xbox slots retain their original behavior.
+This build uses .39's visuals, as requested; the .40 image enhancement is absent.
+
+| Touch control | Xbox input |
+| --- | --- |
+| Left / right thumbstick | Left / right stick |
+| A, B, X, Y | A, B, X, Y |
+| Left / right index trigger | LT / RT, analog |
+| Left / right grip | LB / RB |
+| Ordinary left / right stick click | L3 / R3 |
+| Left grip + left stick click | Start |
+| Right grip + right stick click | Back |
+| Hold both grips and move right stick | D-pad, including diagonals |
+| Hold both stick clicks for one second | Recenter camera and world-locked HUD |
+
+Recenter uses the same origin update as F8, once per hold. The right System bit
+also triggers it if delivered, but the installed Oculus profile does not expose
+that button. SteamVR reserves System input for its dashboard and does not normally
+deliver it to applications: [Valve's input documentation](https://github.com/ValveSoftware/openvr/blob/master/docs/Driver_API_Documentation.md#reserved-input-sources).
+The both-stick gesture is the supported fallback; this mod cannot take over the
+right Oculus/System button from Meta or SteamVR.
+
+Input requires the game to have desktop focus and SteamVR to allow application
+input. Dashboard/focus loss neutralizes Touch input; snapshots expire after
+250 ms, and disconnects return to physical XInput. Both external-compositor and
+legacy in-process modes are supported. Detection requires controller type
+`oculus_touch` and SteamVR's standard Touch legacy bindings. Other controller
+types are left unmapped. Physical controller rumble is forwarded; Touch haptics
+are not implemented. Set `VRControllers=0` to disable the bridge.
+
+The shared protocol is version 2: install the new DLL and host together. Logs
+report XInput hook installation, detected controller types and recenter events.
+Validation covers 29 mapping/state/gesture cases, a real ordinal-import hook
+test, the existing rendering checks and two-process transport lifecycle checks.
+Physical Touch button use and comfort still require in-game verification.
+
 ## Menu blur framebuffer copies (build 20261010.39)
 
 The .38 F12 captures and the game's `cIdOtWork::drawBlur` path identify the

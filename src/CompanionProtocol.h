@@ -5,9 +5,10 @@
 #include <cstring>
 #include <type_traits>
 #include <openvr.h>
+#include "ControllerInput.h"
 
 namespace bvr::ipc {
-constexpr uint32_t Magic = 0x42565248, Version = 1, SlotCount = 3;
+constexpr uint32_t Magic = 0x42565248, Version = 2, SlotCount = 3;
 enum SlotState : LONG { Free, Writing, Ready, Reading };
 struct Tracking {
     uint64_t sample = 0, tick = 0;
@@ -38,6 +39,7 @@ struct Control {
     uint64_t heartbeat = 0, received = 0, submitted = 0, testFailures = 0;
     Calibration calibration{};
     Tracking tracking{};
+    ControllerInput controllers{};
 };
 struct Shared {
     uint32_t magic = Magic, version = Version, bytes = sizeof(Shared), reserved = 0;

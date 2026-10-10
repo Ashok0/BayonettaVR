@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <openvr.h>
 #include <d3d11.h>
+#include "ControllerInput.h"
 
 namespace bvr {
 class VRRuntime {
@@ -41,6 +42,8 @@ public:
     vr::EVRCompositorError Submit(int eye, ID3D11Texture2D* texture);
 
 private:
+    void ApplyControllers(const ControllerInput& input);
+    uint64_t controllerRecenterSequence_=0;
     Mat4 EyeViewProjection(int eye, float units, const Mat4& input = Identity()) const;
     Mat4 RenderHeadForEye(int eye) const;
     int TrackingMode() const;
