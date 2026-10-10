@@ -2,6 +2,7 @@
 #include "Log.h"
 #include <windows.h>
 #include <cwchar>
+#include <cmath>
 
 extern "C" IMAGE_DOS_HEADER __ImageBase;
 
@@ -27,10 +28,23 @@ void LoadConfig() {
     if (wchar_t* slash = wcsrchr(path, L'\\')) *(slash + 1) = L'\0';
     wcscat_s(path, L"BayonettaVR.ini");
     g_cfg.enabled = ReadInt(path, L"Enabled", 1) != 0;
+    g_cfg.externalCompositor = ReadInt(path, L"ExternalCompositor", 0) != 0;
+    Log("config: external compositor=%d", g_cfg.externalCompositor);
     g_cfg.nativeStereo = ReadInt(path, L"NativeStereo", 1) != 0;
     g_cfg.forceHalfRate = ReadInt(path, L"ForceHalfRate", 0) != 0;
     g_cfg.uncapPresent = ReadInt(path, L"UncapPresent", 1) != 0;
     g_cfg.positionalTracking = ReadInt(path, L"PositionalTracking", 1) != 0;
+    g_cfg.compositorRotation = ReadInt(path, L"CompositorRotation", 1) != 0;
+    g_cfg.automaticTurning = ReadInt(path, L"AutomaticTurning", 0) != 0;
+    g_cfg.directPoseTurning = ReadInt(path, L"DirectPoseTurning", 1) != 0;
+    g_cfg.nativeEarlySubmit = ReadInt(path, L"NativeEarlySubmit", 0) != 0;
+    g_cfg.nativeExplicitPose = ReadInt(path, L"NativeExplicitPose", 1) != 0;
+    g_cfg.compositorTurnDegrees = ReadFloat(path, L"CompositorTurnDegrees", 12.0f);
+    if (!std::isfinite(g_cfg.compositorTurnDegrees)) g_cfg.compositorTurnDegrees = 12.0f;
+    if (g_cfg.compositorTurnDegrees < 0.0f) g_cfg.compositorTurnDegrees = 0.0f;
+    if (g_cfg.compositorTurnDegrees > 0.0f && g_cfg.compositorTurnDegrees < 2.0f)
+        g_cfg.compositorTurnDegrees = 2.0f;
+    if (g_cfg.compositorTurnDegrees > 45.0f) g_cfg.compositorTurnDegrees = 45.0f;
     g_cfg.applyToUi = ReadInt(path, L"ApplyToUI", 0) != 0;
     g_cfg.swapEyes = ReadInt(path, L"SwapEyes", 0) != 0;
     g_cfg.mirrorSideBySide = ReadInt(path, L"MirrorSideBySide", 0) != 0;
@@ -42,12 +56,14 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20260914.13 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d",
+    Log("config: build=20261002.33 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,
         g_cfg.stereoScale, g_cfg.gameVerticalFovDegrees, g_cfg.projectionMode,
-        g_cfg.matrixRegisterOverride);
+        g_cfg.matrixRegisterOverride, g_cfg.compositorRotation, g_cfg.compositorTurnDegrees,
+        g_cfg.automaticTurning, g_cfg.directPoseTurning, g_cfg.nativeEarlySubmit,
+        g_cfg.nativeExplicitPose);
 }
 
 const Config& Cfg() { return g_cfg; }

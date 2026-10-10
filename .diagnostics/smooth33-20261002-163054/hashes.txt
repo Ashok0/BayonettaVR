@@ -1,0 +1,13 @@
+
+
+Algorithm : SHA256
+Hash      : F506D03AA149C33FC580AF2D508ED482A0F98E0534BA6F0265B33FC20B1ACDF4
+Path      : C:\dev\astra6\Bayonetta\.diagnostics\smooth33-20261002-163054\d3d9.dll
+
+Algorithm : SHA256
+Hash      : 98D127986C280A7A00F30B966D6BD547E156366EB7DE7DB802EBE9D1D56D434A
+Path      : C:\dev\astra6\Bayonetta\.diagnostics\smooth33-20261002-163054\BayonettaVRHost.exe
+
+
+
+

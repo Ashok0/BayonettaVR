@@ -1,0 +1,2 @@
+host ready parent alive, adapter=0 test=1
+host stopped received=0 failures=0

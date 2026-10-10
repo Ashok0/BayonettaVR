@@ -19,6 +19,13 @@ inline Mat4 Mul(const Mat4& a, const Mat4& b) {
     return o;
 }
 
+inline Mat4 Transpose(const Mat4& a) {
+    Mat4 o{};
+    for (int r = 0; r < 4; ++r)
+        for (int c = 0; c < 4; ++c) o.m[r][c] = a.m[c][r];
+    return o;
+}
+
 inline Mat4 InvertRigid(const Mat4& a) {
     Mat4 o = Identity();
     for (int r = 0; r < 3; ++r)

@@ -3,10 +3,17 @@
 namespace bvr {
 struct Config {
     bool enabled = true;
+    bool externalCompositor = false;
     bool nativeStereo = true;
     bool forceHalfRate = false;
     bool uncapPresent = true;
     bool positionalTracking = true;
+    bool compositorRotation = true;
+    bool automaticTurning = false;
+    bool directPoseTurning = true;
+    bool nativeEarlySubmit = false;
+    bool nativeExplicitPose = true;
+    float compositorTurnDegrees = 12.0f;
     bool applyToUi = false;
     bool swapEyes = false;
     bool mirrorSideBySide = false;

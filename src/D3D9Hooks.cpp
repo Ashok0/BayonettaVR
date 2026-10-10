@@ -2,7 +2,11 @@
 #include "Config.h"
 #include "Log.h"
 #include "Matrix.h"
+#include "ShaderAnalysis.h"
+#include "ReferenceGridRenderer.h"
 #include "VR.h"
+#include "IndependentGrid.h"
+#include "SharedFrameTransport.h"
 #include <d3d11.h>
 #include <dxgi.h>
 #include <windows.h>
@@ -82,8 +86,22 @@ int g_clipCacheCount[2]{};
 IDirect3DDevice9* g_device = nullptr;
 bool g_nativePairReady = false;
 unsigned long long g_nativePairs = 0;
+bool g_earlySubmitEnabled = false;
+EarlySubmissionGate g_earlySubmission;
+struct PipelineTiming {
+    double waitStart = 0, poseReady = 0, pairReady = 0, handoff = 0;
+} g_pipeline;
+
+double PipelineSeconds() {
+    static const double frequency = [] {
+        LARGE_INTEGER f{}; QueryPerformanceFrequency(&f); return double(f.QuadPart);
+    }();
+    LARGE_INTEGER now{}; QueryPerformanceCounter(&now);
+    return double(now.QuadPart)/frequency;
+}
 
 constexpr int kSubmitRingSize = 4;
+constexpr UINT kCleanGridSize = 1024;
 struct EyeTexture {
     IDirect3DTexture9* d3d9 = nullptr;
     IDirect3DSurface9* readback = nullptr;
@@ -93,6 +111,7 @@ struct EyeTexture {
     unsigned long long pixelHash = 0;
 };
 EyeTexture g_eyes[2];
+ID3D11Texture2D* g_cleanGrid[2][kSubmitRingSize]{};
 ID3D11Device* g_d3d11 = nullptr;
 ID3D11DeviceContext* g_context11 = nullptr;
 UINT g_width = 0, g_height = 0;
@@ -100,7 +119,10 @@ bool g_gpuShared = false;
 int g_submitSlot = 0;
 bool g_snapshotPending = false;
 bool g_snapshotSaved[2]{};
+unsigned g_snapshotSequence = 0;
 bool g_stackCapturePending = true;
+bool g_referenceGrid = false;
+ReferenceGridRenderer g_referenceRenderer;
 
 void DumpRenderStack() {
     void* frames[32]{};
@@ -149,7 +171,8 @@ bool SaveEyeBitmap(int eye, const D3DLOCKED_RECT& locked, UINT width, UINT heigh
     GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase), path, MAX_PATH);
     if (wchar_t* slash = wcsrchr(path, L'\\')) *(slash + 1) = L'\0';
     wchar_t name[64]{};
-    swprintf_s(name, L"BayonettaVR_eye%d.bmp", eye);
+    swprintf_s(name, L"BayonettaVR_capture%02u_%s_eye%d.bmp", g_snapshotSequence,
+               VR().PoseModeLabel(), eye);
     wcscat_s(path, name);
 
     BITMAPFILEHEADER fileHeader{};
@@ -190,6 +213,8 @@ struct ID3DXBufferLocal : IUnknown {
 using DisassembleFn = HRESULT (WINAPI*)(const DWORD*, BOOL, const char*, ID3DXBufferLocal**);
 
 void ReleaseTextures() {
+    g_earlySubmission.Reset();
+    g_referenceRenderer.Reset();
     for (auto& eye : g_eyes) {
         for (auto*& texture : eye.submit11) {
             if (texture) texture->Release();
@@ -199,6 +224,12 @@ void ReleaseTextures() {
         if (eye.readback) eye.readback->Release();
         if (eye.d3d9) eye.d3d9->Release();
         eye = {};
+    }
+    for (auto& eye : g_cleanGrid) {
+        for (auto*& texture : eye) {
+            if (texture) texture->Release();
+            texture = nullptr;
+        }
     }
     if (g_context11) { g_context11->Release(); g_context11 = nullptr; }
     if (g_d3d11) { g_d3d11->Release(); g_d3d11 = nullptr; }
@@ -240,13 +271,21 @@ int FindDp4Matrix(const std::string& text, const std::string& target) {
         for (int i = 0; i < 4; ++i) {
             char needle[80]{};
             sprintf_s(needle, "dp4 %s.%c,", target.c_str(), components[i]);
-            const size_t pos = text.find(needle);
-            if (pos == std::string::npos) { all = false; break; }
             char constant[24]{};
             sprintf_s(constant, ", c%d", base + i);
-            const size_t end = text.find('\n', pos);
-            const size_t hit = text.find(constant, pos);
-            if (hit == std::string::npos || (end != std::string::npos && hit > end)) {
+            bool componentMatched = false;
+            size_t pos = 0;
+            while ((pos = text.find(needle, pos)) != std::string::npos) {
+                const size_t end = text.find('\n', pos);
+                const size_t hit = text.find(constant, pos);
+                if (hit != std::string::npos &&
+                    (end == std::string::npos || hit < end)) {
+                    componentMatched = true;
+                    break;
+                }
+                pos += strlen(needle);
+            }
+            if (!componentMatched) {
                 all = false;
                 break;
             }
@@ -257,28 +296,7 @@ int FindDp4Matrix(const std::string& text, const std::string& target) {
 }
 
 int FindNamedCameraMatrix(const std::string& text) {
-    size_t lineStart = 0;
-    while (lineStart < text.size()) {
-        const size_t lineEnd = text.find('\n', lineStart);
-        const std::string line = text.substr(lineStart,
-            lineEnd == std::string::npos ? std::string::npos : lineEnd - lineStart);
-        std::string lower = line;
-        std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c) {
-            return static_cast<char>(tolower(c));
-        });
-        const bool cameraName = lower.find("worldviewproj") != std::string::npos ||
-                                lower.find("viewprojection") != std::string::npos ||
-                                lower.find("viewprojmatrix") != std::string::npos;
-        if (cameraName) {
-            for (size_t i = 0; i + 1 < lower.size(); ++i) {
-                if (lower[i] == 'c' && lower[i + 1] >= '0' && lower[i + 1] <= '9')
-                    return atoi(lower.c_str() + i + 1);
-            }
-        }
-        if (lineEnd == std::string::npos) break;
-        lineStart = lineEnd + 1;
-    }
-    return -1;
+    return NamedSceneCameraMatrix(text);
 }
 
 int FindPositionMatrix(const std::string& text) {
@@ -288,6 +306,7 @@ int FindPositionMatrix(const std::string& text) {
     // shaders, where c8 (g_ViewProjection) is folded into temporary rows and
     // therefore never appears in the final dp4 quartet directly.
     const int namedMatrix = FindNamedCameraMatrix(text);
+    if (namedMatrix == -2) return -1; // Light camera; preserve its projection.
     if (namedMatrix >= 0) return namedMatrix;
 
     std::string output = "oPos";
@@ -497,7 +516,8 @@ bool EnsureCapture(IDirect3DDevice9* device, IDirect3DSurface9* backbuffer) {
             D3D11_TEXTURE2D_DESC td{};
             td.Width=desc.Width; td.Height=desc.Height; td.MipLevels=1; td.ArraySize=1;
             td.Format=DXGI_FORMAT_B8G8R8A8_UNORM; td.SampleDesc.Count=1;
-            td.Usage=D3D11_USAGE_DEFAULT; td.BindFlags=D3D11_BIND_SHADER_RESOURCE;
+            td.Usage=D3D11_USAGE_DEFAULT;
+            td.BindFlags=D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
             for (int slot = 0; slot < kSubmitRingSize; ++slot) {
                 hr = g_d3d11->CreateTexture2D(&td, nullptr, &g_eyes[i].submit11[slot]);
                 if (FAILED(hr) || !g_eyes[i].submit11[slot]) {
@@ -537,7 +557,8 @@ bool EnsureCapture(IDirect3DDevice9* device, IDirect3DSurface9* backbuffer) {
             D3D11_TEXTURE2D_DESC td{};
             td.Width=desc.Width; td.Height=desc.Height; td.MipLevels=1; td.ArraySize=1;
             td.Format=DXGI_FORMAT_B8G8R8A8_UNORM; td.SampleDesc.Count=1;
-            td.Usage=D3D11_USAGE_DEFAULT; td.BindFlags=D3D11_BIND_SHADER_RESOURCE;
+            td.Usage=D3D11_USAGE_DEFAULT;
+            td.BindFlags=D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
             for (int slot = 0; slot < kSubmitRingSize; ++slot) {
                 hr = g_d3d11->CreateTexture2D(&td, nullptr, &g_eyes[i].submit11[slot]);
                 if (FAILED(hr)) {
@@ -549,19 +570,56 @@ bool EnsureCapture(IDirect3DDevice9* device, IDirect3DSurface9* backbuffer) {
             }
         }
     }
+    D3D11_TEXTURE2D_DESC cleanDesc{};
+    cleanDesc.Width = cleanDesc.Height = kCleanGridSize;
+    cleanDesc.MipLevels = cleanDesc.ArraySize = cleanDesc.SampleDesc.Count = 1;
+    cleanDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    cleanDesc.Usage = D3D11_USAGE_DEFAULT;
+    cleanDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
+    for (int eye = 0; eye < 2; ++eye) {
+        for (int slot = 0; slot < kSubmitRingSize; ++slot) {
+            hr = g_d3d11->CreateTexture2D(&cleanDesc, nullptr, &g_cleanGrid[eye][slot]);
+            if (FAILED(hr) || !g_cleanGrid[eye][slot]) {
+                Log("capture: clean grid texture eye %d slot %d failed 0x%08X", eye, slot, hr);
+                ReleaseTextures();
+                return false;
+            }
+        }
+    }
+    // Compile and create the private grid pipeline before the user enables F5.
+    // This draw lands in an unused clean texture and is cleared before submit.
+    hr = g_referenceRenderer.Draw(g_d3d11, g_context11, g_cleanGrid[0][0], Identity());
+    if (FAILED(hr)) {
+        Log("capture: clean grid shader initialization failed 0x%08X", hr);
+        ReleaseTextures();
+        return false;
+    }
     g_width = desc.Width; g_height = desc.Height;
-    Log("capture: %s eye textures ready at %ux%u, VR adapter=%d feature level=0x%X",
-        g_gpuShared ? "GPU-shared" : "CPU-bridged", g_width, g_height, vrAdapter, level);
+    Log("capture: %s eye textures ready at %ux%u plus clean %ux%u grid, VR adapter=%d feature level=0x%X",
+        g_gpuShared ? "GPU-shared" : "CPU-bridged", g_width, g_height,
+        kCleanGridSize, kCleanGridSize, vrAdapter, level);
     return true;
 }
 
-void SynchronizeD3D9(IDirect3DDevice9* device) {
+HRESULT SynchronizeD3D9(IDirect3DDevice9* device) {
     IDirect3DQuery9* fence = nullptr;
-    if (SUCCEEDED(device->CreateQuery(D3DQUERYTYPE_EVENT, &fence)) && fence) {
-        fence->Issue(D3DISSUE_END);
-        while (fence->GetData(nullptr, 0, D3DGETDATA_FLUSH) == S_FALSE) SwitchToThread();
-        fence->Release();
+    HRESULT status=device->CreateQuery(D3DQUERYTYPE_EVENT,&fence);
+    if(FAILED(status)||!fence)return FAILED(status)?status:E_FAIL;
+    status=fence->Issue(D3DISSUE_END);
+    const ULONGLONG deadline=GetTickCount64()+2000;
+    if(SUCCEEDED(status))while((status=fence->GetData(nullptr,0,D3DGETDATA_FLUSH))==S_FALSE){
+        if(GetTickCount64()>=deadline){status=HRESULT_FROM_WIN32(WAIT_TIMEOUT);break;}
+        SwitchToThread();
     }
+    fence->Release();return status;
+}
+
+HRESULT SynchronizeD3D11Copies() {
+    if(!g_d3d11||!g_context11)return E_FAIL;
+    const HRESULT status=FinishGpu(g_d3d11,g_context11);
+    static bool logged=false;
+    if(!logged){Log("capture: D3D11 copy completion fence active (status=0x%08X)",status);logged=true;}
+    return status;
 }
 
 HRESULT CaptureEyeSurface(IDirect3DDevice9* device, IDirect3DSurface9* backbuffer, int eye) {
@@ -582,7 +640,8 @@ HRESULT CaptureEyeSurface(IDirect3DDevice9* device, IDirect3DSurface9* backbuffe
     if (g_eyes[eye].ready && needsCpuTransfer && g_eyes[eye].readback) {
         // Normal shared-texture frames synchronize once after both eyes. A
         // CPU fallback or explicit screenshot must complete before LockRect.
-        SynchronizeD3D9(device);
+        const HRESULT sync=SynchronizeD3D9(device);
+        if(FAILED(sync)){g_eyes[eye].ready=false;return sync;}
         IDirect3DSurface9* gpuSurface = nullptr;
         if (SUCCEEDED(g_eyes[eye].d3d9->GetSurfaceLevel(0, &gpuSurface)) && gpuSurface) {
             readbackResult = device->GetRenderTargetData(gpuSurface, g_eyes[eye].readback);
@@ -625,6 +684,7 @@ OtDrawFn g_otDraw = nullptr;
 unsigned char* g_otDrawTarget = nullptr;
 void* g_otDrawTrampoline = nullptr;
 unsigned char g_otDrawOriginal[6]{};
+bool CaptureAndSubmit(IDirect3DDevice9* device, bool early);
 
 void __fastcall HookOtManagerDraw(void* self, void*) {
     if (!g_otDraw) return;
@@ -636,20 +696,32 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     g_insideNativeDraw = true;
     // Sample the compositor's predicted pose at the last game-level point
     // before either eye is rendered. Both eyes then use this exact pose.
-    VR().WaitForPose();
+    g_pipeline.waitStart = PipelineSeconds();
+    const bool independent = IndependentVRGrid().OwnsFrames();
+    if (!independent) VR().WaitForPose();
+    g_pipeline.poseReady = PipelineSeconds();
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
 
     VR().SetEye(0);
     g_otDraw(self);
-    const HRESULT left = CaptureEye(g_device, 0);
+    const HRESULT left = independent ? E_PENDING : CaptureEye(g_device, 0);
 
     VR().SetEye(1);
     g_otDraw(self);
-    const HRESULT right = CaptureEye(g_device, 1);
+    const HRESULT right = independent ? E_PENDING : CaptureEye(g_device, 1);
+    g_pipeline.pairReady = PipelineSeconds();
 
     g_nativePairReady = SUCCEEDED(left) && SUCCEEDED(right) &&
                         g_eyes[0].ready && g_eyes[1].ready;
     if (g_nativePairReady) ++g_nativePairs;
+    if (g_nativePairReady && g_earlySubmitEnabled && Cfg().directPoseTurning &&
+        VR().NativeFullTracking() && CaptureAndSubmit(g_device, true)) {
+        // Both VR images are complete. Like the standalone probe, submit and
+        // release the compositor now rather than waiting for desktop Present.
+        g_earlySubmission.MarkSubmitted();
+        VR().PostPresentHandoff();
+        g_pipeline.handoff = PipelineSeconds();
+    }
     g_insideNativeDraw = false;
 }
 
@@ -733,40 +805,60 @@ void RemoveNativeStereoHook() {
     g_otDrawTrampoline = nullptr;
 }
 
-void CaptureAndSubmit(IDirect3DDevice9* device) {
-    if (!VR().Active()) return;
-    static bool keyWasDown[5]{};
-    static ULONGLONG lastPress[5]{};
-    const int keys[5] = {VK_F8, VK_F9, VK_F10, VK_F11, VK_F12};
-    bool pressed[5]{};
+bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
+    if (!VR().Active() || IndependentVRGrid().OwnsFrames()) return false;
+    const double entryTime = PipelineSeconds();
+    static bool keyWasDown[9]{};
+    static ULONGLONG lastPress[9]{};
+    const int keys[9] = {VK_F7, VK_F8, VK_F9, VK_F10, VK_F11, VK_F12, VK_F6, VK_F5, VK_F4};
+    bool pressed[9]{};
     const ULONGLONG now = GetTickCount64();
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 9; ++i) {
         const bool down = (GetAsyncKeyState(keys[i]) & 0x8000) != 0;
         pressed[i] = down && !keyWasDown[i] && now - lastPress[i] >= 500;
         if (pressed[i]) lastPress[i] = now;
         keyWasDown[i] = down;
     }
-    if (pressed[0]) VR().Recenter();
-    if (pressed[1]) VR().CycleStereoScale();
-    if (pressed[2]) VR().ToggleEyeSwap();
-    if (pressed[3]) VR().CycleProjectionMode();
-    if (pressed[4]) {
+    if (pressed[0]) VR().ToggleCompositorPoseDiagnostic();
+    if (pressed[1]) VR().Recenter();
+    if (pressed[2]) VR().CycleStereoScale();
+    if (pressed[3]) VR().ToggleEyeSwap();
+    if (pressed[4]) VR().CycleProjectionMode();
+    if (pressed[6]) VR().ToggleAutomaticTurning();
+    if (pressed[7]) {
+        g_referenceGrid = !g_referenceGrid;
+        VR().SetExternalGrid(g_referenceGrid);
+        Log(VR().External() ? "companion: F5 host grid %s" : "vr: F5 clean D3D11 grid-only submission %s (no D3D9 copy or game image)",
+            g_referenceGrid ? "on" : "off");
+    }
+    if (pressed[8]) {
+        g_earlySubmitEnabled = !g_earlySubmitEnabled;
+        Log("vr: F4 native submission timing %s (only active during full native tracking)",
+            g_earlySubmitEnabled ? "early: immediately after stereo pair" : "late: desktop Present (.27)");
+    }
+    if (pressed[5]) {
+        ++g_snapshotSequence;
         g_snapshotPending = true;
         g_snapshotSaved[0] = g_snapshotSaved[1] = false;
         g_stackCapturePending = true;
         Log("capture: F12 eye-buffer snapshot requested");
+        VR().LogPoseDiagnostic();
         DumpShaderDiagnostics();
     }
     IDirect3DSurface9* backbuffer = nullptr;
-    if (FAILED(device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer)) || !backbuffer) return;
-    if (!EnsureCapture(device, backbuffer)) { backbuffer->Release(); return; }
+    if (FAILED(device->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backbuffer)) || !backbuffer) return false;
+    if (!EnsureCapture(device, backbuffer)) { backbuffer->Release(); return false; }
 
     const bool nativePair = g_nativePairReady;
     g_nativePairReady = false;
+    if (VR().External() && !nativePair) { backbuffer->Release(); return false; }
     const int eye = VR().Eye();
     const HRESULT readbackResult = nativePair ? S_OK : CaptureEyeSurface(device, backbuffer, eye);
-    if (g_gpuShared) {
-        SynchronizeD3D9(device);
+    const double transferStart = PipelineSeconds();
+    const bool cleanGridFrame = g_referenceGrid && !VR().External();
+    if (g_gpuShared && !cleanGridFrame) {
+        const HRESULT sync=SynchronizeD3D9(device);
+        if(FAILED(sync)){Log("capture: D3D9 fence failed 0x%08X; pair skipped",sync);backbuffer->Release();return false;}
         // Do not submit a resource that D3D9 will rewrite next frame. Copy the
         // completed shared surfaces into ordinary D3D11 textures so OpenVR's
         // asynchronous compositor sees a stable image for this submission.
@@ -774,18 +866,58 @@ void CaptureAndSubmit(IDirect3DDevice9* device) {
             if (eyeTexture.ready && eyeTexture.shared11 && eyeTexture.submit11[g_submitSlot])
                 g_context11->CopyResource(eyeTexture.submit11[g_submitSlot], eyeTexture.shared11);
         }
-        g_context11->Flush();
+    }
+    if (cleanGridFrame) {
+        for (int e = 0; e < 2; ++e) {
+            if (!g_eyes[e].ready || !VR().ReferencePoseValid(e)) continue;
+            ID3D11RenderTargetView* target = nullptr;
+            const HRESULT viewResult = g_d3d11->CreateRenderTargetView(
+                g_cleanGrid[e][g_submitSlot], nullptr, &target);
+            if (FAILED(viewResult) || !target) {
+                Log("vr: clean grid target failed 0x%08X; disabled", viewResult);
+                g_referenceGrid = false;
+                backbuffer->Release();
+                return false;
+            }
+            const float background[4]{0.004f, 0.008f, 0.045f, 1.0f};
+            g_context11->ClearRenderTargetView(target, background);
+            target->Release();
+            const HRESULT hr = g_referenceRenderer.Draw(g_d3d11, g_context11,
+                g_cleanGrid[e][g_submitSlot], VR().CapturedReferenceClip(e));
+            if (FAILED(hr)) {
+                Log("vr: clean reference grid failed 0x%08X; disabled", hr);
+                g_referenceGrid = false;
+                backbuffer->Release();
+                return false;
+            }
+        }
+    }
+    if ((g_gpuShared && !cleanGridFrame) || cleanGridFrame) {
+        // Flush alone does not guarantee that the new eye pixels have reached
+        // the submission texture. Pairing a current pose with old ring-buffer
+        // contents produces severe motion-only reprojection judder.
+        const HRESULT sync=SynchronizeD3D11Copies();
+        if(FAILED(sync)){Log("capture: D3D11 fence failed 0x%08X; pair skipped",sync);backbuffer->Release();return false;}
     }
     if (g_snapshotPending && g_snapshotSaved[0] && g_snapshotSaved[1]) {
         g_snapshotPending = false;
         Log("capture: F12 eye-buffer snapshot pair complete");
     }
-    ID3D11Texture2D* left = g_eyes[0].ready ? g_eyes[0].submit11[g_submitSlot]
+    ID3D11Texture2D* left = cleanGridFrame ? g_cleanGrid[0][g_submitSlot] :
+        g_eyes[0].ready ? g_eyes[0].submit11[g_submitSlot]
                                              : g_eyes[eye].submit11[g_submitSlot];
-    ID3D11Texture2D* right = g_eyes[1].ready ? g_eyes[1].submit11[g_submitSlot]
+    ID3D11Texture2D* right = cleanGridFrame ? g_cleanGrid[1][g_submitSlot] :
+        g_eyes[1].ready ? g_eyes[1].submit11[g_submitSlot]
                                               : g_eyes[eye].submit11[g_submitSlot];
-    const auto le = VR().Submit(0, left);
-    const auto re = VR().Submit(1, right);
+    const double submitStart = PipelineSeconds();
+    const bool published = VR().External() && VR().SubmitPair(g_d3d11,g_context11,left,right);
+    const auto le = VR().External() ? vr::VRCompositorError_None : VR().Submit(0,left);
+    const auto re = VR().External() ? vr::VRCompositorError_None : VR().Submit(1,right);
+    if (VR().External() && published) {
+        static unsigned remotePairs=0;
+        if (++remotePairs%300==0) Log("companion: published %u complete stereo pairs",remotePairs);
+    }
+    const double submitEnd = PipelineSeconds();
     static unsigned long long presents = 0;
     static unsigned long long previousReportFrame = 0;
     static ULONGLONG previousReportTick = GetTickCount64();
@@ -796,13 +928,19 @@ void CaptureAndSubmit(IDirect3DDevice9* device) {
         const double rate = seconds > 0.0 ? (presents - previousReportFrame) / seconds : 0.0;
         Log("vr: frame=%llu rate=%.1fHz mode=%s bridge=%s readback=0x%08X ready=%d/%d submit=%d/%d transformed=%llu nativePairs=%llu hash=%016llX/%016llX",
             presents, rate, nativePair ? "native" : "alternating",
-            g_gpuShared ? "shared" : "cpu", readbackResult,
+            cleanGridFrame ? "clean-grid" : g_gpuShared ? "shared" : "cpu", readbackResult,
             g_eyes[0].ready, g_eyes[1].ready,
             static_cast<int>(le), static_cast<int>(re), g_adjustedDraws,
             g_nativePairs,
             g_eyes[0].pixelHash, g_eyes[1].pixelHash);
         previousReportFrame = presents;
         previousReportTick = reportTick;
+        VR().LogFrameTiming();
+        if (nativePair) Log("vr pipeline: early=%d wait=%.2fms pair=%.2fms queue=%.2fms transfer=%.2fms submit=%.2fms poseAgeAtSubmit=%.2fms",
+            early, (g_pipeline.poseReady-g_pipeline.waitStart)*1000,
+            (g_pipeline.pairReady-g_pipeline.poseReady)*1000,
+            (entryTime-g_pipeline.pairReady)*1000, (submitStart-transferStart)*1000,
+            (submitEnd-submitStart)*1000, (submitStart-g_pipeline.poseReady)*1000);
     }
     static bool loggedTransforms = false;
     if (!loggedTransforms) {
@@ -826,6 +964,7 @@ void CaptureAndSubmit(IDirect3DDevice9* device) {
     if (nativePair) VR().SetEye(0);
     else VR().AdvanceEye();
     if (!nativePair) VR().WaitForPose();
+    return true; // A pair was submitted/attempted; do not submit it twice.
 }
 
 template<class Call>
@@ -835,9 +974,69 @@ HRESULT PresentOnce(IDirect3DDevice9* device, Call&& call) {
     // capture the side-by-side desktop mirror as a new HMD eye frame.
     if (g_insidePresent) return call();
     g_insidePresent = true;
-    CaptureAndSubmit(device);
+    auto& grid = IndependentVRGrid();
+    static bool f3Down = false, f8Down = false;
+    const bool f3 = (GetAsyncKeyState(VK_F3) & 0x8000) != 0;
+    const bool f8 = (GetAsyncKeyState(VK_F8) & 0x8000) != 0;
+    const bool finished = grid.Poll();
+    if (finished) Log("independent grid: game regained compositor ownership");
+    bool changedOwner = finished;
+    if (f3 && !f3Down && VR().Active() && !VR().External()) {
+        if (grid.OwnsFrames()) {
+            grid.RequestStop();
+            Log("independent grid: F3 stop requested; waiting for worker exit");
+        } else if (!finished) {
+            changedOwner = VR().StartIndependentGrid();
+            Log("independent grid: F3 start %s", changedOwner ? "requested" : "FAILED");
+        }
+    }
+    if (grid.OwnsFrames() && f8 && !f8Down) grid.Recenter();
+    f3Down = f3; f8Down = f8;
+    if (grid.OwnsFrames() || changedOwner) {
+        g_nativePairReady = false;
+        g_earlySubmission.Reset();
+        for (auto& eye : g_eyes) eye.ready = false;
+        // Keep desktop rendering/presentation running. The worker alone waits,
+        // submits and hands off. Skip this transition frame on return as well.
+        const HRESULT result = call();
+        // Freeze at a completed frame boundary; do not skip engine draw calls
+        // or let its queues/simulation grow. Only this render/game thread parks.
+        // The worker continues its own tracking/render/submit loop unchanged.
+        static bool parkNeedsRelease = false;
+        const bool f2 = (GetAsyncKeyState(VK_F2) & 0x8000) != 0;
+        if (!f2) parkNeedsRelease = false;
+        if (f2 && !parkNeedsRelease && grid.OwnsFrames()) {
+            parkNeedsRelease = true;
+            Log("independent grid: parking game thread (F2 release or 4 seconds resumes)");
+            grid.SetGameParked(true);
+            const ULONGLONG parkDeadline = GetTickCount64()+4000;
+            while ((GetAsyncKeyState(VK_F2) & 0x8000) && GetTickCount64()<parkDeadline) {
+                // F3 remains an immediate exit, including while the game is parked.
+                if (GetAsyncKeyState(VK_F3) & 0x8000) { grid.RequestStop(); f3Down = true; break; }
+                if (grid.Poll()) { Log("independent grid: worker exited while parked"); break; }
+                Sleep(10);
+            }
+            grid.SetGameParked(false);
+            Log("independent grid: game thread resumed");
+        }
+        g_insidePresent = false;
+        return result;
+    }
+    const bool alreadySubmitted = g_earlySubmission.ConsumeAtPresent();
+    const bool hadNativeTiming = alreadySubmitted || g_nativePairReady;
+    if (!alreadySubmitted) CaptureAndSubmit(device, false);
+    const double presentStart = PipelineSeconds();
     const HRESULT result = call();
-    VR().PostPresentHandoff();
+    const double presentEnd = PipelineSeconds();
+    if (!alreadySubmitted) {
+        VR().PostPresentHandoff();
+        g_pipeline.handoff = PipelineSeconds();
+    }
+    static unsigned desktopFrames = 0;
+    if (++desktopFrames % 300 == 0 && hadNativeTiming)
+        Log("vr desktop: early=%d present=%.2fms poseToHandoff=%.2fms",
+            alreadySubmitted, (presentEnd-presentStart)*1000,
+            (g_pipeline.handoff-g_pipeline.poseReady)*1000);
     g_insidePresent = false;
     return result;
 }
@@ -900,6 +1099,7 @@ void HookSwapChain(IDirect3DSwapChain9* swap) {
 
 void HookDevice(IDirect3DDevice9Ex* device) {
     g_device = device;
+    g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
     void** v = *reinterpret_cast<void***>(device);
     PatchVtable(v,16,&HookReset,g_reset);
     PatchVtable(v,17,&HookPresent,g_present);

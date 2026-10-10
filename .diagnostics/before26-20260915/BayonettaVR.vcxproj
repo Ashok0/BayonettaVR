@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32"><Configuration>Debug</Configuration><Platform>Win32</Platform></ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32"><Configuration>Release</Configuration><Platform>Win32</Platform></ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{2946BC41-4852-4EF1-B0C8-A924EB73619E}</ProjectGuid>
+    <RootNamespace>BayonettaVR</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration"><WholeProgramOptimization>true</WholeProgramOptimization><UseDebugLibraries>false</UseDebugLibraries></PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration"><UseDebugLibraries>true</UseDebugLibraries></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets"><Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" /></ImportGroup>
+  <PropertyGroup>
+    <TargetName>d3d9</TargetName>
+    <OutDir>$(SolutionDir)build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\obj\$(Platform)\$(Configuration)\</IntDir>
+    <GameDir Condition="'$(GameDir)'==''">C:\Program Files (x86)\Steam\steamapps\common\Bayonetta\</GameDir>
+    <DeployToGame Condition="'$(DeployToGame)'==''">false</DeployToGame>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard><WarningLevel>Level4</WarningLevel><SDLCheck>true</SDLCheck><ConformanceMode>true</ConformanceMode><MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)third_party\openvr\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link><SubSystem>Windows</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation><ModuleDefinitionFile>src\d3d9_proxy.def</ModuleDefinitionFile><AdditionalDependencies>d3d9.lib;d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'"><ClCompile><Optimization>MaxSpeed</Optimization><FunctionLevelLinking>true</FunctionLevelLinking><IntrinsicFunctions>true</IntrinsicFunctions></ClCompile><Link><EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences></Link></ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Config.cpp"/><ClCompile Include="src\D3D9Hooks.cpp"/><ClCompile Include="src\Log.cpp"/><ClCompile Include="src\VR.cpp"/><ClCompile Include="src\d3d9_proxy.cpp"/>
+  </ItemGroup>
+  <ItemGroup><ClInclude Include="src\Config.h"/><ClInclude Include="src\D3D9Hooks.h"/><ClInclude Include="src\Log.h"/><ClInclude Include="src\Matrix.h"/><ClInclude Include="src\VR.h"/></ItemGroup>
+  <ItemGroup><None Include="BayonettaVR.ini"/><None Include="README.md"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\TrackingMath.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="DeployToGameFolder" AfterTargets="Build" Condition="'$(DeployToGame)'=='true'">
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)" />
+    <Copy SourceFiles="$(SolutionDir)BayonettaVR.ini" DestinationFolder="$(GameDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

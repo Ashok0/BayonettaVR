@@ -1,0 +1,18 @@
+Build 20261002.33: installed DLL and external companion, SHA256 verified against release outputs.
+Backup: .diagnostics/before33-20261002-112608
+Installed setting: ExternalCompositor=1; existing native stereo/positional and calibration settings preserved.
+
+PASS: Release/Win32 solution build (DLL and companion project reference).
+PASS: proxy LoadLibrary/export check.
+PASS: existing math/tracking/anchor/shader/grid/pose policy/frame worker checks.
+PASS: real two-process D3D11 shared texture transport: pixel/eye/pose validation, resize, producer-device recreation, bounded queue drops, intentional mismatch detection, stop/restart, parent-death exit.
+PASS: direct runtime smoke using final release helper: live tracking and 76 successful stereo submissions during the 8-second measurement; host exited after stop.
+
+LIMITATIONS:
+Runtime smoke is an idle session at approximately 10 Hz; not a comfort or normal playing-rate test.
+Computer Use app enumeration failed twice: native pipe unavailable, OS error 2. Cannot automate game menus here.
+Actual game integration and subjective headset smoothness are NOT yet verified.
+No root cause claim. A smooth standalone reference motivates moving OpenVR ownership out of the game; shared GPU scheduling and game rendering still affect the result.
+
+Next user action: launch Bayonetta normally, continue to scene, F8 to recenter. No F6 required.
+Fallback: ExternalCompositor=0 restores the previous in-process path; .32 DLL and INI backup retained above.

@@ -3,3 +3,7 @@ C:\dev\astra6\Bayonetta\src\D3D9Hooks.cpp;C:\dev\astra6\Bayonetta\build\obj\Win3
 C:\dev\astra6\Bayonetta\src\Log.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\Log.obj
 C:\dev\astra6\Bayonetta\src\VR.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\VR.obj
 C:\dev\astra6\Bayonetta\src\d3d9_proxy.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\d3d9_proxy.obj
+C:\dev\astra6\Bayonetta\src\ReferenceGridRenderer.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\ReferenceGridRenderer.obj
+C:\dev\astra6\Bayonetta\src\IndependentGrid.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\IndependentGrid.obj
+C:\dev\astra6\Bayonetta\src\CompanionClient.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\CompanionClient.obj
+C:\dev\astra6\Bayonetta\src\SharedFrameTransport.cpp;C:\dev\astra6\Bayonetta\build\obj\Win32\Release\SharedFrameTransport.obj

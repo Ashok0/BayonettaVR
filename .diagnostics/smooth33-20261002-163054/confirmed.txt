@@ -1,0 +1,4 @@
+User-confirmed working baseline: build .33 external companion.
+User report: "Its running liquid smooth!!!"
+Preserve these exact installed binaries and settings before further changes.
+This confirms subjective smoothness for the user's current session; it does not identify the exact internal cause of the previous in-process judder.

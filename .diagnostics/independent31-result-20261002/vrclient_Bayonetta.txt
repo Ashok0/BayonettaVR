@@ -1,0 +1,78 @@
+Fri Oct 02 2026 10:35:58.267 [Info] - //==============================================================================================
+Fri Oct 02 2026 10:35:58.268 [Info] - ================================================================================================
+Fri Oct 02 2026 10:35:58.268 [Info] - ================================================================================================
+Fri Oct 02 2026 10:35:58.268 [Info] - Bayonetta 2.17.10 startup with PID=15448, config=C:\Program Files (x86)\Steam\config, runtime=C:\Program Files (x86)\Steam\steamapps\common\SteamVR, arch=win32
+Fri Oct 02 2026 10:35:58.270 [Info] - vrclient type=VRApplication_Scene
+Fri Oct 02 2026 10:35:58.281 [Info] - Skipping external driver C:\Program Files (x86)\Steam\steamapps\common\LIV\resources\LIV Virtual Camera\00liv_virtualcamera because it is not a directory
+Fri Oct 02 2026 10:35:58.290 [Info] - [Settings] Load Json Settings from C:\Program Files (x86)\Steam\config\steamvr.vrsettings
+Fri Oct 02 2026 10:35:58.308 [Info] - Client (SteamVR_Namespace) app container state: 1
+Fri Oct 02 2026 10:35:58.308 [Info] - CSharedResourceNamespaceClient::Init(): received namespace data 3228
+Fri Oct 02 2026 10:35:58.308 [Info] - Client (VR_ServerPipe_3228) app container state: 1
+Fri Oct 02 2026 10:35:59.376 [Info] - Received success response from vrserver connect
+Fri Oct 02 2026 10:36:01.510 [Info] - Timed out waiting for a good app key
+Fri Oct 02 2026 10:36:01.510 [Info] - App key after connect message:steam.app.460790
+Fri Oct 02 2026 10:36:01.520 [Info] - [Input] Attempting to load initial input config
+Fri Oct 02 2026 10:36:01.524 [Info] - Checking input type trigger::click for path (/user/hand/left/input/trigger)
+Fri Oct 02 2026 10:36:01.525 [Info] - Checking input type trigger::pull for path (/user/hand/left/input/trigger)
+Fri Oct 02 2026 10:36:01.525 [Info] - Checking input type trigger::touch for path (/user/hand/left/input/trigger)
+Fri Oct 02 2026 10:36:01.525 [Info] - Checking input type joystick::click for path (/user/hand/left/input/joystick)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type joystick::position for path (/user/hand/left/input/joystick)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type joystick::touch for path (/user/hand/left/input/joystick)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type trigger::click for path (/user/hand/left/input/grip)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type trigger::pull for path (/user/hand/left/input/grip)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type trigger::touch for path (/user/hand/left/input/grip)
+Fri Oct 02 2026 10:36:01.526 [Info] - Checking input type button::click for path (/user/hand/left/input/x)
+Fri Oct 02 2026 10:36:01.527 [Info] - Checking input type button::touch for path (/user/hand/left/input/x)
+Fri Oct 02 2026 10:36:01.527 [Info] - Checking input type button::click for path (/user/hand/left/input/y)
+Fri Oct 02 2026 10:36:01.527 [Info] - Checking input type button::touch for path (/user/hand/left/input/y)
+Fri Oct 02 2026 10:36:01.527 [Info] - Checking input type trigger::click for path (/user/hand/right/input/trigger)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type trigger::pull for path (/user/hand/right/input/trigger)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type trigger::touch for path (/user/hand/right/input/trigger)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type joystick::click for path (/user/hand/right/input/joystick)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type joystick::position for path (/user/hand/right/input/joystick)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type joystick::touch for path (/user/hand/right/input/joystick)
+Fri Oct 02 2026 10:36:01.528 [Info] - Checking input type trigger::click for path (/user/hand/right/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type trigger::pull for path (/user/hand/right/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type trigger::touch for path (/user/hand/right/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::click for path (/user/hand/left/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::touch for path (/user/hand/left/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::click for path (/user/hand/right/input/a)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::touch for path (/user/hand/right/input/a)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::click for path (/user/hand/right/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::touch for path (/user/hand/right/input/grip)
+Fri Oct 02 2026 10:36:01.529 [Info] - Checking input type button::click for path (/user/hand/right/input/b)
+Fri Oct 02 2026 10:36:01.530 [Info] - Checking input type button::touch for path (/user/hand/right/input/b)
+Fri Oct 02 2026 10:36:01.531 [Info] - Determined this is a legacy app.
+Fri Oct 02 2026 10:36:01.535 [Info] - Checking input type button::click for path (/user/head/proximity)
+Fri Oct 02 2026 10:36:01.535 [Info] - Determined this is a legacy app.
+Fri Oct 02 2026 10:36:01.542 [Info] - [Simulation] Clearing overridden properties for all existing devices
+Fri Oct 02 2026 10:36:01.543 [Info] - [Input] After initial config load, app appears to be using legacy input
+Fri Oct 02 2026 10:36:01.543 [Info] - /user/hand/left is FFFFFFFF
+Fri Oct 02 2026 10:36:01.543 [Info] - /user/hand/right is FFFFFFFF
+Fri Oct 02 2026 10:36:01.543 [Info] - TrackedControllerRole_LeftHand (FFFFFFFF)-> 
+Fri Oct 02 2026 10:36:01.544 [Info] - Skipping role TrackedControllerRole_LeftHand because the device is invalid
+Fri Oct 02 2026 10:36:01.544 [Info] - TrackedControllerRole_RightHand (FFFFFFFF)-> 
+Fri Oct 02 2026 10:36:01.544 [Info] - Skipping role TrackedControllerRole_RightHand because the device is invalid
+Fri Oct 02 2026 10:36:01.544 [Info] - TrackedControllerRole_Invalid (0)-> 
+Fri Oct 02 2026 10:36:01.544 [Info] - Client (VR_CompositorPipe_3228) app container state: 1
+Fri Oct 02 2026 10:36:01.554 [Info] - Received success response from vrcompositor connect
+Fri Oct 02 2026 10:36:01.554 [Info] - Initializing the limited version of CVRCompositorClient
+Fri Oct 02 2026 10:36:01.574 [Info] - VR Dashboard executable already running.
+Fri Oct 02 2026 10:36:01.639 [Info] - Capturing Scene Focus
+Fri Oct 02 2026 10:36:03.119 [Info] - Found Windows 8 or newer, so enable advanced image processing of scene textures.
+Fri Oct 02 2026 10:36:03.120 [Info] - Loading shaders
+Fri Oct 02 2026 10:36:03.177 [Info] - Shaders loaded in 0.058594 seconds
+Fri Oct 02 2026 10:36:03.177 [Info] - Setting max texture dimensions to 2766x2920 before requiring downsampling (standard)
+Fri Oct 02 2026 10:36:04.419 [Info] - Loading shaders
+Fri Oct 02 2026 10:36:04.445 [Info] - Shaders loaded in 0.027344 seconds
+Fri Oct 02 2026 10:36:04.445 [Info] - [CDownsampleRenderer] Releasing old resources.
+Fri Oct 02 2026 10:36:04.446 [Info] - Setting max texture dimensions to 2766x2920 before requiring downsampling (standard)
+Fri Oct 02 2026 10:36:04.446 [Info] - [CMsaaResolveRenderer] Deleting old resources
+Fri Oct 02 2026 10:36:27.635 [Warning] - Application submitted two left scene textures for a single frame!
+Fri Oct 02 2026 10:36:27.635 [Warning] - Application submitted two right scene textures for a single frame!
+Fri Oct 02 2026 10:37:08.492 [Info] - Loading shaders
+Fri Oct 02 2026 10:37:08.519 [Info] - Shaders loaded in 0.026763 seconds
+Fri Oct 02 2026 10:37:08.519 [Info] - [CDownsampleRenderer] Releasing old resources.
+Fri Oct 02 2026 10:37:08.520 [Info] - Setting max texture dimensions to 2766x2920 before requiring downsampling (standard)
+Fri Oct 02 2026 10:37:08.520 [Info] - [CMsaaResolveRenderer] Deleting old resources
+Fri Oct 02 2026 10:37:29.861 [Info] - NvAPI: Skipping NvAPI_Unload

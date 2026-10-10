@@ -35,7 +35,7 @@
       <RuntimeLibrary Condition="'$(Configuration)'=='Release'">MultiThreaded</RuntimeLibrary>
       <RuntimeLibrary Condition="'$(Configuration)'=='Debug'">MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
-    <Link><SubSystem>Windows</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation><ModuleDefinitionFile>src\d3d9_proxy.def</ModuleDefinitionFile><AdditionalDependencies>d3d9.lib;d3d11.lib;dxgi.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
+    <Link><SubSystem>Windows</SubSystem><GenerateDebugInformation>true</GenerateDebugInformation><ModuleDefinitionFile>src\d3d9_proxy.def</ModuleDefinitionFile><AdditionalDependencies>d3d9.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies></Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'"><ClCompile><Optimization>MaxSpeed</Optimization><FunctionLevelLinking>true</FunctionLevelLinking><IntrinsicFunctions>true</IntrinsicFunctions></ClCompile><Link><EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences></Link></ItemDefinitionGroup>
   <ItemGroup>
@@ -43,9 +43,16 @@
   </ItemGroup>
   <ItemGroup><ClInclude Include="src\Config.h"/><ClInclude Include="src\D3D9Hooks.h"/><ClInclude Include="src\Log.h"/><ClInclude Include="src\Matrix.h"/><ClInclude Include="src\VR.h"/></ItemGroup>
   <ItemGroup><None Include="BayonettaVR.ini"/><None Include="README.md"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\TrackingMath.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\PoseSubmission.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\ReferenceGrid.h"/><ClInclude Include="src\ReferenceGridRenderer.h"/><ClCompile Include="src\ReferenceGridRenderer.cpp"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\FrameLoopWorker.h"/><ClInclude Include="src\IndependentGrid.h"/><ClCompile Include="src\IndependentGrid.cpp"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\CompanionProtocol.h"/><ClInclude Include="src\CompanionClient.h"/><ClInclude Include="src\SharedFrameTransport.h"/><ClCompile Include="src\CompanionClient.cpp"/><ClCompile Include="src\SharedFrameTransport.cpp"/></ItemGroup>
+  <ItemGroup><ProjectReference Include="BayonettaVRHost.vcxproj"><Project>{826B19E2-66B9-47CE-A0CB-EE5F07DDC1E7}</Project><ReferenceOutputAssembly>false</ReferenceOutputAssembly><LinkLibraryDependencies>false</LinkLibraryDependencies></ProjectReference></ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Target Name="DeployToGameFolder" AfterTargets="Build" Condition="'$(DeployToGame)'=='true'">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)" />
+    <Copy SourceFiles="$(TargetPath);$(OutDir)BayonettaVRHost.exe" DestinationFolder="$(GameDir)" />
     <Copy SourceFiles="$(SolutionDir)BayonettaVR.ini" DestinationFolder="$(GameDir)" SkipUnchangedFiles="true" />
   </Target>
 </Project>

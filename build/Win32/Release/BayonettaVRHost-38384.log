@@ -1,0 +1,5 @@
+host ready parent alive, adapter=0 test=0
+host pairs=19 received=0 sequence=0 sample=0 imageAge=0ms grid=1 noFocus=0
+host pairs=39 received=0 sequence=0 sample=0 imageAge=0ms grid=1 noFocus=0
+host pairs=59 received=0 sequence=0 sample=0 imageAge=0ms grid=1 noFocus=0
+host stopped received=0 failures=0
