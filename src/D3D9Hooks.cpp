@@ -6,6 +6,7 @@
 #include "WorldHud.h"
 #include "MenuPanel9.h"
 #include "MoviePanel9.h"
+#include "MovieDrawQueue.h"
 #include "EffectStreamReplay.h"
 #include "ReferenceGridRenderer.h"
 #include "VR.h"
@@ -105,6 +106,8 @@ thread_local bool g_compositingMenu = false;
 thread_local bool g_capturingMovie = false;
 MoviePanel9 g_moviePanel;
 bool g_movieCaptureFailed=false;
+thread_local bool g_flatMovieFrame=false;
+const MovieDrawQueue* g_movieQueue=nullptr;
 bool g_menuHooksInstalled = false;
 MenuPanel9 g_menuPanel;
 unsigned long long g_menuCaptures[2]{}, g_menuEyeDraws[2]{};
@@ -566,7 +569,7 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
         if(++skipped<=4||skipped%600==0)Log("dof: suppressed draws=%u",skipped);
         return S_OK;
     }
-    if (g_compositingMenu) return call();
+    if (g_compositingMenu || g_flatMovieFrame) return call();
     if (g_capturingMovie) return g_moviePanel.CaptureDraw(device,call);
     if (g_capturingMenu >= 0) {
         RecordMenuDraw(device);
@@ -931,7 +934,7 @@ bool g_effectHooksInstalled = false;
 unsigned long long g_effectStreamsRestored = 0, g_effectReplayFrames = 0;
 
 void __fastcall HookClearEffectStream(void* stream, void*) {
-    if (g_insideNativeDraw && VR().Eye() == 0 && !g_effectStreams.Remember(stream)) {
+    if (g_insideNativeDraw && !g_flatMovieFrame && VR().Eye() == 0 && !g_effectStreams.Remember(stream)) {
         static bool logged = false;
         if (!logged) { Log("effects: replay capacity exceeded; excess streams use original behavior"); logged = true; }
     }
@@ -941,7 +944,7 @@ void __fastcall HookClearEffectStream(void* stream, void*) {
 }
 
 void DrawMenuList(void* self, int layer) {
-    if (!g_insideNativeDraw || !Cfg().worldLockedHud || !g_device) { g_drawMenuList(self); return; }
+    if (g_flatMovieFrame || !g_insideNativeDraw || !Cfg().worldLockedHud || !g_device) { g_drawMenuList(self); return; }
     if (VR().Eye() == 0 || !g_menuPanel.Ready(layer)) {
         if (!g_menuPanel.Begin(g_device, layer)) {
             static bool logged = false;
@@ -967,7 +970,7 @@ void DrawMenuList(void* self, int layer) {
 void __fastcall HookIdList(void* self, void*) { DrawMenuList(self, 0); }
 void __fastcall HookIdFontList(void* self, void*) { DrawMenuList(self, 1); }
 void __fastcall HookMovieList(void* self, void*) {
-    if(!g_insideNativeDraw || !Cfg().worldLockedMovies || !g_device){g_drawMovieList(self);return;}
+    if(g_flatMovieFrame || !g_insideNativeDraw || !Cfg().worldLockedMovies || !g_device){g_drawMovieList(self);return;}
     if(VR().Eye()==0) {
         g_movieCaptureFailed=!g_moviePanel.Begin(g_device);
         if(!g_movieCaptureFailed) {
@@ -992,7 +995,7 @@ void __fastcall HookMovieList(void* self, void*) {
         if(++count<=2||count%600==0)Log("movies: eye=%d shared-frame screen draws=%u",VR().Eye(),count);
     } else Log("movies: eye=%d screen draw failed 0x%08X",VR().Eye(),hr);
 }
-bool FinishStereoFrame() { return !g_insideNativeDraw || VR().Eye() == 1; }
+bool FinishStereoFrame() { return g_flatMovieFrame || !g_insideNativeDraw || VR().Eye() == 1; }
 void __fastcall HookRotateUiBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateUiBuffers(self); }
 void __fastcall HookRotateFontBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateFontBuffers(self); }
 void __fastcall HookReleaseUiTextures(void* self, void*) { if (FinishStereoFrame()) g_releaseUiTextures(self); }
@@ -1061,6 +1064,7 @@ bool InstallEffectHooks(unsigned char* image) {
 }
 MenuCallPatch g_menuPatches[7]{};
 void RemoveMenuHooks() {
+    g_movieQueue=nullptr;
     for (auto& patch : g_menuPatches) if (patch.address) {
         DWORD old = 0;
         if (VirtualProtect(patch.address, 5, PAGE_EXECUTE_READWRITE, &old)) {
@@ -1080,6 +1084,14 @@ bool InstallMenuHooks(unsigned char* image) {
     const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50,0x8706E0};
     const void* hooks[] = {&HookIdList,&HookIdFontList,&HookRotateUiBuffers,
         &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials,&HookMovieList};
+    // Verify the MovieDraw identity and the OT layout used by Pending before
+    // reading its bank heads. These are specific to the supported Steam build.
+    const unsigned char movieThis[]={0xB9,0xB8,0xDB,0xA7,0x05};
+    const unsigned char otLayout[]={0x83,0xEC,0x10,0x8B,0x41,0x20,0x8B,0x51,0x28,0x53,0x8B,0x59,0x24};
+    if(memcmp(image+0xE530C,movieThis,sizeof(movieThis)) ||
+       memcmp(image+0x8706E0,otLayout,sizeof(otLayout))) {
+        Log("movies: queue layout signature mismatch");return false;
+    }
     for (int i=0;i<7;++i) {
         auto* site = image + sites[i];
         int32_t displacement = 0; memcpy(&displacement, site+1, 4);
@@ -1104,8 +1116,9 @@ bool InstallMenuHooks(unsigned char* image) {
         FlushInstructionCache(GetCurrentProcess(), site, 5);
     }
     g_menuHooksInstalled = true;
+    g_movieQueue=reinterpret_cast<const MovieDrawQueue*>(image+0x567DBB8);
     Log("menu: Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair");
-    Log("movies: verified MovieDraw call hooked for single capture and stereo screen replay");
+    Log("movies: verified MovieDraw queue; complete cinematic composition captured once for both eyes");
     return true;
 }
 
@@ -1132,16 +1145,45 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     if(g_menuDiagnosticActive){g_menuDiagnosticDraw=0;Log("menu trace: begin capture=%u",g_snapshotSequence);}
     if (g_effectHooksInstalled) g_effectStreams.BeginFrame();
 
-    VR().SetEye(0);
-    g_otDraw(self);
-    const HRESULT left = independent ? E_PENDING : CaptureEye(g_device, 0);
+    HRESULT left=E_PENDING,right=E_PENDING;
+    const bool movie=!independent && Cfg().worldLockedMovies && g_movieQueue && g_movieQueue->Pending();
+    if(movie) {
+        // Render the ORIGINAL composition exactly once: moving scene cards,
+        // video, overlays, subtitles and cleanup all retain game draw order.
+        // Applying HMD transforms to individual layers breaks their alignment.
+        VR().SetEye(0);
+        g_flatMovieFrame=true;
+        g_otDraw(self);
+        g_flatMovieFrame=false;
+        IDirect3DSurface9* frame=nullptr;
+        g_device->GetBackBuffer(0,0,D3DBACKBUFFER_TYPE_MONO,&frame);
+        const bool captured=g_moviePanel.CaptureFrame(g_device,frame);
+        VR().EnsureOrigin();
+        for(int eye=0;eye<2;++eye) {
+            VR().SetEye(eye);
+            g_compositingMenu=true;
+            const HRESULT screen=captured ? g_moviePanel.PresentFrame(g_device,frame,
+                VR().MovieClipTransform(g_moviePanel.Aspect())) : E_FAIL;
+            g_compositingMenu=false;
+            const HRESULT result=SUCCEEDED(screen)?CaptureEye(g_device,eye):screen;
+            (eye==0?left:right)=result;
+        }
+        if(frame)frame->Release();
+        static unsigned frames=0;
+        if(++frames<=2 || frames%600==0 || FAILED(left) || FAILED(right))
+            Log("movies: complete composition frame=%u captured=%d eyes=%08X/%08X",frames,captured,left,right);
+    } else {
+        VR().SetEye(0);
+        g_otDraw(self);
+        left = independent ? E_PENDING : CaptureEye(g_device, 0);
 
-    VR().SetEye(1);
-    const size_t restored = g_effectStreams.RestoreForRightEye();
-    g_effectStreamsRestored += restored;
-    if (restored) ++g_effectReplayFrames;
-    g_otDraw(self);
-    const HRESULT right = independent ? E_PENDING : CaptureEye(g_device, 1);
+        VR().SetEye(1);
+        const size_t restored = g_effectStreams.RestoreForRightEye();
+        g_effectStreamsRestored += restored;
+        if (restored) ++g_effectReplayFrames;
+        g_otDraw(self);
+        right = independent ? E_PENDING : CaptureEye(g_device, 1);
+    }
     FinishMenuDiagnostic();
     g_pipeline.pairReady = PipelineSeconds();
 

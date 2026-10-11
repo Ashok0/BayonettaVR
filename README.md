@@ -3,6 +3,38 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Composed movie cinematics (build 20261011.50)
+
+The user reported a story cinematic with a visible map but missing airplane
+animation, plus a giant face card visible behind the viewer. The .49 renderer
+separated MovieDraw from scene geometry and Id/IdFont overlays; those layers
+therefore did not share the movie's projection, depth or composition.
+
+.50 detects queued MovieDraw commands before rendering, using the verified
+Steam OT render-bank layout. For those frames the engine composes its complete
+original view once, including animated geometry, video, overlays, subtitles
+and fades. A GPU copy preserves the final composition, which is then projected
+onto the same fixed screen for each eye. Each eye's surrounding image is
+cleared to black, preventing off-camera cinematic cards from appearing around
+or behind the screen. Cleanup runs once. An empty movie queue immediately
+returns to native stereo and the existing HUD/menu path. Screen dimensions,
+recenter behavior and the .39 visual preferences are retained.
+
+The movie GPU checks cover 89,359 composition pixels, three moving-overlay
+positions, subtitles, asymmetric eye projections, six completely black rear
+views, queue-bank transitions, viewport/scissor restoration, and rendering
+inside the engine-owned D3D scene. The existing 36 movie projection cases and
+full regression suite also pass. The specific story map/airplane scene still
+requires an in-headset replay; the regression uses a synthetic layered scene.
+The final installed build completed 9,600 live startup frames with successful
+movie copies and both eye captures, with no movie-render errors in the session
+log (`.diagnostics/movie50-startup`). An initial live probe caught nested
+BeginScene calls; they were removed and the test now exercises the engine-owned
+scene contract. Desktop visual verification was unavailable because the
+Computer Use native pipe could not connect. The installed DLL SHA256 matches
+the release build; the preceding .49 DLL/INI/log are backed up under
+`.diagnostics/before50-20261011-101738`.
+
 ## Stereo splash movies (build 20261011.49)
 
 The user reported SEGA and Platinum Games splash movies visible only in the

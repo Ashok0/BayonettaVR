@@ -58,7 +58,35 @@ void MoviePanel9::End(IDirect3DDevice9* d){
     Release(oldTarget_);Release(oldDepth_);
     ready_=draws_!=0 && !failed_ && SUCCEEDED(target)&&SUCCEEDED(depth)&&SUCCEEDED(viewport)&&SUCCEEDED(scissor);
 }
-HRESULT MoviePanel9::Draw(IDirect3DDevice9* d,const Mat4& clip){
+bool MoviePanel9::CaptureFrame(IDirect3DDevice9* d,IDirect3DSurface9* source){
+    BeginFrame();
+    D3DSURFACE_DESC desc{};
+    if(!source || FAILED(source->GetDesc(&desc)) || !Ensure(d,desc.Width,desc.Height))return false;
+    ready_=SUCCEEDED(d->StretchRect(source,nullptr,surface_,nullptr,D3DTEXF_NONE));
+    return ready_;
+}
+HRESULT MoviePanel9::PresentFrame(IDirect3DDevice9* d,IDirect3DSurface9* target,const Mat4& clip){
+    if(!ready_)return E_FAIL;
+    IDirect3DSurface9 *oldTarget=nullptr,*oldDepth=nullptr;
+    D3DVIEWPORT9 viewport{};RECT scissor{};D3DSURFACE_DESC desc{};
+    if(!target || FAILED(target->GetDesc(&desc)) || FAILED(d->GetViewport(&viewport)) ||
+       FAILED(d->GetScissorRect(&scissor)) || FAILED(d->GetRenderTarget(0,&oldTarget)))return E_FAIL;
+    d->GetDepthStencilSurface(&oldDepth);
+    HRESULT hr=d->SetDepthStencilSurface(nullptr);
+    if(SUCCEEDED(hr))hr=d->SetRenderTarget(0,target);
+    const D3DVIEWPORT9 full{0,0,desc.Width,desc.Height,0,1};
+    if(SUCCEEDED(hr))hr=d->SetViewport(&full);
+    // The engine owns BeginScene/EndScene outside cOtManager::draw. Nesting
+    // another BeginScene here produces D3DERR_INVALIDCALL in the live game.
+    if(SUCCEEDED(hr))hr=Draw(d,clip,true);
+    d->SetDepthStencilSurface(nullptr);
+    const HRESULT rt=d->SetRenderTarget(0,oldTarget),depth=d->SetDepthStencilSurface(oldDepth);
+    const HRESULT vp=d->SetViewport(&viewport),sc=d->SetScissorRect(&scissor);
+    Release(oldTarget);Release(oldDepth);
+    if(FAILED(hr))return hr;
+    if(FAILED(rt))return rt;if(FAILED(depth))return depth;if(FAILED(vp))return vp;return sc;
+}
+HRESULT MoviePanel9::Draw(IDirect3DDevice9* d,const Mat4& clip,bool clearBackground){
     if(!ready_||!state_)return S_FALSE;
     HRESULT hr=state_->Capture();if(FAILED(hr))return hr;
     d->SetVertexDeclaration(declaration_);d->SetVertexShader(vs_);d->SetPixelShader(ps_);
@@ -72,8 +100,11 @@ HRESULT MoviePanel9::Draw(IDirect3DDevice9* d,const Mat4& clip){
     d->SetRenderState(D3DRS_COLORWRITEENABLE,15);d->SetRenderState(D3DRS_CULLMODE,D3DCULL_NONE);
     d->SetRenderState(D3DRS_FILLMODE,D3DFILL_SOLID);d->SetRenderState(D3DRS_SRGBWRITEENABLE,FALSE);
     d->SetRenderState(D3DRS_CLIPPLANEENABLE,0);d->SetStreamSourceFreq(0,1);
+    // Do not expose the original cutscene's camera-facing cards around or
+    // behind the viewer. Clear the whole eye, with scissor already disabled.
+    if(clearBackground)hr=d->Clear(0,nullptr,D3DCLEAR_TARGET,0xff000000,1,0);
     const float vertices[][4]={{-1,1,0,0},{1,1,1,0},{-1,-1,0,1},{1,-1,1,1}};
-    hr=d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,vertices,sizeof(vertices[0]));
+    if(SUCCEEDED(hr))hr=d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,vertices,sizeof(vertices[0]));
     const HRESULT restored=state_->Apply();return FAILED(hr)?hr:restored;
 }
 }

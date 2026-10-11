@@ -11,6 +11,11 @@ public:
     void BeginFrame(){ready_=false;draws_=0;}
     bool Begin(IDirect3DDevice9* device);
     void End(IDirect3DDevice9* device);
+    // Called after the engine finishes its draw lists, within its D3D scene.
+    // Preserve the complete cinematic,
+    // including scene geometry, movie, Id overlays, fades and subtitles.
+    bool CaptureFrame(IDirect3DDevice9* device,IDirect3DSurface9* source);
+    HRESULT PresentFrame(IDirect3DDevice9* device,IDirect3DSurface9* target,const Mat4& clip);
     template<class Call> HRESULT CaptureDraw(IDirect3DDevice9* device,Call&& call){
         IDirect3DSurface9* target=nullptr;
         const bool recording=SUCCEEDED(device->GetRenderTarget(0,&target)) && target==surface_;
@@ -19,7 +24,7 @@ public:
         if(recording){if(SUCCEEDED(hr))++draws_;else failed_=true;}
         return hr;
     }
-    HRESULT Draw(IDirect3DDevice9* device,const Mat4& clip);
+    HRESULT Draw(IDirect3DDevice9* device,const Mat4& clip,bool clearBackground=false);
     bool Ready()const{return ready_;}
     float Aspect()const{return height_?float(width_)/height_:16.f/9;}
     IDirect3DSurface9* SourceTarget()const{return oldTarget_;}
