@@ -140,6 +140,24 @@ static bool AnchorTests() {
 }
 
 int main() {
+    // Fog reconstructs view Z with the original game projection. Changing the
+    // eye FOV/optical center must leave both depth rows intact; otherwise depth
+    // tests and the fog fade disagree even with perfectly aligned sampling.
+    unsigned depthCases=0;
+    for(float farPlane:{100.f,6553.f,50000.f})for(float nearPlane:{.1f,.5f})for(int eye=0;eye<2;++eye) {
+        const Mat4 game=PerspectiveFovLH(.7f,16.f/9.f,nearPlane,farPlane);
+        const Mat4 headset=PerspectiveRawLH(eye?-.85f:-1.3f,eye?1.3f:.85f,-1.4f,.97f,.1f,100000.f);
+        const Mat4 corrected=WithSceneDepth(headset,game);
+        for(int r=0;r<4;++r)for(int c=0;c<4;++c)
+            if(corrected.m[r][c]!=(r<2?headset:game).m[r][c])return 7;
+        for(float z:{1.f,10.f,50.f}) {
+            const double packed=1.0-double(corrected.m[2][2])-double(corrected.m[2][3])/z;
+            const double reconstructed=double(game.m[2][3])/(1.0-double(game.m[2][2])-packed);
+            if(std::fabs(reconstructed-z)>1e-8)return 8;
+            ++depthCases;
+        }
+    }
+    std::printf("scene depth: %u eye/depth cases preserve fog reconstruction and asymmetric FOV\n",depthCases);
     Mat4 rigid = Identity();
     rigid.m[0][0]=0; rigid.m[0][2]=1; rigid.m[2][0]=-1; rigid.m[2][2]=0;
     rigid.m[0][3]=3; rigid.m[1][3]=-2; rigid.m[2][3]=7;

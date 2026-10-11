@@ -44,7 +44,8 @@ public:
 private:
     void ApplyControllers(const ControllerInput& input);
     uint64_t controllerRecenterSequence_=0;
-    Mat4 EyeViewProjection(int eye, float units, const Mat4& input = Identity()) const;
+    Mat4 EyeViewProjection(int eye, float units, const Mat4& input = Identity(),
+                           const Mat4* sceneProjection = nullptr) const;
     Mat4 RenderHeadForEye(int eye) const;
     int TrackingMode() const;
     bool external_ = false;

@@ -1,0 +1,3 @@
+//Depth of field PS for cutscenes 2. Disabled.
+ps_3_0
+dcl_texcoord v0

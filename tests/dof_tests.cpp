@@ -1,6 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 #include "DepthOfField.h"
+#include "MotionBlur.h"
 #include <d3dcompiler.h>
 #include <wrl/client.h>
 #include <vector>
@@ -42,13 +43,19 @@ int main(){
         bool equal=true;for(int y=0;y<32;++y)for(int x=0;x<32;++x){const auto row=reinterpret_cast<const DWORD*>(static_cast<const char*>(map.pBits)+y*map.Pitch);if((row[x]&0xffffff)!=expected)equal=false;}
         read->UnlockRect();Require(equal,"all pixels preserve expected scene/depth");
     };
-    const uint32_t hashes[]={0xb959e4d7,0x548c7346,0xfc2a113c,0xcb1d0471};
+    const uint32_t hashes[]={0xb959e4d7,0x548c7346,0xfc2a113c,0xcb1d0471,
+        0xcde775fa,0x27b1ec05,0x7c993bc7,0x9fcfac0f,0x24ea099a};
     for(const auto hash:hashes){
-        char path[128]{};sprintf_s(path,"tests/fixtures/dof/%08X.bin",hash);
+        const bool motion = hash==0xcde775fa||hash==0x27b1ec05||hash==0x7c993bc7||hash==0x9fcfac0f||hash==0x24ea099a;
+        const auto match=motion?IsMotionBlurShader:IsDepthOfFieldShader;
+        filter=PixelShaderDrawFilter(match);
+        char path[128]{};sprintf_s(path,"tests/fixtures/%s/%08X.bin",motion?"motion_blur":"dof",hash);
         std::ifstream f(path,std::ios::binary|std::ios::ate);Require(f.good(),"original shader fixture");const size_t n=size_t(f.tellg());f.seekg(0);
         std::vector<DWORD> original(n/4);f.read(reinterpret_cast<char*>(original.data()),n);
-        Require(IsDepthOfFieldShader(ShaderCrc32(original.data(),n),n),"exact game shader hash and size");
-        Require(!IsDepthOfFieldShader(hash,n+4)&&!IsDepthOfFieldShader(hash^1,n),"near match rejected");
+        Require(match(ShaderCrc32(original.data(),n),n),"exact game shader hash and size");
+        Require(!match(hash,n+4)&&!match(hash^1,n),"near match rejected");
+        Require(!(motion?IsDepthOfFieldShader:IsMotionBlurShader)(hash,n),"DOF and motion blur remain separate");
+        Require(!filter.Register(red.Get()),"ordinary shader not filtered");
         ComPtr<IDirect3DPixelShader9> filtered;
         Check(Create(d.Get(),original.data(),&filtered));
         Require(filter.Register(filtered.Get())==hash,"original shader identified");
@@ -67,5 +74,5 @@ int main(){
         }
     }
     d->SetPixelShader(nullptr);DestroyWindow(window);
-    puts("DOF: four actual game shaders matched; 8 eye render cases preserve scene/depth; original shader identity/metadata, setting-off, unrelated shaders, near matches and state-block restoration passed");
+    puts("DOF + motion blur: 9 actual shaders; 18 eye cases preserve scene/depth; original metadata, setting-off, unrelated shaders, near matches and state-block restoration passed");
 }

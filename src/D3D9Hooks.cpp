@@ -12,6 +12,9 @@
 #include "SharedFrameTransport.h"
 #include "ControllerHooks.h"
 #include "DepthOfField.h"
+#include "MotionBlur.h"
+#include "AmbientOcclusion.h"
+#include "SoftParticleDepth.h"
 #include <d3d11.h>
 #include <dxgi.h>
 #include <windows.h>
@@ -63,6 +66,12 @@ PresentFn g_present = nullptr;
 CreateVSFn g_createVS = nullptr;
 CreatePixelShaderFn g_createPS = nullptr;
 DepthOfFieldFilter g_dofFilter;
+PixelShaderDrawFilter g_motionBlurFilter(IsMotionBlurShader);
+bool g_disableMotionBlur = true;
+PixelShaderDrawFilter g_ambientOcclusionShader(IsAmbientOcclusionShader);
+bool g_disableAmbientOcclusion = true;
+SoftParticleDepth g_softParticleDepth;
+bool g_fixSoftParticleDepth = true;
 SetVSFn g_setVS = nullptr;
 SetConstFn g_setConst = nullptr;
 SetRenderTargetFn g_setRenderTarget = nullptr;
@@ -537,6 +546,17 @@ bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
 
 template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
+    const bool ambientPass=g_ambientOcclusionShader.ShouldSkip(device,Cfg().enabled&&VR().Active());
+    AmbientOcclusionBypass ambient(device,ambientPass&&g_disableAmbientOcclusion);
+    if(ambientPass) {
+        static unsigned seen=0;
+        if(++seen<=4||seen%600==0)Log("ambient shadows: draws=%u bypass=%d",seen,ambient.Active());
+    }
+    if(g_motionBlurFilter.ShouldSkip(device,Cfg().enabled&&VR().Active()&&g_disableMotionBlur)) {
+        static unsigned skipped=0;
+        if(++skipped<=4||skipped%600==0)Log("motion blur: suppressed draws=%u",skipped);
+        return S_OK;
+    }
     if(g_dofFilter.ShouldSkip(device,Cfg().enabled&&Cfg().disableDepthOfField)) {
         static unsigned skipped=0;
         if(++skipped<=4||skipped%600==0)Log("dof: suppressed draws=%u",skipped);
@@ -546,6 +566,13 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     if (g_capturingMenu >= 0) {
         RecordMenuDraw(device);
         return g_menuPanel.CaptureDraw(device, g_capturingMenu, call);
+    }
+    SoftParticleDepthScope softDepth(device,g_softParticleDepth,
+        Cfg().enabled && VR().Active() && g_insideNativeDraw && g_fixSoftParticleDepth);
+    if(softDepth.Active()) {
+        static unsigned draws[2]{};
+        auto& count=draws[VR().Eye()];
+        if(++count<=2 || count%1200==0)Log("soft particle depth: eye=%d corrected draws=%u",VR().Eye(),count);
     }
     int base = Cfg().matrixRegisterOverride;
     ShaderInfo* shaderInfo = nullptr;
@@ -1185,18 +1212,30 @@ void RemoveNativeStereoHook() {
 bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
     if (!VR().Active() || IndependentVRGrid().OwnsFrames()) return false;
     const double entryTime = PipelineSeconds();
-    static bool keyWasDown[9]{};
-    static ULONGLONG lastPress[9]{};
-    const int keys[9] = {VK_F7, VK_F8, VK_F9, VK_F10, VK_F11, VK_F12, VK_F6, VK_F5, VK_F4};
-    bool pressed[9]{};
+    static bool keyWasDown[10]{};
+    static ULONGLONG lastPress[10]{};
+    const int keys[10] = {VK_F7, VK_F8, VK_F9, VK_F10, VK_F11, VK_F12, VK_F6, VK_F5, VK_F4, VK_F1};
+    bool pressed[10]{};
     const ULONGLONG now = GetTickCount64();
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < 10; ++i) {
         const bool down = (GetAsyncKeyState(keys[i]) & 0x8000) != 0;
         pressed[i] = down && !keyWasDown[i] && now - lastPress[i] >= 500;
         if (pressed[i]) lastPress[i] = now;
         keyWasDown[i] = down;
     }
     if (pressed[0]) VR().ToggleCompositorPoseDiagnostic();
+    if (pressed[9]) {
+        if(GetAsyncKeyState(VK_SHIFT)&0x8000) {
+            g_disableMotionBlur = !g_disableMotionBlur;
+            Log("motion blur: Shift+F1 comparison, suppression %s",g_disableMotionBlur?"ON":"OFF");
+        } else if(GetAsyncKeyState(VK_CONTROL)&0x8000) {
+            g_disableAmbientOcclusion = !g_disableAmbientOcclusion;
+            Log("ambient shadows: Ctrl+F1 comparison, bypass %s",g_disableAmbientOcclusion?"ON":"OFF");
+        } else {
+            g_fixSoftParticleDepth = !g_fixSoftParticleDepth;
+            Log("soft particle depth: F1 comparison, correction %s",g_fixSoftParticleDepth?"ON":"OFF");
+        }
+    }
     if (pressed[1]) VR().Recenter();
     if (pressed[2]) VR().CycleStereoScale();
     if (pressed[3]) VR().ToggleEyeSwap();
@@ -1429,6 +1468,7 @@ void UncapPresentation(D3DPRESENT_PARAMETERS* parameters) {
 }
 
 HRESULT STDMETHODCALLTYPE HookReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* p) {
+    g_softParticleDepth.ReleaseReplacement();
     g_effectStreams.Reset();
     g_menuPanel.Reset();
     ReleaseTextures();
@@ -1456,6 +1496,12 @@ HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDi
     if(SUCCEEDED(hr)&&out&&*out) {
         const auto hash=g_dofFilter.Register(*out);
         if(hash)Log("dof: identified original pixel shader %08X (object unchanged)",hash);
+        const auto motionHash=g_motionBlurFilter.Register(*out);
+        if(motionHash)Log("motion blur: identified original pixel shader %08X (object unchanged)",motionHash);
+        const auto aoHash=g_ambientOcclusionShader.Register(*out);
+        if(aoHash)Log("ambient shadows: identified original pixel shader %08X (object unchanged)",aoHash);
+        const auto softHash=g_softParticleDepth.Register(*out);
+        if(softHash)Log("soft particle depth: identified original pixel shader %08X (object unchanged)",softHash);
     }
     return hr;
 }
@@ -1487,7 +1533,7 @@ HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE 
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     return PresentOnce(d, [&]{ return g_presentEx(d,a,b,c,e,f); });
 }
-HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
+HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_softParticleDepth.ReleaseReplacement();g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
 HRESULT STDMETHODCALLTYPE HookSwapPresent(IDirect3DSwapChain9* swap,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     IDirect3DDevice9* device = nullptr;
     if (SUCCEEDED(swap->GetDevice(&device)) && device) {
@@ -1506,7 +1552,13 @@ void HookSwapChain(IDirect3DSwapChain9* swap) {
 }
 
 void HookDevice(IDirect3DDevice9Ex* device) {
+    g_softParticleDepth.Reset();
+    g_fixSoftParticleDepth = Cfg().fixSoftParticleDepth;
     g_dofFilter.Reset();
+    g_motionBlurFilter.Reset();
+    g_disableMotionBlur = Cfg().disableMotionBlur;
+    g_ambientOcclusionShader.Reset();
+    g_disableAmbientOcclusion = Cfg().disableAmbientOcclusion;
     g_device = device;
     g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
     void** v = *reinterpret_cast<void***>(device);
@@ -1557,7 +1609,10 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
+    g_softParticleDepth.Reset();
+    g_ambientOcclusionShader.Reset();
     g_dofFilter.Reset();
+    g_motionBlurFilter.Reset();
     RemoveNativeStereoHook();
     g_device = nullptr;
     ReleaseTextures();

@@ -325,7 +325,7 @@ void VRRuntime::PostPresentHandoff() {
     if (compositor_) compositor_->PostPresentHandoff();
 }
 
-Mat4 VRRuntime::EyeViewProjection(int eye, float units, const Mat4& input) const {
+Mat4 VRRuntime::EyeViewProjection(int eye, float units, const Mat4& input, const Mat4* sceneProjection) const {
     if (!poseValid_ || !originValid_) return Identity();
     int e = swapEyes_ ? (eye ^ 1) : eye;
     // The SAME synthetic head pose is used for rendering and texture submit.
@@ -357,6 +357,7 @@ Mat4 VRRuntime::EyeViewProjection(int eye, float units, const Mat4& input) const
     }
     Mat4 eyeProjection = PerspectiveRawLH(l, r, t, b,
                                           Cfg().nearClip, Cfg().farClip);
+    if(sceneProjection) eyeProjection = WithSceneDepth(eyeProjection,*sceneProjection);
     // Preserve the game path's original multiplication order as well as its
     // values. The independent reference uses the default identity input.
     return Mul(eyeProjection, Mul(eyeView, input));
@@ -384,7 +385,7 @@ Mat4 VRRuntime::ClipTransform(float gameAspect) const {
     if (!Invert(gameProjection, invGame)) return Identity();
     // Existing clip = Pgame * modelView * vertex. Replace the camera/projection
     // portion without needing Bayonetta's model or view matrices separately.
-    return EyeViewProjection(eye_, Cfg().worldUnitsPerMetre, invGame);
+    return EyeViewProjection(eye_, Cfg().worldUnitsPerMetre, invGame, &gameProjection);
 }
 
 Mat4 VRRuntime::HudClipTransform(float gameAspect) const {

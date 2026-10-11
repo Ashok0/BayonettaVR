@@ -47,6 +47,10 @@
   <ItemGroup><ClInclude Include="src\WorldHud.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MenuPanel9.h"/><ClCompile Include="src\MenuPanel9.cpp"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\MotionBlur.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\AmbientOcclusion.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\SoftParticleDepth.h"/><ClInclude Include="src\SoftParticleDepthBytecode.h"/></ItemGroup>
+  <ItemGroup><None Include="src\shaders\SoftParticleDepth.asm"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\EffectStreamReplay.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\PoseSubmission.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ReferenceGrid.h"/><ClInclude Include="src\ReferenceGridRenderer.h"/><ClCompile Include="src\ReferenceGridRenderer.cpp"/></ItemGroup>

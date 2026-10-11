@@ -80,4 +80,11 @@ inline Mat4 PerspectiveRawLH(float l, float r, float t, float b, float zn, float
     p.m[3][2] = 1.0f;
     return p;
 }
+
+// Keep the game's depth encoding: soft particles reconstruct view Z using
+// its projection constants. Replacing the FOV must not change that encoding.
+inline Mat4 WithSceneDepth(Mat4 eye, const Mat4& scene) {
+    for(int c=0;c<4;++c){eye.m[2][c]=scene.m[2][c];eye.m[3][c]=scene.m[3][c];}
+    return eye;
+}
 }

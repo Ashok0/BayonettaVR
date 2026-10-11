@@ -4,6 +4,9 @@ namespace bvr {
 struct Config {
     bool enabled = true;
     bool disableDepthOfField = true;
+    bool disableMotionBlur = true;
+    bool disableAmbientOcclusion = true;
+    bool fixSoftParticleDepth = true;
     bool vrControllers = true;
     bool externalCompositor = false;
     bool nativeStereo = true;

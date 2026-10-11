@@ -3,6 +3,138 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Soft-particle depth alignment (build 20261011.47)
+
+The user confirmed the silhouette persists with .46. Its log shows the SSAO
+bypass active throughout the cutscene; the earlier motion-blur and SSAO
+workarounds have not resolved this artifact.
+
+The game's `espshadersoftpt` vertex shader divides screen XY by W before
+interpolation. This produces a distorted depth lookup when VR head rotation
+tilts its originally camera-facing particles. .47 samples scene depth at the
+actual rasterized pixel (`VPOS`) instead. It retains the original particle
+color, alpha/fade calculation, texture slots and geometry. The VR projection
+also preserves the game's depth encoding so its depth reconstruction constants
+remain valid. HUD and reference-grid projections retain their own depth range.
+
+`FixSoftParticleDepth=1` enables the correction. **F1 toggles the particle depth
+lookup correction**, Ctrl+F1 toggles the previous SSAO bypass, and Shift+F1
+toggles the previous motion-blur bypass. F1 does not change the corrected scene
+depth encoding. Restart restores the INI settings. Existing visuals, DOF
+suppression and controller mappings remain configured as before.
+
+Only the exact Steam pixel shader (`E166CF17`, 552 bytes) is recognized. Game
+shader creation and bytecode remain intact; a preassembled substitute is lazily
+created on its first VR scene draw, bound for that draw, then restored along
+with its temporary constant. Actual bindings are queried to cover state blocks.
+Device reset releases the substitute. This correction performs no frame capture
+or readback.
+The log reports corrected draw counts separately for both eyes.
+
+The real game VS/PS regression reproduces 25,100 incorrectly placed mask pixels
+with the original shader. The correction passes all 59,796 checked pixels in
+36 GPU cases covering head yaw/pitch, asymmetric eyes and viewport offsets.
+Toggle restoration, shader metadata, state blocks and recreation also pass.
+36 mathematical depth cases and the full regression suite pass; Release/Win32
+build succeeds. This proves the shader bug and its correction in the test scene;
+the user's opening-cutscene silhouette still requires in-headset confirmation.
+
+Regenerate `src/SoftParticleDepthBytecode.h` with a Win32-built
+`tools/assemble_shader.cpp`, passing `src/shaders/SoftParticleDepth.asm`, the
+output header path, and `kSoftParticleDepthBytecode` as its three arguments.
+
+## Ambient-shadow bypass (build 20261010.46, ineffective for reported silhouette)
+
+The user confirmed .44 loads again but the head-moving transparent shadow remains
+in cutscenes. .46 is based on that working path; the .45 capture hooks remain out.
+It targets the separate screen-space ambient-occlusion pass as a candidate
+workaround. The user's artifact has not yet been confirmed against this pass.
+
+`DisableAmbientOcclusion=1` removes ambient darkening from the exact Steam
+`filtershaderssao.pso` (CRC32 `46871F68`, 8172 bytes). This shader also copies scene
+color, so its draw must run. Temporarily setting its sample-count selector
+`c198.y` to zero makes the occlusion multiplier one; the original constant is
+restored immediately after drawing. No shader object or bytecode is replaced.
+Only the identified shader is affected, and only while VR is active.
+
+**F1 now toggles the ambient-shadow bypass**; Shift+F1 retains the earlier
+motion-blur comparison. Restart restores both INI settings. The tradeoff is
+loss of SSAO contact darkening. Ordinary shadow maps, menu blur, .39 colors,
+DOF bypass and controller mappings retain their existing paths. Logs record
+`ambient shadows: draws=... bypass=...` when the affected pass actually runs;
+no heavy capture is required for this test.
+
+The GPU regression uses the original game shader across 18 depth/sample-count/
+eye cases. Bypassed output matches scene RGBA exactly, toggling restores the
+original shading, and constants, shader metadata and state-block behavior pass.
+The baseline darkened 12,288 pixels, confirming the test exercises active AO.
+This validates the bypass mechanism; it does not yet establish that SSAO is the
+source of the user's haze.
+Release/Win32 and the full regression suite passed. A Steam launch of .46
+(PID 19128) reached 300 stereo frames and logged 600 ambient-shadow draws with
+`bypass=1`, confirming this pass is active and the override is being applied.
+The opening-cutscene appearance remains unverified in-headset.
+
+## Loading hang: .45 withdrawn, .44 restored
+
+After .45, the user reported a loading-screen hang. The latest log stops after
+frame 1,800 and contains no scene-capture start; no new scene-capture directory
+was created. This does not establish the cause. The exact backed-up .44 DLL
+that previously reached the graveyard was restored, and .45's scene-capture
+integration was removed from the source. The standalone capture helper/test
+remain for investigation, but are not included in the mod. Settings are retained.
+Loading past the reported hang still needs confirmation; the haze is unresolved.
+
+## Cutscene haze investigation (withdrawn build 20261010.45)
+
+The user's .44 F1 comparison made no difference. The 17:12 F12 capture shows
+the graveyard cutscene with zero captured menu draws, and no motion-blur
+suppression events occurred during that run. The targeted motion-blur passes
+were not active. The source of the head-moving shadow/haze is still unresolved.
+
+F12 now additionally records one left-eye scene frame into a timestamped
+`BayonettaVR_scene_*` directory next to the game. It saves actual bound vertex
+and pixel shader assembly, original camera/pixel constants, draw order,
+render-target and texture bindings, sampled render textures, completed targets,
+and images before/after small textured draws. Floating-point buffers also get
+DDS copies so near-black depth values remain available. Unlike the old menu-only
+trace, these images are read before their backing textures can be reused.
+
+Capture is limited to 8,192 draws, 80 images and a 512 MiB conservative raw-image
+budget. It may briefly pause rendering while saving. No new effect is disabled
+in .45; it is a diagnostic update, not a confirmed haze fix. The existing .39
+colors, menu fixes, DOF bypass and controller mapping are retained.
+
+The targeted GPU test checks PNG readback inside BeginScene/EndScene, preserved
+shader identity, targets, samplers, camera constants, final pixels and completion.
+Release/Win32 and the full regression suite passed. Steam startup of .45
+(PID 28900) reached 1,200 stereo frames. The in-game F12 scene trace and haze
+diagnosis still require the next cutscene capture.
+
+## Camera motion-blur ghost bypass (build 20261010.44)
+
+The reported faint, object-shaped haze moving with the headset predates the DOF
+change. Inspection of the installed game's shaders identified six motion-blur
+programs (five unique bytecodes) that reconstruct scene samples using
+`g_InvOldWVP` and `g_InvNewWVP` pixel constants. Those matrices do not receive the
+mod's vertex-camera HMD transform, making this a candidate for displaced ghosts.
+The user's exact artifact has not yet been confirmed against this pass.
+
+`DisableMotionBlur=1` bypasses only these identified motion-blur draws while VR
+is active, preserving original shader objects and metadata as in .43. It does
+not change menu blur, bloom, SSAO, or .39's colors. **F1** toggles the bypass for
+a same-scene comparison; restart restores the INI setting. If the haze remains,
+capture it with F12 and report whether F1 changed it. Logs record recognition,
+suppression counts and toggle state. The tradeoff is removal of the game's
+cinematic motion blur. No shader replacement is returned to the game.
+
+GPU regression checks cover all five motion-blur bytecodes alongside the four
+DOF shaders, original metadata, setting-off behavior, state-block bindings and
+color/depth preservation in both eyes. Headset confirmation is still required.
+Release/Win32 and the full regression suite passed. A Steam startup check
+(PID 10992) loaded all six motion-blur programs and rendered over 1,200 stereo
+frames without a startup crash. This does not validate the opening-cutscene haze.
+
 ## DOF startup-crash correction (build 20261010.43)
 
 The user reported .42 crashing to desktop. Its log stopped immediately after
