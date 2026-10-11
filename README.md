@@ -3,7 +3,34 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
-## World-space movies (build 20261011.48)
+## Stereo splash movies (build 20261011.49)
+
+The user reported SEGA and Platinum Games splash movies visible only in the
+left eye, while CRIWARE was correct. Startup eye-buffer captures reproduced
+the missing right-eye SEGA image and corrupted/blank right-eye Platinum image.
+Both movie draw calls executed with depth testing disabled, so .48's draw
+counts alone did not establish that the decoded movie survived the second draw.
+
+.49 executes the dedicated movie list once per stereo frame, into one RGBA8
+render target, and replays that same image on the world-space screen for each
+eye. It no longer reruns the game's movie renderer for the right eye. The
+decoded image is captured before applying the HMD transform. Empty movie passes
+produce no screen, so CRIWARE, menus and gameplay are not covered by a stale
+movie. The capture uses about 14 MiB at 2560x1440 and no CPU readback. Device
+reset and resizing release/recreate its resources. The .48 movie size/distance
+settings and recenter behavior are retained.
+
+After-fix startup captures visibly contain SEGA and Platinum in both eyes,
+including the animated Platinum splash. The GPU test invalidates the decoder
+inputs after capture and checks both eye views over 36 turn/lean cases (22,227
+pixels against independent rays). Shader, texture and matrix restoration,
+empty passes and resource recreation pass. Temporary automatic startup
+captures used for verification are removed from the installed build.
+Release/Win32 and the full regression suite pass. The final installed DLL
+matches the build; before/after eye captures are preserved under
+`.diagnostics/splash48-before` and `.diagnostics/splash49-after`.
+
+## World-space movies (build 20261011.48, renderer superseded by .49)
 
 The user confirmed .47 fixes the fog silhouettes. The next reported issue is
 double vision in the first film-strip intro after launching the game.

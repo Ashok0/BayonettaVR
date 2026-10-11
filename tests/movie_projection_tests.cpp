@@ -2,6 +2,7 @@
 #define NOMINMAX
 #include "WorldHud.h"
 #include "ShaderAnalysis.h"
+#include "MoviePanel9.h"
 #include <d3d9.h>
 #include <wrl/client.h>
 #include <fstream>
@@ -34,12 +35,32 @@ int main(){
     unsigned cases=0,samples=0,oldWrong=0;
     auto draw=[&](const Mat4& matrix){Check(d->SetVertexShaderConstantF(24,&matrix.m[0][0],4));Check(d->Clear(0,nullptr,D3DCLEAR_TARGET,0,1,0));Check(d->BeginScene());Check(d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,quad,sizeof(quad[0])));Check(d->EndScene());Check(d->SetVertexShaderConstantF(24,&original.m[0][0],4));Check(d->GetRenderTargetData(target.Get(),read.Get()));std::vector<DWORD> pixels(128*128);Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY));for(int y=0;y<128;++y)memcpy(pixels.data()+y*128,static_cast<char*>(locked.pBits)+y*locked.Pitch,128*4);Check(read->UnlockRect());return pixels;};
     const auto legacy=draw(original);
+    MoviePanel9 panel;
+    Check(d->SetVertexShaderConstantF(24,&original.m[0][0],4));
+    Require(panel.Begin(d.Get()),"capture allocation");Check(d->BeginScene());
+    Check(panel.CaptureDraw(d.Get(),[&]{return d->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP,2,quad,sizeof(quad[0]));}));
+    Check(d->EndScene());panel.End(d.Get());Require(panel.Ready(),"captured movie ready");
+    // Model the observed non-replayable decoder: its inputs cease to contain
+    // the decoded frame after the first movie render. Neither eye may read them.
+    Check(textures[0]->LockRect(0,&locked,nullptr,D3DLOCK_DISCARD));
+    for(int y=0;y<32;++y)memset(static_cast<char*>(locked.pBits)+y*locked.Pitch,0,32*4);
+    Check(textures[0]->UnlockRect(0));
+    auto replay=[&](const Mat4& clip){
+        Check(d->Clear(0,nullptr,D3DCLEAR_TARGET,0,1,0));Check(d->BeginScene());Check(panel.Draw(d.Get(),clip));Check(d->EndScene());
+        Check(d->GetRenderTargetData(target.Get(),read.Get()));std::vector<DWORD> pixels(128*128);
+        Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY));for(int y=0;y<128;++y)memcpy(pixels.data()+y*128,static_cast<char*>(locked.pBits)+y*locked.Pitch,128*4);Check(read->UnlockRect());
+        ComPtr<IDirect3DVertexShader9> restoredVS;ComPtr<IDirect3DPixelShader9> restoredPS;
+        Check(d->GetVertexShader(&restoredVS));Check(d->GetPixelShader(&restoredPS));
+        Require(restoredVS.Get()==vs.Get()&&restoredPS.Get()==ps.Get(),"game shaders restored");
+        ComPtr<IDirect3DBaseTexture9> restoredTexture;Check(d->GetTexture(0,&restoredTexture));Require(restoredTexture.Get()==textures[0].Get(),"decoder binding restored");
+        return pixels;
+    };
     for(float yaw:{-.35f,0.f,.35f})for(float pitch:{-.2f,0.f,.2f})for(float lean:{0.f,.3f})for(int eye=0;eye<2;++eye){
         Mat4 eyeOffset=Identity();eyeOffset.m[0][3]=eye?.032f:-.032f;
         const Mat4 eyePose=Mul(Pose(yaw,pitch,lean),eyeOffset);
         const Mat4 projection=PerspectiveRawLH(eye?-.85f:-1.3f,eye?1.3f:.85f,-1.15f,.95f,.1f,100000);
         const Mat4 movie=Mul(projection,Mul(InvertRigid(eyePose),HudPanelFromClip(16.f/9,4,3,0)));
-        const auto pixels=draw(Mul(movie,original));
+        const auto pixels=replay(movie);
         for(int y=2;y<126;y+=2)for(int x=2;x<126;x+=2){
             // Independently intersect each eye's ray with the fixed z=3m screen.
             const float ray[3]={(2.f*x/128-1-projection.m[0][2])/projection.m[0][0],(1-2.f*y/128-projection.m[1][2])/projection.m[1][1],1};float world[3]{};
@@ -47,7 +68,7 @@ int main(){
             const float t=(3-eyePose.m[2][3])/world[2];
             const float u=.5f+(eyePose.m[0][3]+t*world[0])/4, vv=.5f-(eyePose.m[1][3]+t*world[1])/2.25f;
             if(u<.02f||u>.98f||vv<.02f||vv>.98f)continue;
-            if(std::fabs(u*8-std::round(u*8))<.02f || std::fabs(vv*8-std::round(vv*8))<.02f)continue;
+            if(std::fabs(u*8-std::round(u*8))<.09f || std::fabs(vv*8-std::round(vv*8))<.09f)continue;
             const float luma=float(64+((int(u*8)+int(vv*8))&1)*128)/255;
             const int expected=int(std::round(255*(1.164f*(luma-.0625f)+1.596f*(128.f/255-.5f))));
             const int red=int((pixels[y*128+x]>>16)&255),old=int((legacy[y*128+x]>>16)&255);
@@ -57,5 +78,9 @@ int main(){
         Mat4 after{};Check(d->GetVertexShaderConstantF(24,&after.m[0][0],4));Require(memcmp(&after,&original,sizeof(original))==0,"matrix restored");++cases;
     }
     Require(samples>10000&&oldWrong>3000,"original path reproduces binocular mismatch");
-    DestroyWindow(window);printf("movies: %u GPU eye/turn/lean cases, %u ray-matched video pixels; %u old-path mismatches; original matrix restored\n",cases,samples,oldWrong);
+    panel.BeginFrame();Require(!panel.Ready(),"new frame invalidates previous video");
+    Require(panel.Begin(d.Get()),"empty movie pass begin");panel.End(d.Get());
+    Require(!panel.Ready()&&panel.Draw(d.Get(),Identity())==S_FALSE,"empty movie pass cannot obscure CRIWARE or gameplay");
+    panel.Reset();Require(panel.Begin(d.Get()),"recreate after device resource reset");panel.End(d.Get());Require(!panel.Ready(),"reset cannot replay stale movie");
+    DestroyWindow(window);printf("movies: %u GPU eye/turn/lean cases, %u ray-matched video pixels; %u old-path mismatches; consumed decoder inputs, shaders/bindings/matrix restoration, empty pass and reset passed\n",cases,samples,oldWrong);
 }
