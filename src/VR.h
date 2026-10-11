@@ -39,6 +39,7 @@ public:
     Mat4 CapturedReferenceClip(int eye) const { return referenceClip_[eye & 1]; }
     Mat4 ClipTransform(float gameAspect) const;
     Mat4 HudClipTransform(float gameAspect) const;
+    Mat4 MovieClipTransform(float gameAspect) const;
     vr::EVRCompositorError Submit(int eye, ID3D11Texture2D* texture);
 
 private:

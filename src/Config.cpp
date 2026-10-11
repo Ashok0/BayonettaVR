@@ -39,6 +39,11 @@ void LoadConfig() {
     g_cfg.disableMotionBlur = ReadInt(path, L"DisableMotionBlur", 1) != 0;
     g_cfg.disableAmbientOcclusion = ReadInt(path, L"DisableAmbientOcclusion", 1) != 0;
     g_cfg.fixSoftParticleDepth = ReadInt(path, L"FixSoftParticleDepth", 1) != 0;
+    g_cfg.worldLockedMovies = ReadInt(path, L"WorldLockedMovies", 1) != 0;
+    g_cfg.movieDistanceMetres = ReadBoundedFloat(path,L"MovieDistanceMetres",3.0f,1.0f,10.0f);
+    g_cfg.movieWidthMetres = ReadBoundedFloat(path,L"MovieWidthMetres",4.0f,1.0f,10.0f);
+    Log("movies: worldLocked=%d width=%.2fm distance=%.2fm",g_cfg.worldLockedMovies,
+        g_cfg.movieWidthMetres,g_cfg.movieDistanceMetres);
     Log("soft particle depth: FixSoftParticleDepth=%d (F1 toggles for comparison)",g_cfg.fixSoftParticleDepth);
     Log("ambient shadows: DisableAmbientOcclusion=%d (Ctrl+F1 toggles for comparison)",g_cfg.disableAmbientOcclusion);
     Log("motion blur: DisableMotionBlur=%d (Shift+F1 toggles for comparison)",g_cfg.disableMotionBlur);
@@ -79,7 +84,7 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20261011.47 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+    Log("config: build=20261011.48 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,

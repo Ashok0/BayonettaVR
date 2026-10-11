@@ -397,6 +397,12 @@ Mat4 VRRuntime::HudClipTransform(float gameAspect) const {
     return EyeViewProjection(eye_, 1.0f, panel);
 }
 
+Mat4 VRRuntime::MovieClipTransform(float gameAspect) const {
+    const Mat4 screen=HudPanelFromClip(gameAspect,Cfg().movieWidthMetres,
+        Cfg().movieDistanceMetres,0.0f);
+    return EyeViewProjection(eye_,1.0f,screen);
+}
+
 int VRRuntime::DXGIAdapterIndex() const {
     if (external_) return externalAdapter_;
     int32_t index = -1;

@@ -1,0 +1,404 @@
+movies: worldLocked=1 width=4.00m distance=3.00m
+soft particle depth: FixSoftParticleDepth=1 (F1 toggles for comparison)
+ambient shadows: DisableAmbientOcclusion=1 (Ctrl+F1 toggles for comparison)
+motion blur: DisableMotionBlur=1 (Shift+F1 toggles for comparison)
+dof: DisableDepthOfField=1 (four verified cutscene shaders)
+config: external compositor=1
+hud: worldLocked=1 width=3.20m distance=2.00m verticalOffset=0.00m; F8 reanchors
+config: build=20261011.48 enabled=1 native=1 halfRate=0 uncapPresent=1 positional=1 compositorPoseDiagnostic=0 units/m=1.000 stereo=1.000 fov=60.00 projection=0 matrixOverride=-1 compositorRotation=1 turnDegrees=12.0 autoTurn=0 directPoseTurning=1 earlySubmit=0 explicitNativePose=1
+proxy: real d3d9 loaded
+proxy: Direct3DCreate9Ex result=0x00000000
+d3d9: IDirect3D9Ex hook installed
+d3d9: CreateDeviceEx result=0x00000000 1280x720 windowed=1 interval=0x1->0x80000000
+d3d9: device hooks installed
+d3d9: swap-chain Present hook installed
+companion: ready pid=48804 adapter=0
+companion: full native tracking active; game process did not initialize OpenVR
+controllers: XInput 1.3 import hooks get=1 set=1; virtual Xbox slot=0
+native stereo: cOtManager::draw dual-pass hook installed at 004E3A70
+menu: Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair
+movies: verified MovieDraw call hooked for world-space stereo projection
+effects: stereo stream replay installed at 21 post-draw clear sites
+shader: 4934EF60 position matrix c54
+shader: 07EC9D40 position matrix c54
+shader: 493EA360 position matrix c54
+shader: 49447FE0 position matrix c54
+shader: 494597C0 position matrix c24
+shader: 494591E0 position matrix c24
+shader: 494611E0 position matrix c24
+shader: 49476900 position matrix c24
+shader: 49476F00 position matrix c24
+shader: 49458F60 position matrix c24
+shader: 49447CC0 position matrix c24
+shader: 49407EC0 position matrix c24
+shader: 4F8DA580 position matrix c24
+shader: 4F850320 position matrix c8
+shader: 4F8EBD40 position matrix c8
+shader: 4F795180 position matrix c8
+shader: 49468560 position matrix c8
+shader: 49466980 position matrix c8
+shader: 494673A0 position matrix c8
+shader: 49467B40 position matrix c8
+shader: 49467120 position matrix c8
+shader: 49467DC0 position matrix c8
+shader: 49467620 position matrix c8
+shader: 49466C00 position matrix c8
+shader: 49466EA0 position matrix c8
+shader: 494678C0 position matrix c8
+shader: 49468040 position matrix c8
+shader: 494682E0 position matrix c24
+shader: 4FAD4A40 position matrix c8
+shader: 4FAD47C0 position matrix c24
+shader: 4FAD42C0 position matrix c8
+shader: 4FAD4CE0 position matrix c8
+shader: 4FAD4F60 position matrix c8
+shader: 4FAD3600 position matrix c8
+shader: 4FAD38A0 position matrix c8
+shader: 4FAD3380 position matrix c8
+shader: 4FAD3B20 position matrix c8
+shader: 4FAD3DA0 position matrix c8
+shader: 4FAD4020 position matrix c8
+shader: 4FAD4540 position matrix c24
+shader: 493FA080 position matrix c8
+shader: 493F98E0 position matrix c8
+shader: 493FAD20 position matrix c8
+shader: 493F9B60 position matrix c8
+shader: 493FBC60 position matrix c8
+shader: 493FBEE0 position matrix c24
+shader: 493F8220 position matrix c24
+shader: 493F9660 position matrix c8
+shader: 493F89C0 position matrix c8
+shader: 493F8720 position matrix c24
+shader: 493F8C40 position matrix c8
+shader: 493FB4C0 position matrix c8
+shader: 493F9E00 position matrix c8
+shader: 493F84A0 position matrix c8
+shader: 493F8EC0 position matrix c8
+shader: 493FB240 position matrix c8
+shader: 493FA300 position matrix c8
+shader: 493F9140 position matrix c8
+shader: 493F93E0 position matrix c8
+shader: 493FAFA0 position matrix c24
+shader: 493FAAA0 position matrix c24
+shader: 4FC99D40 position matrix c24
+shader: 4FC9B920 position matrix c8
+shader: 4FC9A9E0 position matrix c4
+shader: 4FC995A0 position matrix c8
+shader: 4FC99840 position matrix c4
+shader: 4FC9CAE0 position matrix c8
+shader: 4FC9C5C0 position matrix c8
+shader: 4FC9B180 position matrix c8
+shader: 4FC99AC0 position matrix c8
+shader: 4FC9A260 position matrix c8
+shader: 4FC9A4E0 position matrix c24
+shader: 4FC9BBA0 position matrix c24
+shader: 4FC9AC80 position matrix c8
+shader: 4FC9BE20 position matrix c8
+shader: 4FC9C0C0 position matrix c8
+shader: 4FC9C340 position matrix c24
+shader: 4FC9AF00 position matrix c24
+shader: 4FC9C840 position matrix c8
+shader: 4FC9B400 position matrix c8
+shader: 4FC9B6A0 position matrix c8
+shader: 4FC990A0 position matrix c8
+shader: 4FC99320 position matrix c8
+shader: 49446300 position matrix c8
+shader: 49445B60 position matrix c8
+shader: 49446580 position matrix c8
+shader: 49445660 position matrix c8
+shader: 494458E0 position matrix c4
+shader: 49445E00 position matrix c8
+shader: 49446080 position matrix c8
+shader: 49446820 position matrix c8
+shader: 49444C40 position matrix c24
+shader: 49444EC0 position matrix c8
+shader: 49445140 position matrix c8
+shader: 50BEA7C0 position matrix c24
+shader: 50BEB6E0 position matrix c24
+shader: 50BEAA40 position matrix c8
+shader: 50BEAF60 position matrix c8
+shader: 50BEBC00 position matrix c8
+shader: 50BEB1E0 position matrix c24
+shader: 50BEB460 position matrix c8
+shader: 50BEB980 position matrix c4
+shader: 50BEBE80 position matrix c8
+shader: 50BEA540 position matrix c8
+shader: 50C47BA0 position matrix c24
+shader: 50C485C0 position matrix c24
+shader: 50C45FC0 position matrix c8
+shader: 50C46F00 position matrix c24
+shader: 50C464E0 position matrix c8
+shader: 50C45D40 position matrix c8
+shader: 50C49500 position matrix c24
+shader: 50C49A00 position matrix c8
+shader: 50C476A0 position matrix c8
+shader: 50C46260 position matrix c8
+shader: 50C48340 position matrix c8
+shader: 50C49780 position matrix c8
+shader: 50C46760 position matrix c24
+shader: 50C47E20 position matrix c8
+shader: 50C46C80 position matrix c24
+shader: 50C47180 position matrix c24
+shader: 50C48840 position matrix c24
+shader: 50C48AE0 position matrix c8
+shader: 50C469E0 position matrix c8
+shader: 50C47920 position matrix c24
+shader: 50C47400 position matrix c8
+shader: 50C480C0 position matrix c8
+shader: 50C48FE0 position matrix c8
+shader: 50C48D60 position matrix c8
+shader: 50C49260 position matrix c8
+shader: 50DD9420 position matrix c24
+shader: 50DD9BA0 position matrix c8
+shader: 50DDC1A0 position matrix c8
+shader: 50DD9E40 position matrix c24
+shader: 50DDA0C0 position matrix c8
+shader: 50DD8C80 position matrix c8
+shader: 50DDAFE0 position matrix c8
+shader: 50DD84E0 position matrix c8
+shader: 50DD8F00 position matrix c8
+shader: 50DDAD60 position matrix c8
+shader: 50DD9920 position matrix c24
+shader: 50DDA5C0 position matrix c8
+shader: 50DDA340 position matrix c8
+shader: 50DDBA00 position matrix c8
+shader: 50DDAAE0 position matrix c4
+shader: 50DDB500 position matrix c8
+shader: 50DDA860 position matrix c8
+shader: 50DD96A0 position matrix c8
+shader: 50DDB780 position matrix c8
+shader: 50DDBCA0 position matrix c8
+shader: 50DD8760 position matrix c8
+shader: 50DDBF20 position matrix c8
+shader: 50DD8A00 position matrix c8
+shader: 50DD9180 position matrix c8
+shader: 50C8DDE0 position matrix c8
+shader: 50C8ED00 position matrix c24
+shader: 50C8E2E0 position matrix c8
+shader: 50C8EFA0 position matrix c24
+shader: 50C8F220 position matrix c8
+shader: 50C8D640 position matrix c24
+shader: 50C8D8C0 position matrix c8
+shader: 50C8DB60 position matrix c24
+shader: 50C8E580 position matrix c8
+shader: 50C8EA80 position matrix c24
+shader: 50C72F40 position matrix c8
+shader: 50C731C0 position matrix c8
+shader: 50C71880 position matrix c8
+shader: 50C74100 position matrix c24
+shader: 50C72020 position matrix c8
+shader: 50C73460 position matrix c24
+shader: 50C74380 position matrix c8
+shader: 50C736E0 position matrix c24
+shader: 50C748A0 position matrix c24
+shader: 50C73960 position matrix c8
+shader: 50C75020 position matrix c8
+shader: 50C71B00 position matrix c24
+shader: 50C72520 position matrix c24
+shader: 50C722A0 position matrix c24
+shader: 50C74DA0 position matrix c24
+shader: 50C752C0 position matrix c24
+shader: 50C72A40 position matrix c24
+shader: 50C72CC0 position matrix c24
+shader: 50C73BE0 position matrix c24
+shader: 50C75540 position matrix c24
+shader: 50C73E80 position matrix c24
+shader: 50C6BCA0 position matrix c24
+shader: 50C69BC0 position matrix c24
+shader: 50C6AAE0 position matrix c24
+shader: 50C6B280 position matrix c24
+shader: 50C6B000 position matrix c24
+shader: 50C691A0 position matrix c24
+shader: 50C6A0C0 position matrix c24
+shader: 50C6A860 position matrix c24
+shader: 50C69E40 position matrix c24
+soft particle depth: identified original pixel shader E166CF17 (object unchanged)
+shader: 50C67FE0 position matrix c24
+shader: 50C6B500 position matrix c24
+shader: 50C69940 position matrix c24
+shader: 50C68260 position matrix c24
+shader: 50C6B7A0 position matrix c24
+shader: 50C68C80 position matrix c24
+shader: 50C6BA20 position matrix c24
+shader: 50C68500 position matrix c24
+shader: 50C68780 position matrix c24
+shader: 50C696A0 position matrix c24
+shader: 50C6A360 position matrix c24
+shader: 50C68A00 position matrix c24
+shader: 50C68F20 position matrix c24
+shader: 50C69420 position matrix c24
+shader: 4FBC8560 position matrix c24
+shader: 4FBC9C20 position matrix c24
+shader: 4FBC9480 position matrix c24
+shader: 4FBC9720 position matrix c24
+shader: 4FBC78C0 position matrix c24
+shader: 4FBC82E0 position matrix c24
+shader: 4FBC8A60 position matrix c24
+shader: 4FBC7B40 position matrix c8
+shader: 4FBC87E0 position matrix c8
+shader: 4FBC9EA0 position matrix c8
+shader: 4FBC99A0 position matrix c8
+shader: 4FBCA140 position matrix c8
+shader: 4FBCA3C0 position matrix c8
+shader: 4FBC8D00 position matrix c8
+shader: 4FBC7DC0 position matrix c8
+shader: 4FBC8040 position matrix c8
+shader: 4FBC8F80 position matrix c8
+dof: identified original pixel shader B959E4D7 (object unchanged)
+shader: 4FBC9200 position matrix c8
+dof: identified original pixel shader 548C7346 (object unchanged)
+shader: 4FBC2A40 position matrix c8
+dof: identified original pixel shader FC2A113C (object unchanged)
+shader: 4FBC3460 position matrix c8
+dof: identified original pixel shader CB1D0471 (object unchanged)
+shader: 4FBC4620 position matrix c8
+shader: 4FBC4B20 position matrix c8
+shader: 4FBC6700 position matrix c8
+shader: 4FBC2CC0 position matrix c8
+shader: 4FBC7120 position matrix c24
+shader: 4FBC52C0 position matrix c24
+shader: 4FBC6EA0 position matrix c24
+shader: 4FBC5540 position matrix c24
+shader: 4FBC48A0 position matrix c24
+motion blur: identified original pixel shader CDE775FA (object unchanged)
+shader: 4FBC4DA0 position matrix c24
+motion blur: identified original pixel shader 27B1EC05 (object unchanged)
+shader: 4FBC5F60 position matrix c24
+motion blur: identified original pixel shader 7C993BC7 (object unchanged)
+shader: 4FBC2F40 position matrix c24
+motion blur: identified original pixel shader 9FCFAC0F (object unchanged)
+shader: 4FBC5040 position matrix c24
+motion blur: identified original pixel shader 24EA099A (object unchanged)
+shader: 4FBC57C0 position matrix c24
+motion blur: identified original pixel shader 24EA099A (object unchanged)
+shader: 4FBC5A60 position matrix c24
+ambient shadows: identified original pixel shader 46871F68 (object unchanged)
+shader: 4FBC5CE0 position matrix c8
+shader: 4FBC61E0 position matrix c8
+shader: 4FBC31E0 position matrix c8
+shader: 4FBC4100 position matrix c8
+shader: 4FBC6480 position matrix c8
+shader: 4FBC6980 position matrix c8
+shader: 4FBC6C00 position matrix c8
+shader: 4FBC36E0 position matrix c8
+shader: 4FBC73A0 position matrix c8
+shader: 4FBC3E80 position matrix c8
+shader: 4FBC7620 position matrix c8
+shader: 4FBC27C0 position matrix c8
+shader: 4FBC3C00 position matrix c8
+shader: 4FBC3960 position matrix c8
+shader: 4FBC4380 position matrix c8
+shader: 50F4C7A0 position matrix c8
+shader: 50F4FF60 position matrix c8
+shader: 50F4D6E0 position matrix c8
+shader: 50F4F020 position matrix c8
+shader: 50F501E0 position matrix c8
+shader: 50F4C2A0 position matrix c8
+shader: 50F4DE80 position matrix c8
+vr: tracking origin recentered
+capture: GPU-shared eye textures ready at 1280x720 plus clean 1024x1024 grid, VR adapter=0 feature level=0xB000
+capture: D3D11 copy completion fence active (status=0x00000000)
+vr: frame=1 rate=0.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=0 nativePairs=1 hash=0000000000000000/0000000000000000
+companion: tracking sample=14 valid=1 queueDrops=0
+menu: captures=1/1 eyeComposites=2/2
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.03ms pair=372.63ms queue=27.40ms transfer=4.57ms submit=2.45ms poseAgeAtSubmit=404.61ms
+stereo: 0 transformed draws (0 HUD), 271 shaders inspected
+render stack: 4 frames, game=00400000 size=0x59B8000
+render stack: 00 69EE3DAF
+render stack: 01 69EEABDE
+render stack: 02 69EE95DF
+render stack: 03 00C5DAD6 game+0x0085DAD6
+capture: GPU-shared eye textures ready at 2560x1440 plus clean 1024x1024 grid, VR adapter=0 feature level=0xB000
+ambient shadows: draws=1 bypass=1
+movies: eye=0 world-screen draws=1 matrix=c24
+hud: projecting shader=4FBC7120 matrix=c24 onto recenter-space panel
+ambient shadows: draws=2 bypass=1
+movies: eye=1 world-screen draws=1 matrix=c24
+ambient shadows: draws=3 bypass=1
+movies: eye=0 world-screen draws=2 matrix=c24
+ambient shadows: draws=4 bypass=1
+movies: eye=1 world-screen draws=2 matrix=c24
+vr: frame=300 rate=44.3Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=396 nativePairs=300 hash=0000000000000000/0000000000000000
+companion: tracking sample=73 valid=1 queueDrops=155
+menu: captures=300/300 eyeComposites=600/600
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.30ms queue=14.82ms transfer=1.05ms submit=0.00ms poseAgeAtSubmit=16.18ms
+vr desktop: early=0 present=0.40ms poseToHandoff=17.93ms
+ambient shadows: draws=600 bypass=1
+vr: frame=600 rate=60.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=994 nativePairs=600 hash=0000000000000000/0000000000000000
+companion: tracking sample=122 valid=1 queueDrops=308
+menu: captures=600/600 eyeComposites=1200/1200
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.43ms queue=13.71ms transfer=1.12ms submit=0.00ms poseAgeAtSubmit=15.27ms
+vr desktop: early=0 present=0.32ms poseToHandoff=16.73ms
+companion: published 300 complete stereo pairs
+ambient shadows: draws=1200 bypass=1
+movies: eye=0 world-screen draws=600 matrix=c24
+movies: eye=1 world-screen draws=600 matrix=c24
+vr: frame=900 rate=59.8Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=1580 nativePairs=900 hash=0000000000000000/0000000000000000
+companion: tracking sample=171 valid=1 queueDrops=461
+menu: captures=900/900 eyeComposites=1800/1800
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.30ms queue=14.63ms transfer=0.82ms submit=0.00ms poseAgeAtSubmit=15.76ms
+vr desktop: early=0 present=0.48ms poseToHandoff=17.40ms
+ambient shadows: draws=1800 bypass=1
+vr: frame=1200 rate=57.6Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=1786 nativePairs=1200 hash=0000000000000000/0000000000000000
+companion: tracking sample=222 valid=1 queueDrops=611
+menu: captures=1200/1200 eyeComposites=2400/2400
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.94ms queue=13.66ms transfer=1.09ms submit=0.00ms poseAgeAtSubmit=15.70ms
+vr desktop: early=0 present=0.31ms poseToHandoff=17.26ms
+companion: published 600 complete stereo pairs
+ambient shadows: draws=2400 bypass=1
+vr: frame=1500 rate=60.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=2386 nativePairs=1500 hash=0000000000000000/0000000000000000
+companion: tracking sample=271 valid=1 queueDrops=765
+menu: captures=1500/1500 eyeComposites=3000/3000
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=1.00ms queue=13.43ms transfer=0.99ms submit=0.22ms poseAgeAtSubmit=15.43ms
+vr desktop: early=0 present=0.31ms poseToHandoff=17.13ms
+movies: eye=0 world-screen draws=1200 matrix=c24
+movies: eye=1 world-screen draws=1200 matrix=c24
+ambient shadows: draws=3000 bypass=1
+vr: frame=1800 rate=56.8Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=2986 nativePairs=1800 hash=0000000000000000/0000000000000000
+companion: tracking sample=322 valid=1 queueDrops=913
+menu: captures=1800/1800 eyeComposites=3600/3600
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.97ms queue=13.06ms transfer=1.19ms submit=0.00ms poseAgeAtSubmit=15.24ms
+vr desktop: early=0 present=0.38ms poseToHandoff=16.78ms
+companion: published 900 complete stereo pairs
+ambient shadows: draws=3600 bypass=1
+vr: frame=2100 rate=60.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=3586 nativePairs=2100 hash=0000000000000000/0000000000000000
+companion: tracking sample=371 valid=1 queueDrops=1067
+menu: captures=2100/2100 eyeComposites=4200/4200
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=0.97ms queue=13.07ms transfer=0.90ms submit=0.23ms poseAgeAtSubmit=14.96ms
+vr desktop: early=0 present=0.45ms poseToHandoff=16.93ms
+movies: eye=0 world-screen draws=1800 matrix=c24
+movies: eye=1 world-screen draws=1800 matrix=c24
+ambient shadows: draws=4200 bypass=1
+vr: frame=2400 rate=60.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=4186 nativePairs=2400 hash=0000000000000000/0000000000000000
+companion: tracking sample=419 valid=1 queueDrops=1221
+menu: captures=2400/2400 eyeComposites=4800/4800
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=1.10ms queue=13.73ms transfer=1.20ms submit=0.23ms poseAgeAtSubmit=16.18ms
+vr desktop: early=0 present=0.39ms poseToHandoff=17.86ms
+companion: published 1200 complete stereo pairs
+ambient shadows: draws=4800 bypass=1
+vr: frame=2700 rate=59.8Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=4786 nativePairs=2700 hash=0000000000000000/0000000000000000
+companion: tracking sample=468 valid=1 queueDrops=1375
+menu: captures=2700/2700 eyeComposites=5400/5400
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=1.01ms queue=12.91ms transfer=1.20ms submit=0.00ms poseAgeAtSubmit=15.13ms
+vr desktop: early=0 present=0.35ms poseToHandoff=16.79ms
+movies: eye=0 world-screen draws=2400 matrix=c24
+movies: eye=1 world-screen draws=2400 matrix=c24
+ambient shadows: draws=5400 bypass=1
+vr: frame=3000 rate=60.0Hz mode=native bridge=shared readback=0x00000000 ready=1/1 submit=0/0 transformed=5386 nativePairs=3000 hash=0000000000000000/0000000000000000
+companion: tracking sample=517 valid=1 queueDrops=1528
+menu: captures=3000/3000 eyeComposites=6000/6000
+effects: replayFrames=0 streamsRestored=0
+vr pipeline: early=0 wait=0.00ms pair=1.07ms queue=13.04ms transfer=1.21ms submit=0.00ms poseAgeAtSubmit=15.34ms
+vr desktop: early=0 present=0.67ms poseToHandoff=17.19ms
+companion: published 1500 complete stereo pairs
+ambient shadows: draws=6000 bypass=1

@@ -3,7 +3,45 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
-## Soft-particle depth alignment (build 20261011.47)
+## World-space movies (build 20261011.48)
+
+The user confirmed .47 fixes the fog silhouettes. The next reported issue is
+double vision in the first film-strip intro after launching the game.
+
+The native `MovieDraw` list runs separately from the captured Id/IdFont UI.
+Previously its orthographic rectangles bypassed HMD projection and filled
+each eye's texture identically, despite the headset's asymmetric projections.
+.48 hooks only this verified call at Steam RVA `0xE5311` and projects movie
+rectangles onto one recenter-space screen using each eye's actual view and
+projection. Movie decoding, shader objects, texture coordinates, color and
+playback timing are unchanged. No new capture textures or frame replay are
+needed. The ordinary matrix/scissor restoration path restores the original
+state after each movie draw. Movie transforms bypass the scene/HUD matrix cache
+because the movie screen has independent dimensions.
+
+`WorldLockedMovies=1`, `MovieWidthMetres=4.0`, `MovieDistanceMetres=3.0` are the
+defaults. The screen stays fixed during head movement; F8 or the existing
+controller recenter action brings it back in front of the user. Set
+`WorldLockedMovies=0` and restart to restore the previous movie behavior.
+This targets full-screen movie playback; menu previews retain the menu path.
+
+The film-strip border is baked into `data/movie/syukyaku_A.sfd` (confirmed by
+decoding a frame directly from that file). It is retained so the complete
+picture remains visible; removing it would require cropping or altering video
+content. The fixed screen reduces its apparent size and keeps both eyes aligned.
+
+The original game movie shaders pass 36 GPU eye/turn/lean cases with 29,888
+pixels checked against independent world-space rays. The old unprojected path
+mismatches 15,028 of those pixels. The original matrix is restored after every
+draw. `tools/verify_movie_hook.py` validates the executable timestamp, movie-list
+identity and all seven movie/UI cleanup call targets. In-headset confirmation
+of .48 is still required.
+Release/Win32 and the full regression suite pass. The installed .48 startup run
+reached 1,200 stereo frames and logged 600 projected movie draws in each eye at
+matrix c24. The installed DLL hash matches the build. This confirms the movie
+path is active, independently of the remaining headset appearance check.
+
+## Soft-particle depth alignment (build 20261011.47, user confirmed working)
 
 The user confirmed the silhouette persists with .46. Its log shows the SSAO
 bypass active throughout the cutscene; the earlier motion-blur and SSAO
@@ -37,7 +75,7 @@ with the original shader. The correction passes all 59,796 checked pixels in
 Toggle restoration, shader metadata, state blocks and recreation also pass.
 36 mathematical depth cases and the full regression suite pass; Release/Win32
 build succeeds. This proves the shader bug and its correction in the test scene;
-the user's opening-cutscene silhouette still requires in-headset confirmation.
+the user subsequently confirmed that this fixes the opening-cutscene silhouette.
 
 Regenerate `src/SoftParticleDepthBytecode.h` with a Win32-built
 `tools/assemble_shader.cpp`, passing `src/shaders/SoftParticleDepth.asm`, the

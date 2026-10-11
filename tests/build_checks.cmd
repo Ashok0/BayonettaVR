@@ -20,6 +20,8 @@ call tests\build_ambient_occlusion_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_soft_particle_checks.cmd
 if errorlevel 1 exit /b 1
+call tests\build_movie_checks.cmd
+if errorlevel 1 exit /b 1
 call tests\build_scene_capture_checks.cmd
 if errorlevel 1 exit /b 1
 cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\world_hud_tests.cpp /Fobuild\test\world_hud_tests.obj /Febuild\test\world_hud_tests.exe

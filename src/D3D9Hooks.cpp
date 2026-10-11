@@ -101,6 +101,7 @@ thread_local bool g_insidePresent = false;
 thread_local bool g_insideNativeDraw = false;
 thread_local int g_capturingMenu = -1;
 thread_local bool g_compositingMenu = false;
+thread_local bool g_projectingMovie = false;
 bool g_menuHooksInstalled = false;
 MenuPanel9 g_menuPanel;
 unsigned long long g_menuCaptures[2]{}, g_menuEyeDraws[2]{};
@@ -602,8 +603,9 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     float aspect = 16.0f / 9.0f;
     if (SUCCEEDED(device->GetViewport(&viewport)) && viewport.Height) aspect = float(viewport.Width) / float(viewport.Height);
     const bool orthographic = LooksOrthographic(original);
-    bool hud = false;
-    if (orthographic) {
+    const bool movie = g_projectingMovie && orthographic;
+    bool hud = movie;
+    if (orthographic && !movie) {
         if (Cfg().worldLockedHud) {
             if (g_menuHooksInstalled) return call(); // Dedicated Id/IdFont capture owns UI.
             // With native stereo, only change the draws captured into each
@@ -616,7 +618,7 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     VR().EnsureOrigin();
     Mat4 clipTransform{};
     bool cached = false;
-    if (g_insideNativeDraw && viewport.Height) {
+    if (g_insideNativeDraw && viewport.Height && !movie) {
         const int eye = VR().Eye();
         for (int i = 0; i < g_clipCacheCount[eye]; ++i) {
             if (g_clipCache[eye][i].width == viewport.Width &&
@@ -639,7 +641,13 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
             }
         }
     }
-    if (!cached) clipTransform = hud ? VR().HudClipTransform(aspect) : VR().ClipTransform(aspect);
+    if (!cached) clipTransform = movie ? VR().MovieClipTransform(aspect) :
+        hud ? VR().HudClipTransform(aspect) : VR().ClipTransform(aspect);
+    if(movie) {
+        static unsigned draws[2]{};
+        auto& count=draws[VR().Eye()];
+        if(++count<=2 || count%600==0)Log("movies: eye=%d world-screen draws=%u matrix=c%d",VR().Eye(),count,base);
+    }
     DWORD scissorEnabled = FALSE;
     RECT oldScissor{};
     bool restoreScissor = false;
@@ -917,6 +925,7 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early);
 using GameThisCall = void (__thiscall*)(void*);
 using GameCall = void (__cdecl*)();
 GameThisCall g_drawMenuList = nullptr;
+GameThisCall g_drawMovieList = nullptr;
 GameThisCall g_rotateUiBuffers = nullptr, g_rotateFontBuffers = nullptr, g_releaseUiTextures = nullptr;
 GameCall g_releaseMaterials = nullptr;
 GameThisCall g_clearEffectStream = nullptr;
@@ -960,6 +969,15 @@ void DrawMenuList(void* self, int layer) {
 }
 void __fastcall HookIdList(void* self, void*) { DrawMenuList(self, 0); }
 void __fastcall HookIdFontList(void* self, void*) { DrawMenuList(self, 1); }
+void __fastcall HookMovieList(void* self, void*) {
+    // Only the explicit MovieDraw pass. Decoder conversion targets, menu movie
+    // previews, gameplay and UI keep their existing transforms. Both eyes draw
+    // the same decoded frame on one physical plane using their own projection.
+    const bool previous=g_projectingMovie;
+    g_projectingMovie=g_insideNativeDraw && Cfg().worldLockedMovies;
+    g_drawMovieList(self);
+    g_projectingMovie=previous;
+}
 bool FinishStereoFrame() { return !g_insideNativeDraw || VR().Eye() == 1; }
 void __fastcall HookRotateUiBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateUiBuffers(self); }
 void __fastcall HookRotateFontBuffers(void* self, void*) { if (FinishStereoFrame()) g_rotateFontBuffers(self); }
@@ -1027,7 +1045,7 @@ bool InstallEffectHooks(unsigned char* image) {
     Log("effects: stereo stream replay installed at %zu post-draw clear sites", _countof(kEffectClearSites));
     return true;
 }
-MenuCallPatch g_menuPatches[6]{};
+MenuCallPatch g_menuPatches[7]{};
 void RemoveMenuHooks() {
     for (auto& patch : g_menuPatches) if (patch.address) {
         DWORD old = 0;
@@ -1044,11 +1062,11 @@ bool InstallMenuHooks(unsigned char* image) {
     // Steam 0x591AD330 cOtManager::draw: explicit Id/IdFont passes followed
     // by ClearBuffer and deferred texture/material releases. These call sites
     // are checked before any mutation; no global function hook is necessary.
-    const uintptr_t sites[] = {0xE5358,0xE53E0,0xE5459,0xE5463,0xE54C3,0xE54C8};
-    const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50};
+    const uintptr_t sites[] = {0xE5358,0xE53E0,0xE5459,0xE5463,0xE54C3,0xE54C8,0xE5311};
+    const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50,0x8706E0};
     const void* hooks[] = {&HookIdList,&HookIdFontList,&HookRotateUiBuffers,
-        &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials};
-    for (int i=0;i<6;++i) {
+        &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials,&HookMovieList};
+    for (int i=0;i<7;++i) {
         auto* site = image + sites[i];
         int32_t displacement = 0; memcpy(&displacement, site+1, 4);
         if (site[0] != 0xE8 || site+5+displacement != image+targets[i]) {
@@ -1056,11 +1074,12 @@ bool InstallMenuHooks(unsigned char* image) {
         }
     }
     g_drawMenuList = reinterpret_cast<GameThisCall>(image+targets[0]);
+    g_drawMovieList = reinterpret_cast<GameThisCall>(image+targets[6]);
     g_rotateUiBuffers = reinterpret_cast<GameThisCall>(image+targets[2]);
     g_rotateFontBuffers = reinterpret_cast<GameThisCall>(image+targets[3]);
     g_releaseUiTextures = reinterpret_cast<GameThisCall>(image+targets[4]);
     g_releaseMaterials = reinterpret_cast<GameCall>(image+targets[5]);
-    for (int i=0;i<6;++i) {
+    for (int i=0;i<7;++i) {
         auto* site = image + sites[i];
         DWORD old = 0;
         if (!VirtualProtect(site, 5, PAGE_EXECUTE_READWRITE, &old)) { RemoveMenuHooks(); return false; }
@@ -1072,6 +1091,7 @@ bool InstallMenuHooks(unsigned char* image) {
     }
     g_menuHooksInstalled = true;
     Log("menu: Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair");
+    Log("movies: verified MovieDraw call hooked for world-space stereo projection");
     return true;
 }
 

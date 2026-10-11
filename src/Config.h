@@ -7,6 +7,9 @@ struct Config {
     bool disableMotionBlur = true;
     bool disableAmbientOcclusion = true;
     bool fixSoftParticleDepth = true;
+    bool worldLockedMovies = true;
+    float movieDistanceMetres = 3.0f;
+    float movieWidthMetres = 4.0f;
     bool vrControllers = true;
     bool externalCompositor = false;
     bool nativeStereo = true;
