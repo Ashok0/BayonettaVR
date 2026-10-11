@@ -24,6 +24,10 @@ call tests\build_movie_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_scene_capture_checks.cmd
 if errorlevel 1 exit /b 1
+call tests\build_native_scene_trace_checks.cmd
+if errorlevel 1 exit /b 1
+call tests\build_map_cinema_checks.cmd
+if errorlevel 1 exit /b 1
 cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\world_hud_tests.cpp /Fobuild\test\world_hud_tests.obj /Febuild\test\world_hud_tests.exe
 if errorlevel 1 exit /b 1
 build\test\world_hud_tests.exe

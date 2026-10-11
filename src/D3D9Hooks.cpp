@@ -7,6 +7,8 @@
 #include "MenuPanel9.h"
 #include "MoviePanel9.h"
 #include "MovieDrawQueue.h"
+#include "NativeSceneTrace9.h"
+#include "MapCinema9.h"
 #include "EffectStreamReplay.h"
 #include "ReferenceGridRenderer.h"
 #include "VR.h"
@@ -108,6 +110,9 @@ MoviePanel9 g_moviePanel;
 bool g_movieCaptureFailed=false;
 thread_local bool g_flatMovieFrame=false;
 const MovieDrawQueue* g_movieQueue=nullptr;
+NativeSceneTrace9 g_nativeSceneTrace;
+MapCinema9 g_mapCinema;
+bool g_nativeSceneTracePending=false;
 bool g_menuHooksInstalled = false;
 MenuPanel9 g_menuPanel;
 unsigned long long g_menuCaptures[2]{}, g_menuEyeDraws[2]{};
@@ -552,7 +557,11 @@ bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
 }
 
 template<class Call>
-HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
+HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Call&& call) {
+    if(g_nativeSceneTrace.Busy() || g_mapCinema.Busy())return call();
+    if(g_insideNativeDraw && VR().Eye()==0 && Cfg().worldLockedMapSequence &&
+       !g_compositingMenu && !g_capturingMovie && g_capturingMenu<0)
+        g_mapCinema.Observe(device,primitiveCount);
     const bool ambientPass=g_ambientOcclusionShader.ShouldSkip(device,Cfg().enabled&&VR().Active());
     AmbientOcclusionBypass ambient(device,ambientPass&&g_disableAmbientOcclusion);
     if(ambientPass) {
@@ -594,7 +603,12 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
         }
     }
     if (liveShader) liveShader->Release();
-    if (!VR().Active() || base < 0 || base > 252) return call();
+    if (!VR().Active()) return call();
+    if (base < 0 || base > 252) {
+        if(g_insideNativeDraw && VR().Eye()==0 && g_nativeSceneTrace.Active())
+            g_nativeSceneTrace.Record(device,primitiveCount,-1,Identity(),true);
+        return call();
+    }
 
     if (g_stackCapturePending) {
         g_stackCapturePending = false;
@@ -610,6 +624,8 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, Call&& call) {
     float aspect = 16.0f / 9.0f;
     if (SUCCEEDED(device->GetViewport(&viewport)) && viewport.Height) aspect = float(viewport.Width) / float(viewport.Height);
     const bool orthographic = LooksOrthographic(original);
+    if(g_insideNativeDraw && VR().Eye()==0 && g_nativeSceneTrace.Active())
+        g_nativeSceneTrace.Record(device,primitiveCount,base,original,orthographic);
     bool hud = false;
     if (orthographic) {
         if (Cfg().worldLockedHud) {
@@ -1139,15 +1155,30 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
     g_menuPanel.BeginFrame();
     g_moviePanel.BeginFrame();
+    g_mapCinema.BeginFrame();
     g_movieCaptureFailed=false;
+    if(g_nativeSceneTracePending){
+        g_nativeSceneTracePending=false;
+        wchar_t path[MAX_PATH]{},name[96]{};
+        GetModuleFileNameW(reinterpret_cast<HMODULE>(&__ImageBase),path,MAX_PATH);
+        if(auto* slash=wcsrchr(path,L'\\'))*(slash+1)=L'\0';
+        SYSTEMTIME now{};GetLocalTime(&now);
+        swprintf_s(name,L"BayonettaVR_scene_%04u%02u%02u_%02u%02u%02u_%u",now.wYear,now.wMonth,now.wDay,
+            now.wHour,now.wMinute,now.wSecond,g_snapshotSequence);
+        wcscat_s(path,name);
+        const bool started=g_nativeSceneTrace.Begin(g_device,path,&DisassembleShader);
+        Log("scene trace: start=%d directory=%ls",started,path);
+    }
     g_menuDiagnosticActive=g_menuDiagnosticPending;
     g_menuDiagnosticPending=false;
     if(g_menuDiagnosticActive){g_menuDiagnosticDraw=0;Log("menu trace: begin capture=%u",g_snapshotSequence);}
     if (g_effectHooksInstalled) g_effectStreams.BeginFrame();
 
     HRESULT left=E_PENDING,right=E_PENDING;
-    const bool movie=!independent && Cfg().worldLockedMovies && g_movieQueue && g_movieQueue->Pending();
-    if(movie) {
+    const unsigned mapSamples=g_mapCinema.Samples();
+    bool movie=!independent && ((Cfg().worldLockedMovies && g_movieQueue && g_movieQueue->Pending()) ||
+        (Cfg().worldLockedMapSequence && g_mapCinema.Active()));
+    const auto drawCinema=[&]{
         // Render the ORIGINAL composition exactly once: moving scene cards,
         // video, overlays, subtitles and cleanup all retain game draw order.
         // Applying HMD transforms to individual layers breaks their alignment.
@@ -1155,6 +1186,7 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
         g_flatMovieFrame=true;
         g_otDraw(self);
         g_flatMovieFrame=false;
+        if(Cfg().worldLockedMapSequence)g_mapCinema.Resolve(g_device);
         IDirect3DSurface9* frame=nullptr;
         g_device->GetBackBuffer(0,0,D3DBACKBUFFER_TYPE_MONO,&frame);
         const bool captured=g_moviePanel.CaptureFrame(g_device,frame);
@@ -1172,17 +1204,32 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
         static unsigned frames=0;
         if(++frames<=2 || frames%600==0 || FAILED(left) || FAILED(right))
             Log("movies: complete composition frame=%u captured=%d eyes=%08X/%08X",frames,captured,left,right);
-    } else {
+    };
+    if(movie)drawCinema();
+    else {
         VR().SetEye(0);
         g_otDraw(self);
-        left = independent ? E_PENDING : CaptureEye(g_device, 0);
-
-        VR().SetEye(1);
+        // Recognize at the list boundary, before publishing either eye. The
+        // first native pass deferred UI cleanup and retained effect streams,
+        // so the entering frame can be recomposed with the original camera.
+        const bool map=!independent && Cfg().worldLockedMapSequence && g_mapCinema.Resolve(g_device);
         const size_t restored = g_effectStreams.RestoreForRightEye();
         g_effectStreamsRestored += restored;
         if (restored) ++g_effectReplayFrames;
-        g_otDraw(self);
-        right = independent ? E_PENDING : CaptureEye(g_device, 1);
+        if(map){movie=true;drawCinema();}
+        else {
+            left = independent ? E_PENDING : CaptureEye(g_device, 0);
+            VR().SetEye(1);
+            g_otDraw(self);
+            right = independent ? E_PENDING : CaptureEye(g_device, 1);
+        }
+    }
+    const bool wasMap=g_mapCinema.Active();g_mapCinema.EndFrame();
+    if(g_mapCinema.Samples()!=mapSamples)Log("map cinema: sampled=%u lastCRC=%08X expected=%08X",g_mapCinema.Samples()-mapSamples,g_mapCinema.LastHash(),MapCinema9::MapFingerprint);
+    if(wasMap!=g_mapCinema.Active())Log("map cinema: exact map texture %s",g_mapCinema.Active()?"recognized; original composition on fixed screen":"absent; returning to native stereo");
+    if(g_nativeSceneTrace.Active()){
+        const unsigned previews=g_nativeSceneTrace.Finish(g_device);
+        Log("scene trace: complete movieFrame=%d smallPreviews=%u",movie,previews);
     }
     FinishMenuDiagnostic();
     g_pipeline.pairReady = PipelineSeconds();
@@ -1331,7 +1378,10 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
             g_earlySubmitEnabled ? "early: immediately after stereo pair" : "late: desktop Present (.27)");
     }
     if (pressed[5]) {
-        g_menuDiagnosticPending=true;
+        // Ordinary F12 stays bounded. The older full-size UI texture dump is
+        // still available explicitly with Shift+F12 for menu-only problems.
+        g_menuDiagnosticPending=(GetAsyncKeyState(VK_SHIFT)&0x8000)!=0;
+        g_nativeSceneTracePending=true;
         ++g_snapshotSequence;
         g_snapshotPending = true;
         g_snapshotSaved[0] = g_snapshotSaved[1] = false;
@@ -1546,7 +1596,7 @@ void UncapPresentation(D3DPRESENT_PARAMETERS* parameters) {
 }
 
 HRESULT STDMETHODCALLTYPE HookReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* p) {
-    g_moviePanel.Reset();
+    g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.ReleaseReplacement();
     g_effectStreams.Reset();
     g_menuPanel.Reset();
@@ -1606,14 +1656,14 @@ HRESULT STDMETHODCALLTYPE HookSetConst(IDirect3DDevice9* d,UINT start,const floa
     if(data&&start<256){ UINT n=std::min(count,256u-start); memcpy(&g_constants[start][0],data,n*4*sizeof(float)); for(UINT i=0;i<n;++i)g_constantValid[start+i]=true; }
     return g_setConst(d,start,data,count);
 }
-HRESULT STDMETHODCALLTYPE HookDrawPrimitive(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT s,UINT n){return DrawWithTrackedCamera(d,[&]{return g_drawPrimitive(d,t,s,n);});}
-HRESULT STDMETHODCALLTYPE HookDrawIndexed(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,INT b,UINT mi,UINT nv,UINT si,UINT pc){return DrawWithTrackedCamera(d,[&]{return g_drawIndexed(d,t,b,mi,nv,si,pc);});}
-HRESULT STDMETHODCALLTYPE HookDrawPrimitiveUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT n,const void*v,UINT st){return DrawWithTrackedCamera(d,[&]{return g_drawPrimitiveUP(d,t,n,v,st);});}
-HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT mv,UINT nv,UINT pc,const void*i,D3DFORMAT f,const void*v,UINT st){return DrawWithTrackedCamera(d,[&]{return g_drawIndexedUP(d,t,mv,nv,pc,i,f,v,st);});}
+HRESULT STDMETHODCALLTYPE HookDrawPrimitive(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT s,UINT n){return DrawWithTrackedCamera(d,n,[&]{return g_drawPrimitive(d,t,s,n);});}
+HRESULT STDMETHODCALLTYPE HookDrawIndexed(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,INT b,UINT mi,UINT nv,UINT si,UINT pc){return DrawWithTrackedCamera(d,pc,[&]{return g_drawIndexed(d,t,b,mi,nv,si,pc);});}
+HRESULT STDMETHODCALLTYPE HookDrawPrimitiveUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT n,const void*v,UINT st){return DrawWithTrackedCamera(d,n,[&]{return g_drawPrimitiveUP(d,t,n,v,st);});}
+HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT mv,UINT nv,UINT pc,const void*i,D3DFORMAT f,const void*v,UINT st){return DrawWithTrackedCamera(d,pc,[&]{return g_drawIndexedUP(d,t,mv,nv,pc,i,f,v,st);});}
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     return PresentOnce(d, [&]{ return g_presentEx(d,a,b,c,e,f); });
 }
-HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_moviePanel.Reset();g_softParticleDepth.ReleaseReplacement();g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
+HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();g_softParticleDepth.ReleaseReplacement();g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
 HRESULT STDMETHODCALLTYPE HookSwapPresent(IDirect3DSwapChain9* swap,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     IDirect3DDevice9* device = nullptr;
     if (SUCCEEDED(swap->GetDevice(&device)) && device) {
@@ -1632,7 +1682,7 @@ void HookSwapChain(IDirect3DSwapChain9* swap) {
 }
 
 void HookDevice(IDirect3DDevice9Ex* device) {
-    g_moviePanel.Reset();
+    g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();
     g_fixSoftParticleDepth = Cfg().fixSoftParticleDepth;
     g_dofFilter.Reset();
@@ -1690,7 +1740,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
-    g_moviePanel.Reset();
+    g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();
     g_ambientOcclusionShader.Reset();
     g_dofFilter.Reset();

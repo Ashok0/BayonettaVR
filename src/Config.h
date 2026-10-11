@@ -8,6 +8,7 @@ struct Config {
     bool disableAmbientOcclusion = true;
     bool fixSoftParticleDepth = true;
     bool worldLockedMovies = true;
+    bool worldLockedMapSequence = true;
     float movieDistanceMetres = 3.0f;
     float movieWidthMetres = 4.0f;
     bool vrControllers = true;

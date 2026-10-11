@@ -3,6 +3,96 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Native map sequence on a fixed screen (build 20261011.53)
+
+The 11:54:49 capture identifies the native map asset: a 4096x2048 DXT1
+texture whose 256x144 preview has CRC32 `7A6D8996`. This sequence queues no
+MovieDraw commands, so .50's movie-only selection never composed it onto a
+screen. .53 recognizes the actual map pixels and uses the existing complete
+cinematic composition path for these frames. The map, animated cards, scene
+geometry and overlays share one fixed screen, with black surroundings in both
+eyes. This deliberately flattens this authored sequence; it is not a repair
+that retains the surrounding native 3D scene and moves only the face.
+
+`WorldLockedMapSequence=1` is the default (set it to 0 to keep the prior native
+rendering). Dimensions/format only select candidates; they cannot activate
+cinema without the pixel fingerprint. At most four new candidates are sampled
+at a draw-list boundary, with the result cached on each texture object. There
+is no recurring readback for a recognized asset. Sampling failure or a changed
+asset fails closed to native rendering. The entering frame restores effect
+streams and recomposes before either eye is published; UI cleanup runs once.
+When the map stops being drawn, the completed frame remains on the screen and
+the following frame returns to native stereo. Device resets release resources.
+
+F12 now retains texture references at draw time and performs all preview draws
+after both eye captures, avoiding nested diagnostic draws inside engine draw
+callbacks. Static map/card previews remain useful; render-target previews are
+explicitly labeled as end-of-pair contents. The .52 eye capture was distorted,
+so it is not evidence of the face's exact geometry. The map-screen routing
+addresses the sequence as a complete composition rather than deleting a draw.
+
+Release/Win32 and the complete regression suite pass. The new GPU test checks
+the captured reference fingerprint, a same-size DXT1 nonmatch, entry, 100 cached
+frames, exit, and preserved MRT pixels/bindings and viewport/scissor state.
+Existing movie tests verify both eyes, moving overlays and black rear views.
+The actual .53 map replay and headset appearance still require user validation.
+The installed DLL matches the build, SHA256
+`CD02CEC8CD99565CCC3620AADE8F54BA50B8C1B5CE8BB3D8ACB86664DDA67D44`.
+The .52 DLL, INI, log, eye pair and scene trace are preserved under
+`.diagnostics/face52-20261011-115449`.
+
+## Scene trace MRT correction (build 20261011.52)
+
+The 11:09:53 F12 capture from .51 contains 300 native draws, both eye images,
+and five texture previews. The eyes show the coastal city, map edge and a
+very large nearby surface; the face's texture is not yet identified. Three
+previews taken during the depth/normal pass are black. Evidence, the .51 DLL,
+INI and log are preserved in `.diagnostics/face51-20261011-110953`.
+
+The preview renderer left the engine's secondary render target attached.
+An A/B GPU regression reproduces black previews with that binding retained
+and valid texture pixels with it detached. .52 explicitly saves, detaches and
+restores all supported extra render targets; D3DSBT_ALL does not save them.
+The test verifies both target bindings and both complete scene images remain
+unchanged. This fixes the diagnostic, **not the reported head panel**.
+
+F12 also includes low-polygon orthographic textures and metadata for draws
+without a recognized camera matrix (`matrix=c-1`, identity placeholder).
+The limits remain 2,048 draws and 16 previews of 256x144 pixels. Another F12
+capture while looking directly at the face is needed to identify its texture.
+Release/Win32 and the complete regression suite pass. The installed .52 DLL
+matches the build, SHA256
+`B696F61496C38418241D59B651CD4C6C997796224F564D5880DB95DC104274E2`.
+
+## Native scene-card investigation (build 20261011.51)
+
+The user confirmed the airplane animation works in .50, but a giant face card
+remains behind the viewer during the map/airplane story sequence only. The
+10:34 F12 pair and log show native scene rendering with an empty Id/IdFont
+capture, rather than .50's complete movie-frame path. The saved view contains
+the map and surrounding scene geometry; it does not identify the face's draw.
+This issue is **not yet fixed**. .51 preserves .50's rendering behavior and
+adds a bounded diagnostic for the missing native scene evidence.
+
+F12 now saves the existing eye pair plus a `BayonettaVR_scene_...` directory.
+It records at most 2,048 left-eye draws (shader CRCs, original projection,
+render target, texture identities, depth/blend/cull state) and previews at most
+16 distinct color textures from low-polygon perspective scene draws. Previews
+are 256x144; GPU copies occur at use and CPU readbacks occur after both eyes.
+There is no full-resolution texture dump or per-draw CPU readback. Capture
+automatically disarms after one frame. Shift+F12 additionally retains the older
+full-size menu diagnostic, which is unnecessary for this issue.
+
+To collect the remaining evidence, look directly at the face in the map
+sequence and press F12, then quit normally. The trace's GPU regression checks
+its limits, sampled preview pixels, and unchanged scene image, render target,
+depth, texture binding, viewport, scissor, culling and vertex layout.
+Release/Win32, the full regression suite, and the strengthened in-scene trace
+test with live shader objects pass. .51 is installed with SHA256
+`0F8ACD2231BEFC66C1E56DE7DC0D8F2F0CFD1352745B6163BA02D8269040FEF3`.
+The .50 DLL, INI, log, F12 eye pair and shader files are preserved under
+`.diagnostics/face50-20261011-104836`.
+
 ## Composed movie cinematics (build 20261011.50)
 
 The user reported a story cinematic with a visible map but missing airplane

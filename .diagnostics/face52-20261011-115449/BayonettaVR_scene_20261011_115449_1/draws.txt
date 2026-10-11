@@ -1,0 +1,2563 @@
+Native left-eye scene before HMD projection. Limits: 2048 draws, 16 previews at 256x144, 64 shader identities.
+preview setup=00000000
+draw=1 primitives=2 vs=004E872A ps=A6EB54D8 matrix=c8 ortho=1 rt=4ACA6480 8x8 fmt=21 viewport=0,0,8,8 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F97CF60 2560x1440 fmt=21 usage=00000001
+draw=2 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA2F00 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12580 16x16 fmt=21 usage=00000200
+texture1=65A12580 16x16 fmt=21 usage=00000200
+draw=3 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA2F40 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A120E0 16x16 fmt=21 usage=00000200
+texture1=65A120E0 16x16 fmt=21 usage=00000200
+draw=4 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3140 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10AE0 16x16 fmt=21 usage=00000200
+texture1=65A10AE0 16x16 fmt=21 usage=00000200
+draw=5 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA2F80 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12320 16x16 fmt=21 usage=00000200
+texture1=65A12320 16x16 fmt=21 usage=00000200
+draw=6 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3500 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11B20 16x16 fmt=21 usage=00000200
+texture1=65A11B20 16x16 fmt=21 usage=00000200
+draw=7 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA34C0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10F80 16x16 fmt=21 usage=00000200
+texture1=65A10F80 16x16 fmt=21 usage=00000200
+draw=8 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3380 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11540 16x16 fmt=21 usage=00000200
+texture1=65A11540 16x16 fmt=21 usage=00000200
+draw=9 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA30C0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10E60 16x16 fmt=21 usage=00000200
+texture1=65A10E60 16x16 fmt=21 usage=00000200
+draw=10 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3240 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A117A0 16x16 fmt=21 usage=00000200
+texture1=65A117A0 16x16 fmt=21 usage=00000200
+draw=11 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3540 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12DA0 16x16 fmt=21 usage=00000200
+texture1=65A12DA0 16x16 fmt=21 usage=00000200
+draw=12 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3280 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11C40 16x16 fmt=21 usage=00000200
+texture1=65A11C40 16x16 fmt=21 usage=00000200
+draw=13 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA32C0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12460 16x16 fmt=21 usage=00000200
+texture1=65A12460 16x16 fmt=21 usage=00000200
+draw=14 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3600 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A118C0 16x16 fmt=894720068 usage=00000200
+texture1=65A118C0 16x16 fmt=894720068 usage=00000200
+draw=15 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3800 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A110A0 16x16 fmt=894720068 usage=00000200
+texture1=65A110A0 16x16 fmt=894720068 usage=00000200
+draw=16 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3B80 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A111E0 16x16 fmt=894720068 usage=00000200
+texture1=65A111E0 16x16 fmt=894720068 usage=00000200
+draw=17 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA38C0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12200 16x16 fmt=894720068 usage=00000200
+texture1=65A12200 16x16 fmt=894720068 usage=00000200
+draw=18 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3B00 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A119E0 16x16 fmt=894720068 usage=00000200
+texture1=65A119E0 16x16 fmt=894720068 usage=00000200
+draw=19 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3940 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10D40 16x16 fmt=894720068 usage=00000200
+texture1=65A10D40 16x16 fmt=894720068 usage=00000200
+draw=20 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3B40 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11D60 16x16 fmt=894720068 usage=00000200
+texture1=65A11D60 16x16 fmt=894720068 usage=00000200
+draw=21 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3BC0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10C00 16x16 fmt=894720068 usage=00000200
+texture1=65A10C00 16x16 fmt=894720068 usage=00000200
+draw=22 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3580 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11300 16x16 fmt=894720068 usage=00000200
+texture1=65A11300 16x16 fmt=894720068 usage=00000200
+draw=23 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA35C0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12A20 16x16 fmt=894720068 usage=00000200
+texture1=65A12A20 16x16 fmt=894720068 usage=00000200
+draw=24 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3C40 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11E80 16x16 fmt=894720068 usage=00000200
+texture1=65A11E80 16x16 fmt=894720068 usage=00000200
+draw=25 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA3640 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11680 16x16 fmt=894720068 usage=00000200
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=26 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA4240 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12580 16x16 fmt=21 usage=00000200
+texture1=65A12580 16x16 fmt=21 usage=00000200
+draw=27 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA4500 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A120E0 16x16 fmt=21 usage=00000200
+texture1=65A120E0 16x16 fmt=21 usage=00000200
+draw=28 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA4640 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10AE0 16x16 fmt=21 usage=00000200
+texture1=65A10AE0 16x16 fmt=21 usage=00000200
+draw=29 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA5380 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12320 16x16 fmt=21 usage=00000200
+texture1=65A12320 16x16 fmt=21 usage=00000200
+draw=30 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA5400 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11B20 16x16 fmt=21 usage=00000200
+texture1=65A11B20 16x16 fmt=21 usage=00000200
+draw=31 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4ACA5640 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10F80 16x16 fmt=21 usage=00000200
+texture1=65A10F80 16x16 fmt=21 usage=00000200
+draw=32 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501460 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11540 16x16 fmt=21 usage=00000200
+texture1=65A11540 16x16 fmt=21 usage=00000200
+draw=33 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5013E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10E60 16x16 fmt=21 usage=00000200
+texture1=65A10E60 16x16 fmt=21 usage=00000200
+draw=34 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5014A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A117A0 16x16 fmt=21 usage=00000200
+texture1=65A117A0 16x16 fmt=21 usage=00000200
+draw=35 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5011E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12DA0 16x16 fmt=21 usage=00000200
+texture1=65A12DA0 16x16 fmt=21 usage=00000200
+draw=36 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5012E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11C40 16x16 fmt=21 usage=00000200
+texture1=65A11C40 16x16 fmt=21 usage=00000200
+draw=37 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501420 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12460 16x16 fmt=21 usage=00000200
+texture1=65A12460 16x16 fmt=21 usage=00000200
+draw=38 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5015A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A118C0 16x16 fmt=894720068 usage=00000200
+texture1=65A118C0 16x16 fmt=894720068 usage=00000200
+draw=39 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501220 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A110A0 16x16 fmt=894720068 usage=00000200
+texture1=65A110A0 16x16 fmt=894720068 usage=00000200
+draw=40 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F500F60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A111E0 16x16 fmt=894720068 usage=00000200
+texture1=65A111E0 16x16 fmt=894720068 usage=00000200
+draw=41 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5012A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12200 16x16 fmt=894720068 usage=00000200
+texture1=65A12200 16x16 fmt=894720068 usage=00000200
+draw=42 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501060 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A119E0 16x16 fmt=894720068 usage=00000200
+texture1=65A119E0 16x16 fmt=894720068 usage=00000200
+draw=43 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5013A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10D40 16x16 fmt=894720068 usage=00000200
+texture1=65A10D40 16x16 fmt=894720068 usage=00000200
+draw=44 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501720 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11D60 16x16 fmt=894720068 usage=00000200
+texture1=65A11D60 16x16 fmt=894720068 usage=00000200
+draw=45 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501AE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10C00 16x16 fmt=894720068 usage=00000200
+texture1=65A10C00 16x16 fmt=894720068 usage=00000200
+draw=46 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501960 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11300 16x16 fmt=894720068 usage=00000200
+texture1=65A11300 16x16 fmt=894720068 usage=00000200
+draw=47 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501C20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12A20 16x16 fmt=894720068 usage=00000200
+texture1=65A12A20 16x16 fmt=894720068 usage=00000200
+draw=48 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5018E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11E80 16x16 fmt=894720068 usage=00000200
+texture1=65A11E80 16x16 fmt=894720068 usage=00000200
+draw=49 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5017E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11680 16x16 fmt=894720068 usage=00000200
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=50 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5018A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12580 16x16 fmt=21 usage=00000200
+texture1=65A12580 16x16 fmt=21 usage=00000200
+draw=51 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501D20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A120E0 16x16 fmt=21 usage=00000200
+texture1=65A120E0 16x16 fmt=21 usage=00000200
+draw=52 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5019E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10AE0 16x16 fmt=21 usage=00000200
+texture1=65A10AE0 16x16 fmt=21 usage=00000200
+draw=53 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501A20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12320 16x16 fmt=21 usage=00000200
+texture1=65A12320 16x16 fmt=21 usage=00000200
+draw=54 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501A60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11B20 16x16 fmt=21 usage=00000200
+texture1=65A11B20 16x16 fmt=21 usage=00000200
+draw=55 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501F20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10F80 16x16 fmt=21 usage=00000200
+texture1=65A10F80 16x16 fmt=21 usage=00000200
+draw=56 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501820 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11540 16x16 fmt=21 usage=00000200
+texture1=65A11540 16x16 fmt=21 usage=00000200
+draw=57 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501860 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10E60 16x16 fmt=21 usage=00000200
+texture1=65A10E60 16x16 fmt=21 usage=00000200
+draw=58 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501B60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A117A0 16x16 fmt=21 usage=00000200
+texture1=65A117A0 16x16 fmt=21 usage=00000200
+draw=59 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501BA0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12DA0 16x16 fmt=21 usage=00000200
+texture1=65A12DA0 16x16 fmt=21 usage=00000200
+draw=60 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501BE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11C40 16x16 fmt=21 usage=00000200
+texture1=65A11C40 16x16 fmt=21 usage=00000200
+draw=61 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501CA0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12460 16x16 fmt=21 usage=00000200
+texture1=65A12460 16x16 fmt=21 usage=00000200
+draw=62 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502560 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A118C0 16x16 fmt=894720068 usage=00000200
+texture1=65A118C0 16x16 fmt=894720068 usage=00000200
+draw=63 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502620 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A110A0 16x16 fmt=894720068 usage=00000200
+texture1=65A110A0 16x16 fmt=894720068 usage=00000200
+draw=64 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502460 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A111E0 16x16 fmt=894720068 usage=00000200
+texture1=65A111E0 16x16 fmt=894720068 usage=00000200
+draw=65 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F501F60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12200 16x16 fmt=894720068 usage=00000200
+texture1=65A12200 16x16 fmt=894720068 usage=00000200
+draw=66 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502720 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A119E0 16x16 fmt=894720068 usage=00000200
+texture1=65A119E0 16x16 fmt=894720068 usage=00000200
+draw=67 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502520 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10D40 16x16 fmt=894720068 usage=00000200
+texture1=65A10D40 16x16 fmt=894720068 usage=00000200
+draw=68 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502120 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11D60 16x16 fmt=894720068 usage=00000200
+texture1=65A11D60 16x16 fmt=894720068 usage=00000200
+draw=69 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502060 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10C00 16x16 fmt=894720068 usage=00000200
+texture1=65A10C00 16x16 fmt=894720068 usage=00000200
+draw=70 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5020E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11300 16x16 fmt=894720068 usage=00000200
+texture1=65A11300 16x16 fmt=894720068 usage=00000200
+draw=71 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5020A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12A20 16x16 fmt=894720068 usage=00000200
+texture1=65A12A20 16x16 fmt=894720068 usage=00000200
+draw=72 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502160 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11E80 16x16 fmt=894720068 usage=00000200
+texture1=65A11E80 16x16 fmt=894720068 usage=00000200
+draw=73 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5024A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11680 16x16 fmt=894720068 usage=00000200
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=74 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502DA0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12580 16x16 fmt=21 usage=00000200
+texture1=65A12580 16x16 fmt=21 usage=00000200
+draw=75 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502D20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A120E0 16x16 fmt=21 usage=00000200
+texture1=65A120E0 16x16 fmt=21 usage=00000200
+draw=76 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5027A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10AE0 16x16 fmt=21 usage=00000200
+texture1=65A10AE0 16x16 fmt=21 usage=00000200
+draw=77 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5028A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12320 16x16 fmt=21 usage=00000200
+texture1=65A12320 16x16 fmt=21 usage=00000200
+draw=78 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5029A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11B20 16x16 fmt=21 usage=00000200
+texture1=65A11B20 16x16 fmt=21 usage=00000200
+draw=79 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502D60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10F80 16x16 fmt=21 usage=00000200
+texture1=65A10F80 16x16 fmt=21 usage=00000200
+draw=80 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502A60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11540 16x16 fmt=21 usage=00000200
+texture1=65A11540 16x16 fmt=21 usage=00000200
+draw=81 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502AE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10E60 16x16 fmt=21 usage=00000200
+texture1=65A10E60 16x16 fmt=21 usage=00000200
+draw=82 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502E60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A117A0 16x16 fmt=21 usage=00000200
+texture1=65A117A0 16x16 fmt=21 usage=00000200
+draw=83 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502BE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12DA0 16x16 fmt=21 usage=00000200
+texture1=65A12DA0 16x16 fmt=21 usage=00000200
+draw=84 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5027E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11C40 16x16 fmt=21 usage=00000200
+texture1=65A11C40 16x16 fmt=21 usage=00000200
+draw=85 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502A20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12460 16x16 fmt=21 usage=00000200
+texture1=65A12460 16x16 fmt=21 usage=00000200
+draw=86 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502CE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A118C0 16x16 fmt=894720068 usage=00000200
+texture1=65A118C0 16x16 fmt=894720068 usage=00000200
+draw=87 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502860 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A110A0 16x16 fmt=894720068 usage=00000200
+texture1=65A110A0 16x16 fmt=894720068 usage=00000200
+draw=88 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502AA0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A111E0 16x16 fmt=894720068 usage=00000200
+texture1=65A111E0 16x16 fmt=894720068 usage=00000200
+draw=89 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502920 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12200 16x16 fmt=894720068 usage=00000200
+texture1=65A12200 16x16 fmt=894720068 usage=00000200
+draw=90 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502EE0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A119E0 16x16 fmt=894720068 usage=00000200
+texture1=65A119E0 16x16 fmt=894720068 usage=00000200
+draw=91 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502F20 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10D40 16x16 fmt=894720068 usage=00000200
+texture1=65A10D40 16x16 fmt=894720068 usage=00000200
+draw=92 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5032E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11D60 16x16 fmt=894720068 usage=00000200
+texture1=65A11D60 16x16 fmt=894720068 usage=00000200
+draw=93 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5032A0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A10C00 16x16 fmt=894720068 usage=00000200
+texture1=65A10C00 16x16 fmt=894720068 usage=00000200
+draw=94 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F503720 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11300 16x16 fmt=894720068 usage=00000200
+texture1=65A11300 16x16 fmt=894720068 usage=00000200
+draw=95 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F502F60 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A12A20 16x16 fmt=894720068 usage=00000200
+texture1=65A12A20 16x16 fmt=894720068 usage=00000200
+draw=96 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F5031E0 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11E80 16x16 fmt=894720068 usage=00000200
+texture1=65A11E80 16x16 fmt=894720068 usage=00000200
+draw=97 primitives=2 vs=CB1E6A15 ps=409EE332 matrix=c24 ortho=1 rt=4F503620 32x32 fmt=21 viewport=0,0,32,32 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.03125
+m1 0 -2 0 1.03125
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=65A11680 16x16 fmt=894720068 usage=00000200
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=98 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=4294967295/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=65A09D00 256x256 fmt=894720068 usage=00000000
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=99 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=65640EE0 256x256 fmt=894720068 usage=00000000
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=100 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=65640B60 256x256 fmt=894720068 usage=00000000
+texture1=65A11680 16x16 fmt=894720068 usage=00000200
+draw=101 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.2824211 13.1764717 0 -13.086503
+m1 13.1764717 21.2824211 0 15.5826826
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=102 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.2824211 13.1764717 0 6.97101116
+m1 13.1764717 21.2824211 0 15.5826826
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=103 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.2824211 13.1764717 0 -13.086503
+m1 13.1764717 21.2824211 0 35.6401978
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=104 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.2824211 13.1764717 0 6.97101116
+m1 13.1764717 21.2824211 0 35.6401978
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=105 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 6.80255651 -16.4361115 0 -4.91956043
+m1 -16.4361115 -6.80255651 0 -17.026104
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C686A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=106 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 6.80255651 -16.4361115 0 15.1379538
+m1 -16.4361115 -6.80255651 0 -17.026104
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C686A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=107 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 6.80255651 -16.4361115 0 -4.91956043
+m1 -16.4361115 -6.80255651 0 3.03140879
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C686A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=108 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 6.80255651 -16.4361115 0 15.1379538
+m1 -16.4361115 -6.80255651 0 3.03140879
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C686A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=109 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 21.6233215 7.29474258 0 9.13016319
+m1 7.29474258 -21.6233215 0 -4.67467546
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69EE0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=110 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 21.6233215 7.29474258 0 29.1876774
+m1 7.29474258 -21.6233215 0 -4.67467546
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69EE0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=111 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 21.6233215 7.29474258 0 9.13016319
+m1 7.29474258 -21.6233215 0 -24.7321873
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69EE0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=112 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 21.6233215 7.29474258 0 29.1876774
+m1 7.29474258 -21.6233215 0 -24.7321873
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69EE0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=113 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.7812061 4.54840517 0 2.23089767
+m1 4.54840517 -17.7812061 0 -11.6337976
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B040 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=114 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.7812061 4.54840517 0 22.2884121
+m1 4.54840517 -17.7812061 0 -11.6337976
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B040 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=115 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.7812061 4.54840517 0 2.23089767
+m1 4.54840517 -17.7812061 0 8.42371655
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B040 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=116 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.7812061 4.54840517 0 22.2884121
+m1 4.54840517 -17.7812061 0 8.42371655
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B040 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=117 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 13.6704073 -12.8563576 0 3.62540197
+m1 -12.8563576 -13.6704073 0 -17.8808613
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=118 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 13.6704073 -12.8563576 0 -16.4321117
+m1 -12.8563576 -13.6704073 0 -17.8808613
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=119 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 13.6704073 -12.8563576 0 3.62540197
+m1 -12.8563576 -13.6704073 0 2.17665148
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=120 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 13.6704073 -12.8563576 0 -16.4321117
+m1 -12.8563576 -13.6704073 0 2.17665148
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=121 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -15.5968075 -8.41400909 0 -21.4311352
+m1 -8.41400909 15.5968075 0 11.4681091
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C679E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=122 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -15.5968075 -8.41400909 0 -1.37362111
+m1 -8.41400909 15.5968075 0 11.4681091
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C679E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=123 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -15.5968075 -8.41400909 0 -21.4311352
+m1 -8.41400909 15.5968075 0 -8.58940411
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C679E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=124 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -15.5968075 -8.41400909 0 -1.37362111
+m1 -8.41400909 15.5968075 0 -8.58940411
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C679E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=125 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.5867329 -4.97390032 0 -14.8687239
+m1 -4.97390032 21.5867329 0 16.5396786
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=126 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.5867329 -4.97390032 0 5.18878984
+m1 -4.97390032 21.5867329 0 16.5396786
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=127 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.5867329 -4.97390032 0 -14.8687239
+m1 -4.97390032 21.5867329 0 -3.5178349
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=128 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -21.5867329 -4.97390032 0 5.18878984
+m1 -4.97390032 21.5867329 0 -3.5178349
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=129 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -7.47632551 -16.3248558 0 -11.8324633
+m1 -16.3248558 7.47632551 0 -1.28247547
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=130 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -7.47632551 -16.3248558 0 -31.8899765
+m1 -16.3248558 7.47632551 0 -1.28247547
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=131 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -7.47632551 -16.3248558 0 -11.8324633
+m1 -16.3248558 7.47632551 0 -21.3399887
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=132 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -7.47632551 -16.3248558 0 -31.8899765
+m1 -16.3248558 7.47632551 0 -21.3399887
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6B600 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=133 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -5.70422029 -20.106926 0 -21.2303963
+m1 -20.106926 5.70422029 0 -0.21038492
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67B00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=134 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -5.70422029 -20.106926 0 -1.17288256
+m1 -20.106926 5.70422029 0 -0.21038492
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67B00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=135 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -5.70422029 -20.106926 0 -21.2303963
+m1 -20.106926 5.70422029 0 -20.2678986
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67B00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=136 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -5.70422029 -20.106926 0 -1.17288256
+m1 -20.106926 5.70422029 0 -20.2678986
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67B00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=137 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 0.779381037 -21.6270924 0 -13.588872
+m1 -21.6270924 -0.779381037 0 -5.44251728
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A5C0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=138 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 0.779381037 -21.6270924 0 6.46864176
+m1 -21.6270924 -0.779381037 0 -5.44251728
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A5C0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=139 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 0.779381037 -21.6270924 0 -13.588872
+m1 -21.6270924 -0.779381037 0 -25.5000305
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A5C0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=140 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 0.779381037 -21.6270924 0 6.46864176
+m1 -21.6270924 -0.779381037 0 -25.5000305
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A5C0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=141 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.0333977 2.09540367 0 13.3844471
+m1 2.09540367 -17.0333977 0 -9.30811024
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C68440 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=142 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.0333977 2.09540367 0 -6.67306614
+m1 2.09540367 -17.0333977 0 -9.30811024
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C68440 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=143 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.0333977 2.09540367 0 13.3844471
+m1 2.09540367 -17.0333977 0 10.749404
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C68440 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=144 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 17.0333977 2.09540367 0 -6.67306614
+m1 2.09540367 -17.0333977 0 10.749404
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C68440 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=145 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 14.1223049 -6.85890484 0 10.679575
+m1 -6.85890484 -14.1223049 0 -11.8645697
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D57E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=146 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 14.1223049 -6.85890484 0 -9.37793922
+m1 -6.85890484 -14.1223049 0 -11.8645697
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D57E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=147 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 14.1223049 -6.85890484 0 10.679575
+m1 -6.85890484 -14.1223049 0 8.19294453
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D57E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=148 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 14.1223049 -6.85890484 0 -9.37793922
+m1 -6.85890484 -14.1223049 0 8.19294453
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D57E0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=149 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -3.23710847 -12.1196556 0 -8.2379446
+m1 -12.1196556 3.23710847 0 -0.740710855
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=150 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -3.23710847 -12.1196556 0 11.8195686
+m1 -12.1196556 3.23710847 0 -0.740710855
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=151 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -3.23710847 -12.1196556 0 -8.2379446
+m1 -12.1196556 3.23710847 0 -20.7982235
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=152 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -3.23710847 -12.1196556 0 11.8195686
+m1 -12.1196556 3.23710847 0 -20.7982235
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C69C80 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=153 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -6.99213552 14.6715565 0 8.84933281
+m1 14.6715565 6.99213552 0 5.22315836
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A260 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=154 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -6.99213552 14.6715565 0 -11.2081814
+m1 14.6715565 6.99213552 0 5.22315836
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A260 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=155 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -6.99213552 14.6715565 0 8.84933281
+m1 14.6715565 6.99213552 0 25.2806721
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A260 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=156 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -6.99213552 14.6715565 0 -11.2081814
+m1 14.6715565 6.99213552 0 25.2806721
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6A260 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=157 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -11.8162651 2.48169661 0 0.475254506
+m1 2.48169661 11.8162651 0 14.392766
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6AF00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=158 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -11.8162651 2.48169661 0 -19.5822582
+m1 2.48169661 11.8162651 0 14.392766
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6AF00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=159 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -11.8162651 2.48169661 0 0.475254506
+m1 2.48169661 11.8162651 0 -5.66474771
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6AF00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=160 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -11.8162651 2.48169661 0 -19.5822582
+m1 2.48169661 11.8162651 0 -5.66474771
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C6AF00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=161 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.5133724 -0.801837802 0 -7.9935317
+m1 -0.801837802 10.5133724 0 9.00749302
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=162 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.5133724 -0.801837802 0 12.063982
+m1 -0.801837802 10.5133724 0 9.00749302
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=163 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.5133724 -0.801837802 0 -7.9935317
+m1 -0.801837802 10.5133724 0 -11.0500202
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=164 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.5133724 -0.801837802 0 12.063982
+m1 -0.801837802 10.5133724 0 -11.0500202
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=165 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -1.48369849 14.0998192 0 4.5082407
+m1 14.0998192 1.48369849 0 12.2784805
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=166 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -1.48369849 14.0998192 0 24.5657539
+m1 14.0998192 1.48369849 0 12.2784805
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=167 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -1.48369849 14.0998192 0 4.5082407
+m1 14.0998192 1.48369849 0 -7.77903318
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=168 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -1.48369849 14.0998192 0 24.5657539
+m1 14.0998192 1.48369849 0 -7.77903318
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D4A00 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=169 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.4238119 1.5790379 0 -8.93039322
+m1 1.5790379 10.4238119 0 8.11331463
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=170 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.4238119 1.5790379 0 11.12712
+m1 1.5790379 10.4238119 0 8.11331463
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=171 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.4238119 1.5790379 0 -8.93039322
+m1 1.5790379 10.4238119 0 -11.9441996
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=172 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 -10.4238119 1.5790379 0 11.12712
+m1 1.5790379 10.4238119 0 -11.9441996
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C67C20 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=173 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 4.39305162 -2.88268685 0 2.60985422
+m1 -2.88268685 -4.39305162 0 -13.1475019
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D56A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=174 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 4.39305162 -2.88268685 0 -17.4476585
+m1 -2.88268685 -4.39305162 0 -13.1475019
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D56A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=175 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 4.39305162 -2.88268685 0 2.60985422
+m1 -2.88268685 -4.39305162 0 6.91001177
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D56A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=176 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+m0 4.39305162 -2.88268685 0 -17.4476585
+m1 -2.88268685 -4.39305162 0 6.91001177
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=501D56A0 64x64 fmt=894720068 usage=00000000
+texture1=500AF4A0 256x256 fmt=894720068 usage=00000000
+draw=177 primitives=2 vs=9FFEA812 ps=EF0C3C98 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=178 primitives=2 vs=9FFEA812 ps=EF0C3C98 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=179 primitives=2 vs=9FFEA812 ps=EF0C3C98 matrix=c24 ortho=0 rt=4F672020 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+m0 20.0575142 0 0 10.0287571
+m1 0 -20.0575142 0 -10.0287571
+m2 0 0 -1.00010002 9.90099049
+m3 0 0 -1 10
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=180 primitives=20 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=181 primitives=261 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=182 primitives=418 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=183 primitives=420 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=184 primitives=1104 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=185 primitives=183 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=186 primitives=222 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=187 primitives=292 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=188 primitives=402 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=189 primitives=65 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=190 primitives=1328 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=191 primitives=740 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=500D62E0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+m0 1 0 0 0
+m1 0 1 0 0
+m2 0 0 1 0
+m3 0 0 0 1
+texture0=46C687C0 256x256 fmt=21 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=192 primitives=1759 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622F20 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=193 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B1E0 4096x2048 fmt=827611204 usage=00000000
+stack 6A2E467B 6A2EDFB2 6A2EB92C 00C5DB30 0042D397
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=194 primitives=55 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=195 primitives=55 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=196 primitives=55 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=197 primitives=86 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=198 primitives=86 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=199 primitives=165 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=200 primitives=303 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564BD60 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=201 primitives=303 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564BD60 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=202 primitives=805 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564AAE0 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=203 primitives=805 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564AAE0 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=204 primitives=1759 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.72958255 0.44370088 1.40261292 113.996956
+m1 1.72027755 3.80321217 -5.77736425 1129.85425
+m2 0.276385307 -0.838481128 -0.469671279 -236.821198
+m3 0.276381075 -0.838468313 -0.469664127 -236.717575
+texture0=506224C0 1024x1024 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=205 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B420 4x4 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=206 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2EDFB2 6A2EB92C 00C5DB30 0042D397
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=207 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=208 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=209 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=210 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=211 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=212 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622840 512x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=213 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=214 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=215 primitives=70 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=216 primitives=307 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=217 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=218 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=219 primitives=90 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=220 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=221 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=222 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=223 primitives=37 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=224 primitives=25 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=225 primitives=278 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=226 primitives=39 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=506225E0 256x128 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=227 primitives=55 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=228 primitives=61 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622140 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=229 primitives=37 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621F00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=230 primitives=75 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=231 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=232 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=233 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=234 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=235 primitives=17 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=236 primitives=357 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=237 primitives=4 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622840 512x256 fmt=861165636 usage=00000000
+stack 6A2E467B 6A2EDFB2 6A2EB92C 00C5DB30 0042D3BC
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=238 primitives=121 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=239 primitives=63 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=240 primitives=34 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=241 primitives=21 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622140 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=242 primitives=770 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=243 primitives=235 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 115.234901
+m1 1.43791437 3.80321217 -5.85403252 1140.46533
+m2 0.253269732 -0.838481128 -0.482529163 -239.160599
+m3 0.253265858 -0.838468313 -0.482521802 -239.056946
+texture0=50624640 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=244 primitives=2 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4FE1AA80 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B420 4x4 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=245 primitives=1759 vs=15E561A5 ps=42535AE0 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B420 4x4 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=246 primitives=1759 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622F20 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=50080100 256x256 fmt=894720068 usage=00000000
+draw=247 primitives=2 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B1E0 4096x2048 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=248 primitives=55 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=249 primitives=55 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=250 primitives=55 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=251 primitives=86 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=252 primitives=86 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=253 primitives=165 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B300 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=254 primitives=303 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564BD60 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=255 primitives=303 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564BD60 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=256 primitives=805 vs=5D442F6F ps=09B362E2 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564AAE0 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=257 primitives=805 vs=5D442F6F ps=09B362E2 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564AAE0 1024x1024 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=258 primitives=1759 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.72958255 0.44370088 1.40261292 113.996956
+m1 1.72027755 3.80321217 -5.77736425 1129.85425
+m2 0.276385307 -0.838481128 -0.469671279 -236.821198
+m3 0.276381075 -0.838468313 -0.469664127 -236.717575
+texture0=506224C0 1024x1024 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=259 primitives=2 vs=5D442F6F ps=09B362E2 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B420 4x4 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=260 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=261 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=262 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=263 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=264 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=265 primitives=2 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B560 512x2048 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=266 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622840 512x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=267 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=268 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=269 primitives=70 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=270 primitives=307 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=271 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=272 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=273 primitives=90 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=274 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=275 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=276 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=277 primitives=37 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=278 primitives=25 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=279 primitives=278 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=280 primitives=39 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=506225E0 256x128 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=281 primitives=55 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=282 primitives=61 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622140 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=283 primitives=37 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621F00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=284 primitives=75 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=285 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=286 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=287 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=288 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=289 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=290 primitives=357 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=291 primitives=4 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622840 512x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=292 primitives=121 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622CE0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=293 primitives=63 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50621CA0 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=294 primitives=34 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622020 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=295 primitives=21 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622140 512x512 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=296 primitives=770 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=50622E00 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=297 primitives=235 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 115.234901
+m1 1.43791437 3.80321217 -5.85403252 1140.46533
+m2 0.253269732 -0.838481128 -0.482529163 -239.160599
+m3 0.253265858 -0.838468313 -0.482521802 -239.056946
+texture0=50624640 256x256 fmt=861165636 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=298 primitives=2 vs=5D442F6F ps=09B362E2 matrix=c8 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+m0 3.79324865 0.44370088 1.21998894 113.996956
+m1 1.43791437 3.80321217 -5.85403252 1129.85425
+m2 0.253269732 -0.838481128 -0.482529163 -236.821198
+m3 0.253265858 -0.838468313 -0.482521802 -236.717575
+texture0=6564B420 4x4 fmt=827611204 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=299 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+m0 -7.97280312 5.32254219 0 -1.32539368
+m1 -9.46229744 -14.1738758 0 -11.0625
+m2 -2.98023224e-08 -5.96046448e-08 -1.00001526 -1.22543335
+m3 -2.98023224e-08 -1.1920929e-07 -1 -1.12539673
+texture0=500AF820 512x512 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=300 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+m0 -4.71037292 -7.74731207 0 -6.22911072
+m1 13.7730007 -8.37399769 0 3.4552002
+m2 0 0 -1.00001526 -1.22543335
+m3 0 -2.98023224e-08 -1 -1.12539673
+texture0=500AF820 512x512 fmt=894720068 usage=00000000
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=301 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+m0 2.88372779 -4.08710861 0 -0.601959229
+m1 7.26597214 5.12662792 0 6.9519043
+m2 2.98023224e-08 0 -1.00001526 -1.22541809
+m3 5.96046448e-08 -2.98023224e-08 -1 -1.12541199
+texture0=500AF260 256x256 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=302 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+m0 2.34375 0 0 1.171875
+m1 0 4.16666698 -2.42841053e-10 2.08333349
+m2 0 2.00097916e-09 1.52590219e-05 0.000152591223
+m3 0 0 0 1
+texture0=5007E0A0 256x256 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6
+texture1=4F97CF60 2560x1440 fmt=21 usage=00000001
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=303 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/9/6 cull=1
+m0 1.99999988 0 0 1
+m1 0 2.00000024 -2.42841053e-10 1.00000012
+m2 0 9.60470037e-10 1.52590219e-05 0.000152590699
+m3 0 0 0 1
+texture0=5007E0A0 256x256 fmt=894720068 usage=00000000
+texture1=500806E0 512x512 fmt=894720068 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=304 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+m0 2.5 0 0 1.24999571
+m1 0 4.44444466 -2.42841053e-10 1.98166347
+m2 0 2.13437779e-09 1.52590219e-05 0.000152591281
+m3 0 0 0 1
+texture0=503F9F80 256x256 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6
+texture1=500806E0 512x512 fmt=894720068 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=305 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+m0 0.0829307958 0 0 -0.852362394
+m1 0 1.94444454 -2.42841053e-10 0.972222209
+m2 0 9.33790156e-10 1.52590219e-05 0.000152590685
+m3 0 0 0 1
+texture0=504CD720 128x256 fmt=894720068 usage=00000000
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6
+texture1=500806E0 512x512 fmt=894720068 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=306 primitives=2 vs=8AECB4A6 ps=6E722DE9 matrix=c8 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F97B700 2560x1440 fmt=21 usage=00000001
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6 00C70729
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=307 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F97B700 2560x1440 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=308 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7120 320x176 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=309 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7120 320x176 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=310 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7120 320x176 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=311 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7240 160x80 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=312 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7240 160x80 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=313 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7240 160x80 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=314 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F75C0 80x48 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=315 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F75C0 80x48 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=316 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F75C0 80x48 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=317 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F6A20 48x32 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=318 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F6A20 48x32 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=319 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F6A20 48x32 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=320 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7360 32x16 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=321 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 0.00156250002 0 0 -1
+m1 0 -0.00277777785 0 1
+m2 0 0 -1.52590219e-05 -0
+m3 0 0 0 1
+texture0=4F1F7360 32x16 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=322 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1.00234377
+m1 0 -2 0 1.00416672
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F7120 320x176 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=323 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/6 cull=1
+m0 2 0 0 -1.00234377
+m1 0 -2 0 1.00416672
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F7240 160x80 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=324 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/2 cull=1
+m0 2 0 0 -1.00234377
+m1 0 -2 0 1.00416672
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F75C0 80x48 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=325 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/2 cull=1
+m0 2 0 0 -1.00234377
+m1 0 -2 0 1.00416672
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F6A20 48x32 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=326 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4ACA6340 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/2 cull=1
+m0 2 0 0 -1.00234377
+m1 0 -2 0 1.00416672
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F7360 32x16 fmt=21 usage=00000001
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=327 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=1/5/2 cull=1
+m0 2 0 0 -1
+m1 0 -2 0 1
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F1F6FE0 320x176 fmt=21 usage=00000001
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6 0043E5EA 00C70729
+texture1=4F3B9B40 256x1 fmt=22 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=328 primitives=2 vs=CB1E6A15 ps=2A32DDB6 matrix=c24 ortho=1 rt=4F6734C0 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+m0 2.00000048 0 0 1.00000024
+m1 0 2 -2.42841053e-10 1
+m2 0 9.60469926e-10 1.52590219e-05 0.000152590699
+m3 0 0 0 1
+texture0=4F97B700 2560x1440 fmt=21 usage=00000001
+texture1=500806E0 512x512 fmt=894720068 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+draw=329 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4F672160 2560x1440 fmt=22 viewport=0,0,2560,1440 depth=0/0 blend=0/5/6 cull=1
+m0 2 0 0 -1
+m1 0 -2 0 1
+m2 0 0 -1.52590219e-05 0.000152590219
+m3 0 0 0 1
+texture0=4F97BBA0 2560x1440 fmt=21 usage=00000001
+stack 6A2E467B 6A2ED13E 6A2EB8C3 00C5DAD6 004E52A3 6A2E9D6B 0049DEDF
+texture1=500806E0 512x512 fmt=894720068 usage=00000000
+texture2=4FA165E0 4x4 fmt=894720068 usage=00000000
+texture3=4F3BA100 256x256 fmt=827611204 usage=00000000
+preview draw=193 texture=6564B1E0 status=00000000
+preview draw=206 texture=6564B560 status=00000000
+preview draw=237 texture=50622840 status=00000000
+preview draw=299 texture=500AF820 status=00000000
+preview draw=301 texture=500AF260 status=00000000
+preview draw=302 texture=5007E0A0 status=00000000
+preview draw=304 texture=503F9F80 status=00000000
+preview draw=305 texture=504CD720 status=00000000
+preview draw=306 texture=4F97B700 status=00000000
+preview draw=327 texture=4F1F6FE0 status=00000000
+preview draw=329 texture=4F97BBA0 status=00000000
+end draws=329 savedPreviews=11
