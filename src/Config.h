@@ -14,6 +14,7 @@ struct Config {
     bool vrControllers = true;
     bool externalCompositor = false;
     bool nativeStereo = true;
+    bool fixCameraCulling = true;
     bool forceHalfRate = false;
     bool uncapPresent = true;
     bool positionalTracking = true;

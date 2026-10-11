@@ -9,6 +9,7 @@
 #include "MovieDrawQueue.h"
 #include "NativeSceneTrace9.h"
 #include "MapCinema9.h"
+#include "CameraCulling.h"
 #include "EffectStreamReplay.h"
 #include "ReferenceGridRenderer.h"
 #include "VR.h"
@@ -1310,10 +1311,14 @@ bool InstallNativeStereoHook() {
     // This also defers cEspManager's heap-bank rotation until the right eye,
     // keeping the GPU buffers referenced by restored descriptors alive.
     if (InstallMenuHooks(image)) InstallEffectHooks(image);
+    if(Cfg().fixCameraCulling)InstallCameraCullingHook(image,[] {
+        return Cfg().enabled && Cfg().nativeStereo && VR().Active();
+    });
     return true;
 }
 
 void RemoveNativeStereoHook() {
+    RemoveCameraCullingHook();
     RemoveEffectHooks();
     RemoveMenuHooks();
     g_menuPanel.Reset();

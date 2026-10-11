@@ -3,6 +3,38 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Camera visibility for native VR (build 20261011.54)
+
+`FixCameraCulling=1` expands scene visibility around the game camera, so head
+turns can see geometry behind or beside its original view. This addresses the
+reported camera-dependent pop-in independently of Bayonetta's facing direction.
+The ordinary `cCameraFrustum::VfrustumCk` at Steam VA `00AAA720` is hooked;
+its caller uses the camera at manager `05B29050 + 8`. The override is restricted
+to that active camera and the main camera's frustum at `00F2E0D0`, while native
+VR is active. The separate shadow check and unrelated cameras retain their
+original behavior. The existing map cinema fix remains enabled.
+
+The original check runs first. Rejected bounding spheres are admitted within
+a sphere enclosing the camera's far frustum corners, including object radius,
+in every orientation. This preserves all originally visible objects and a
+finite distance limit, removing the old forward/near/side-plane rejection for
+surrounding geometry. Invalid range inputs fall back to the original result.
+The hook validates the executable timestamp, full wrapper bytes and camera
+getter, and restores its original instructions at shutdown.
+
+This draws additional geometry and may cost frame time. Set `FixCameraCulling=0`
+and restart to compare the original behavior. Logs report installation and the
+first off-camera object retained. Tests execute the actual x86 game routines,
+checking the trampoline, 360-degree sweeps, 100,000 visibility comparisons,
+far range, camera switching, disabled fallback, shadow isolation and removal.
+Headset appearance, frame cost and any additional map-specific visibility
+systems still require an in-game replay; the isolated tests cannot prove those.
+Release/Win32 and the full regression suite pass. Build .54 is installed with
+`FixCameraCulling=1`, preserving the other installed settings. Installed SHA256:
+`C287A03BD564FD3E3865AD22A8F308B32824192C5BABC40BC641C49E95E2EB45`.
+The previous DLL, INI and log are backed up under
+`.diagnostics/before54-20261011-154149`.
+
 ## Native map sequence on a fixed screen (build 20261011.53)
 
 The 11:54:49 capture identifies the native map asset: a 4096x2048 DXT1
