@@ -6,6 +6,24 @@
 #include <cstring>
 
 namespace bvr {
+// Shared timing policy for real gamepads and Touch. Interruptions cannot
+// finish a previous hold; a held chord fires once until released.
+class RecenterHold {
+public:
+    bool Update(bool both,bool active,uint64_t now) {
+        if(!active || !both || (holding_&&(now<last_ || now-last_>250))) {
+            holding_=fired_=false;
+        }
+        last_=now;
+        if(!active || !both)return false;
+        if(!holding_){holding_=true;start_=now;}
+        if(!fired_&&now-start_>=1000){fired_=true;return true;}
+        return false;
+    }
+private:
+    uint64_t start_=0,last_=0;
+    bool holding_=false,fired_=false;
+};
 struct TouchHand {
     bool connected=false, primary=false, secondary=false, stickClick=false, system=false;
     float x=0,y=0,trigger=0,grip=0;
@@ -21,15 +39,12 @@ public:
         ControllerInput output{};output.tick=now;output.recenterSequence=recenterSequence_;
         output.connected=left.connected||right.connected;
         output.active=output.connected&&focused;
-        if(!output.active) {holdStart_=0;holding_=fired_=systemDown_=false;return output;}
+        if(!output.active) {hold_.Update(false,false,now);systemDown_=false;return output;}
         const bool both=left.connected&&right.connected&&left.stickClick&&right.stickClick;
         const bool system=right.connected&&right.system;
         if(system&&!systemDown_)++recenterSequence_;
         systemDown_=system;
-        if(both) {
-            if(!holding_){holding_=true;holdStart_=now;}
-            if(!fired_&&now-holdStart_>=1000){++recenterSequence_;fired_=true;}
-        } else {holding_=fired_=false;holdStart_=0;}
+        if(hold_.Update(both,true,now))++recenterSequence_;
         output.recenterSequence=recenterSequence_;
         auto& p=output.pad;
         if(left.connected) {
@@ -74,8 +89,9 @@ private:
         if(x*x+y*y<.12f*.12f){outX=outY=0;return;}
         outX=SHORT(x*(x<0?32768:32767));outY=SHORT(y*(y<0?32768:32767));
     }
-    uint64_t recenterSequence_=0,holdStart_=0;
-    bool holding_=false,fired_=false,systemDown_=false;
+    uint64_t recenterSequence_=0;
+    RecenterHold hold_;
+    bool systemDown_=false;
 };
 // Called under the input hook's lock; monotonic packets describe the merged pad.
 class XboxInputBridge {

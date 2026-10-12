@@ -124,6 +124,7 @@ bool VRRuntime::Init() {
         Shutdown();
         return false;
     }
+    compositor_->SetTrackingSpace(vr::TrackingUniverseStanding);
     for (int i = 0; i < 2; ++i) {
         const vr::EVREye e = i ? vr::Eye_Right : vr::Eye_Left;
         eyeToHead_[i] = FromVR(system_->GetEyeToHeadTransform(e));
@@ -181,6 +182,7 @@ bool VRRuntime::StartIndependentGrid() {
 
 void VRRuntime::Shutdown() {
     UpdateControllerInput({});
+    PollGamepadRecenter(false,GetTickCount64());
     IndependentVRGrid().StopAndJoin();
     if (external_) Companion().Stop();
     if (system_ && g_shutdown) g_shutdown();
@@ -190,15 +192,18 @@ void VRRuntime::Shutdown() {
 }
 
 void VRRuntime::Recenter() {
-    origin_ = headPose_;
-    renderAnchor_ = origin_;
-    originValid_ = poseValid_;
-    ++renderRevision_;
-    Log("vr: tracking origin recentered");
+    Mat4 level{};
+    if(!poseValid_ || !LevelTrackingOrigin(headPose_,level)) {
+        Log("recenter: valid headset pose unavailable; keeping current origin");return;
+    }
+    origin_=level;renderAnchor_=origin_;originValid_=true;++renderRevision_;
+    Log("recenter: headset heading reset; origin pitch/roll=0; game camera unchanged");
 }
 
 void VRRuntime::EnsureOrigin() {
-    if (!originValid_ && poseValid_) Recenter();
+    // Startup follows the same rule as L3+R3: never capture headset tilt as
+    // persistent world tilt, even if the headset was tilted during launch.
+    if(!originValid_ && poseValid_)Recenter();
 }
 
 void VRRuntime::CycleStereoScale() {
@@ -274,11 +279,12 @@ void VRRuntime::LogPoseDiagnostic() const {
 void VRRuntime::WaitForPose() {
     if (external_) {
         ipc::Control control{};
-        if (!Companion().Poll(control)) { poseValid_=false;UpdateControllerInput({});return; }
+        if (!Companion().Poll(control)) { poseValid_=false;UpdateControllerInput({});ApplyGamepadCalibration();return; }
         poseSample_=control.tracking.sample;
         poseValid_=control.tracking.valid && GetTickCount64()-control.tracking.tick<250;
         if(poseValid_)headPose_=FromVR(control.tracking.head);
         ApplyControllers(control.controllers);
+        ApplyGamepadCalibration();
         return;
     }
     if (!compositor_) return;
@@ -291,6 +297,7 @@ void VRRuntime::WaitForPose() {
     if (e != vr::VRCompositorError_None) {
         poseValid_ = false;
         UpdateControllerInput({});
+        ApplyGamepadCalibration();
         Log("vr: WaitGetPoses error %d", static_cast<int>(e));
         return;
     }
@@ -306,6 +313,14 @@ void VRRuntime::WaitForPose() {
         FollowRenderAnchor(renderAnchor_, headPose_, Cfg().compositorTurnDegrees)) {
         ++renderRevision_;
         ++anchorTurns_;
+    }
+    ApplyGamepadCalibration();
+}
+
+void VRRuntime::ApplyGamepadCalibration() {
+    DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
+    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),GetTickCount64())) {
+        Recenter();Log("controllers: physical gamepad L3+R3 recenter");
     }
 }
 

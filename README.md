@@ -3,6 +3,39 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Level headset recentering (build 20261011.57)
+
+Hold **L3+R3 for one second** on the gamepad or both VR thumbsticks to reset
+headset heading and clear tilt captured in the tracking origin. F8 performs
+the same reset. Startup also uses a level origin, so a headset tilted during
+launch cannot permanently tilt the game. Actual head pitch/roll continue to
+track normally after recentering.
+
+The stored origin contains horizontal heading and headset position only.
+There is no game-camera leveling, floor reference or camera-height offset.
+The .54 scene projection path is restored exactly; analog-stick camera orbit
+and elevation remain controlled by the game. This replaces the withdrawn
+.55/.56 floor-calibration behavior. Their FloorCalibration INI key has no
+function in .57. No special ground position or standing posture is required.
+
+Gamepad and VR-controller shortcuts share the one-second hold policy and
+cancel on focus loss, disconnect or stale input. Gamepad recentering also works
+with VRControllers=0. Recenter changes take effect together for both eyes.
+Tests cover 90 tilt/recenter/height cases, including 80 reproductions of the
+old persistent-launch-tilt behavior, and 100 stereo camera orbits with original
+camera position, pitch and yaw preserved. Withdrawn floor code is archived in
+`.diagnostics/heading57/withdrawn56`.
+
+Release/Win32 and the full regression suite pass. Build .57 is installed;
+installed binaries match the build outputs by SHA256:
+- d3d9.dll: `ACA56E0993A136776795DD4287890E5DCBEE404D634F640A42EFBBE8801C426A`
+- BayonettaVRHost.exe: `507266BFBDAC5A8AEA307E83112066BCFB7BA6414B8D43650E8B6EF2F94CF9FD`
+
+Previous binaries and INI are backed up in
+`.diagnostics/before57-20261011-230739`. The obsolete FloorCalibration stanza
+was removed from the installed INI; other settings were preserved. Headset
+appearance and physical-controller behavior still need confirmation in game.
+
 ## Camera visibility for native VR (build 20261011.54)
 
 `FixCameraCulling=1` expands scene visibility around the game camera, so head

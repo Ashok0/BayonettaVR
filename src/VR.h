@@ -44,6 +44,7 @@ public:
 
 private:
     void ApplyControllers(const ControllerInput& input);
+    void ApplyGamepadCalibration();
     uint64_t controllerRecenterSequence_=0;
     Mat4 EyeViewProjection(int eye, float units, const Mat4& input = Identity(),
                            const Mat4* sceneProjection = nullptr) const;

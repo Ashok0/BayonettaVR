@@ -23,7 +23,9 @@ struct Runtime {
         vr::EVRInitError error{};init(&error,vr::VRApplication_Scene);if(error){printf("OpenVR init error=%d\n",int(error));return false;}
         initialized=true;
         system=static_cast<vr::IVRSystem*>(iface(vr::IVRSystem_Version,&error));
-        compositor=static_cast<vr::IVRCompositor*>(iface(vr::IVRCompositor_Version,&error));return system&&compositor;
+        compositor=static_cast<vr::IVRCompositor*>(iface(vr::IVRCompositor_Version,&error));
+        if(compositor)compositor->SetTrackingSpace(vr::TrackingUniverseStanding);
+        return system&&compositor;
     }
 };
 Mat4 Matrix(const vr::HmdMatrix34_t& pose){Mat4 m=Identity();for(int r=0;r<3;++r)for(int c=0;c<4;++c)m.m[r][c]=pose.m[r][c];return m;}
@@ -52,7 +54,7 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
     SharedFrameConsumer consumer;
     TouchControllers controllers;
     const bool controllerInput=!test&&GetPrivateProfileIntW(L"VR",L"VRControllers",1,(directory+L"\\BayonettaVR.ini").c_str())!=0;
-    printf("controllers: build=20261010.41 enabled=%d; hold both sticks 1s to recenter; right System is runtime-reserved\n",controllerInput);
+    printf("controllers: build=20261011.57 enabled=%d; hold both sticks 1s to recenter heading; standing tracking space\n",controllerInput);
     // Shutdown OpenVR before releasing any textures it may still reference.
     Runtime runtime;vr::IVRSystem* system=nullptr;vr::IVRCompositor* compositor=nullptr;
     if(!test&&!runtime.Init(directory,system,compositor))return 1;

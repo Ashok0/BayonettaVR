@@ -1,0 +1,26 @@
+Build .55 rollback after user reported mostly black geometry and reversed left/right movement.
+
+Restored installed DLL, companion and INI byte-for-byte from before55-20261011-223031.
+Restored the reviewed .55 source changes to c1eb907 (.54) and restored release binaries.
+The installed DLL SHA256 is C287A03BD564FD3E3865AD22A8F308B32824192C5BABC40BC641C49E95E2EB45.
+The failed binaries/settings/log, exact tracked patch, and new source/test files are archived here.
+
+Latest .55 log confirms floor alignment actually activated four times:
+head heights 1.262, 1.276, 1.259, 1.260 metres; player ground Y -42;
+height offsets -0.804, -0.434, -1.335, -3.324 game units.
+
+Likely defect to investigate before attempting any replacement:
+RecoverGameCamera checks orthogonality but not determinant. Orthogonal matrices
+can include a reflection when recovering a view with a different handedness.
+LevelPose always constructs a determinant +1 basis. If the recovered camera
+has determinant -1, Correction therefore introduces a reflection. For example,
+camera orientation diag(1,1,-1) becomes level diag(-1,1,-1), yielding correction
+diag(-1,1,1). This mirrors X and reverses triangle winding, consistent with
+the reported reversed movement and geometry vanishing through face culling.
+The .55 tests generated only determinant +1 cameras and missed this case.
+This explains a concrete flaw in the implementation; the actual live camera
+determinant was not captured, so it is not yet a confirmed runtime root cause.
+
+Do not redeploy .55. Future calibration requires live camera/view convention
+verification and tests including reflected coordinate bases and triangle winding.
+The rollback restores pre-calibration behavior; full floor calibration is withdrawn.

@@ -30,9 +30,11 @@ int main() {
     Require(p.wButtons==(XINPUT_GAMEPAD_DPAD_LEFT|XINPUT_GAMEPAD_DPAD_UP)&&!p.sThumbRX&&!p.sThumbRY,"D-pad modifier consumes camera and bumpers");
     l.grip=r.grip=0;l.stickClick=r.stickClick=true;
     Require(mapper.Map(l,r,true,100).recenterSequence==0,"hold starts without recenter");
+    for(uint64_t t=200;t<=1000;t+=100)mapper.Map(l,r,true,t);
     Require(mapper.Map(l,r,true,1099).recenterSequence==0,"one-second threshold");
     input=mapper.Map(l,r,true,1100);
     Require(input.recenterSequence==1&&!(input.pad.wButtons&(XINPUT_GAMEPAD_LEFT_THUMB|XINPUT_GAMEPAD_RIGHT_THUMB)),"one recenter consumes stick clicks");
+    for(uint64_t t=1200;t<5000;t+=100)mapper.Map(l,r,true,t);
     Require(mapper.Map(l,r,true,5000).recenterSequence==1,"long hold does not repeat");
     l.stickClick=r.stickClick=false;mapper.Map(l,r,true,5010);r.system=true;
     Require(mapper.Map(l,r,true,5020).recenterSequence==2,"right System if runtime exposes it");
@@ -41,6 +43,7 @@ int main() {
     auto unfocused=mapper.Map(l,r,false,6100);
     Require(!unfocused.active&&unfocused.connected&&!unfocused.pad.wButtons&&unfocused.recenterSequence==2,"focus loss releases buttons/cancels hold");
     Require(mapper.Map(l,r,true,7000).recenterSequence==2,"focus return cannot complete old hold");
+    for(uint64_t t=7100;t<8000;t+=100)mapper.Map(l,r,true,t);
     Require(mapper.Map(l,r,true,8000).recenterSequence==3,"new full hold after focus returns");
     r.connected=false;input=mapper.Map(l,r,true,8100);
     Require(input.connected&&!input.pad.sThumbRX&&!input.pad.bRightTrigger,"one hand disconnect clears that hand");
@@ -59,5 +62,18 @@ int main() {
     Require(!bridge.Read(0,state,false,351)&&!bridge.Read(0,state,false,99),"stale and invalid timestamps fail closed");
     input.active=0;bridge.Update(input);state={};Require(bridge.Read(0,state,false,110)&&!state.Gamepad.wButtons,"dashboard supplies neutral releases");
     input.connected=0;bridge.Update(input);Require(!bridge.Read(0,state,false,110),"disconnect returns to physical path");
+    RecenterHold physical;
+    Require(!physical.Update(true,true,0),"physical chord starts at tick zero");
+    for(uint64_t t=100;t<1000;t+=100)Require(!physical.Update(true,true,t),"physical hold waits");
+    Require(physical.Update(true,true,1000),"physical hold fires at one second");
+    Require(!physical.Update(true,true,1100),"physical hold does not repeat");
+    physical.Update(false,true,1200);physical.Update(true,true,1300);
+    Require(!physical.Update(true,true,2400),"missing polls cancel physical hold");
+    physical.Update(true,false,2500);
+    Require(!physical.Update(true,true,2600),"focus loss cancels physical hold");
+    for(uint64_t t=2700;t<3600;t+=100)physical.Update(true,true,t);
+    Require(physical.Update(true,true,3600),"physical chord rearms after interruption");
+    physical.Update(false,false,3700);
+    Require(!physical.Update(true,true,3800),"disconnect cancels physical hold");
     printf("controller input: %d mapping, merge, focus, stale, disconnect and recenter checks passed\n",checks);
 }

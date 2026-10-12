@@ -1,0 +1,559 @@
+diff --git a/BayonettaVR.ini b/BayonettaVR.ini
+index fe55cfa..333cf4a 100644
+--- a/BayonettaVR.ini
++++ b/BayonettaVR.ini
+@@ -27,7 +27,11 @@ MovieWidthMetres=4.0
+ MovieDistanceMetres=3.0
+ 
+ ; Touch controllers feed the game's Xbox 360 player-one input. No driver needed.
+-; Both thumbstick clicks held for 1 second recenter the camera and HUD.
++; Hold L3+R3 for 1 second on a gamepad or both VR sticks to calibrate.
++; Stand/sit normally with Bayonetta on flat ground. Uses the VR runtime's floor.
++; Aligns height and levels the scene; later game camera movement is preserved.
++; F8 also calibrates. Shift+F8 clears calibration and restores the original camera.
++FloorCalibration=1
+ ; Oculus reserves the right System button, so it normally cannot reach the mod.
+ ; Grip + same-hand stick click = left Start / right Back.
+ ; Both grips + right stick = D-pad; ordinary stick clicks = L3/R3.
+diff --git a/BayonettaVR.vcxproj b/BayonettaVR.vcxproj
+index fda97ce..68cc3b7 100644
+--- a/BayonettaVR.vcxproj
++++ b/BayonettaVR.vcxproj
+@@ -44,6 +44,7 @@
+   <ItemGroup><ClInclude Include="src\Config.h"/><ClInclude Include="src\D3D9Hooks.h"/><ClInclude Include="src\Log.h"/><ClInclude Include="src\Matrix.h"/><ClInclude Include="src\VR.h"/></ItemGroup>
+   <ItemGroup><None Include="BayonettaVR.ini"/><None Include="README.md"/></ItemGroup>
+   <ItemGroup><ClInclude Include="src\TrackingMath.h"/></ItemGroup>
++  <ItemGroup><ClInclude Include="src\FloorCalibration.h"/></ItemGroup>
+   <ItemGroup><ClInclude Include="src\CameraCulling.h"/><ClCompile Include="src\CameraCulling.cpp"/></ItemGroup>
+   <ItemGroup><ClInclude Include="src\WorldHud.h"/></ItemGroup>
+   <ItemGroup><ClInclude Include="src\MenuPanel9.h"/><ClCompile Include="src\MenuPanel9.cpp"/></ItemGroup>
+diff --git a/README.md b/README.md
+index 022a380..4264861 100644
+--- a/README.md
++++ b/README.md
+@@ -3,6 +3,50 @@
+ Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
+ Bayonetta (executable timestamp `0x591AD330`).
+ 
++## Corrected floor calibration (build 20261011.56)
++
++Hold **L3+R3 for one second** on a player-one gamepad or both VR thumbsticks.
++Keep Bayonetta standing on ordinary flat ground and wear the headset at your
++normal playing height. F8 also calibrates. **Shift+F8 clears calibration** and
++restores the original camera/recenter behavior immediately. Startup keeps the
++original camera until calibration succeeds. `FloorCalibration=0` disables the
++feature; gamepad calibration is independent of Touch input emulation.
++
++Calibration uses the VR runtime's configured standing-space floor and the
++player's feet position. It levels game-camera pitch/roll and adjusts eye height
++without changing world scale. Subsequent game-camera vertical movement remains,
++so different terrain or camera elevation can need recalibration. The feet
++reference is not a terrain raycast: calibrate while grounded, not during a jump.
++Missing or invalid reference data preserves an existing calibration; before the
++first successful calibration it performs the original recenter instead.
++
++The .55 failure was a handedness error: the game uses a right-handed look-at and
++projection, and recovering its view through the mod's left-handed projection
++produces a reflected basis. Replacing that basis with a positive-determinant
++one reflected the whole scene, reversing horizontal directions and triangle
++winding. .56 preserves the basis sign and refuses any correction that would
++reflect, scale or otherwise violate an orthogonal camera transform.
++
++Regression tests execute the original Steam camera routines (`C5A160` and
++`C5A580`), resolving the game's actual D3DX and CRT imports. The GPU test
++reproduces .55's black/reversed image in all 18 stereo cases with face culling
++enabled, then verifies .56 against a separately constructed native-engine
++camera over 294,912 pixels. Another 3,150 cases cover both basis signs, head
++and camera tilt, height, scale, stereo, the physical floor plane and invalid
++input. Successful calibration logs both camera and correction determinants.
++This regression reproduces the reported failure; final comfort/floor alignment
++still needs a headset check. The archived .55 evidence remains in
++`.diagnostics/failed55-20261011-223721`.
++
++Release/Win32, the full regression suite and companion transport tests pass.
++Both .56 components are installed with existing settings preserved and
++`FloorCalibration=1`. Previous .54 files are saved under
++`.diagnostics/before56-20261011-224948`.
++Installed DLL SHA256:
++`C1787F59D8EE0FD5170CBA7E29CE4D6BABA2E34C2ED22779006ACF70212A82A1`.
++Installed companion SHA256:
++`3728BC1DB48C01FB9A554AE5737731976556EC295B6C711177320EBF7707EA6B`.
++
+ ## Camera visibility for native VR (build 20261011.54)
+ 
+ `FixCameraCulling=1` expands scene visibility around the game camera, so head
+diff --git a/src/CompanionHost.cpp b/src/CompanionHost.cpp
+index 22ab4fd..357af8a 100644
+--- a/src/CompanionHost.cpp
++++ b/src/CompanionHost.cpp
+@@ -23,7 +23,9 @@ struct Runtime {
+         vr::EVRInitError error{};init(&error,vr::VRApplication_Scene);if(error){printf("OpenVR init error=%d\n",int(error));return false;}
+         initialized=true;
+         system=static_cast<vr::IVRSystem*>(iface(vr::IVRSystem_Version,&error));
+-        compositor=static_cast<vr::IVRCompositor*>(iface(vr::IVRCompositor_Version,&error));return system&&compositor;
++        compositor=static_cast<vr::IVRCompositor*>(iface(vr::IVRCompositor_Version,&error));
++        if(compositor)compositor->SetTrackingSpace(vr::TrackingUniverseStanding);
++        return system&&compositor;
+     }
+ };
+ Mat4 Matrix(const vr::HmdMatrix34_t& pose){Mat4 m=Identity();for(int r=0;r<3;++r)for(int c=0;c<4;++c)m.m[r][c]=pose.m[r][c];return m;}
+@@ -52,7 +54,7 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
+     SharedFrameConsumer consumer;
+     TouchControllers controllers;
+     const bool controllerInput=!test&&GetPrivateProfileIntW(L"VR",L"VRControllers",1,(directory+L"\\BayonettaVR.ini").c_str())!=0;
+-    printf("controllers: build=20261010.41 enabled=%d; hold both sticks 1s to recenter; right System is runtime-reserved\n",controllerInput);
++    printf("controllers: build=20261011.56 enabled=%d; hold both sticks 1s to calibrate; standing tracking space\n",controllerInput);
+     // Shutdown OpenVR before releasing any textures it may still reference.
+     Runtime runtime;vr::IVRSystem* system=nullptr;vr::IVRCompositor* compositor=nullptr;
+     if(!test&&!runtime.Init(directory,system,compositor))return 1;
+diff --git a/src/Config.cpp b/src/Config.cpp
+index c1605d4..461ce57 100644
+--- a/src/Config.cpp
++++ b/src/Config.cpp
+@@ -55,6 +55,7 @@ void LoadConfig() {
+     Log("config: external compositor=%d", g_cfg.externalCompositor);
+     g_cfg.nativeStereo = ReadInt(path, L"NativeStereo", 1) != 0;
+     g_cfg.fixCameraCulling = ReadInt(path, L"FixCameraCulling", 1) != 0;
++    g_cfg.floorCalibration = ReadInt(path, L"FloorCalibration", 1) != 0;
+     Log("camera culling: FixCameraCulling=%d",g_cfg.fixCameraCulling);
+     g_cfg.forceHalfRate = ReadInt(path, L"ForceHalfRate", 0) != 0;
+     g_cfg.uncapPresent = ReadInt(path, L"UncapPresent", 1) != 0;
+@@ -88,7 +89,7 @@ void LoadConfig() {
+     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
+     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
+     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
+-    Log("config: build=20261011.54 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
++    Log("config: build=20261011.56 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
+         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
+         g_cfg.worldUnitsPerMetre,
+diff --git a/src/Config.h b/src/Config.h
+index 20dd3dd..c279079 100644
+--- a/src/Config.h
++++ b/src/Config.h
+@@ -15,6 +15,7 @@ struct Config {
+     bool externalCompositor = false;
+     bool nativeStereo = true;
+     bool fixCameraCulling = true;
++    bool floorCalibration = true;
+     bool forceHalfRate = false;
+     bool uncapPresent = true;
+     bool positionalTracking = true;
+diff --git a/src/ControllerHooks.cpp b/src/ControllerHooks.cpp
+index 0fff316..c115e6d 100644
+--- a/src/ControllerHooks.cpp
++++ b/src/ControllerHooks.cpp
+@@ -9,11 +9,16 @@ GetStateFn originalGet=nullptr;
+ SetStateFn originalSet=nullptr;
+ SRWLOCK inputLock=SRWLOCK_INIT;
+ XboxInputBridge bridge;
++RecenterHold gamepadHold;
++bool calibrationActive=false;
++constexpr WORD stickChord=XINPUT_GAMEPAD_LEFT_THUMB|XINPUT_GAMEPAD_RIGHT_THUMB;
+ DWORD WINAPI GetState(DWORD index,XINPUT_STATE* state) {
+     if(!state)return ERROR_BAD_ARGUMENTS;
+     const DWORD result=originalGet(index,state);
+     if(result!=ERROR_SUCCESS)*state={};
+     AcquireSRWLockExclusive(&inputLock);
++    if(index==0 && calibrationActive && (state->Gamepad.wButtons&stickChord)==stickChord)
++        state->Gamepad.wButtons&=~stickChord;
+     const bool supplied=bridge.Read(index,*state,result==ERROR_SUCCESS,GetTickCount64());
+     ReleaseSRWLockExclusive(&inputLock);
+     return supplied?ERROR_SUCCESS:result;
+@@ -38,6 +43,17 @@ template<class T> bool Patch(ULONG_PTR* slot,T hook,T& original) {
+ void UpdateControllerInput(const ControllerInput& input) {
+     AcquireSRWLockExclusive(&inputLock);bridge.Update(input);ReleaseSRWLockExclusive(&inputLock);
+ }
++bool PollGamepadRecenter(bool active,uint64_t now) {
++    // Call the unhooked export, so the consumed game buttons and virtual pad
++    // cannot hide a physical chord or produce duplicate Touch events.
++    XINPUT_STATE state{};
++    const bool connected=originalGet && originalGet(0,&state)==ERROR_SUCCESS;
++    AcquireSRWLockExclusive(&inputLock);
++    calibrationActive=active;
++    const bool fired=gamepadHold.Update(connected&&(state.Gamepad.wButtons&stickChord)==stickChord,
++        active&&connected,now);
++    ReleaseSRWLockExclusive(&inputLock);return fired;
++}
+ bool InstallControllerHooks() {
+     auto* base=reinterpret_cast<unsigned char*>(GetModuleHandleW(nullptr));
+     auto* dos=reinterpret_cast<IMAGE_DOS_HEADER*>(base);
+diff --git a/src/ControllerHooks.h b/src/ControllerHooks.h
+index 03a82f7..5d22dea 100644
+--- a/src/ControllerHooks.h
++++ b/src/ControllerHooks.h
+@@ -3,4 +3,5 @@
+ namespace bvr {
+ bool InstallControllerHooks();
+ void UpdateControllerInput(const ControllerInput& input);
++bool PollGamepadRecenter(bool active,uint64_t now);
+ }
+diff --git a/src/ControllerInput.h b/src/ControllerInput.h
+index 46bcaed..4029cac 100644
+--- a/src/ControllerInput.h
++++ b/src/ControllerInput.h
+@@ -6,6 +6,24 @@
+ #include <cstring>
+ 
+ namespace bvr {
++// Shared timing policy for real gamepads and Touch. Interruptions cannot
++// finish a previous hold; a held chord fires once until released.
++class RecenterHold {
++public:
++    bool Update(bool both,bool active,uint64_t now) {
++        if(!active || !both || (holding_&&(now<last_ || now-last_>250))) {
++            holding_=fired_=false;
++        }
++        last_=now;
++        if(!active || !both)return false;
++        if(!holding_){holding_=true;start_=now;}
++        if(!fired_&&now-start_>=1000){fired_=true;return true;}
++        return false;
++    }
++private:
++    uint64_t start_=0,last_=0;
++    bool holding_=false,fired_=false;
++};
+ struct TouchHand {
+     bool connected=false, primary=false, secondary=false, stickClick=false, system=false;
+     float x=0,y=0,trigger=0,grip=0;
+@@ -21,15 +39,12 @@ public:
+         ControllerInput output{};output.tick=now;output.recenterSequence=recenterSequence_;
+         output.connected=left.connected||right.connected;
+         output.active=output.connected&&focused;
+-        if(!output.active) {holdStart_=0;holding_=fired_=systemDown_=false;return output;}
++        if(!output.active) {hold_.Update(false,false,now);systemDown_=false;return output;}
+         const bool both=left.connected&&right.connected&&left.stickClick&&right.stickClick;
+         const bool system=right.connected&&right.system;
+         if(system&&!systemDown_)++recenterSequence_;
+         systemDown_=system;
+-        if(both) {
+-            if(!holding_){holding_=true;holdStart_=now;}
+-            if(!fired_&&now-holdStart_>=1000){++recenterSequence_;fired_=true;}
+-        } else {holding_=fired_=false;holdStart_=0;}
++        if(hold_.Update(both,true,now))++recenterSequence_;
+         output.recenterSequence=recenterSequence_;
+         auto& p=output.pad;
+         if(left.connected) {
+@@ -74,8 +89,9 @@ private:
+         if(x*x+y*y<.12f*.12f){outX=outY=0;return;}
+         outX=SHORT(x*(x<0?32768:32767));outY=SHORT(y*(y<0?32768:32767));
+     }
+-    uint64_t recenterSequence_=0,holdStart_=0;
+-    bool holding_=false,fired_=false,systemDown_=false;
++    uint64_t recenterSequence_=0;
++    RecenterHold hold_;
++    bool systemDown_=false;
+ };
+ // Called under the input hook's lock; monotonic packets describe the merged pad.
+ class XboxInputBridge {
+diff --git a/src/D3D9Hooks.cpp b/src/D3D9Hooks.cpp
+index b0da727..27ec618 100644
+--- a/src/D3D9Hooks.cpp
++++ b/src/D3D9Hooks.cpp
+@@ -1366,7 +1366,10 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
+             Log("soft particle depth: F1 comparison, correction %s",g_fixSoftParticleDepth?"ON":"OFF");
+         }
+     }
+-    if (pressed[1]) VR().Recenter();
++    if (pressed[1]) {
++        if(GetAsyncKeyState(VK_SHIFT)&0x8000)VR().ResetCalibration();
++        else VR().Recenter();
++    }
+     if (pressed[2]) VR().CycleStereoScale();
+     if (pressed[3]) VR().ToggleEyeSwap();
+     if (pressed[4]) VR().CycleProjectionMode();
+@@ -1720,7 +1723,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
+         primary->Release();
+     }
+     VR().Init();
+-    if(Cfg().enabled&&Cfg().vrControllers)InstallControllerHooks();
++    if(Cfg().enabled)InstallControllerHooks();
+     InstallNativeStereoHook();
+ }
+ 
+diff --git a/src/VR.cpp b/src/VR.cpp
+index f97a138..2d4ad4a 100644
+--- a/src/VR.cpp
++++ b/src/VR.cpp
+@@ -46,35 +46,44 @@ Mat4 ToGameCoordinates(const Mat4& v, float units) {
+ }
+ 
+ bool GetBayonettaProjection(Mat4& projection) {
+-    // BayoHook independently identifies 0x00F2DCE0 as the Steam build's live
+-    // row-vector view-projection matrix. For V*P, the lengths of columns 0 and
+-    // 1 (excluding translation) are the perspective X/Y scales because the
+-    // view rotation is orthonormal. This remains valid as the game's FOV
+-    // changes between gameplay and cutscenes.
+-    const auto* image = reinterpret_cast<const unsigned char*>(GetModuleHandleW(nullptr));
+-    if (!image) return false;
+-    constexpr uintptr_t viewProjectionRva = 0x00B2DCE0; // VA 0x00F2DCE0
+-    const float* m = reinterpret_cast<const float*>(image + viewProjectionRva);
+-    const float forwardSq = m[3] * m[3] + m[7] * m[7] + m[11] * m[11];
+-    const float forward = std::sqrt(forwardSq);
+-    const float x = std::sqrt(m[0] * m[0] + m[4] * m[4] + m[8] * m[8]);
+-    const float y = std::sqrt(m[1] * m[1] + m[5] * m[5] + m[9] * m[9]);
+-    const float depth = (m[2] * m[3] + m[6] * m[7] + m[10] * m[11]) /
+-                        forwardSq;
+-    const float depthOffset = m[14] - depth * m[15];
+-    if (!std::isfinite(x) || !std::isfinite(y) || !std::isfinite(forward) ||
+-        !std::isfinite(depth) || !std::isfinite(depthOffset) ||
+-        x < 0.05f || x > 20.0f || y < 0.05f || y > 20.0f ||
+-        forward < 0.5f || forward > 1.5f || std::fabs(depth) < 0.1f ||
+-        std::fabs(depth) > 10.0f || std::fabs(depthOffset) < 1e-6f ||
+-        std::fabs(depthOffset) > 10000.0f) return false;
+-    projection = {};
+-    projection.m[0][0] = x / forward;
+-    projection.m[1][1] = y / forward;
+-    projection.m[2][2] = depth;
+-    projection.m[2][3] = depthOffset;
+-    projection.m[3][2] = 1.0f;
+-    return true;
++    const auto* image=reinterpret_cast<const unsigned char*>(GetModuleHandleW(nullptr));
++    if(!image)return false;
++    Mat4 rowViewProjection{};
++    // BayoHook and the Steam camera getter identify this live row-vector V*P.
++    memcpy(&rowViewProjection,image+0xB2DCE0,sizeof(rowViewProjection));
++    return GameProjectionFromViewProjection(rowViewProjection,projection);
++}
++
++bool GetBayonettaCamera(const Mat4& projection,Mat4& camera) {
++    const auto* image=reinterpret_cast<const unsigned char*>(GetModuleHandleW(nullptr));
++    if(!image)return false;
++    Mat4 rowViewProjection{};memcpy(&rowViewProjection,image+0xB2DCE0,sizeof(rowViewProjection));
++    return RecoverGameCamera(projection,Transpose(rowViewProjection),camera);
++}
++
++bool GetGroundReference(float& groundY) {
++    // Steam player-one pointer and cObj translation, independently mapped by
++    // the bundled BayoHook SDK. This is a feet reference, not a terrain raycast:
++    // calibrate while the player is standing on ordinary ground.
++    const auto* image=reinterpret_cast<const unsigned char*>(GetModuleHandleW(nullptr));
++    if(!image)return false;
++    const auto* dos=reinterpret_cast<const IMAGE_DOS_HEADER*>(image);
++    if(dos->e_magic!=IMAGE_DOS_SIGNATURE)return false;
++    const auto* nt=reinterpret_cast<const IMAGE_NT_HEADERS*>(image+dos->e_lfanew);
++    if(nt->Signature!=IMAGE_NT_SIGNATURE || nt->FileHeader.TimeDateStamp!=0x591AD330 ||
++       nt->OptionalHeader.SizeOfImage<0x5760760)return false;
++    uintptr_t player=0;SIZE_T bytes=0;
++    const auto read=[&](const void* address,void* out,size_t size) {
++        return ReadProcessMemory(GetCurrentProcess(),address,out,size,&bytes)&&bytes==size;
++    };
++    if(!read(image+0x576075C,&player,sizeof(player)) || !player)return false;
++    float position[3]{};unsigned char walls=0;
++    if(!read(reinterpret_cast<const void*>(player+0xD0),position,sizeof(position)) ||
++       !read(reinterpret_cast<const void*>(player+0x95ED4),&walls,sizeof(walls)) || walls)return false;
++    // Do not use the SDK's guessed "aerial" field at +69C: the reference
++    // symbols identify it as cIKManager::m_flag, not a proven ground-contact flag.
++    for(float value:position)if(!std::isfinite(value)||std::fabs(value)>1e7f)return false;
++    groundY=position[1];return true;
+ }
+ }
+ 
+@@ -124,6 +133,7 @@ bool VRRuntime::Init() {
+         Shutdown();
+         return false;
+     }
++    compositor_->SetTrackingSpace(vr::TrackingUniverseStanding);
+     for (int i = 0; i < 2; ++i) {
+         const vr::EVREye e = i ? vr::Eye_Right : vr::Eye_Left;
+         eyeToHead_[i] = FromVR(system_->GetEyeToHeadTransform(e));
+@@ -181,6 +191,7 @@ bool VRRuntime::StartIndependentGrid() {
+ 
+ void VRRuntime::Shutdown() {
+     UpdateControllerInput({});
++    PollGamepadRecenter(false,GetTickCount64());
+     IndependentVRGrid().StopAndJoin();
+     if (external_) Companion().Stop();
+     if (system_ && g_shutdown) g_shutdown();
+@@ -190,15 +201,44 @@ void VRRuntime::Shutdown() {
+ }
+ 
+ void VRRuntime::Recenter() {
+-    origin_ = headPose_;
++    if(!poseValid_) {Log("calibration: tracking unavailable; keeping existing origin");return;}
++    if(!Cfg().floorCalibration){ResetCalibration();return;}
++    Mat4 level{};
++    if(!LevelPose(headPose_,level))return;
++    Mat4 projection{},camera{};float groundY=0;
++    const float headHeight=headPose_.m[1][3];
++    const bool calibrated=Cfg().floorCalibration && GetGroundReference(groundY) &&
++        GetBayonettaProjection(projection) && GetBayonettaCamera(projection,camera) &&
++        floorCalibration_.Calibrate(camera,groundY,headHeight,Cfg().worldUnitsPerMetre);
++    if(!calibrated && !floorCalibration_.Active()) {
++        ResetCalibration();
++        Log("calibration: floor reference unavailable; ordinary recenter only");return;
++    }
++    if(!calibrated) {
++        Log("calibration: floor reference unavailable; existing calibration and origin unchanged");return;
++    }
++    origin_ = level;
+     renderAnchor_ = origin_;
+     originValid_ = poseValid_;
+     ++renderRevision_;
+-    Log("vr: tracking origin recentered");
++    if(calibrated)Log("calibration: floor aligned; head=%.3fm gameGroundY=%.3f cameraY=%.3f offset=%.3f basisDet=%.3f correctionDet=%.3f",
++        headHeight,groundY,camera.m[1][3],floorCalibration_.HeightOffset(),BasisDeterminant(camera),
++        BasisDeterminant(floorCalibration_.Correction(camera)));
++    else Log("calibration: level heading/HUD recentered; floor %s (requires tracked floor and grounded player)",
++        floorCalibration_.Active()?"calibration preserved":"not calibrated");
++}
++
++void VRRuntime::ResetCalibration() {
++    if(!poseValid_)return;
++    floorCalibration_.Reset();origin_=headPose_;renderAnchor_=origin_;originValid_=true;
++    ++renderRevision_;
++    Log("calibration: cleared; original camera and recenter behavior restored");
+ }
+ 
+ void VRRuntime::EnsureOrigin() {
+-    if (!originValid_ && poseValid_) Recenter();
++    // Initial menu/cutscene draws cannot identify a gameplay floor. Explicit
++    // L3+R3/F8 calibration samples it once the player is on the ground.
++    if (!originValid_ && poseValid_)ResetCalibration();
+ }
+ 
+ void VRRuntime::CycleStereoScale() {
+@@ -274,11 +314,12 @@ void VRRuntime::LogPoseDiagnostic() const {
+ void VRRuntime::WaitForPose() {
+     if (external_) {
+         ipc::Control control{};
+-        if (!Companion().Poll(control)) { poseValid_=false;UpdateControllerInput({});return; }
++        if (!Companion().Poll(control)) { poseValid_=false;UpdateControllerInput({});ApplyGamepadCalibration();return; }
+         poseSample_=control.tracking.sample;
+         poseValid_=control.tracking.valid && GetTickCount64()-control.tracking.tick<250;
+         if(poseValid_)headPose_=FromVR(control.tracking.head);
+         ApplyControllers(control.controllers);
++        ApplyGamepadCalibration();
+         return;
+     }
+     if (!compositor_) return;
+@@ -291,6 +332,7 @@ void VRRuntime::WaitForPose() {
+     if (e != vr::VRCompositorError_None) {
+         poseValid_ = false;
+         UpdateControllerInput({});
++        ApplyGamepadCalibration();
+         Log("vr: WaitGetPoses error %d", static_cast<int>(e));
+         return;
+     }
+@@ -307,6 +349,14 @@ void VRRuntime::WaitForPose() {
+         ++renderRevision_;
+         ++anchorTurns_;
+     }
++    ApplyGamepadCalibration();
++}
++
++void VRRuntime::ApplyGamepadCalibration() {
++    DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
++    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),GetTickCount64())) {
++        Recenter();Log("controllers: physical gamepad L3+R3 calibration");
++    }
+ }
+ 
+ void VRRuntime::ApplyControllers(const ControllerInput& input) {
+@@ -368,8 +418,10 @@ Mat4 VRRuntime::ClipTransform(float gameAspect) const {
+     const float pi = 3.14159265358979323846f;
+     Mat4 gameProjection = PerspectiveFovLH(Cfg().gameVerticalFovDegrees * pi / 180.0f,
+                                            gameAspect, Cfg().nearClip, Cfg().farClip);
+-    Mat4 liveGameProjection{};
+-    if (GetBayonettaProjection(liveGameProjection)) {
++    Mat4 liveGameProjection{},camera{};
++    const bool calibrated=Cfg().floorCalibration && floorCalibration_.Active();
++    const bool live=GetBayonettaProjection(liveGameProjection);
++    if (live) {
+         gameProjection = liveGameProjection;
+         static float lastLoggedY = 0.0f;
+         if (std::fabs(gameProjection.m[1][1] - lastLoggedY) > 0.02f) {
+@@ -383,6 +435,7 @@ Mat4 VRRuntime::ClipTransform(float gameAspect) const {
+     }
+     Mat4 invGame{};
+     if (!Invert(gameProjection, invGame)) return Identity();
++    if(calibrated && live && GetBayonettaCamera(gameProjection,camera))invGame=Mul(floorCalibration_.Correction(camera),invGame);
+     // Existing clip = Pgame * modelView * vertex. Replace the camera/projection
+     // portion without needing Bayonetta's model or view matrices separately.
+     return EyeViewProjection(eye_, Cfg().worldUnitsPerMetre, invGame, &gameProjection);
+diff --git a/src/VR.h b/src/VR.h
+index fcd325e..418a734 100644
+--- a/src/VR.h
++++ b/src/VR.h
+@@ -5,6 +5,7 @@
+ #include <openvr.h>
+ #include <d3d11.h>
+ #include "ControllerInput.h"
++#include "FloorCalibration.h"
+ 
+ namespace bvr {
+ class VRRuntime {
+@@ -15,6 +16,7 @@ public:
+     void WaitForPose();
+     void PostPresentHandoff();
+     void Recenter();
++    void ResetCalibration();
+     void EnsureOrigin();
+     void CycleStereoScale();
+     void ToggleEyeSwap();
+@@ -44,6 +46,8 @@ public:
+ 
+ private:
+     void ApplyControllers(const ControllerInput& input);
++    void ApplyGamepadCalibration();
++    FloorCalibration floorCalibration_;
+     uint64_t controllerRecenterSequence_=0;
+     Mat4 EyeViewProjection(int eye, float units, const Mat4& input = Identity(),
+                            const Mat4* sceneProjection = nullptr) const;
+diff --git a/tests/build_checks.cmd b/tests/build_checks.cmd
+index 44717c6..5515891 100644
+--- a/tests/build_checks.cmd
++++ b/tests/build_checks.cmd
+@@ -30,6 +30,8 @@ call tests\build_map_cinema_checks.cmd
+ if errorlevel 1 exit /b 1
+ call tests\build_camera_culling_checks.cmd
+ if errorlevel 1 exit /b 1
++call tests\build_floor_calibration_checks.cmd
++if errorlevel 1 exit /b 1
+ cl /nologo /EHsc /std:c++17 /W4 /MT /Isrc tests\world_hud_tests.cpp /Fobuild\test\world_hud_tests.obj /Febuild\test\world_hud_tests.exe
+ if errorlevel 1 exit /b 1
+ build\test\world_hud_tests.exe
+diff --git a/tests/controller_input_tests.cpp b/tests/controller_input_tests.cpp
+index c2b3866..693f8e8 100644
+--- a/tests/controller_input_tests.cpp
++++ b/tests/controller_input_tests.cpp
+@@ -30,9 +30,11 @@ int main() {
+     Require(p.wButtons==(XINPUT_GAMEPAD_DPAD_LEFT|XINPUT_GAMEPAD_DPAD_UP)&&!p.sThumbRX&&!p.sThumbRY,"D-pad modifier consumes camera and bumpers");
+     l.grip=r.grip=0;l.stickClick=r.stickClick=true;
+     Require(mapper.Map(l,r,true,100).recenterSequence==0,"hold starts without recenter");
++    for(uint64_t t=200;t<=1000;t+=100)mapper.Map(l,r,true,t);
+     Require(mapper.Map(l,r,true,1099).recenterSequence==0,"one-second threshold");
+     input=mapper.Map(l,r,true,1100);
+     Require(input.recenterSequence==1&&!(input.pad.wButtons&(XINPUT_GAMEPAD_LEFT_THUMB|XINPUT_GAMEPAD_RIGHT_THUMB)),"one recenter consumes stick clicks");
++    for(uint64_t t=1200;t<5000;t+=100)mapper.Map(l,r,true,t);
+     Require(mapper.Map(l,r,true,5000).recenterSequence==1,"long hold does not repeat");
+     l.stickClick=r.stickClick=false;mapper.Map(l,r,true,5010);r.system=true;
+     Require(mapper.Map(l,r,true,5020).recenterSequence==2,"right System if runtime exposes it");
+@@ -41,6 +43,7 @@ int main() {
+     auto unfocused=mapper.Map(l,r,false,6100);
+     Require(!unfocused.active&&unfocused.connected&&!unfocused.pad.wButtons&&unfocused.recenterSequence==2,"focus loss releases buttons/cancels hold");
+     Require(mapper.Map(l,r,true,7000).recenterSequence==2,"focus return cannot complete old hold");
++    for(uint64_t t=7100;t<8000;t+=100)mapper.Map(l,r,true,t);
+     Require(mapper.Map(l,r,true,8000).recenterSequence==3,"new full hold after focus returns");
+     r.connected=false;input=mapper.Map(l,r,true,8100);
+     Require(input.connected&&!input.pad.sThumbRX&&!input.pad.bRightTrigger,"one hand disconnect clears that hand");
+@@ -59,5 +62,18 @@ int main() {
+     Require(!bridge.Read(0,state,false,351)&&!bridge.Read(0,state,false,99),"stale and invalid timestamps fail closed");
+     input.active=0;bridge.Update(input);state={};Require(bridge.Read(0,state,false,110)&&!state.Gamepad.wButtons,"dashboard supplies neutral releases");
+     input.connected=0;bridge.Update(input);Require(!bridge.Read(0,state,false,110),"disconnect returns to physical path");
++    RecenterHold physical;
++    Require(!physical.Update(true,true,0),"physical chord starts at tick zero");
++    for(uint64_t t=100;t<1000;t+=100)Require(!physical.Update(true,true,t),"physical hold waits");
++    Require(physical.Update(true,true,1000),"physical hold fires at one second");
++    Require(!physical.Update(true,true,1100),"physical hold does not repeat");
++    physical.Update(false,true,1200);physical.Update(true,true,1300);
++    Require(!physical.Update(true,true,2400),"missing polls cancel physical hold");
++    physical.Update(true,false,2500);
++    Require(!physical.Update(true,true,2600),"focus loss cancels physical hold");
++    for(uint64_t t=2700;t<3600;t+=100)physical.Update(true,true,t);
++    Require(physical.Update(true,true,3600),"physical chord rearms after interruption");
++    physical.Update(false,false,3700);
++    Require(!physical.Update(true,true,3800),"disconnect cancels physical hold");
+     printf("controller input: %d mapping, merge, focus, stale, disconnect and recenter checks passed\n",checks);
+ }

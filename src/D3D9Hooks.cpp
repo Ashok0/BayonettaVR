@@ -1720,7 +1720,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
         primary->Release();
     }
     VR().Init();
-    if(Cfg().enabled&&Cfg().vrControllers)InstallControllerHooks();
+    if(Cfg().enabled)InstallControllerHooks();
     InstallNativeStereoHook();
 }
 
