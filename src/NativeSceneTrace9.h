@@ -9,13 +9,13 @@
 #include <vector>
 
 namespace bvr {
-// Explicit F12 only. Records one eye/frame, with at most 16 small previews of
-// scene-card textures. No full-resolution scene/texture dumps or per-draw CPU
-// readbacks. Texture references are retained at use; all preview GPU draws
-// and readbacks happen after the stereo pair, outside engine draw callbacks.
+// Explicit F12 only. Records one eye/frame, at most 64 texture previews and
+// 2048 scene checkpoints. GPU checkpoints run at every scene draw boundary;
+// texture previews and all readbacks run after the pair. No full-resolution
+// dumps or per-draw CPU readbacks. Shader identities are capped at 256.
 class NativeSceneTrace9 {
     template<class T> static void Release(T*& p){if(p)p->Release();p=nullptr;}
-    struct Preview { IDirect3DSurface9* surface; unsigned draw; uintptr_t texture; };
+    struct Preview { IDirect3DSurface9* surface; unsigned draw; uintptr_t texture; bool scene=false; };
     struct Pending { IDirect3DTexture9* texture; unsigned draw; };
 public:
     using Disassemble=std::string(*)(const DWORD*);
@@ -23,14 +23,14 @@ public:
     bool Busy()const{return busy_;}
     bool Active()const{return file_ && !busy_;}
     bool Begin(IDirect3DDevice9* d,const wchar_t* directory,Disassemble disassemble){
-        Finish(nullptr);directory_=directory;disassemble_=disassemble;draws_=0;
+        Finish(nullptr);directory_=directory;disassemble_=disassemble;draws_=0;sceneSamples_=0;
         if(!CreateDirectoryW(directory,nullptr))return false;
         if(_wfopen_s(&file_,(directory_+L"\\draws.txt").c_str(),L"w"))return false;
         setvbuf(file_,nullptr,_IOFBF,65536);
-        fprintf(file_,"Native left-eye scene before HMD projection. Limits: 2048 draws, 16 previews at 256x144, 64 shader identities.\n");
+        fprintf(file_,"Native left-eye draw state before HMD projection; scene checkpoints include previous tracked draws. Limits: 2048 draws, 64 texture previews plus 2048 scene checkpoints at 256x144, 256 shader identities.\n");
         fprintf(file_,"Texture previews sample at stereo-pair end; render-target contents can differ from draw-time contents.\n");
         busy_=true;
-        const char shader[]="sampler2D s:register(s0);float4 ps(float2 uv:TEXCOORD0):COLOR{return float4(tex2D(s,uv).rgb,1);}";
+        const char shader[]="sampler2D s:register(s0);float4 mode:register(c0);float4 ps(float2 uv:TEXCOORD0):COLOR{float4 t=tex2D(s,uv);return float4(t.rgb*lerp(1,t.a,mode.x),1);}";
         ID3DBlob* blob=nullptr;
         HRESULT hr=D3DCompile(shader,sizeof(shader)-1,nullptr,nullptr,nullptr,"ps","ps_2_0",0,0,&blob,nullptr);
         if(SUCCEEDED(hr))hr=d->CreatePixelShader(static_cast<const DWORD*>(blob->GetBufferPointer()),&previewPS_);
@@ -56,7 +56,22 @@ public:
         fprintf(file_,"draw=%u primitives=%u vs=%08X ps=%08X matrix=c%d ortho=%d rt=%p %ux%u fmt=%u viewport=%u,%u,%u,%u depth=%u/%u blend=%u/%u/%u cull=%u\n",
             draw,primitives,vi,pi,matrixBase,orthographic,target,rt.Width,rt.Height,rt.Format,
             vp.X,vp.Y,vp.Width,vp.Height,z,zw,blend,src,dst,cull);
+        // Do not let early scenery exhaust the checkpoint budget before the
+        // late effect passes. One bounded GPU snapshot per draw; all CPU
+        // readbacks still run after the stereo pair, only on explicit F12.
+        const bool effect=!orthographic&&matrixBase==24;
+        if(sceneSamples_<2048&&target&&vp.Width>=640&&vp.Width>vp.Height) {
+            IDirect3DTexture9* scene=nullptr;
+            if(SUCCEEDED(target->GetContainer(__uuidof(IDirect3DTexture9),reinterpret_cast<void**>(&scene)))) {
+                ++sceneSamples_;PreviewTexture(d,scene,draw,true);Release(scene);
+            }
+        }
         Release(target);
+        float effectConstants[12]{};
+        if(effect&&SUCCEEDED(d->GetPixelShaderConstantF(184,effectConstants,3))) {
+            for(int i=0;i<3;++i)fprintf(file_,"pc%d %.9g %.9g %.9g %.9g\n",184+i,
+                effectConstants[i*4],effectConstants[i*4+1],effectConstants[i*4+2],effectConstants[i*4+3]);
+        }
         for(int row=0;row<4;++row)fprintf(file_,"m%d %.9g %.9g %.9g %.9g\n",row,
             original.m[row][0],original.m[row][1],original.m[row][2],original.m[row][3]);
         for(DWORD stage=0;stage<4;++stage){
@@ -68,7 +83,7 @@ public:
                 // Include orthographic cards too: not every cinematic layer
                 // uses the scene's perspective projection.
                 if(stage==0 && primitives<=4 && vp.Width>=640 && vp.Width>vp.Height && desc.Width>=128 && desc.Height>=64 &&
-                   !(desc.Usage&D3DUSAGE_DEPTHSTENCIL) && pending_.size()<16 && !previewed_.count(texture)) {
+                   !(desc.Usage&D3DUSAGE_DEPTHSTENCIL) && pending_.size()<64 && !previewed_.count(texture)) {
                     previewed_[texture]=true;tex->AddRef();pending_.push_back({tex,draw});
                     void* stack[10]{};const USHORT count=CaptureStackBackTrace(0,10,stack,nullptr);
                     fprintf(file_,"stack");for(USHORT i=0;i<count;++i)fprintf(file_," %p",stack[i]);fprintf(file_,"\n");
@@ -86,8 +101,8 @@ public:
             if(SUCCEEDED(d->CreateOffscreenPlainSurface(256,144,D3DFMT_A8R8G8B8,D3DPOOL_SYSTEMMEM,&read,nullptr))){
                 for(const auto& preview:previews_){
                     HRESULT hr=d->GetRenderTargetData(preview.surface,read);
-                    if(SUCCEEDED(hr))hr=SavePreview(read,preview.draw)?S_OK:E_FAIL;
-                    fprintf(file_,"preview draw=%u texture=%p status=%08lX\n",preview.draw,reinterpret_cast<void*>(preview.texture),hr);
+                    if(SUCCEEDED(hr))hr=SavePreview(read,preview.draw,preview.scene)?S_OK:E_FAIL;
+                    fprintf(file_,"preview draw=%u texture=%p scene=%d status=%08lX\n",preview.draw,reinterpret_cast<void*>(preview.texture),preview.scene,hr);
                     if(SUCCEEDED(hr))++saved;
                 }
             }
@@ -104,7 +119,7 @@ private:
     template<class T> uint32_t Shader(T* shader,const wchar_t* type){
         if(!shader)return 0;
         auto found=shaders_.find(shader);if(found!=shaders_.end())return found->second;
-        if(shaders_.size()>=64)return 0;
+        if(shaders_.size()>=256)return 0;
         UINT size=0;if(FAILED(shader->GetFunction(nullptr,&size)) || size<8 || size>65536)return 0;
         std::vector<DWORD> code((size+3)/4);if(FAILED(shader->GetFunction(code.data(),&size)))return 0;
         const auto crc=ShaderCrc32(code.data(),size);shaders_[shader]=crc;
@@ -114,7 +129,7 @@ private:
         }
         return crc;
     }
-    void PreviewTexture(IDirect3DDevice9* d,IDirect3DTexture9* texture,unsigned draw){
+    void PreviewTexture(IDirect3DDevice9* d,IDirect3DTexture9* texture,unsigned draw,bool scene=false){
         if(!state_ || !previewPS_)return;
         busy_=true;
         IDirect3DSurface9 *preview=nullptr,*target=nullptr,*depth=nullptr;
@@ -142,6 +157,10 @@ private:
             const D3DVIEWPORT9 previewViewport{0,0,256,144,0,1};
             if(SUCCEEDED(hr))hr=d->SetViewport(&previewViewport);
             d->SetVertexShader(nullptr);d->SetFVF(D3DFVF_XYZRHW|D3DFVF_TEX1);d->SetPixelShader(previewPS_);
+            // Reveal alpha-only effect textures, but preserve scene RGB even
+            // when the engine stores unrelated data in the target's alpha.
+            const float previewMode[4]{scene?0.f:1.f,0,0,0};
+            d->SetPixelShaderConstantF(0,previewMode,1);
             d->SetTexture(0,texture);d->SetStreamSourceFreq(0,1);
             d->SetSamplerState(0,D3DSAMP_MINFILTER,D3DTEXF_LINEAR);d->SetSamplerState(0,D3DSAMP_MAGFILTER,D3DTEXF_LINEAR);
             d->SetSamplerState(0,D3DSAMP_MIPFILTER,D3DTEXF_NONE);d->SetSamplerState(0,D3DSAMP_ADDRESSU,D3DTADDRESS_CLAMP);
@@ -158,14 +177,14 @@ private:
             for(DWORD slot=1;slot<targetCount;++slot)d->SetRenderTarget(slot,extraTargets[slot-1]);
             state_->Apply();d->SetViewport(&vp);d->SetScissorRect(&scissor);
         }
-        if(SUCCEEDED(hr)){previews_.push_back({preview,draw,reinterpret_cast<uintptr_t>(texture)});preview=nullptr;}
+        if(SUCCEEDED(hr)){previews_.push_back({preview,draw,reinterpret_cast<uintptr_t>(texture),scene});preview=nullptr;}
         else fprintf(file_,"preview setup draw=%u status=%08lX\n",draw,hr);
         for(auto& extra:extraTargets)Release(extra);
         Release(preview);Release(target);Release(depth);busy_=false;
     }
-    bool SavePreview(IDirect3DSurface9* surface,unsigned draw){
+    bool SavePreview(IDirect3DSurface9* surface,unsigned draw,bool scene){
         D3DLOCKED_RECT locked{};if(FAILED(surface->LockRect(&locked,nullptr,D3DLOCK_READONLY)))return false;
-        wchar_t name[64]{};swprintf_s(name,L"\\draw%04u_texture0.bmp",draw);FILE* out=nullptr;
+        wchar_t name[64]{};swprintf_s(name,L"\\draw%04u_%s.bmp",draw,scene?L"scene":L"texture0");FILE* out=nullptr;
         bool ok=!_wfopen_s(&out,(directory_+name).c_str(),L"wb");
         if(ok){
             BITMAPFILEHEADER file{};BITMAPINFOHEADER info{};info.biSize=sizeof(info);info.biWidth=256;info.biHeight=-144;
@@ -178,7 +197,7 @@ private:
         surface->UnlockRect();return ok;
     }
     FILE* file_=nullptr;std::wstring directory_;Disassemble disassemble_=nullptr;
-    bool busy_=false;unsigned draws_=0;
+    bool busy_=false;unsigned draws_=0,sceneSamples_=0;
     IDirect3DPixelShader9* previewPS_=nullptr;IDirect3DStateBlock9* state_=nullptr;
     std::vector<Preview> previews_;
     std::vector<Pending> pending_;

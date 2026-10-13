@@ -1,4 +1,6 @@
 @echo off
+call tests\build_practice_reflection_checks.cmd
+if errorlevel 1 exit /b 1
 setlocal
 call "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvars32.bat" >nul
 if errorlevel 1 exit /b 1

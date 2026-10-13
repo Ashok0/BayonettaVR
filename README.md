@@ -3,6 +3,72 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Confirmed red-streak fix (build 20261013.65)
+
+The user confirmed on **2026-10-13** that build **.65** fixes the red streaks
+that shifted with HMD movement in the maroon-background combat/practice areas.
+`DisablePracticeReflection=1` suppresses the red-tinted reflection card seen
+at draw 529 in both `20261013_000226_1` and `20261013_010557_1` captures.
+**Alt+F1** toggles suppression for comparison. This setting defaults on when
+absent from the INI; set it to `0` and restart to restore the original card.
+
+Matching requires the exact native `espshadershimmer.pso` shader (CRC32
+`DD5F8DF1`, 476 bytes), two primitives, the captured (.5,.2,.2,1) material,
+zero distortion with (-.5,-.5) offsets, the same 4x4 DXT5 texture in stages
+0 and 2, a viewport-sized reflection render texture in stage 1, and the
+captured depth/blend states. Only native VR scene draws are eligible. Ordinary
+particles, other shimmer materials, UI and flat movie composition pass through.
+No camera transforms, game shader objects or shader constants are modified.
+
+The native-shader GPU regression checks the captured signature, negative
+matches, state-block binding, reset, unchanged bytecode/constants and 8,192
+pixels with suppression on/off. Extract its fixture with
+`tools/extract_practice_reflection_fixture.py` and run
+`tests/build_practice_reflection_checks.cmd`.
+
+Release/Win32 and the full regression suite pass. Build .65 was installed
+with SHA256 verification; existing INI settings were preserved. The missing
+`DisablePracticeReflection` key uses the enabled default.
+
+The .64 capture completed, but color targets are standalone surfaces whose
+`GetContainer(IDirect3DTexture9)` fails; its scene checkpoints cover only the
+texture-backed depth pass (draws 173-343). Thus the reflection diagnosis uses
+the shader, matrix, material and texture evidence, not a claimed before/after
+color checkpoint. The capture and original eye images are preserved under
+`.diagnostics/streak64`.
+
+## Red-strip investigation (build 20261013.64, diagnostic only)
+
+The expanded .63 capture `BayonettaVR_scene_20261013_000226_1` contains all
+effect shader identities, but its sixteen scene checkpoints were exhausted
+by draw 269, before the main effect passes. The user reports that toggling
+the particle-depth correction with F1 makes no difference to the strip.
+Build .64 was diagnostic only; the subsequent .65 suppression is confirmed
+to fix the reported streaks, as documented above.
+
+F12 now saves a 256x144 GPU scene checkpoint before each eligible draw,
+up to the existing 2,048-draw cap. Readbacks still happen after the stereo
+pair. Texture previews are capped at 64 and multiply RGB by alpha to reveal
+alpha-only effects; scene previews preserve RGB regardless of target alpha.
+This explicit diagnostic can briefly pause rendering and save about 300 MB
+at the limit. It does no checkpoint work during ordinary play.
+
+Release/Win32 and the capture GPU regression pass. Tests cover the final
+draw checkpoint, both caps, alpha-only textures, scene RGB with zero alpha,
+and restoration of shader constants, bindings, MRT images and render state.
+
+## Startup display (build 20261012.63)
+
+The companion submits black frames while waiting for the first game frame,
+instead of automatically displaying the cyan test grid. **F5** still toggles
+the grid manually. The first game frame retains its compositor discontinuity
+flag when switching from the startup display. The expanded F12 diagnostic
+from .62 remains available; the red-streak fix is documented above in .65.
+
+Validation: Release/Win32 build, two-process GPU transport checks (including
+resize, device recreation, pose integrity and host lifecycle), and ten grid
+render/readback cases passed. Headset startup appearance awaits confirmation.
+
 ## Sepia/color-grading removal (build 20261012.61)
 
 `DisableColorGrading=1` removes the post-processing tint, desaturation and

@@ -54,7 +54,7 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
     SharedFrameConsumer consumer;
     TouchControllers controllers;
     const bool controllerInput=!test&&GetPrivateProfileIntW(L"VR",L"VRControllers",1,(directory+L"\\BayonettaVR.ini").c_str())!=0;
-    printf("controllers: build=20261012.61 enabled=%d; hold both sticks 1s to recenter heading; standing tracking space\n",controllerInput);
+    printf("controllers: build=20261013.65 enabled=%d; hold both sticks 1s to recenter heading; standing tracking space\n",controllerInput);
     // Shutdown OpenVR before releasing any textures it may still reference.
     Runtime runtime;vr::IVRSystem* system=nullptr;vr::IVRCompositor* compositor=nullptr;
     if(!test&&!runtime.Init(directory,system,compositor))return 1;
@@ -88,7 +88,7 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
     session.Data()->control.heartbeat=GetTickCount64();session.Unlock();
     printf("host ready parent alive, adapter=%d test=%d\n",calibration.adapter,test);
     uint64_t sample=0,pairs=0,received=0,failures=0,lastRevision[2]{},noFocus=0;
-    Mat4 origin=Identity(),flip=Identity();flip.m[2][2]=-1;bool originValid=false,wasGrid=true;
+    Mat4 origin=Identity(),flip=Identity();flip.m[2][2]=-1;bool originValid=false,wasFallback=true;
     ULONGLONG report=GetTickCount64();ipc::Control control{};
     while(WaitForSingleObject(parent,0)==WAIT_TIMEOUT){
         if(session.Read(control)&&control.stop)break;
@@ -121,27 +121,32 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
         if(!trackingValid){Sleep(10);continue;}
         const Mat4 head=Matrix(poses[0].mDeviceToAbsoluteTracking);
         if(!originValid){origin=head;originValid=true;}
-        const bool showGrid=control.grid!=0||!consumer.HasFrame();
+        const bool showGrid=control.grid!=0;
+        const bool useFallback=showGrid||!consumer.HasFrame();
         const unsigned slot=unsigned(pairs%4);
-        if(showGrid){
-            const float background[4]{0.004f,0.008f,0.045f,1};
+        if(useFallback){
+            // Submit black until the first game frame; the grid is opt-in via F5.
+            const float black[4]{0,0,0,1};
+            const float gridBackground[4]{0.004f,0.008f,0.045f,1};
             for(int e=0;e<2;++e){
-                auto clip=Mul(projections[e],Mul(InvertRigid(eyes[e]),Mul(InvertRigid(head),Mul(origin,flip))));
-                context->ClearRenderTargetView(gridTargets[e][slot].Get(),background);
-                if(FAILED(grid.Draw(device.Get(),context.Get(),gridTextures[e][slot].Get(),clip)))return 7;
+                context->ClearRenderTargetView(gridTargets[e][slot].Get(),showGrid?gridBackground:black);
+                if(showGrid){
+                    auto clip=Mul(projections[e],Mul(InvertRigid(eyes[e]),Mul(InvertRigid(head),Mul(origin,flip))));
+                    if(FAILED(grid.Draw(device.Get(),context.Get(),gridTextures[e][slot].Get(),clip)))return 7;
+                }
             }
             if(FAILED(FinishGpu(device.Get(),context.Get())))return 8;
         }
         bool submitted=true;
         for(int e=0;e<2;++e){
             vr::EVRCompositorError result;
-            if(showGrid){
+            if(useFallback){
                 vr::Texture_t texture{gridTextures[e][slot].Get(),vr::TextureType_DirectX,vr::ColorSpace_Gamma};
                 result=compositor->Submit(static_cast<vr::EVREye>(e),&texture);
             }else{
                 vr::VRTextureWithPose_t texture{};texture.handle=consumer.Eye(e);texture.eType=vr::TextureType_DirectX;
                 texture.eColorSpace=vr::ColorSpace_Gamma;texture.mDeviceToAbsoluteTracking=consumer.Frame().pose[e];
-                const bool discontinuity=wasGrid||lastRevision[e]!=consumer.Frame().revision[e];
+                const bool discontinuity=wasFallback||lastRevision[e]!=consumer.Frame().revision[e];
                 const auto flags=static_cast<vr::EVRSubmitFlags>(vr::Submit_TextureWithPose|(discontinuity?vr::Submit_FrameDiscontinuity:0));
                 result=compositor->Submit(static_cast<vr::EVREye>(e),&texture,nullptr,flags);
                 if(result==vr::VRCompositorError_None)lastRevision[e]=consumer.Frame().revision[e];
@@ -149,7 +154,7 @@ int Run(ipc::Session& session,HANDLE parent,DWORD parentId,const std::wstring& d
             if(result==vr::VRCompositorError_DoNotHaveFocus){submitted=false;++noFocus;continue;}
             if(result!=vr::VRCompositorError_None){printf("submit eye=%d error=%d\n",e,int(result));return 9;}
         }
-        wasGrid=showGrid;compositor->PostPresentHandoff();if(submitted)++pairs;
+        wasFallback=useFallback;compositor->PostPresentHandoff();if(submitted)++pairs;
         if(GetTickCount64()-report>=2000){
             printf("host pairs=%llu received=%llu sequence=%llu sample=%llu imageAge=%llums grid=%d noFocus=%llu\n",pairs,received,
                 consumer.Frame().sequence,consumer.Frame().sample,consumer.HasFrame()?GetTickCount64()-consumer.Frame().tick:0,showGrid,noFocus);

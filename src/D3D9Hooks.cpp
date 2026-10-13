@@ -20,6 +20,7 @@
 #include "MotionBlur.h"
 #include "AmbientOcclusion.h"
 #include "ColorGrading.h"
+#include "PracticeReflection.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
 #include <dxgi.h>
@@ -78,6 +79,8 @@ PixelShaderDrawFilter g_ambientOcclusionShader(IsAmbientOcclusionShader);
 bool g_disableAmbientOcclusion = true;
 PixelShaderDrawFilter g_colorGradingShader(IsColorGradingShader);
 bool g_disableColorGrading = true;
+PracticeReflectionFilter g_practiceReflection;
+bool g_disablePracticeReflection = true;
 SoftParticleDepth g_softParticleDepth;
 bool g_fixSoftParticleDepth = true;
 SetVSFn g_setVS = nullptr;
@@ -593,6 +596,13 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Cal
     if (g_capturingMenu >= 0) {
         RecordMenuDraw(device);
         return g_menuPanel.CaptureDraw(device, g_capturingMenu, call);
+    }
+    if(g_practiceReflection.ShouldSkip(device,primitiveCount,
+        Cfg().enabled && VR().Active() && g_insideNativeDraw && g_disablePracticeReflection)) {
+        static unsigned skipped[2]{};
+        auto& count=skipped[VR().Eye()];
+        if(++count<=2 || count%600==0)Log("practice reflection: eye=%d suppressed red reflection cards=%u",VR().Eye(),count);
+        return S_OK;
     }
     SoftParticleDepthScope softDepth(device,g_softParticleDepth,
         Cfg().enabled && VR().Active() && g_insideNativeDraw && g_fixSoftParticleDepth);
@@ -1364,7 +1374,10 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
     }
     if (pressed[0]) VR().ToggleCompositorPoseDiagnostic();
     if (pressed[9]) {
-        if((GetAsyncKeyState(VK_SHIFT)&0x8000)&&(GetAsyncKeyState(VK_CONTROL)&0x8000)) {
+        if(GetAsyncKeyState(VK_MENU)&0x8000) {
+            g_disablePracticeReflection=!g_disablePracticeReflection;
+            Log("practice reflection: Alt+F1 comparison, suppression %s",g_disablePracticeReflection?"ON":"OFF");
+        } else if((GetAsyncKeyState(VK_SHIFT)&0x8000)&&(GetAsyncKeyState(VK_CONTROL)&0x8000)) {
             g_disableColorGrading = !g_disableColorGrading;
             Log("color grading: Ctrl+Shift+F1 comparison, bypass %s",g_disableColorGrading?"ON":"OFF");
         } else if(GetAsyncKeyState(VK_SHIFT)&0x8000) {
@@ -1649,6 +1662,8 @@ HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDi
         const auto colorHash=g_colorGradingShader.Register(*out);
         if(colorHash)Log("color grading: identified original pixel shader %08X (object unchanged)",colorHash);
         const auto softHash=g_softParticleDepth.Register(*out);
+        const auto reflectionHash=g_practiceReflection.Register(*out);
+        if(reflectionHash)Log("practice reflection: identified original pixel shader %08X (object unchanged)",reflectionHash);
         if(softHash)Log("soft particle depth: identified original pixel shader %08X (object unchanged)",softHash);
     }
     return hr;
@@ -1711,6 +1726,8 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     g_disableAmbientOcclusion = Cfg().disableAmbientOcclusion;
     g_colorGradingShader.Reset();
     g_disableColorGrading = Cfg().disableColorGrading;
+    g_practiceReflection.Reset();
+    g_disablePracticeReflection = Cfg().disablePracticeReflection;
     g_device = device;
     g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
     void** v = *reinterpret_cast<void***>(device);
@@ -1761,6 +1778,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
+    g_practiceReflection.Reset();
     g_colorGradingShader.Reset();
     g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();

@@ -7,6 +7,7 @@ struct Config {
     bool disableMotionBlur = true;
     bool disableAmbientOcclusion = true;
     bool disableColorGrading = true;
+    bool disablePracticeReflection = true;
     bool fixSoftParticleDepth = true;
     bool worldLockedMovies = true;
     bool worldLockedMapSequence = true;
