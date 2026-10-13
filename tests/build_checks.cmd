@@ -18,6 +18,8 @@ call tests\build_dof_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_ambient_occlusion_checks.cmd
 if errorlevel 1 exit /b 1
+call tests\build_color_grading_checks.cmd
+if errorlevel 1 exit /b 1
 call tests\build_soft_particle_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_movie_checks.cmd

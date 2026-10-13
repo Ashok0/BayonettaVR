@@ -3,6 +3,35 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Sepia/color-grading removal (build 20261012.61)
+
+`DisableColorGrading=1` removes the post-processing tint, desaturation and
+additive color haze. Press **Ctrl+Shift+F1** while playing to compare with
+the original grading. Set the INI option to `0` and restart to keep the
+original look by default.
+
+The bypass recognizes only the exact Steam `filter00.pso` (CRC32 `6E722DE9`,
+760 bytes) and `filter04.pso` (`373A4BB7`, 500 bytes). During their draws it
+neutralizes the RGB components of constants c184-c186, then restores them.
+The tone-table lookup, native alpha, blend state and game-owned shaders
+remain intact. This removes special-effect color tints that use these same
+grading controls too; baked texture colors and video colors are unaffected.
+
+`tests/build_color_grading_checks.cmd` runs both native shaders on the GPU:
+24 cases / 24,576 pixels check tone-only RGB, exact alpha preservation,
+nonlinear tone curves, both eye inputs, toggle restoration, state-block
+bindings, reset, exact fingerprints and unchanged shader bytecode.
+This source build is based on the current .57 checkout.
+Release/Win32 and the full regression suite pass. Installed with
+`DisableColorGrading=1`; existing settings were preserved. The replaced .60
+binaries, INI and log are in `.diagnostics/before61-20261012-225512`.
+The installed files match the tested build:
+
+- d3d9.dll SHA256: `9C3A4208BCAB08CDEA78918FA1E1953A48238C63011AC171ECC3FC4B8FBD96B2`
+- BayonettaVRHost.exe SHA256: `3DC596C0A1B481F6ACA54A09A7AD2EA8DBA0D1B89A84C579EB3134169A3C2E12`
+
+The final appearance in the headset remains to be checked in-game.
+
 ## Level headset recentering (build 20261011.57)
 
 Hold **L3+R3 for one second** on the gamepad or both VR thumbsticks to reset

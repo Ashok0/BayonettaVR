@@ -38,6 +38,8 @@ void LoadConfig() {
     g_cfg.disableDepthOfField = ReadInt(path, L"DisableDepthOfField", 1) != 0;
     g_cfg.disableMotionBlur = ReadInt(path, L"DisableMotionBlur", 1) != 0;
     g_cfg.disableAmbientOcclusion = ReadInt(path, L"DisableAmbientOcclusion", 1) != 0;
+    g_cfg.disableColorGrading = ReadInt(path, L"DisableColorGrading", 1) != 0;
+    Log("color grading: DisableColorGrading=%d (Ctrl+Shift+F1 toggles tint/desaturation/haze bypass)",g_cfg.disableColorGrading);
     g_cfg.fixSoftParticleDepth = ReadInt(path, L"FixSoftParticleDepth", 1) != 0;
     g_cfg.worldLockedMovies = ReadInt(path, L"WorldLockedMovies", 1) != 0;
     g_cfg.worldLockedMapSequence = ReadInt(path, L"WorldLockedMapSequence", 1) != 0;
@@ -88,7 +90,7 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20261011.57 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+    Log("config: build=20261012.61 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,

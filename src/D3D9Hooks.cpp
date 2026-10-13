@@ -19,6 +19,7 @@
 #include "DepthOfField.h"
 #include "MotionBlur.h"
 #include "AmbientOcclusion.h"
+#include "ColorGrading.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
 #include <dxgi.h>
@@ -75,6 +76,8 @@ PixelShaderDrawFilter g_motionBlurFilter(IsMotionBlurShader);
 bool g_disableMotionBlur = true;
 PixelShaderDrawFilter g_ambientOcclusionShader(IsAmbientOcclusionShader);
 bool g_disableAmbientOcclusion = true;
+PixelShaderDrawFilter g_colorGradingShader(IsColorGradingShader);
+bool g_disableColorGrading = true;
 SoftParticleDepth g_softParticleDepth;
 bool g_fixSoftParticleDepth = true;
 SetVSFn g_setVS = nullptr;
@@ -560,6 +563,12 @@ bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
 template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Call&& call) {
     if(g_nativeSceneTrace.Busy() || g_mapCinema.Busy())return call();
+    ColorGradingBypass colorGrade(device,g_colorGradingShader.ShouldSkip(device,
+        Cfg().enabled&&VR().Active()&&g_disableColorGrading));
+    if(colorGrade.Active()) {
+        static unsigned draws=0;
+        if(++draws<=4||draws%3600==0)Log("color grading: tint/desaturation/haze bypass active, draws=%u",draws);
+    }
     if(g_insideNativeDraw && VR().Eye()==0 && Cfg().worldLockedMapSequence &&
        !g_compositingMenu && !g_capturingMovie && g_capturingMenu<0)
         g_mapCinema.Observe(device,primitiveCount);
@@ -1355,7 +1364,10 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
     }
     if (pressed[0]) VR().ToggleCompositorPoseDiagnostic();
     if (pressed[9]) {
-        if(GetAsyncKeyState(VK_SHIFT)&0x8000) {
+        if((GetAsyncKeyState(VK_SHIFT)&0x8000)&&(GetAsyncKeyState(VK_CONTROL)&0x8000)) {
+            g_disableColorGrading = !g_disableColorGrading;
+            Log("color grading: Ctrl+Shift+F1 comparison, bypass %s",g_disableColorGrading?"ON":"OFF");
+        } else if(GetAsyncKeyState(VK_SHIFT)&0x8000) {
             g_disableMotionBlur = !g_disableMotionBlur;
             Log("motion blur: Shift+F1 comparison, suppression %s",g_disableMotionBlur?"ON":"OFF");
         } else if(GetAsyncKeyState(VK_CONTROL)&0x8000) {
@@ -1634,6 +1646,8 @@ HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDi
         if(motionHash)Log("motion blur: identified original pixel shader %08X (object unchanged)",motionHash);
         const auto aoHash=g_ambientOcclusionShader.Register(*out);
         if(aoHash)Log("ambient shadows: identified original pixel shader %08X (object unchanged)",aoHash);
+        const auto colorHash=g_colorGradingShader.Register(*out);
+        if(colorHash)Log("color grading: identified original pixel shader %08X (object unchanged)",colorHash);
         const auto softHash=g_softParticleDepth.Register(*out);
         if(softHash)Log("soft particle depth: identified original pixel shader %08X (object unchanged)",softHash);
     }
@@ -1695,6 +1709,8 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     g_disableMotionBlur = Cfg().disableMotionBlur;
     g_ambientOcclusionShader.Reset();
     g_disableAmbientOcclusion = Cfg().disableAmbientOcclusion;
+    g_colorGradingShader.Reset();
+    g_disableColorGrading = Cfg().disableColorGrading;
     g_device = device;
     g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
     void** v = *reinterpret_cast<void***>(device);
@@ -1745,6 +1761,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
+    g_colorGradingShader.Reset();
     g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();
     g_ambientOcclusionShader.Reset();
