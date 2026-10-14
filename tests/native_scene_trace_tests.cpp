@@ -72,20 +72,27 @@ int main(){
         Require(vp.Width==640 && vp.Height==360 && !memcmp(&rect,&scissor,sizeof(rect)) && enabled && cull==D3DCULL_CW && fvf==(D3DFVF_XYZRHW|D3DFVF_DIFFUSE),"viewport/scissor/cull/vertex layout restored");
     }
     // Late draws must keep their checkpoints, then stop at the hard draw cap.
-    for(unsigned i=70;i<2100;++i)trace.Record(d.Get(),2,24,Identity(),false);
-    Require(trace.Finish(d.Get())==2112,"64 textures plus 2048 scene checkpoints within engine-owned scene");Check(d->EndScene());
+    for(unsigned i=70;i<2100;++i){
+        if(i>=2048)Check(d->ColorFill(target.Get(),nullptr,0x00400000+i));
+        trace.Record(d.Get(),2,24,Identity(),false);
+    }
+    const D3DVIEWPORT9 tiny{0,0,8,8,0,1};Check(d->SetViewport(&tiny));
+    for(unsigned i=2100;i<NativeSceneTrace9::DrawLimit+10;++i)trace.Record(d.Get(),2,24,Identity(),false);
+    Require(trace.Finish(d.Get())==576,"64 textures plus last 512 scene checkpoints within engine-owned scene");Check(d->EndScene());
     Require(!trace.Active() && !trace.Busy(),"trace disarmed after one frame");
     Check(d->GetRenderTargetData(target.Get(),read.Get()));D3DLOCKED_RECT locked{};Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY));
-    for(int y=0;y<360;++y)for(int x=0;x<640;++x)Require(reinterpret_cast<DWORD*>(static_cast<char*>(locked.pBits)+y*locked.Pitch)[x]==0x00405060,"scene image and zero alpha unchanged");
+    for(int y=0;y<360;++y)for(int x=0;x<640;++x)Require(reinterpret_cast<DWORD*>(static_cast<char*>(locked.pBits)+y*locked.Pitch)[x]==0x00400000+2099,"scene image and zero alpha unchanged");
     Check(read->UnlockRect());
     Check(d->GetRenderTargetData(secondary.Get(),read.Get()));Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY));
     for(int y=0;y<360;++y)for(int x=0;x<640;++x)Require(reinterpret_cast<DWORD*>(static_cast<char*>(locked.pBits)+y*locked.Pitch)[x]==0xff405060,"secondary scene image unchanged");
     Check(read->UnlockRect());
     std::ifstream metadata(path/L"draws.txt");const std::string text((std::istreambuf_iterator<char>(metadata)),{});
-    Require(text.find("end draws=2048 savedPreviews=2112")!=std::string::npos,"metadata draw cap and completion");
+    Require(text.find("end draws=16384 savedPreviews=576")!=std::string::npos,"expanded metadata draw cap and completion");
+    Require(text.find("draw=16385 ")==std::string::npos,"metadata hard cap enforced");
     Require(std::filesystem::exists(path/L"draw0001_texture0.bmp"),"orthographic card preview included");
-    Require(std::filesystem::exists(path/L"draw2048_scene.bmp"),"late scene draw captured");
-    Require(!std::filesystem::exists(path/L"draw2049_scene.bmp"),"scene draw cap enforced");
+    Require(std::filesystem::exists(path/L"draw2100_scene.bmp"),"scene beyond old 2048 limit captured");
+    Require(std::filesystem::exists(path/L"draw1589_scene.bmp"),"oldest retained ring entry");
+    Require(!std::filesystem::exists(path/L"draw1588_scene.bmp"),"earlier checkpoints evicted to bound GPU memory");
     Require(!std::filesystem::exists(path/L"draw0065_texture0.bmp"),"texture preview cap enforced");
     unsigned previews=0;
     for(const auto& entry:std::filesystem::directory_iterator(path))if(entry.path().extension()==L".bmp"){
@@ -94,9 +101,11 @@ int main(){
         Require(info.biWidth==256 && info.biHeight==-144 && file.bfSize==256*144*4+54,"small preview dimensions");
         const bool scene=entry.path().filename().wstring().find(L"_scene")!=std::wstring::npos;
         const bool transparent=entry.path().filename()==L"draw0064_texture0.bmp";
-        Require(scene?pixel==0xff405060:transparent?pixel==0xff000000:(pixel&0xffff00)==0x113300,"scene RGB ignores alpha; texture RGB includes alpha");++previews;
+        const unsigned draw=unsigned(std::stoul(entry.path().filename().wstring().substr(4)));
+        const DWORD expectedScene=draw>2048?0xff400000+draw-1:0xff405060;
+        Require(scene?pixel==expectedScene:transparent?pixel==0xff000000:(pixel&0xffff00)==0x113300,"ring preserves each draw's own pixels; scene RGB ignores alpha; texture RGB includes alpha");++previews;
     }
-    Require(previews==2112,"preview file count");trace.Finish(nullptr);
+    Require(previews==576,"preview file count");trace.Finish(nullptr);
     // The real room's color target is NOT texture-backed. Preserve both
     // checkpoints at use inside BeginScene, before the same surface changes.
     ComPtr<IDirect3DSurface9> standalone;
@@ -128,5 +137,5 @@ int main(){
     Require(extra.find("cube5=")!=std::string::npos&&extra.find("texture12=")!=std::string::npos,"cube and higher sampler slots recorded");
     Require(extra.find("vc12 48 49 50 51")!=std::string::npos&&extra.find("pc40 100 101 102 103")!=std::string::npos,"view and material constants recorded");
     DestroyWindow(window);
-    printf("native scene trace: 2048 draw cap, 64 texture and 2048 scene checkpoints, texture alpha visibility, scene RGB, both MRT images/bindings and scene/depth/texture/viewport/scissor/layout/constants preserved; explicit arm/disarm passed\n");
+    printf("native scene trace: 16384 draw cap, 64 texture previews and last 512 scene checkpoints, post-2048 capture/ring eviction, texture alpha visibility, scene RGB, both MRT images/bindings and scene/depth/texture/viewport/scissor/layout/constants preserved; explicit arm/disarm passed\n");
 }

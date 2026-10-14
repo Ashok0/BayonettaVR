@@ -23,6 +23,7 @@
 #include "PracticeReflection.h"
 #include "ReflectionCamera.h"
 #include "MaterialTextureCamera.h"
+#include "LiveFilmScene9.h"
 #include "FirstPerson.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
@@ -86,6 +87,7 @@ PracticeReflectionFilter g_practiceReflection;
 bool g_disablePracticeReflection = true;
 bool g_fixReflectionCamera = true;
 MaterialTextureCamera g_materialTextureCamera;
+LiveFilmScene9 g_liveFilmScene;
 SoftParticleDepth g_softParticleDepth;
 bool g_fixSoftParticleDepth = true;
 SetVSFn g_setVS = nullptr;
@@ -105,6 +107,7 @@ struct ShaderInfo {
     int matrixBase = -1;
     bool reflectionCamera = false;
     bool materialTextureCamera = false;
+    FilmVertex filmVertex = FilmVertex::None;
     unsigned long long draws = 0;
     unsigned long long hudDraws = 0;
     std::string assembly;
@@ -572,7 +575,7 @@ bool IsHudDraw(IDirect3DDevice9* device, const D3DVIEWPORT9& viewport) {
 
 template<class Call>
 HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Call&& call) {
-    if(g_nativeSceneTrace.Busy() || g_mapCinema.Busy())return call();
+    if(g_nativeSceneTrace.Busy() || g_mapCinema.Busy() || g_liveFilmScene.Busy())return call();
     ColorGradingBypass colorGrade(device,g_colorGradingShader.ShouldSkip(device,
         Cfg().enabled&&VR().Active()&&g_disableColorGrading));
     if(colorGrade.Active()) {
@@ -653,6 +656,14 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Cal
     const bool orthographic = LooksOrthographic(original);
     if(g_insideNativeDraw && VR().Eye()==0 && g_nativeSceneTrace.Active())
         g_nativeSceneTrace.Record(device,primitiveCount,base,original,orthographic);
+    if(g_liveFilmScene.Handle(device,base,original,shaderInfo?shaderInfo->filmVertex:FilmVertex::None,
+        Cfg().enabled&&Cfg().nativeStereo&&g_insideNativeDraw)) {
+        if(shaderInfo->filmVertex==FilmVertex::Card){
+            static unsigned frames[2]{};auto& count=frames[VR().Eye()];
+            if(++count<=2||count%600==0)Log("live film: eye=%d restored native stereo scene; film presentation bypassed=%u",VR().Eye(),count);
+        }
+        return S_OK;
+    }
     if(g_materialTextureCamera.UsesNativeCamera(device,original,base,
         shaderInfo&&shaderInfo->materialTextureCamera,
         Cfg().enabled&&g_insideNativeDraw&&g_fixReflectionCamera)) {
@@ -1206,6 +1217,7 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     g_pipeline.poseReady = PipelineSeconds();
     g_clipCacheCount[0] = g_clipCacheCount[1] = 0;
     g_menuPanel.BeginFrame();
+    g_liveFilmScene.BeginEye();
     g_moviePanel.BeginFrame();
     g_mapCinema.BeginFrame();
     g_movieCaptureFailed=false;
@@ -1272,10 +1284,12 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
         else {
             left = independent ? E_PENDING : CaptureEye(g_device, 0);
             VR().SetEye(1);
+            g_liveFilmScene.BeginEye();
             g_otDraw(self);
             right = independent ? E_PENDING : CaptureEye(g_device, 1);
         }
     }
+    g_liveFilmScene.BeginEye(); // Never retain a scene or target into another pair.
     const bool wasMap=g_mapCinema.Active();g_mapCinema.EndFrame();
     if(g_mapCinema.Samples()!=mapSamples)Log("map cinema: sampled=%u lastCRC=%08X expected=%08X",g_mapCinema.Samples()-mapSamples,g_mapCinema.LastHash(),MapCinema9::MapFingerprint);
     if(wasMap!=g_mapCinema.Active())Log("map cinema: exact map texture %s",g_mapCinema.Active()?"recognized; original composition on fixed screen":"absent; returning to native stereo");
@@ -1665,6 +1679,7 @@ void UncapPresentation(D3DPRESENT_PARAMETERS* parameters) {
 }
 
 HRESULT STDMETHODCALLTYPE HookReset(IDirect3DDevice9* d, D3DPRESENT_PARAMETERS* p) {
+    g_liveFilmScene.ReleaseResources();
     g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.ReleaseReplacement();
     g_effectStreams.Reset();
@@ -1689,6 +1704,7 @@ HRESULT STDMETHODCALLTYPE HookCreateVS(IDirect3DDevice9* d,const DWORD* code,IDi
             if(SUCCEEDED((*out)->GetFunction(bytes.data(),&byteCount))) {
                 info.reflectionCamera=IsReflectionCameraShader(ShaderCrc32(bytes.data(),byteCount),byteCount);
                 info.materialTextureCamera=IsMaterialTextureVertex(ShaderCrc32(bytes.data(),byteCount),byteCount);
+                info.filmVertex=LiveFilmVertex(ShaderCrc32(bytes.data(),byteCount),byteCount);
             }
         }
         if(info.reflectionCamera)Log("reflection camera: recognized native vertex shader %p, per-eye camera c12-c14",*out);
@@ -1712,6 +1728,7 @@ HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDi
         const auto softHash=g_softParticleDepth.Register(*out);
         const auto reflectionHash=g_practiceReflection.Register(*out);
         g_materialTextureCamera.Register(*out);
+        g_liveFilmScene.Register(*out);
         if(reflectionHash)Log("practice reflection: identified original pixel shader %08X (object unchanged)",reflectionHash);
         if(softHash)Log("soft particle depth: identified original pixel shader %08X (object unchanged)",softHash);
     }
@@ -1746,7 +1763,7 @@ HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE 
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     return PresentOnce(d, [&]{ return g_presentEx(d,a,b,c,e,f); });
 }
-HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();g_softParticleDepth.ReleaseReplacement();g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
+HRESULT STDMETHODCALLTYPE HookResetEx(IDirect3DDevice9Ex*d,D3DPRESENT_PARAMETERS*p,D3DDISPLAYMODEEX*m){g_liveFilmScene.ReleaseResources();g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();g_softParticleDepth.ReleaseReplacement();g_effectStreams.Reset();g_menuPanel.Reset();ReleaseTextures();UncapPresentation(p);return g_resetEx(d,p,m);}
 HRESULT STDMETHODCALLTYPE HookSwapPresent(IDirect3DSwapChain9* swap,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {
     IDirect3DDevice9* device = nullptr;
     if (SUCCEEDED(swap->GetDevice(&device)) && device) {
@@ -1765,6 +1782,7 @@ void HookSwapChain(IDirect3DSwapChain9* swap) {
 }
 
 void HookDevice(IDirect3DDevice9Ex* device) {
+    g_liveFilmScene.Reset();
     g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();
     g_fixSoftParticleDepth = Cfg().fixSoftParticleDepth;
@@ -1828,6 +1846,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 }
 
 void ShutdownD3D() {
+    g_liveFilmScene.Reset();
     g_practiceReflection.Reset();
     g_materialTextureCamera.Reset();
     g_colorGradingShader.Reset();

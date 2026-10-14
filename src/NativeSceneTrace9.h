@@ -10,7 +10,7 @@
 
 namespace bvr {
 // Explicit F12 only. Records one eye/frame, at most 64 texture previews and
-// 2048 scene checkpoints. GPU checkpoints run at every scene draw boundary;
+// a rolling tail of 512 scene checkpoints. GPU copies run at draw boundaries;
 // texture previews and all readbacks run after the pair. No full-resolution
 // dumps or per-draw CPU readbacks. Shader identities are capped at 256.
 class NativeSceneTrace9 {
@@ -18,6 +18,7 @@ class NativeSceneTrace9 {
     struct Preview { IDirect3DSurface9* surface; unsigned draw; uintptr_t texture; bool scene=false; };
     struct Pending { IDirect3DTexture9* texture; unsigned draw; };
 public:
+    static constexpr unsigned DrawLimit=16384, SceneLimit=512;
     using Disassemble=std::string(*)(const DWORD*);
     ~NativeSceneTrace9(){Finish(nullptr);}
     bool Busy()const{return busy_;}
@@ -27,7 +28,7 @@ public:
         if(!CreateDirectoryW(directory,nullptr))return false;
         if(_wfopen_s(&file_,(directory_+L"\\draws.txt").c_str(),L"w"))return false;
         setvbuf(file_,nullptr,_IOFBF,65536);
-        fprintf(file_,"Native left-eye draw state before HMD projection; scene checkpoints include previous tracked draws. Limits: 2048 draws, 64 texture previews plus 2048 scene checkpoints at 256x144, 256 shader identities.\n");
+        fprintf(file_,"Native left-eye draw state before HMD projection; scene checkpoints include previous tracked draws. Limits: 16384 draws, 64 texture previews plus last 512 scene checkpoints at 256x144, 256 shader identities.\n");
         fprintf(file_,"Texture previews sample at stereo-pair end; render-target contents can differ from draw-time contents.\n");
         busy_=true;
         const char shader[]="sampler2D s:register(s0);float4 mode:register(c0);float4 ps(float2 uv:TEXCOORD0):COLOR{float4 t=tex2D(s,uv);return float4(t.rgb*lerp(1,t.a,mode.x),1);}";
@@ -41,7 +42,7 @@ public:
         return true; // A failed preview setup still permits the metadata trace.
     }
     void Record(IDirect3DDevice9* d,UINT primitives,int matrixBase,const Mat4& original,bool orthographic){
-        if(!Active() || draws_>=2048)return;
+        if(!Active() || draws_>=DrawLimit)return;
         const unsigned draw=++draws_;
         IDirect3DVertexShader9* vs=nullptr;IDirect3DPixelShader9* ps=nullptr;
         d->GetVertexShader(&vs);d->GetPixelShader(&ps);
@@ -56,16 +57,15 @@ public:
         fprintf(file_,"draw=%u primitives=%u vs=%08X ps=%08X matrix=c%d ortho=%d rt=%p %ux%u fmt=%u viewport=%u,%u,%u,%u depth=%u/%u blend=%u/%u/%u cull=%u\n",
             draw,primitives,vi,pi,matrixBase,orthographic,target,rt.Width,rt.Height,rt.Format,
             vp.X,vp.Y,vp.Width,vp.Height,z,zw,blend,src,dst,cull);
-        // Do not let early scenery exhaust the checkpoint budget before the
-        // late effect passes. One bounded GPU snapshot per draw; all CPU
-        // readbacks still run after the stereo pair, only on explicit F12.
+        // Retain the tail: shadow/depth passes can exceed thousands of draws
+        // before a live film strip is composed. Reuse a bounded surface ring.
         const bool effect=!orthographic&&matrixBase==24;
-        if(sceneSamples_<2048&&target&&vp.Width>=640&&vp.Width>vp.Height) {
+        if(target&&vp.Width>=640&&vp.Width>vp.Height) {
             IDirect3DTexture9* scene=nullptr;
             if(SUCCEEDED(target->GetContainer(__uuidof(IDirect3DTexture9),reinterpret_cast<void**>(&scene)))) {
-                ++sceneSamples_;PreviewTexture(d,scene,draw,true);Release(scene);
+                PreviewTexture(d,scene,draw,true);Release(scene);
             } else if(rt.Format==D3DFMT_A8R8G8B8||rt.Format==D3DFMT_X8R8G8B8) {
-                ++sceneSamples_;PreviewSurface(d,target,draw);
+                PreviewSurface(d,target,draw);
             }
         }
         Release(target);
@@ -127,15 +127,29 @@ public:
         busy_=false;return saved;
     }
 private:
+    HRESULT AcquirePreview(IDirect3DDevice9* d,bool scene,IDirect3DSurface9** out){
+        // Texture previews are appended only at Finish, after scene sampling.
+        if(scene && sceneSamples_>=SceneLimit){
+            *out=previews_[sceneSamples_%SceneLimit].surface;(*out)->AddRef();return S_OK;
+        }
+        return d->CreateRenderTarget(256,144,D3DFMT_A8R8G8B8,D3DMULTISAMPLE_NONE,0,FALSE,out,nullptr);
+    }
+    void KeepPreview(IDirect3DSurface9* surface,unsigned draw,uintptr_t source,bool scene){
+        const Preview value{surface,draw,source,scene};
+        if(scene && sceneSamples_>=SceneLimit){
+            auto& slot=previews_[sceneSamples_%SceneLimit];Release(slot.surface);slot=value;
+        } else previews_.push_back(value);
+        if(scene)++sceneSamples_;
+    }
     void PreviewSurface(IDirect3DDevice9* d,IDirect3DSurface9* source,unsigned draw){
         // The main scene is a standalone render target, so GetContainer
         // cannot supply a texture. Copy/downsample it directly on the GPU.
         // No render bindings or scene boundaries are changed; read back only
         // after both eyes, just like the texture-backed checkpoints.
         busy_=true;IDirect3DSurface9* preview=nullptr;
-        HRESULT hr=d->CreateRenderTarget(256,144,D3DFMT_A8R8G8B8,D3DMULTISAMPLE_NONE,0,FALSE,&preview,nullptr);
+        HRESULT hr=AcquirePreview(d,true,&preview);
         if(SUCCEEDED(hr))hr=d->StretchRect(source,nullptr,preview,nullptr,D3DTEXF_NONE);
-        if(SUCCEEDED(hr)){previews_.push_back({preview,draw,reinterpret_cast<uintptr_t>(source),true});preview=nullptr;}
+        if(SUCCEEDED(hr)){KeepPreview(preview,draw,reinterpret_cast<uintptr_t>(source),true);preview=nullptr;}
         else fprintf(file_,"surface preview draw=%u status=%08lX\n",draw,hr);
         Release(preview);busy_=false;
     }
@@ -159,7 +173,7 @@ private:
         IDirect3DSurface9* extraTargets[3]{};
         D3DCAPS9 caps{};
         D3DVIEWPORT9 vp{};RECT scissor{};
-        HRESULT hr=d->CreateRenderTarget(256,144,D3DFMT_A8R8G8B8,D3DMULTISAMPLE_NONE,0,FALSE,&preview,nullptr);
+        HRESULT hr=AcquirePreview(d,scene,&preview);
         if(SUCCEEDED(hr))hr=d->GetRenderTarget(0,&target);
         if(SUCCEEDED(hr))hr=d->GetViewport(&vp);
         if(SUCCEEDED(hr))hr=d->GetScissorRect(&scissor);
@@ -200,7 +214,7 @@ private:
             for(DWORD slot=1;slot<targetCount;++slot)d->SetRenderTarget(slot,extraTargets[slot-1]);
             state_->Apply();d->SetViewport(&vp);d->SetScissorRect(&scissor);
         }
-        if(SUCCEEDED(hr)){previews_.push_back({preview,draw,reinterpret_cast<uintptr_t>(texture),scene});preview=nullptr;}
+        if(SUCCEEDED(hr)){KeepPreview(preview,draw,reinterpret_cast<uintptr_t>(texture),scene);preview=nullptr;}
         else fprintf(file_,"preview setup draw=%u status=%08lX\n",draw,hr);
         for(auto& extra:extraTargets)Release(extra);
         Release(preview);Release(target);Release(depth);busy_=false;

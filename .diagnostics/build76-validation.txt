@@ -1,0 +1,12 @@
+Build: 20261014.76
+Change: Preserve each eye's live scene before the captured film-strip presentation; restore it at the matched film card and suppress its matching backdrop.
+Source capture: .diagnostics/film75/BayonettaVR_scene_20261014_160018_1 (3689 draws)
+Release/Win32 MSBuild: passed
+Full tests/build_checks.cmd: passed, exit 0; log .diagnostics/checks76.log
+Live film GPU regression: 12 eye/pose/recreation images, 172800 pixels; passed
+Release d3d9.dll SHA256: 85D97733953021F3E7164CAFEA104F67AC8944FC1AF673B15882FF19FA7DFDE2
+Release BayonettaVRHost.exe SHA256: 49B81F7AD242D01679512515CD536BCAD1C7C04ACB1963291B2EE6249034B3BA
+Installation: completed; installed DLL and host SHA256 match tested release files
+Backup: .diagnostics/before76-installed-20261014-161643
+INI: preserved; SHA256 BF54572016332571CD66B6783392BCD93BB08734C92C53ADBEEA0D51396DF93A
+In-game appearance: pending user verification

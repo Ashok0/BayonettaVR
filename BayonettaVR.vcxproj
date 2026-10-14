@@ -51,6 +51,7 @@
   <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ReflectionCamera.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MaterialTextureCamera.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\LiveFilmScene9.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MotionBlur.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\AmbientOcclusion.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\SoftParticleDepth.h"/><ClInclude Include="src\SoftParticleDepthBytecode.h"/></ItemGroup>

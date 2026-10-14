@@ -1,0 +1,7 @@
+Build 20261014.75
+Release/Win32: PASS
+tests/build_native_scene_trace_checks.cmd: PASS
+Rendering unchanged from .74; diagnostic-only update
+Installation: SHA256 verified; INI unchanged. Backup: C:\dev\BayonettaVR\.diagnostics\before75-installed-20261014-155552
+DLL SHA256: B0AECCE18520C9DB401EE8ECB80222F8028238E7CF7C2BE00434742E5CF2A1AE
+Host SHA256: CB806313DFD94DE4847480C9CEB487C1D7DD30E0196D8F9E0F0D15691C6C2B8D

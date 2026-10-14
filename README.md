@@ -3,6 +3,59 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Direct VR view for live film-strip scenes (build 20261014.76)
+
+The user prefers viewing the live 3D scene directly in VR, without its
+decorative film-strip frame. Capture `20261014_160018_1` reaches all 3,689
+draws: the scene is already rendered in stereo before two thumbnail-copy
+draws, a mask, a skinned film card and its backdrop. Applying another VR
+projection to that presentation remaps the already projected eye images.
+
+Build `.76` retains each eye's scene immediately before the captured thumbnail
+setup. When the verified live film-card draw arrives, it restores that scene
+directly and omits the matching backdrop. The live scene keeps its normal
+stereo/6DOF rendering. Each eye gets a fresh snapshot; no image is shared
+between eyes or carried into the next frame. Prerecorded movies retain their
+theater path.
+
+Recognition requires the original copy/card shader signatures, matching
+render-target texture dimensions, the captured thumbnail projection, a local
+film camera and the same render target. Backdrop suppression additionally
+requires a successful scene restore and the same camera. Unmatched sequences
+and failed copies use the original rendering. This targets the captured live
+film presentation; other variants still need in-game verification.
+
+`tests/build_live_film_checks.cmd` checks 12 distinct eye/pose/recreation
+images (172,800 pixels) against their source images, with no extra projection
+or resampling. It also checks native shader matching, excluded cameras and
+targets, one snapshot per eye, backdrop scope, resource reset, MRT content
+and render-state preservation. Release/Win32 and the full regression suite
+pass. Build .76 is installed with SHA256 verification and INI settings
+preserved. Previous files are in
+`.diagnostics/before76-installed-20261014-161643`.
+In-game confirmation is pending.
+
+## Live film-strip stereo investigation (build 20261014.75)
+
+The user reports double vision in live 3D film-strip cutscenes. Capture
+`20261014_154309_1` shows the film-strip doorway scene and uses native stereo
+(`movieFrame=0`), with live model draws. The old 2,048-draw diagnostic stopped
+during depth/shadow rendering before the final film-strip composition, so the
+responsible camera or compositing mismatch is not yet established.
+
+Build `.75` changes the F12 diagnostic only: metadata covers up to 16,384
+draws and a reusable surface ring retains the final 512 scene checkpoints.
+The 64 texture-preview limit remains. This reaches later composition passes
+while reducing checkpoint surface storage from roughly 288 MiB to 72 MiB.
+Readbacks remain at the stereo-pair boundary. Normal rendering retains `.74`.
+
+Release/Win32 and the native scene-trace GPU checks pass, including capture
+beyond draw 2,048, bounded ring eviction, distinct retained draw pixels,
+render state/MRT preservation and the metadata hard cap. Build .75 is installed
+with SHA256 verification and INI settings preserved. Previous files are in
+.diagnostics/before75-installed-20261014-155552.
+A fresh F12 capture of the affected scene is needed.
+
 ## Inventory menu backgrounds (build 20261014.74)
 
 The Equip / Item / File / Exit capture `20261014_152418_2` shows the

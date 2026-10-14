@@ -30,6 +30,8 @@ call tests\build_reflection_camera_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_material_texture_checks.cmd
 if errorlevel 1 exit /b 1
+call tests\build_live_film_checks.cmd
+if errorlevel 1 exit /b 1
 call tests\build_movie_checks.cmd
 if errorlevel 1 exit /b 1
 call tests\build_scene_capture_checks.cmd
