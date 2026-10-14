@@ -21,6 +21,8 @@
 #include "AmbientOcclusion.h"
 #include "ColorGrading.h"
 #include "PracticeReflection.h"
+#include "ReflectionCamera.h"
+#include "MaterialTextureCamera.h"
 #include "FirstPerson.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
@@ -82,6 +84,8 @@ PixelShaderDrawFilter g_colorGradingShader(IsColorGradingShader);
 bool g_disableColorGrading = true;
 PracticeReflectionFilter g_practiceReflection;
 bool g_disablePracticeReflection = true;
+bool g_fixReflectionCamera = true;
+MaterialTextureCamera g_materialTextureCamera;
 SoftParticleDepth g_softParticleDepth;
 bool g_fixSoftParticleDepth = true;
 SetVSFn g_setVS = nullptr;
@@ -99,6 +103,8 @@ SwapPresentFn g_swapPresent = nullptr;
 
 struct ShaderInfo {
     int matrixBase = -1;
+    bool reflectionCamera = false;
+    bool materialTextureCamera = false;
     unsigned long long draws = 0;
     unsigned long long hudDraws = 0;
     std::string assembly;
@@ -647,6 +653,13 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Cal
     const bool orthographic = LooksOrthographic(original);
     if(g_insideNativeDraw && VR().Eye()==0 && g_nativeSceneTrace.Active())
         g_nativeSceneTrace.Record(device,primitiveCount,base,original,orthographic);
+    if(g_materialTextureCamera.UsesNativeCamera(device,original,base,
+        shaderInfo&&shaderInfo->materialTextureCamera,
+        Cfg().enabled&&g_insideNativeDraw&&g_fixReflectionCamera)) {
+        static unsigned draws[2]{};auto& count=draws[VR().Eye()];
+        if(++count<=2||count%12000==0)Log("material texture: eye=%d native local-camera draws=%u",VR().Eye(),count);
+        return call();
+    }
     bool hud = false;
     if (orthographic) {
         if (Cfg().worldLockedHud) {
@@ -719,6 +732,13 @@ HRESULT DrawWithTrackedCamera(IDirect3DDevice9* device, UINT primitiveCount, Cal
         ++g_hudDraws;
         if (shaderInfo && shaderInfo->hudDraws++ == 0)
             Log("hud: projecting shader=%p matrix=c%d onto recenter-space panel", liveShader, base);
+    }
+    ReflectionCameraScope reflectionCamera(device,g_setConst,adjusted,
+        Cfg().enabled&&g_insideNativeDraw&&!hud&&!orthographic&&g_fixReflectionCamera&&
+        shaderInfo&&shaderInfo->reflectionCamera&&base==8);
+    if(reflectionCamera.Active()) {
+        static unsigned draws[2]{};auto& count=draws[VR().Eye()];
+        if(++count<=2||count%12000==0)Log("reflection camera: eye=%d corrected native material draws=%u",VR().Eye(),count);
     }
     const HRESULT result = call();
     g_setConst(device, static_cast<UINT>(base), &original.m[0][0], 4);
@@ -1380,7 +1400,10 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
     }
     if (pressed[0]) VR().ToggleCompositorPoseDiagnostic();
     if (pressed[9]) {
-        if(GetAsyncKeyState(VK_MENU)&0x8000) {
+        if((GetAsyncKeyState(VK_MENU)&0x8000)&&(GetAsyncKeyState(VK_CONTROL)&0x8000)) {
+            g_fixReflectionCamera=!g_fixReflectionCamera;
+            Log("reflection camera: Ctrl+Alt+F1 per-eye and material-texture corrections %s",g_fixReflectionCamera?"ON":"OFF");
+        } else if(GetAsyncKeyState(VK_MENU)&0x8000) {
             g_disablePracticeReflection=!g_disablePracticeReflection;
             Log("practice reflection: Alt+F1 comparison, suppression %s",g_disablePracticeReflection?"ON":"OFF");
         } else if((GetAsyncKeyState(VK_SHIFT)&0x8000)&&(GetAsyncKeyState(VK_CONTROL)&0x8000)) {
@@ -1650,6 +1673,15 @@ HRESULT STDMETHODCALLTYPE HookCreateVS(IDirect3DDevice9* d,const DWORD* code,IDi
         int base=FindPositionMatrix(assembly);
         ShaderInfo info{};
         info.matrixBase=base;
+        UINT byteCount=0;
+        if(SUCCEEDED((*out)->GetFunction(nullptr,&byteCount))&&byteCount&&byteCount<65536) {
+            std::vector<DWORD> bytes((byteCount+3)/4);
+            if(SUCCEEDED((*out)->GetFunction(bytes.data(),&byteCount))) {
+                info.reflectionCamera=IsReflectionCameraShader(ShaderCrc32(bytes.data(),byteCount),byteCount);
+                info.materialTextureCamera=IsMaterialTextureVertex(ShaderCrc32(bytes.data(),byteCount),byteCount);
+            }
+        }
+        if(info.reflectionCamera)Log("reflection camera: recognized native vertex shader %p, per-eye camera c12-c14",*out);
         info.assembly=std::move(assembly);
         g_shaders[*out]=std::move(info);
         if(base>=0) Log("shader: %p position matrix c%d",*out,base);
@@ -1669,6 +1701,7 @@ HRESULT STDMETHODCALLTYPE HookCreatePS(IDirect3DDevice9* d,const DWORD* code,IDi
         if(colorHash)Log("color grading: identified original pixel shader %08X (object unchanged)",colorHash);
         const auto softHash=g_softParticleDepth.Register(*out);
         const auto reflectionHash=g_practiceReflection.Register(*out);
+        g_materialTextureCamera.Register(*out);
         if(reflectionHash)Log("practice reflection: identified original pixel shader %08X (object unchanged)",reflectionHash);
         if(softHash)Log("soft particle depth: identified original pixel shader %08X (object unchanged)",softHash);
     }
@@ -1733,6 +1766,7 @@ void HookDevice(IDirect3DDevice9Ex* device) {
     g_colorGradingShader.Reset();
     g_disableColorGrading = Cfg().disableColorGrading;
     g_practiceReflection.Reset();
+    g_materialTextureCamera.Reset();
     g_disablePracticeReflection = Cfg().disablePracticeReflection;
     g_device = device;
     g_earlySubmitEnabled = Cfg().nativeEarlySubmit;
@@ -1785,6 +1819,7 @@ void HookDirect3D9Ex(IDirect3D9Ex* d3d) {
 
 void ShutdownD3D() {
     g_practiceReflection.Reset();
+    g_materialTextureCamera.Reset();
     g_colorGradingShader.Reset();
     g_mapCinema.Reset();g_nativeSceneTrace.Finish(nullptr);g_moviePanel.Reset();
     g_softParticleDepth.Reset();

@@ -64,6 +64,8 @@ public:
             IDirect3DTexture9* scene=nullptr;
             if(SUCCEEDED(target->GetContainer(__uuidof(IDirect3DTexture9),reinterpret_cast<void**>(&scene)))) {
                 ++sceneSamples_;PreviewTexture(d,scene,draw,true);Release(scene);
+            } else if(rt.Format==D3DFMT_A8R8G8B8||rt.Format==D3DFMT_X8R8G8B8) {
+                ++sceneSamples_;PreviewSurface(d,target,draw);
             }
         }
         Release(target);
@@ -74,7 +76,12 @@ public:
         }
         for(int row=0;row<4;++row)fprintf(file_,"m%d %.9g %.9g %.9g %.9g\n",row,
             original.m[row][0],original.m[row][1],original.m[row][2],original.m[row][3]);
-        for(DWORD stage=0;stage<4;++stage){
+        float view[16*4]{},material[24*4]{};
+        if(SUCCEEDED(d->GetVertexShaderConstantF(0,view,16)))
+            for(int r=0;r<16;++r)fprintf(file_,"vc%d %.9g %.9g %.9g %.9g\n",r,view[r*4],view[r*4+1],view[r*4+2],view[r*4+3]);
+        if(SUCCEEDED(d->GetPixelShaderConstantF(40,material,24)))
+            for(int r=0;r<24;++r)fprintf(file_,"pc%d %.9g %.9g %.9g %.9g\n",40+r,material[r*4],material[r*4+1],material[r*4+2],material[r*4+3]);
+        for(DWORD stage=0;stage<16;++stage){
             IDirect3DBaseTexture9* texture=nullptr;d->GetTexture(stage,&texture);
             if(texture && texture->GetType()==D3DRTYPE_TEXTURE){
                 D3DSURFACE_DESC desc{};auto* tex=static_cast<IDirect3DTexture9*>(texture);tex->GetLevelDesc(0,&desc);
@@ -88,6 +95,10 @@ public:
                     void* stack[10]{};const USHORT count=CaptureStackBackTrace(0,10,stack,nullptr);
                     fprintf(file_,"stack");for(USHORT i=0;i<count;++i)fprintf(file_," %p",stack[i]);fprintf(file_,"\n");
                 }
+            } else if(texture&&texture->GetType()==D3DRTYPE_CUBETEXTURE) {
+                D3DSURFACE_DESC desc{};
+                if(SUCCEEDED(static_cast<IDirect3DCubeTexture9*>(texture)->GetLevelDesc(0,&desc)))
+                    fprintf(file_,"cube%u=%p %ux%u fmt=%u usage=%08lX\n",stage,texture,desc.Width,desc.Height,desc.Format,desc.Usage);
             }
             Release(texture);
         }
@@ -116,6 +127,18 @@ public:
         busy_=false;return saved;
     }
 private:
+    void PreviewSurface(IDirect3DDevice9* d,IDirect3DSurface9* source,unsigned draw){
+        // The main scene is a standalone render target, so GetContainer
+        // cannot supply a texture. Copy/downsample it directly on the GPU.
+        // No render bindings or scene boundaries are changed; read back only
+        // after both eyes, just like the texture-backed checkpoints.
+        busy_=true;IDirect3DSurface9* preview=nullptr;
+        HRESULT hr=d->CreateRenderTarget(256,144,D3DFMT_A8R8G8B8,D3DMULTISAMPLE_NONE,0,FALSE,&preview,nullptr);
+        if(SUCCEEDED(hr))hr=d->StretchRect(source,nullptr,preview,nullptr,D3DTEXF_NONE);
+        if(SUCCEEDED(hr)){previews_.push_back({preview,draw,reinterpret_cast<uintptr_t>(source),true});preview=nullptr;}
+        else fprintf(file_,"surface preview draw=%u status=%08lX\n",draw,hr);
+        Release(preview);busy_=false;
+    }
     template<class T> uint32_t Shader(T* shader,const wchar_t* type){
         if(!shader)return 0;
         auto found=shaders_.find(shader);if(found!=shaders_.end())return found->second;

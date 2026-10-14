@@ -1,0 +1,2123 @@
+Shader draw counts:
+   1 A6EB54D8 filter03.pso
+ 106 E54B73A3 espshaderbase.pso
+ 108 EDBEB70B espshadermask.pso
+   4 EF0C3C98 espshadershimmer2.pso
+  16 AFB21FEA modelshadershadowcas00_bxxxx.pso
+   5 E290931D modelshadergrs00_xxxxa_depthtex.pso
+ 329 28D876E3 modelshaderweightdepthtex.pso
+  10 F12FF905 modelshaderbgs01_xxxxx_depthtex.pso
+  54 E24F2347 modelshaderbgs04_xxxxx_depthtex.pso
+  65 A2CACB31 modelshaderfixeddepthtex.pso
+   7 8F762ED9 modelshaderfixednoalphadepthtex.pso
+  96 42535AE0 modelshaderweightdepth.pso
+   5 A5996EFC modelshadergrs00_xxxxa.pso
+   4 CB8BEC42 modelshaderbgs03_xxxxx.pso
+  52 5EA321BE modelshaderbgs01_xxxxx.pso
+  12 4AC4957B modelshadervtx01_bxxmx.pso
+  33 5CB42FA2 modelshaderobs01_bxxxx.pso
+   2 CD510C23 modelshaderobs05_bxxxx.pso
+  26 38108FB8 modelshadervtx00_xxxxx.pso
+  21 441291DA modelshaderobs07_bxnxx.pso
+  62 0103F1A9 modelshaderbgs04_xxxxx.pso
+  34 D6B9BA20 modelshaderbgs02_xxxxx.pso
+   7 FFE118BE modelshaderbgs09_xxxxx.pso
+  12 07457270 modelshaderbgs05_xxxxx.pso
+   1 205F0663 modelshaderbgs06_xxxxx.pso
+  40 36A9AACF modelshaderobs09_bxxmx.pso
+  47 32CAF330 modelshaderobs04_xxxxx.pso
+  13 8EEBE33D modelshadergls03_bxxxx.pso
+  10 DB234762 modelshaderobs01_bunxx.pso
+   6 69C0ADD7 modelshadervtx02_bxxmx.pso
+   2 49C07FB4 modelshaderobs03_bxxmx.pso
+   8 C1D05BC2 modelshaderobs01_bunmx.pso
+  40 9445C9D2 modelshaderetc03_bxxxx.pso
+   3 6C60805C modelshaderpls05_bxnxb.pso
+   3 03A89F89 modelshaderobs00_bxnxx.pso
+   3 51FA4B03 modelshaderpls06_bxnxa.pso
+   4 F0125E48 modelshaderpls03_bxnxa.pso
+  24 2DD61A8F modelshaderpls01_bxxmb.pso
+   2 1D800D3D modelshaderobs04_bxxmx.pso
+   2 19D126CD modelshaderpls09_bxxmx.pso
+   1 8253CA8B modelshaderpls04_bxnxx.pso
+  34 1847C1F9 modelshadershadowrec00_xxxxx.pso
+  15 A86DCDA5 modelshaderpls02_bxxxx.pso
+  21 3F0F9C5C modelshaderefs02_xxxxx.pso
+   7 D6A7757D modelshaderefs07_bxxxx.pso
+  23 7C2F0109 7C2F0109
+   7 E83CDBD7 modelshaderetc01_bxnxx.pso
+  12 DD5F8DF1 espshadershimmer.pso
+   3 BF10C4D1 modelshaderetc00_bxxmx.pso
+   1 6E722DE9 filter00.pso
+   5 84049DCA filter05.pso
+   5 563F5C20 filter02.pso
+   5 0F24B7EF filter01.pso
+   7 B8690130 filtershadercopytex.pso
+
+Pass transitions:
+draw=1 primitives=2 vs=004E872A ps=A6EB54D8 matrix=c8 ortho=1 rt=4E0A3940 8x8 fmt=21 viewport=0,0,8,8 depth=0/0 blend=0/5/6 cull=1
+  filter03.vso / filter03.pso
+draw=2 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E749460 128x128 fmt=21 viewport=0,0,128,128 depth=4294967295/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=3 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E749460 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=6 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4E749460 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshadermask.pso
+draw=114 primitives=2 vs=9FFEA812 ps=EF0C3C98 matrix=c24 ortho=0 rt=4E749460 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmer2.vso / espshadershimmer2.pso
+draw=118 primitives=1158 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=4ECA04A0 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+  modelshadershadowcas00_bxxxx.vso / modelshadershadowcas00_bxxxx.pso
+draw=134 primitives=296 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 134
+  scene checkpoint BEFORE draw 135
+draw=136 primitives=1015 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 136
+  scene checkpoint BEFORE draw 137
+  scene checkpoint BEFORE draw 138
+  scene checkpoint BEFORE draw 139
+  scene checkpoint BEFORE draw 140
+  scene checkpoint BEFORE draw 141
+  scene checkpoint BEFORE draw 142
+  scene checkpoint BEFORE draw 143
+  scene checkpoint BEFORE draw 144
+  scene checkpoint BEFORE draw 145
+  scene checkpoint BEFORE draw 146
+  scene checkpoint BEFORE draw 147
+  scene checkpoint BEFORE draw 148
+  scene checkpoint BEFORE draw 149
+  scene checkpoint BEFORE draw 150
+  scene checkpoint BEFORE draw 151
+  scene checkpoint BEFORE draw 152
+  scene checkpoint BEFORE draw 153
+  scene checkpoint BEFORE draw 154
+  scene checkpoint BEFORE draw 155
+  scene checkpoint BEFORE draw 156
+  scene checkpoint BEFORE draw 157
+  scene checkpoint BEFORE draw 158
+  scene checkpoint BEFORE draw 159
+  scene checkpoint BEFORE draw 160
+  scene checkpoint BEFORE draw 161
+  scene checkpoint BEFORE draw 162
+  scene checkpoint BEFORE draw 163
+  scene checkpoint BEFORE draw 164
+  scene checkpoint BEFORE draw 165
+  scene checkpoint BEFORE draw 166
+  scene checkpoint BEFORE draw 167
+  scene checkpoint BEFORE draw 168
+  scene checkpoint BEFORE draw 169
+  scene checkpoint BEFORE draw 170
+  scene checkpoint BEFORE draw 171
+  scene checkpoint BEFORE draw 172
+  scene checkpoint BEFORE draw 173
+  scene checkpoint BEFORE draw 174
+  scene checkpoint BEFORE draw 175
+  scene checkpoint BEFORE draw 176
+  scene checkpoint BEFORE draw 177
+  scene checkpoint BEFORE draw 178
+  scene checkpoint BEFORE draw 179
+  scene checkpoint BEFORE draw 180
+  scene checkpoint BEFORE draw 181
+  scene checkpoint BEFORE draw 182
+  scene checkpoint BEFORE draw 183
+  scene checkpoint BEFORE draw 184
+  scene checkpoint BEFORE draw 185
+  scene checkpoint BEFORE draw 186
+  scene checkpoint BEFORE draw 187
+  scene checkpoint BEFORE draw 188
+  scene checkpoint BEFORE draw 189
+  scene checkpoint BEFORE draw 190
+  scene checkpoint BEFORE draw 191
+  scene checkpoint BEFORE draw 192
+  scene checkpoint BEFORE draw 193
+  scene checkpoint BEFORE draw 194
+  scene checkpoint BEFORE draw 195
+  scene checkpoint BEFORE draw 196
+draw=197 primitives=1486 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 197
+draw=198 primitives=78 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 198
+  scene checkpoint BEFORE draw 199
+  scene checkpoint BEFORE draw 200
+draw=201 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 201
+  scene checkpoint BEFORE draw 202
+draw=203 primitives=1157 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 203
+draw=204 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 204
+draw=205 primitives=290 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 205
+  scene checkpoint BEFORE draw 206
+  scene checkpoint BEFORE draw 207
+draw=208 primitives=316 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 208
+  scene checkpoint BEFORE draw 209
+draw=210 primitives=4557 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 210
+  scene checkpoint BEFORE draw 211
+  scene checkpoint BEFORE draw 212
+  scene checkpoint BEFORE draw 213
+draw=214 primitives=633 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 214
+draw=215 primitives=156 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 215
+draw=216 primitives=2722 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 216
+  scene checkpoint BEFORE draw 217
+draw=218 primitives=454 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 218
+draw=219 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 219
+  scene checkpoint BEFORE draw 220
+draw=221 primitives=7031 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 221
+  scene checkpoint BEFORE draw 222
+  scene checkpoint BEFORE draw 223
+draw=224 primitives=36 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 224
+draw=225 primitives=3567 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 225
+  scene checkpoint BEFORE draw 226
+  scene checkpoint BEFORE draw 227
+  scene checkpoint BEFORE draw 228
+draw=229 primitives=3395 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 229
+  scene checkpoint BEFORE draw 230
+draw=231 primitives=704 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 231
+draw=232 primitives=359 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 232
+  scene checkpoint BEFORE draw 233
+draw=234 primitives=80 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 234
+  scene checkpoint BEFORE draw 235
+  scene checkpoint BEFORE draw 236
+draw=237 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 237
+  scene checkpoint BEFORE draw 238
+draw=239 primitives=1178 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 239
+draw=240 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 240
+draw=241 primitives=752 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 241
+  scene checkpoint BEFORE draw 242
+draw=243 primitives=212 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 243
+draw=244 primitives=514 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 244
+  scene checkpoint BEFORE draw 245
+  scene checkpoint BEFORE draw 246
+  scene checkpoint BEFORE draw 247
+  scene checkpoint BEFORE draw 248
+draw=249 primitives=608 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 249
+  scene checkpoint BEFORE draw 250
+  scene checkpoint BEFORE draw 251
+  scene checkpoint BEFORE draw 252
+  scene checkpoint BEFORE draw 253
+  scene checkpoint BEFORE draw 254
+  scene checkpoint BEFORE draw 255
+draw=256 primitives=379 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 256
+  scene checkpoint BEFORE draw 257
+  scene checkpoint BEFORE draw 258
+  scene checkpoint BEFORE draw 259
+draw=260 primitives=1223 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 260
+  scene checkpoint BEFORE draw 261
+  scene checkpoint BEFORE draw 262
+draw=263 primitives=161 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 263
+  scene checkpoint BEFORE draw 264
+draw=265 primitives=88 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 265
+draw=266 primitives=1815 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 266
+draw=267 primitives=355 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 267
+  scene checkpoint BEFORE draw 268
+draw=269 primitives=696 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 269
+draw=270 primitives=3746 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 270
+  scene checkpoint BEFORE draw 271
+draw=272 primitives=5786 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 272
+draw=273 primitives=454 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 273
+  scene checkpoint BEFORE draw 274
+draw=275 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 275
+  scene checkpoint BEFORE draw 276
+draw=277 primitives=1157 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 277
+draw=278 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 278
+draw=279 primitives=152 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 279
+draw=280 primitives=7465 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 280
+  scene checkpoint BEFORE draw 281
+  scene checkpoint BEFORE draw 282
+  scene checkpoint BEFORE draw 283
+  scene checkpoint BEFORE draw 284
+  scene checkpoint BEFORE draw 285
+  scene checkpoint BEFORE draw 286
+  scene checkpoint BEFORE draw 287
+draw=288 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 288
+  scene checkpoint BEFORE draw 289
+draw=290 primitives=1178 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 290
+draw=291 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 291
+draw=292 primitives=1331 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 292
+  scene checkpoint BEFORE draw 293
+draw=294 primitives=5668 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 294
+draw=295 primitives=7183 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 295
+  scene checkpoint BEFORE draw 296
+  scene checkpoint BEFORE draw 297
+  scene checkpoint BEFORE draw 298
+draw=299 primitives=828 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 299
+draw=300 primitives=73 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 300
+  scene checkpoint BEFORE draw 301
+draw=302 primitives=340 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 302
+draw=303 primitives=177 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 303
+  scene checkpoint BEFORE draw 304
+  scene checkpoint BEFORE draw 305
+  scene checkpoint BEFORE draw 306
+  scene checkpoint BEFORE draw 307
+  scene checkpoint BEFORE draw 308
+  scene checkpoint BEFORE draw 309
+  scene checkpoint BEFORE draw 310
+  scene checkpoint BEFORE draw 311
+  scene checkpoint BEFORE draw 312
+  scene checkpoint BEFORE draw 313
+  scene checkpoint BEFORE draw 314
+  scene checkpoint BEFORE draw 315
+  scene checkpoint BEFORE draw 316
+  scene checkpoint BEFORE draw 317
+  scene checkpoint BEFORE draw 318
+  scene checkpoint BEFORE draw 319
+  scene checkpoint BEFORE draw 320
+  scene checkpoint BEFORE draw 321
+  scene checkpoint BEFORE draw 322
+  scene checkpoint BEFORE draw 323
+  scene checkpoint BEFORE draw 324
+  scene checkpoint BEFORE draw 325
+  scene checkpoint BEFORE draw 326
+  scene checkpoint BEFORE draw 327
+  scene checkpoint BEFORE draw 328
+  scene checkpoint BEFORE draw 329
+  scene checkpoint BEFORE draw 330
+  scene checkpoint BEFORE draw 331
+  scene checkpoint BEFORE draw 332
+  scene checkpoint BEFORE draw 333
+  scene checkpoint BEFORE draw 334
+  scene checkpoint BEFORE draw 335
+  scene checkpoint BEFORE draw 336
+  scene checkpoint BEFORE draw 337
+  scene checkpoint BEFORE draw 338
+  scene checkpoint BEFORE draw 339
+  scene checkpoint BEFORE draw 340
+  scene checkpoint BEFORE draw 341
+  scene checkpoint BEFORE draw 342
+  scene checkpoint BEFORE draw 343
+  scene checkpoint BEFORE draw 344
+  scene checkpoint BEFORE draw 345
+  scene checkpoint BEFORE draw 346
+  scene checkpoint BEFORE draw 347
+  scene checkpoint BEFORE draw 348
+  scene checkpoint BEFORE draw 349
+  scene checkpoint BEFORE draw 350
+  scene checkpoint BEFORE draw 351
+  scene checkpoint BEFORE draw 352
+  scene checkpoint BEFORE draw 353
+  scene checkpoint BEFORE draw 354
+  scene checkpoint BEFORE draw 355
+  scene checkpoint BEFORE draw 356
+  scene checkpoint BEFORE draw 357
+  scene checkpoint BEFORE draw 358
+  scene checkpoint BEFORE draw 359
+  scene checkpoint BEFORE draw 360
+  scene checkpoint BEFORE draw 361
+  scene checkpoint BEFORE draw 362
+  scene checkpoint BEFORE draw 363
+  scene checkpoint BEFORE draw 364
+  scene checkpoint BEFORE draw 365
+  scene checkpoint BEFORE draw 366
+  scene checkpoint BEFORE draw 367
+  scene checkpoint BEFORE draw 368
+  scene checkpoint BEFORE draw 369
+  scene checkpoint BEFORE draw 370
+  scene checkpoint BEFORE draw 371
+  scene checkpoint BEFORE draw 372
+  scene checkpoint BEFORE draw 373
+  scene checkpoint BEFORE draw 374
+  scene checkpoint BEFORE draw 375
+  scene checkpoint BEFORE draw 376
+  scene checkpoint BEFORE draw 377
+  scene checkpoint BEFORE draw 378
+  scene checkpoint BEFORE draw 379
+  scene checkpoint BEFORE draw 380
+  scene checkpoint BEFORE draw 381
+  scene checkpoint BEFORE draw 382
+  scene checkpoint BEFORE draw 383
+  scene checkpoint BEFORE draw 384
+  scene checkpoint BEFORE draw 385
+  scene checkpoint BEFORE draw 386
+  scene checkpoint BEFORE draw 387
+  scene checkpoint BEFORE draw 388
+  scene checkpoint BEFORE draw 389
+  scene checkpoint BEFORE draw 390
+  scene checkpoint BEFORE draw 391
+  scene checkpoint BEFORE draw 392
+  scene checkpoint BEFORE draw 393
+  scene checkpoint BEFORE draw 394
+  scene checkpoint BEFORE draw 395
+  scene checkpoint BEFORE draw 396
+  scene checkpoint BEFORE draw 397
+  scene checkpoint BEFORE draw 398
+  scene checkpoint BEFORE draw 399
+  scene checkpoint BEFORE draw 400
+  scene checkpoint BEFORE draw 401
+  scene checkpoint BEFORE draw 402
+  scene checkpoint BEFORE draw 403
+  scene checkpoint BEFORE draw 404
+  scene checkpoint BEFORE draw 405
+  scene checkpoint BEFORE draw 406
+  scene checkpoint BEFORE draw 407
+  scene checkpoint BEFORE draw 408
+  scene checkpoint BEFORE draw 409
+  scene checkpoint BEFORE draw 410
+  scene checkpoint BEFORE draw 411
+  scene checkpoint BEFORE draw 412
+  scene checkpoint BEFORE draw 413
+  scene checkpoint BEFORE draw 414
+  scene checkpoint BEFORE draw 415
+  scene checkpoint BEFORE draw 416
+  scene checkpoint BEFORE draw 417
+  scene checkpoint BEFORE draw 418
+  scene checkpoint BEFORE draw 419
+  scene checkpoint BEFORE draw 420
+  scene checkpoint BEFORE draw 421
+  scene checkpoint BEFORE draw 422
+  scene checkpoint BEFORE draw 423
+  scene checkpoint BEFORE draw 424
+  scene checkpoint BEFORE draw 425
+  scene checkpoint BEFORE draw 426
+  scene checkpoint BEFORE draw 427
+  scene checkpoint BEFORE draw 428
+  scene checkpoint BEFORE draw 429
+  scene checkpoint BEFORE draw 430
+  scene checkpoint BEFORE draw 431
+  scene checkpoint BEFORE draw 432
+  scene checkpoint BEFORE draw 433
+  scene checkpoint BEFORE draw 434
+  scene checkpoint BEFORE draw 435
+  scene checkpoint BEFORE draw 436
+  scene checkpoint BEFORE draw 437
+  scene checkpoint BEFORE draw 438
+  scene checkpoint BEFORE draw 439
+  scene checkpoint BEFORE draw 440
+  scene checkpoint BEFORE draw 441
+  scene checkpoint BEFORE draw 442
+  scene checkpoint BEFORE draw 443
+  scene checkpoint BEFORE draw 444
+  scene checkpoint BEFORE draw 445
+  scene checkpoint BEFORE draw 446
+  scene checkpoint BEFORE draw 447
+  scene checkpoint BEFORE draw 448
+  scene checkpoint BEFORE draw 449
+  scene checkpoint BEFORE draw 450
+  scene checkpoint BEFORE draw 451
+  scene checkpoint BEFORE draw 452
+  scene checkpoint BEFORE draw 453
+  scene checkpoint BEFORE draw 454
+  scene checkpoint BEFORE draw 455
+  scene checkpoint BEFORE draw 456
+  scene checkpoint BEFORE draw 457
+  scene checkpoint BEFORE draw 458
+  scene checkpoint BEFORE draw 459
+  scene checkpoint BEFORE draw 460
+  scene checkpoint BEFORE draw 461
+  scene checkpoint BEFORE draw 462
+  scene checkpoint BEFORE draw 463
+  scene checkpoint BEFORE draw 464
+  scene checkpoint BEFORE draw 465
+  scene checkpoint BEFORE draw 466
+  scene checkpoint BEFORE draw 467
+  scene checkpoint BEFORE draw 468
+  scene checkpoint BEFORE draw 469
+  scene checkpoint BEFORE draw 470
+  scene checkpoint BEFORE draw 471
+  scene checkpoint BEFORE draw 472
+  scene checkpoint BEFORE draw 473
+  scene checkpoint BEFORE draw 474
+  scene checkpoint BEFORE draw 475
+  scene checkpoint BEFORE draw 476
+  scene checkpoint BEFORE draw 477
+  scene checkpoint BEFORE draw 478
+  scene checkpoint BEFORE draw 479
+  scene checkpoint BEFORE draw 480
+  scene checkpoint BEFORE draw 481
+  scene checkpoint BEFORE draw 482
+  scene checkpoint BEFORE draw 483
+  scene checkpoint BEFORE draw 484
+  scene checkpoint BEFORE draw 485
+  scene checkpoint BEFORE draw 486
+  scene checkpoint BEFORE draw 487
+  scene checkpoint BEFORE draw 488
+  scene checkpoint BEFORE draw 489
+  scene checkpoint BEFORE draw 490
+  scene checkpoint BEFORE draw 491
+  scene checkpoint BEFORE draw 492
+  scene checkpoint BEFORE draw 493
+  scene checkpoint BEFORE draw 494
+  scene checkpoint BEFORE draw 495
+  scene checkpoint BEFORE draw 496
+  scene checkpoint BEFORE draw 497
+  scene checkpoint BEFORE draw 498
+  scene checkpoint BEFORE draw 499
+  scene checkpoint BEFORE draw 500
+  scene checkpoint BEFORE draw 501
+  scene checkpoint BEFORE draw 502
+  scene checkpoint BEFORE draw 503
+  scene checkpoint BEFORE draw 504
+  scene checkpoint BEFORE draw 505
+  scene checkpoint BEFORE draw 506
+  scene checkpoint BEFORE draw 507
+  scene checkpoint BEFORE draw 508
+  scene checkpoint BEFORE draw 509
+  scene checkpoint BEFORE draw 510
+  scene checkpoint BEFORE draw 511
+  scene checkpoint BEFORE draw 512
+  scene checkpoint BEFORE draw 513
+  scene checkpoint BEFORE draw 514
+  scene checkpoint BEFORE draw 515
+  scene checkpoint BEFORE draw 516
+  scene checkpoint BEFORE draw 517
+  scene checkpoint BEFORE draw 518
+  scene checkpoint BEFORE draw 519
+  scene checkpoint BEFORE draw 520
+  scene checkpoint BEFORE draw 521
+  scene checkpoint BEFORE draw 522
+  scene checkpoint BEFORE draw 523
+  scene checkpoint BEFORE draw 524
+  scene checkpoint BEFORE draw 525
+  scene checkpoint BEFORE draw 526
+  scene checkpoint BEFORE draw 527
+  scene checkpoint BEFORE draw 528
+  scene checkpoint BEFORE draw 529
+  scene checkpoint BEFORE draw 530
+  scene checkpoint BEFORE draw 531
+  scene checkpoint BEFORE draw 532
+  scene checkpoint BEFORE draw 533
+  scene checkpoint BEFORE draw 534
+  scene checkpoint BEFORE draw 535
+  scene checkpoint BEFORE draw 536
+  scene checkpoint BEFORE draw 537
+  scene checkpoint BEFORE draw 538
+  scene checkpoint BEFORE draw 539
+  scene checkpoint BEFORE draw 540
+  scene checkpoint BEFORE draw 541
+  scene checkpoint BEFORE draw 542
+  scene checkpoint BEFORE draw 543
+  scene checkpoint BEFORE draw 544
+  scene checkpoint BEFORE draw 545
+  scene checkpoint BEFORE draw 546
+  scene checkpoint BEFORE draw 547
+  scene checkpoint BEFORE draw 548
+  scene checkpoint BEFORE draw 549
+  scene checkpoint BEFORE draw 550
+  scene checkpoint BEFORE draw 551
+  scene checkpoint BEFORE draw 552
+  scene checkpoint BEFORE draw 553
+  scene checkpoint BEFORE draw 554
+  scene checkpoint BEFORE draw 555
+  scene checkpoint BEFORE draw 556
+  scene checkpoint BEFORE draw 557
+  scene checkpoint BEFORE draw 558
+  scene checkpoint BEFORE draw 559
+  scene checkpoint BEFORE draw 560
+  scene checkpoint BEFORE draw 561
+  scene checkpoint BEFORE draw 562
+  scene checkpoint BEFORE draw 563
+  scene checkpoint BEFORE draw 564
+  scene checkpoint BEFORE draw 565
+draw=566 primitives=1759 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 566
+  scene checkpoint BEFORE draw 567
+  scene checkpoint BEFORE draw 568
+  scene checkpoint BEFORE draw 569
+  scene checkpoint BEFORE draw 570
+  scene checkpoint BEFORE draw 571
+  scene checkpoint BEFORE draw 572
+  scene checkpoint BEFORE draw 573
+  scene checkpoint BEFORE draw 574
+  scene checkpoint BEFORE draw 575
+  scene checkpoint BEFORE draw 576
+  scene checkpoint BEFORE draw 577
+  scene checkpoint BEFORE draw 578
+  scene checkpoint BEFORE draw 579
+  scene checkpoint BEFORE draw 580
+  scene checkpoint BEFORE draw 581
+  scene checkpoint BEFORE draw 582
+  scene checkpoint BEFORE draw 583
+  scene checkpoint BEFORE draw 584
+  scene checkpoint BEFORE draw 585
+  scene checkpoint BEFORE draw 586
+  scene checkpoint BEFORE draw 587
+  scene checkpoint BEFORE draw 588
+  scene checkpoint BEFORE draw 589
+  scene checkpoint BEFORE draw 590
+  scene checkpoint BEFORE draw 591
+  scene checkpoint BEFORE draw 592
+  scene checkpoint BEFORE draw 593
+  scene checkpoint BEFORE draw 594
+  scene checkpoint BEFORE draw 595
+  scene checkpoint BEFORE draw 596
+  scene checkpoint BEFORE draw 597
+  scene checkpoint BEFORE draw 598
+draw=599 primitives=756 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EA12660 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 599
+  scene checkpoint BEFORE draw 600
+  scene checkpoint BEFORE draw 601
+  scene checkpoint BEFORE draw 602
+  scene checkpoint BEFORE draw 603
+draw=604 primitives=1486 vs=15E561A5 ps=42535AE0 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixeddepth.vso / modelshaderweightdepth.pso
+  scene checkpoint BEFORE draw 604
+  scene checkpoint BEFORE draw 605
+  scene checkpoint BEFORE draw 606
+  scene checkpoint BEFORE draw 607
+  scene checkpoint BEFORE draw 608
+  scene checkpoint BEFORE draw 609
+  scene checkpoint BEFORE draw 610
+  scene checkpoint BEFORE draw 611
+  scene checkpoint BEFORE draw 612
+  scene checkpoint BEFORE draw 613
+  scene checkpoint BEFORE draw 614
+  scene checkpoint BEFORE draw 615
+  scene checkpoint BEFORE draw 616
+  scene checkpoint BEFORE draw 617
+  scene checkpoint BEFORE draw 618
+  scene checkpoint BEFORE draw 619
+  scene checkpoint BEFORE draw 620
+  scene checkpoint BEFORE draw 621
+  scene checkpoint BEFORE draw 622
+  scene checkpoint BEFORE draw 623
+  scene checkpoint BEFORE draw 624
+  scene checkpoint BEFORE draw 625
+  scene checkpoint BEFORE draw 626
+  scene checkpoint BEFORE draw 627
+  scene checkpoint BEFORE draw 628
+  scene checkpoint BEFORE draw 629
+  scene checkpoint BEFORE draw 630
+  scene checkpoint BEFORE draw 631
+  scene checkpoint BEFORE draw 632
+  scene checkpoint BEFORE draw 633
+  scene checkpoint BEFORE draw 634
+  scene checkpoint BEFORE draw 635
+  scene checkpoint BEFORE draw 636
+  scene checkpoint BEFORE draw 637
+  scene checkpoint BEFORE draw 638
+  scene checkpoint BEFORE draw 639
+  scene checkpoint BEFORE draw 640
+  scene checkpoint BEFORE draw 641
+  scene checkpoint BEFORE draw 642
+  scene checkpoint BEFORE draw 643
+  scene checkpoint BEFORE draw 644
+  scene checkpoint BEFORE draw 645
+  scene checkpoint BEFORE draw 646
+  scene checkpoint BEFORE draw 647
+  scene checkpoint BEFORE draw 648
+  scene checkpoint BEFORE draw 649
+  scene checkpoint BEFORE draw 650
+  scene checkpoint BEFORE draw 651
+  scene checkpoint BEFORE draw 652
+  scene checkpoint BEFORE draw 653
+  scene checkpoint BEFORE draw 654
+  scene checkpoint BEFORE draw 655
+  scene checkpoint BEFORE draw 656
+  scene checkpoint BEFORE draw 657
+  scene checkpoint BEFORE draw 658
+  scene checkpoint BEFORE draw 659
+  scene checkpoint BEFORE draw 660
+  scene checkpoint BEFORE draw 661
+  scene checkpoint BEFORE draw 662
+  scene checkpoint BEFORE draw 663
+  scene checkpoint BEFORE draw 664
+  scene checkpoint BEFORE draw 665
+  scene checkpoint BEFORE draw 666
+  scene checkpoint BEFORE draw 667
+  scene checkpoint BEFORE draw 668
+  scene checkpoint BEFORE draw 669
+  scene checkpoint BEFORE draw 670
+  scene checkpoint BEFORE draw 671
+  scene checkpoint BEFORE draw 672
+  scene checkpoint BEFORE draw 673
+  scene checkpoint BEFORE draw 674
+  scene checkpoint BEFORE draw 675
+  scene checkpoint BEFORE draw 676
+  scene checkpoint BEFORE draw 677
+  scene checkpoint BEFORE draw 678
+  scene checkpoint BEFORE draw 679
+  scene checkpoint BEFORE draw 680
+  scene checkpoint BEFORE draw 681
+  scene checkpoint BEFORE draw 682
+  scene checkpoint BEFORE draw 683
+  scene checkpoint BEFORE draw 684
+  scene checkpoint BEFORE draw 685
+  scene checkpoint BEFORE draw 686
+  scene checkpoint BEFORE draw 687
+  scene checkpoint BEFORE draw 688
+  scene checkpoint BEFORE draw 689
+  scene checkpoint BEFORE draw 690
+  scene checkpoint BEFORE draw 691
+  scene checkpoint BEFORE draw 692
+  scene checkpoint BEFORE draw 693
+  scene checkpoint BEFORE draw 694
+  scene checkpoint BEFORE draw 695
+  scene checkpoint BEFORE draw 696
+  scene checkpoint BEFORE draw 697
+  scene checkpoint BEFORE draw 698
+  scene checkpoint BEFORE draw 699
+draw=700 primitives=296 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+  scene checkpoint BEFORE draw 700
+  scene checkpoint BEFORE draw 701
+draw=702 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+  scene checkpoint BEFORE draw 702
+draw=703 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 703
+draw=704 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+  scene checkpoint BEFORE draw 704
+draw=705 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 705
+draw=706 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+  scene checkpoint BEFORE draw 706
+  scene checkpoint BEFORE draw 707
+draw=708 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 708
+  scene checkpoint BEFORE draw 709
+draw=710 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+  scene checkpoint BEFORE draw 710
+  scene checkpoint BEFORE draw 711
+  scene checkpoint BEFORE draw 712
+  scene checkpoint BEFORE draw 713
+  scene checkpoint BEFORE draw 714
+  scene checkpoint BEFORE draw 715
+  scene checkpoint BEFORE draw 716
+  scene checkpoint BEFORE draw 717
+draw=718 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 718
+  scene checkpoint BEFORE draw 719
+draw=720 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+  scene checkpoint BEFORE draw 720
+draw=721 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 721
+draw=722 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+  scene checkpoint BEFORE draw 722
+draw=723 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 723
+draw=724 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+  scene checkpoint BEFORE draw 724
+  scene checkpoint BEFORE draw 725
+draw=726 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 726
+  scene checkpoint BEFORE draw 727
+  scene checkpoint BEFORE draw 728
+  scene checkpoint BEFORE draw 729
+draw=730 primitives=33 vs=648FD477 ps=CD510C23 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs05_bxxxx.pso
+  scene checkpoint BEFORE draw 730
+  scene checkpoint BEFORE draw 731
+draw=732 primitives=620 vs=09C76559 ps=38108FB8 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadervtx00_bxxxx.vso / modelshadervtx00_xxxxx.pso
+  scene checkpoint BEFORE draw 732
+draw=733 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 733
+  scene checkpoint BEFORE draw 734
+  scene checkpoint BEFORE draw 735
+  scene checkpoint BEFORE draw 736
+  scene checkpoint BEFORE draw 737
+  scene checkpoint BEFORE draw 738
+draw=739 primitives=311 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 739
+  scene checkpoint BEFORE draw 740
+draw=741 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 741
+  scene checkpoint BEFORE draw 742
+  scene checkpoint BEFORE draw 743
+  scene checkpoint BEFORE draw 744
+  scene checkpoint BEFORE draw 745
+  scene checkpoint BEFORE draw 746
+  scene checkpoint BEFORE draw 747
+  scene checkpoint BEFORE draw 748
+  scene checkpoint BEFORE draw 749
+  scene checkpoint BEFORE draw 750
+draw=751 primitives=2 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 751
+  scene checkpoint BEFORE draw 752
+  scene checkpoint BEFORE draw 753
+  scene checkpoint BEFORE draw 754
+  scene checkpoint BEFORE draw 755
+  scene checkpoint BEFORE draw 756
+draw=757 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 757
+  scene checkpoint BEFORE draw 758
+  scene checkpoint BEFORE draw 759
+  scene checkpoint BEFORE draw 760
+draw=761 primitives=68 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 761
+  scene checkpoint BEFORE draw 762
+draw=763 primitives=1486 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 763
+draw=764 primitives=78 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 764
+  scene checkpoint BEFORE draw 765
+  scene checkpoint BEFORE draw 766
+draw=767 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 767
+  scene checkpoint BEFORE draw 768
+draw=769 primitives=1157 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 769
+draw=770 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 770
+draw=771 primitives=290 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 771
+  scene checkpoint BEFORE draw 772
+  scene checkpoint BEFORE draw 773
+draw=774 primitives=316 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 774
+  scene checkpoint BEFORE draw 775
+draw=776 primitives=4557 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 776
+  scene checkpoint BEFORE draw 777
+  scene checkpoint BEFORE draw 778
+  scene checkpoint BEFORE draw 779
+draw=780 primitives=633 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 780
+draw=781 primitives=156 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 781
+draw=782 primitives=2722 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 782
+  scene checkpoint BEFORE draw 783
+draw=784 primitives=454 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 784
+draw=785 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 785
+  scene checkpoint BEFORE draw 786
+draw=787 primitives=7031 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 787
+  scene checkpoint BEFORE draw 788
+  scene checkpoint BEFORE draw 789
+draw=790 primitives=36 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 790
+draw=791 primitives=3567 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 791
+  scene checkpoint BEFORE draw 792
+  scene checkpoint BEFORE draw 793
+  scene checkpoint BEFORE draw 794
+draw=795 primitives=3395 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 795
+draw=796 primitives=1759 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+  scene checkpoint BEFORE draw 796
+draw=797 primitives=704 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 797
+draw=798 primitives=359 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 798
+  scene checkpoint BEFORE draw 799
+draw=800 primitives=80 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 800
+  scene checkpoint BEFORE draw 801
+  scene checkpoint BEFORE draw 802
+draw=803 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 803
+  scene checkpoint BEFORE draw 804
+draw=805 primitives=1178 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 805
+draw=806 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 806
+draw=807 primitives=752 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+  scene checkpoint BEFORE draw 807
+  scene checkpoint BEFORE draw 808
+draw=809 primitives=212 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 809
+draw=810 primitives=514 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 810
+  scene checkpoint BEFORE draw 811
+draw=812 primitives=4780 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 812
+  scene checkpoint BEFORE draw 813
+  scene checkpoint BEFORE draw 814
+draw=815 primitives=608 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 815
+  scene checkpoint BEFORE draw 816
+  scene checkpoint BEFORE draw 817
+  scene checkpoint BEFORE draw 818
+  scene checkpoint BEFORE draw 819
+  scene checkpoint BEFORE draw 820
+  scene checkpoint BEFORE draw 821
+draw=822 primitives=379 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 822
+draw=823 primitives=176 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 823
+  scene checkpoint BEFORE draw 824
+  scene checkpoint BEFORE draw 825
+draw=826 primitives=1223 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 826
+  scene checkpoint BEFORE draw 827
+  scene checkpoint BEFORE draw 828
+draw=829 primitives=161 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 829
+draw=830 primitives=287 vs=F7908A01 ps=205F0663 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs06_xxxxx.pso
+  scene checkpoint BEFORE draw 830
+draw=831 primitives=88 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 831
+draw=832 primitives=1815 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 832
+draw=833 primitives=355 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 833
+  scene checkpoint BEFORE draw 834
+draw=835 primitives=696 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 835
+draw=836 primitives=3746 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 836
+  scene checkpoint BEFORE draw 837
+draw=838 primitives=5786 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 838
+draw=839 primitives=454 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 839
+  scene checkpoint BEFORE draw 840
+draw=841 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 841
+  scene checkpoint BEFORE draw 842
+draw=843 primitives=1157 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 843
+draw=844 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 844
+draw=845 primitives=152 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+  scene checkpoint BEFORE draw 845
+draw=846 primitives=7465 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 846
+  scene checkpoint BEFORE draw 847
+  scene checkpoint BEFORE draw 848
+  scene checkpoint BEFORE draw 849
+  scene checkpoint BEFORE draw 850
+  scene checkpoint BEFORE draw 851
+  scene checkpoint BEFORE draw 852
+  scene checkpoint BEFORE draw 853
+draw=854 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 854
+  scene checkpoint BEFORE draw 855
+draw=856 primitives=1178 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 856
+draw=857 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+  scene checkpoint BEFORE draw 857
+draw=858 primitives=1331 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 858
+  scene checkpoint BEFORE draw 859
+draw=860 primitives=5668 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 860
+draw=861 primitives=7183 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 861
+  scene checkpoint BEFORE draw 862
+  scene checkpoint BEFORE draw 863
+  scene checkpoint BEFORE draw 864
+draw=865 primitives=828 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 865
+draw=866 primitives=73 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 866
+  scene checkpoint BEFORE draw 867
+draw=868 primitives=340 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+  scene checkpoint BEFORE draw 868
+draw=869 primitives=177 vs=F556C85E ps=36A9AACF matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs09_bxxmx.vso / modelshaderobs09_bxxmx.pso
+  scene checkpoint BEFORE draw 869
+  scene checkpoint BEFORE draw 870
+  scene checkpoint BEFORE draw 871
+  scene checkpoint BEFORE draw 872
+  scene checkpoint BEFORE draw 873
+  scene checkpoint BEFORE draw 874
+  scene checkpoint BEFORE draw 875
+  scene checkpoint BEFORE draw 876
+  scene checkpoint BEFORE draw 877
+  scene checkpoint BEFORE draw 878
+  scene checkpoint BEFORE draw 879
+  scene checkpoint BEFORE draw 880
+  scene checkpoint BEFORE draw 881
+  scene checkpoint BEFORE draw 882
+  scene checkpoint BEFORE draw 883
+  scene checkpoint BEFORE draw 884
+  scene checkpoint BEFORE draw 885
+  scene checkpoint BEFORE draw 886
+  scene checkpoint BEFORE draw 887
+  scene checkpoint BEFORE draw 888
+  scene checkpoint BEFORE draw 889
+  scene checkpoint BEFORE draw 890
+  scene checkpoint BEFORE draw 891
+  scene checkpoint BEFORE draw 892
+  scene checkpoint BEFORE draw 893
+  scene checkpoint BEFORE draw 894
+  scene checkpoint BEFORE draw 895
+  scene checkpoint BEFORE draw 896
+  scene checkpoint BEFORE draw 897
+  scene checkpoint BEFORE draw 898
+  scene checkpoint BEFORE draw 899
+  scene checkpoint BEFORE draw 900
+  scene checkpoint BEFORE draw 901
+  scene checkpoint BEFORE draw 902
+  scene checkpoint BEFORE draw 903
+  scene checkpoint BEFORE draw 904
+  scene checkpoint BEFORE draw 905
+  scene checkpoint BEFORE draw 906
+  scene checkpoint BEFORE draw 907
+draw=908 primitives=233 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 908
+draw=909 primitives=213 vs=F556C85E ps=36A9AACF matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs09_bxxmx.vso / modelshaderobs09_bxxmx.pso
+  scene checkpoint BEFORE draw 909
+draw=910 primitives=731 vs=EF05A9C9 ps=8EEBE33D matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadergls03_bxxxx.vso / modelshadergls03_bxxxx.pso
+  scene checkpoint BEFORE draw 910
+  scene checkpoint BEFORE draw 911
+  scene checkpoint BEFORE draw 912
+  scene checkpoint BEFORE draw 913
+  scene checkpoint BEFORE draw 914
+  scene checkpoint BEFORE draw 915
+  scene checkpoint BEFORE draw 916
+  scene checkpoint BEFORE draw 917
+  scene checkpoint BEFORE draw 918
+  scene checkpoint BEFORE draw 919
+  scene checkpoint BEFORE draw 920
+  scene checkpoint BEFORE draw 921
+draw=922 primitives=160 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+  scene checkpoint BEFORE draw 922
+  scene checkpoint BEFORE draw 923
+  scene checkpoint BEFORE draw 924
+  scene checkpoint BEFORE draw 925
+  scene checkpoint BEFORE draw 926
+  scene checkpoint BEFORE draw 927
+draw=928 primitives=170 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 928
+  scene checkpoint BEFORE draw 929
+  scene checkpoint BEFORE draw 930
+  scene checkpoint BEFORE draw 931
+draw=932 primitives=1838 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+  scene checkpoint BEFORE draw 932
+draw=933 primitives=8196 vs=EF05A9C9 ps=8EEBE33D matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadergls03_bxxxx.vso / modelshadergls03_bxxxx.pso
+  scene checkpoint BEFORE draw 933
+draw=934 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+  scene checkpoint BEFORE draw 934
+draw=935 primitives=1009 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 935
+  scene checkpoint BEFORE draw 936
+  scene checkpoint BEFORE draw 937
+draw=938 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+  scene checkpoint BEFORE draw 938
+  scene checkpoint BEFORE draw 939
+draw=940 primitives=1856 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 940
+  scene checkpoint BEFORE draw 941
+  scene checkpoint BEFORE draw 942
+  scene checkpoint BEFORE draw 943
+draw=944 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+  scene checkpoint BEFORE draw 944
+draw=945 primitives=1531 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 945
+  scene checkpoint BEFORE draw 946
+  scene checkpoint BEFORE draw 947
+draw=948 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+  scene checkpoint BEFORE draw 948
+  scene checkpoint BEFORE draw 949
+draw=950 primitives=2862 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 950
+  scene checkpoint BEFORE draw 951
+  scene checkpoint BEFORE draw 952
+  scene checkpoint BEFORE draw 953
+draw=954 primitives=2423 vs=67B951BD ps=0103F1A9 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_bxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 954
+  scene checkpoint BEFORE draw 955
+  scene checkpoint BEFORE draw 956
+  scene checkpoint BEFORE draw 957
+draw=958 primitives=273 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 958
+draw=959 primitives=401 vs=BDAFACB9 ps=49C07FB4 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs03_bxxxx.vso / modelshaderobs03_bxxmx.pso
+  scene checkpoint BEFORE draw 959
+draw=960 primitives=192 vs=67B951BD ps=0103F1A9 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_bxxxx.vso / modelshaderbgs04_xxxxx.pso
+  scene checkpoint BEFORE draw 960
+  scene checkpoint BEFORE draw 961
+  scene checkpoint BEFORE draw 962
+  scene checkpoint BEFORE draw 963
+draw=964 primitives=268 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 964
+draw=965 primitives=409 vs=BDAFACB9 ps=49C07FB4 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs03_bxxxx.vso / modelshaderobs03_bxxmx.pso
+  scene checkpoint BEFORE draw 965
+draw=966 primitives=2862 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 966
+  scene checkpoint BEFORE draw 967
+  scene checkpoint BEFORE draw 968
+  scene checkpoint BEFORE draw 969
+draw=970 primitives=2762 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 970
+  scene checkpoint BEFORE draw 971
+  scene checkpoint BEFORE draw 972
+  scene checkpoint BEFORE draw 973
+  scene checkpoint BEFORE draw 974
+  scene checkpoint BEFORE draw 975
+  scene checkpoint BEFORE draw 976
+  scene checkpoint BEFORE draw 977
+  scene checkpoint BEFORE draw 978
+  scene checkpoint BEFORE draw 979
+  scene checkpoint BEFORE draw 980
+draw=981 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 981
+  scene checkpoint BEFORE draw 982
+  scene checkpoint BEFORE draw 983
+  scene checkpoint BEFORE draw 984
+draw=985 primitives=83 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 985
+  scene checkpoint BEFORE draw 986
+  scene checkpoint BEFORE draw 987
+  scene checkpoint BEFORE draw 988
+draw=989 primitives=374 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 989
+  scene checkpoint BEFORE draw 990
+  scene checkpoint BEFORE draw 991
+  scene checkpoint BEFORE draw 992
+draw=993 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 993
+draw=994 primitives=1526 vs=5DD39D91 ps=C1D05BC2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunmx.pso
+  scene checkpoint BEFORE draw 994
+  scene checkpoint BEFORE draw 995
+  scene checkpoint BEFORE draw 996
+  scene checkpoint BEFORE draw 997
+  scene checkpoint BEFORE draw 998
+  scene checkpoint BEFORE draw 999
+draw=1000 primitives=2605 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+  scene checkpoint BEFORE draw 1000
+draw=1001 primitives=454 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+  scene checkpoint BEFORE draw 1001
+draw=1002 primitives=1424 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+  scene checkpoint BEFORE draw 1002
+draw=1003 primitives=487 vs=5DD39D91 ps=C1D05BC2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunmx.pso
+  scene checkpoint BEFORE draw 1003
+  scene checkpoint BEFORE draw 1004
+draw=1005 primitives=2902 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 1005
+  scene checkpoint BEFORE draw 1006
+  scene checkpoint BEFORE draw 1007
+draw=1008 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1008
+draw=1009 primitives=2762 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 1009
+  scene checkpoint BEFORE draw 1010
+draw=1011 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1011
+  scene checkpoint BEFORE draw 1012
+draw=1013 primitives=3037 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+  scene checkpoint BEFORE draw 1013
+  scene checkpoint BEFORE draw 1014
+draw=1015 primitives=194 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1015
+draw=1016 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1016
+draw=1017 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1017
+draw=1018 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1018
+draw=1019 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1019
+draw=1020 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1020
+draw=1021 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1021
+draw=1022 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1022
+draw=1023 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1023
+draw=1024 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1024
+draw=1025 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1025
+draw=1026 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1026
+draw=1027 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1027
+draw=1028 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1028
+draw=1029 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1029
+draw=1030 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1030
+draw=1031 primitives=332 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1031
+draw=1032 primitives=132 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1032
+draw=1033 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1033
+draw=1034 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1034
+draw=1035 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1035
+draw=1036 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1036
+draw=1037 primitives=198 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1037
+draw=1038 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1038
+draw=1039 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1039
+draw=1040 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1040
+draw=1041 primitives=229 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1041
+draw=1042 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1042
+draw=1043 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1043
+draw=1044 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1044
+draw=1045 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1045
+draw=1046 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1046
+draw=1047 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1047
+draw=1048 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1048
+draw=1049 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1049
+draw=1050 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1050
+draw=1051 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1051
+draw=1052 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1052
+draw=1053 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1053
+draw=1054 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1054
+draw=1055 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1055
+draw=1056 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1056
+draw=1057 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1057
+draw=1058 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1058
+draw=1059 primitives=328 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1059
+draw=1060 primitives=132 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1060
+draw=1061 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1061
+draw=1062 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1062
+draw=1063 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1063
+draw=1064 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1064
+draw=1065 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1065
+draw=1066 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1066
+draw=1067 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1067
+draw=1068 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1068
+draw=1069 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1069
+draw=1070 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1070
+draw=1071 primitives=230 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1071
+draw=1072 primitives=43 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1072
+draw=1073 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1073
+draw=1074 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1074
+draw=1075 primitives=284 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1075
+draw=1076 primitives=188 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1076
+draw=1077 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1077
+draw=1078 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1078
+draw=1079 primitives=197 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1079
+draw=1080 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1080
+draw=1081 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1081
+draw=1082 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1082
+draw=1083 primitives=328 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1083
+draw=1084 primitives=312 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1084
+draw=1085 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1085
+draw=1086 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1086
+draw=1087 primitives=155 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1087
+draw=1088 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1088
+draw=1089 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1089
+draw=1090 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1090
+draw=1091 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1091
+draw=1092 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1092
+draw=1093 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1093
+draw=1094 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+  scene checkpoint BEFORE draw 1094
+draw=1095 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1095
+  scene checkpoint BEFORE draw 1096
+draw=1097 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1097
+draw=1098 primitives=1792 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+  scene checkpoint BEFORE draw 1098
+draw=1099 primitives=1579 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+  scene checkpoint BEFORE draw 1099
+draw=1100 primitives=276 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+  scene checkpoint BEFORE draw 1100
+draw=1101 primitives=502 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+  scene checkpoint BEFORE draw 1101
+draw=1102 primitives=2965 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+  scene checkpoint BEFORE draw 1102
+draw=1103 primitives=491 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+  scene checkpoint BEFORE draw 1103
+draw=1104 primitives=258 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+  scene checkpoint BEFORE draw 1104
+draw=1105 primitives=2268 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+  scene checkpoint BEFORE draw 1105
+draw=1106 primitives=87 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 1106
+draw=1107 primitives=696 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+  scene checkpoint BEFORE draw 1107
+draw=1108 primitives=809 vs=3E33A405 ps=1D800D3D matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxmx.vso / modelshaderobs04_bxxmx.pso
+  scene checkpoint BEFORE draw 1108
+draw=1109 primitives=1252 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+  scene checkpoint BEFORE draw 1109
+draw=1110 primitives=717 vs=3E33A405 ps=1D800D3D matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxmx.vso / modelshaderobs04_bxxmx.pso
+  scene checkpoint BEFORE draw 1110
+draw=1111 primitives=4071 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+  scene checkpoint BEFORE draw 1111
+draw=1112 primitives=397 vs=6955BB24 ps=19D126CD matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls09_bxxmx.vso / modelshaderpls09_bxxmx.pso
+  scene checkpoint BEFORE draw 1112
+  scene checkpoint BEFORE draw 1113
+draw=1114 primitives=1288 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+  scene checkpoint BEFORE draw 1114
+  scene checkpoint BEFORE draw 1115
+draw=1116 primitives=2093 vs=5DD39D91 ps=8253CA8B matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls04_bxnxx.pso
+  scene checkpoint BEFORE draw 1116
+draw=1117 primitives=572 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 1117
+  scene checkpoint BEFORE draw 1118
+draw=1119 primitives=3142 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+  scene checkpoint BEFORE draw 1119
+draw=1120 primitives=189 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+  scene checkpoint BEFORE draw 1120
+draw=1121 primitives=227 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 1121
+  scene checkpoint BEFORE draw 1122
+  scene checkpoint BEFORE draw 1123
+  scene checkpoint BEFORE draw 1124
+draw=1125 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1125
+  scene checkpoint BEFORE draw 1126
+draw=1127 primitives=2229 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+  scene checkpoint BEFORE draw 1127
+draw=1128 primitives=227 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+  scene checkpoint BEFORE draw 1128
+  scene checkpoint BEFORE draw 1129
+  scene checkpoint BEFORE draw 1130
+  scene checkpoint BEFORE draw 1131
+draw=1132 primitives=1486 vs=BB5B05C6 ps=1847C1F9 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadershadowrec00_xxxxx.vso / modelshadershadowrec00_xxxxx.pso
+  scene checkpoint BEFORE draw 1132
+  scene checkpoint BEFORE draw 1133
+  scene checkpoint BEFORE draw 1134
+  scene checkpoint BEFORE draw 1135
+  scene checkpoint BEFORE draw 1136
+  scene checkpoint BEFORE draw 1137
+  scene checkpoint BEFORE draw 1138
+  scene checkpoint BEFORE draw 1139
+  scene checkpoint BEFORE draw 1140
+  scene checkpoint BEFORE draw 1141
+  scene checkpoint BEFORE draw 1142
+  scene checkpoint BEFORE draw 1143
+  scene checkpoint BEFORE draw 1144
+  scene checkpoint BEFORE draw 1145
+  scene checkpoint BEFORE draw 1146
+  scene checkpoint BEFORE draw 1147
+  scene checkpoint BEFORE draw 1148
+  scene checkpoint BEFORE draw 1149
+  scene checkpoint BEFORE draw 1150
+  scene checkpoint BEFORE draw 1151
+  scene checkpoint BEFORE draw 1152
+  scene checkpoint BEFORE draw 1153
+  scene checkpoint BEFORE draw 1154
+  scene checkpoint BEFORE draw 1155
+  scene checkpoint BEFORE draw 1156
+  scene checkpoint BEFORE draw 1157
+  scene checkpoint BEFORE draw 1158
+  scene checkpoint BEFORE draw 1159
+  scene checkpoint BEFORE draw 1160
+  scene checkpoint BEFORE draw 1161
+  scene checkpoint BEFORE draw 1162
+  scene checkpoint BEFORE draw 1163
+  scene checkpoint BEFORE draw 1164
+  scene checkpoint BEFORE draw 1165
+draw=1166 primitives=1759 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+  scene checkpoint BEFORE draw 1166
+draw=1167 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+  scene checkpoint BEFORE draw 1167
+  scene checkpoint BEFORE draw 1168
+  scene checkpoint BEFORE draw 1169
+  scene checkpoint BEFORE draw 1170
+  scene checkpoint BEFORE draw 1171
+  scene checkpoint BEFORE draw 1172
+  scene checkpoint BEFORE draw 1173
+  scene checkpoint BEFORE draw 1174
+  scene checkpoint BEFORE draw 1175
+  scene checkpoint BEFORE draw 1176
+  scene checkpoint BEFORE draw 1177
+  scene checkpoint BEFORE draw 1178
+  scene checkpoint BEFORE draw 1179
+  scene checkpoint BEFORE draw 1180
+draw=1181 primitives=39 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+  scene checkpoint BEFORE draw 1181
+draw=1182 primitives=55 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+  scene checkpoint BEFORE draw 1182
+  scene checkpoint BEFORE draw 1183
+  scene checkpoint BEFORE draw 1184
+  scene checkpoint BEFORE draw 1185
+  scene checkpoint BEFORE draw 1186
+  scene checkpoint BEFORE draw 1187
+  scene checkpoint BEFORE draw 1188
+  scene checkpoint BEFORE draw 1189
+  scene checkpoint BEFORE draw 1190
+  scene checkpoint BEFORE draw 1191
+draw=1192 primitives=4 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_xxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1192
+  scene checkpoint BEFORE draw 1193
+  scene checkpoint BEFORE draw 1194
+  scene checkpoint BEFORE draw 1195
+  scene checkpoint BEFORE draw 1196
+  scene checkpoint BEFORE draw 1197
+  scene checkpoint BEFORE draw 1198
+draw=1199 primitives=430 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=3
+  modelshaderpls02_bxxxx.vso / modelshaderpls02_bxxxx.pso
+  scene checkpoint BEFORE draw 1199
+  scene checkpoint BEFORE draw 1200
+  scene checkpoint BEFORE draw 1201
+  scene checkpoint BEFORE draw 1202
+  scene checkpoint BEFORE draw 1203
+  scene checkpoint BEFORE draw 1204
+  scene checkpoint BEFORE draw 1205
+  scene checkpoint BEFORE draw 1206
+draw=1207 primitives=756 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+  scene checkpoint BEFORE draw 1207
+  scene checkpoint BEFORE draw 1208
+  scene checkpoint BEFORE draw 1209
+  scene checkpoint BEFORE draw 1210
+  scene checkpoint BEFORE draw 1211
+draw=1212 primitives=48 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+  scene checkpoint BEFORE draw 1212
+  scene checkpoint BEFORE draw 1213
+draw=1214 primitives=20 vs=D539A5A1 ps=D6A7757D matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs07_bxxxx.vso / modelshaderefs07_bxxxx.pso
+  scene checkpoint BEFORE draw 1214
+  scene checkpoint BEFORE draw 1215
+  scene checkpoint BEFORE draw 1216
+  scene checkpoint BEFORE draw 1217
+  scene checkpoint BEFORE draw 1218
+  scene checkpoint BEFORE draw 1219
+  scene checkpoint BEFORE draw 1220
+draw=1221 primitives=48 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+  scene checkpoint BEFORE draw 1221
+  scene checkpoint BEFORE draw 1222
+  scene checkpoint BEFORE draw 1223
+draw=1224 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1224
+draw=1225 primitives=545 vs=90241E02 ps=E83CDBD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc01_bxnxx.vso / modelshaderetc01_bxnxx.pso
+  scene checkpoint BEFORE draw 1225
+  scene checkpoint BEFORE draw 1226
+  scene checkpoint BEFORE draw 1227
+  scene checkpoint BEFORE draw 1228
+  scene checkpoint BEFORE draw 1229
+draw=1230 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1230
+draw=1231 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1231
+draw=1232 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1232
+draw=1233 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1233
+draw=1234 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1234
+draw=1235 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1235
+draw=1236 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1236
+draw=1237 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1237
+  scene checkpoint BEFORE draw 1238
+draw=1239 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1239
+  scene checkpoint BEFORE draw 1240
+  scene checkpoint BEFORE draw 1241
+  scene checkpoint BEFORE draw 1242
+  scene checkpoint BEFORE draw 1243
+  scene checkpoint BEFORE draw 1244
+  scene checkpoint BEFORE draw 1245
+draw=1246 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1246
+draw=1247 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1247
+  scene checkpoint BEFORE draw 1248
+  scene checkpoint BEFORE draw 1249
+draw=1250 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1250
+  scene checkpoint BEFORE draw 1251
+  scene checkpoint BEFORE draw 1252
+  scene checkpoint BEFORE draw 1253
+  scene checkpoint BEFORE draw 1254
+  scene checkpoint BEFORE draw 1255
+  scene checkpoint BEFORE draw 1256
+  scene checkpoint BEFORE draw 1257
+draw=1258 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1258
+draw=1259 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1259
+draw=1260 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1260
+draw=1261 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1261
+  scene checkpoint BEFORE draw 1262
+draw=1263 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1263
+draw=1264 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1264
+  scene checkpoint BEFORE draw 1265
+draw=1266 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1266
+draw=1267 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1267
+draw=1268 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1268
+  scene checkpoint BEFORE draw 1269
+draw=1270 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1270
+  scene checkpoint BEFORE draw 1271
+  scene checkpoint BEFORE draw 1272
+  scene checkpoint BEFORE draw 1273
+  scene checkpoint BEFORE draw 1274
+  scene checkpoint BEFORE draw 1275
+  scene checkpoint BEFORE draw 1276
+draw=1277 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1277
+draw=1278 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1278
+draw=1279 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1279
+draw=1280 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1280
+draw=1281 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1281
+  scene checkpoint BEFORE draw 1282
+  scene checkpoint BEFORE draw 1283
+  scene checkpoint BEFORE draw 1284
+  scene checkpoint BEFORE draw 1285
+  scene checkpoint BEFORE draw 1286
+  scene checkpoint BEFORE draw 1287
+draw=1288 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1288
+draw=1289 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1289
+  scene checkpoint BEFORE draw 1290
+draw=1291 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1291
+draw=1292 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1292
+  scene checkpoint BEFORE draw 1293
+  scene checkpoint BEFORE draw 1294
+  scene checkpoint BEFORE draw 1295
+draw=1296 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1296
+draw=1297 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1297
+draw=1298 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1298
+  scene checkpoint BEFORE draw 1299
+  scene checkpoint BEFORE draw 1300
+  scene checkpoint BEFORE draw 1301
+  scene checkpoint BEFORE draw 1302
+  scene checkpoint BEFORE draw 1303
+  scene checkpoint BEFORE draw 1304
+  scene checkpoint BEFORE draw 1305
+draw=1306 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1306
+draw=1307 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1307
+draw=1308 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1308
+draw=1309 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1309
+draw=1310 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1310
+draw=1311 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1311
+draw=1312 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1312
+draw=1313 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1313
+draw=1314 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1314
+draw=1315 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1315
+draw=1316 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1316
+  scene checkpoint BEFORE draw 1317
+draw=1318 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1318
+  scene checkpoint BEFORE draw 1319
+  scene checkpoint BEFORE draw 1320
+  scene checkpoint BEFORE draw 1321
+  scene checkpoint BEFORE draw 1322
+  scene checkpoint BEFORE draw 1323
+draw=1324 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1324
+draw=1325 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1325
+draw=1326 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1326
+draw=1327 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1327
+  scene checkpoint BEFORE draw 1328
+  scene checkpoint BEFORE draw 1329
+  scene checkpoint BEFORE draw 1330
+  scene checkpoint BEFORE draw 1331
+draw=1332 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1332
+draw=1333 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1333
+draw=1334 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1334
+draw=1335 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1335
+  scene checkpoint BEFORE draw 1336
+draw=1337 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1337
+  scene checkpoint BEFORE draw 1338
+draw=1339 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+  scene checkpoint BEFORE draw 1339
+draw=1340 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1340
+  scene checkpoint BEFORE draw 1341
+  scene checkpoint BEFORE draw 1342
+draw=1343 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1343
+  scene checkpoint BEFORE draw 1344
+  scene checkpoint BEFORE draw 1345
+  scene checkpoint BEFORE draw 1346
+draw=1347 primitives=218 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+  scene checkpoint BEFORE draw 1347
+  scene checkpoint BEFORE draw 1348
+  scene checkpoint BEFORE draw 1349
+  scene checkpoint BEFORE draw 1350
+  scene checkpoint BEFORE draw 1351
+  scene checkpoint BEFORE draw 1352
+  scene checkpoint BEFORE draw 1353
+  scene checkpoint BEFORE draw 1354
+  scene checkpoint BEFORE draw 1355
+  scene checkpoint BEFORE draw 1356
+  scene checkpoint BEFORE draw 1357
+  scene checkpoint BEFORE draw 1358
+  scene checkpoint BEFORE draw 1359
+  scene checkpoint BEFORE draw 1360
+  scene checkpoint BEFORE draw 1361
+  scene checkpoint BEFORE draw 1362
+  scene checkpoint BEFORE draw 1363
+  scene checkpoint BEFORE draw 1364
+draw=1365 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1365
+draw=1366 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1366
+draw=1367 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1367
+  scene checkpoint BEFORE draw 1368
+  scene checkpoint BEFORE draw 1369
+  scene checkpoint BEFORE draw 1370
+  scene checkpoint BEFORE draw 1371
+draw=1372 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1372
+draw=1373 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1373
+  scene checkpoint BEFORE draw 1374
+  scene checkpoint BEFORE draw 1375
+draw=1376 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1376
+  scene checkpoint BEFORE draw 1377
+  scene checkpoint BEFORE draw 1378
+draw=1379 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1379
+draw=1380 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1380
+draw=1381 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+  scene checkpoint BEFORE draw 1381
+draw=1382 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1382
+draw=1383 primitives=154 vs=E06CEE1C ps=BF10C4D1 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc00_bxxmx.vso / modelshaderetc00_bxxmx.pso
+  scene checkpoint BEFORE draw 1383
+  scene checkpoint BEFORE draw 1384
+  scene checkpoint BEFORE draw 1385
+draw=1386 primitives=2 vs=90241E02 ps=E83CDBD7 matrix=c8 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc01_bxnxx.vso / modelshaderetc01_bxnxx.pso
+  scene checkpoint BEFORE draw 1386
+  scene checkpoint BEFORE draw 1387
+draw=1388 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1388
+  scene checkpoint BEFORE draw 1389
+  scene checkpoint BEFORE draw 1390
+  scene checkpoint BEFORE draw 1391
+draw=1392 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1392
+  scene checkpoint BEFORE draw 1393
+  scene checkpoint BEFORE draw 1394
+  scene checkpoint BEFORE draw 1395
+  scene checkpoint BEFORE draw 1396
+draw=1397 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1397
+draw=1398 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1398
+draw=1399 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1399
+draw=1400 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+  scene checkpoint BEFORE draw 1400
+draw=1401 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+  scene checkpoint BEFORE draw 1401
+  scene checkpoint BEFORE draw 1402
+draw=1403 primitives=2 vs=8AECB4A6 ps=6E722DE9 matrix=c8 ortho=1 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=0/5/2 cull=1
+  filter07.vso / filter00.pso
+  scene checkpoint BEFORE draw 1403
+draw=1404 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1405 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1406 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1407 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1408 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1409 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1410 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1411 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1412 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1413 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1414 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1415 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1416 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1417 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1418 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1419 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1420 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1421 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E0A3C00 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1424 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E74A040 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+  scene checkpoint BEFORE draw 1424
+draw=1425 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E749780 2560x1440 fmt=22 viewport=0,0,2560,1440 depth=0/0 blend=0/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+  scene checkpoint BEFORE draw 1425

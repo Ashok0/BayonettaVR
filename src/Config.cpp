@@ -93,7 +93,7 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20261013.70 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+    Log("config: build=20261014.73 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,

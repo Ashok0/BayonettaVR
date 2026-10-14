@@ -1,0 +1,1299 @@
+Shader draw counts:
+   1 A6EB54D8 filter03.pso
+ 100 E54B73A3 espshaderbase.pso
+ 100 EDBEB70B espshadermask.pso
+   4 EF0C3C98 espshadershimmer2.pso
+  16 AFB21FEA modelshadershadowcas00_bxxxx.pso
+   5 E290931D modelshadergrs00_xxxxa_depthtex.pso
+ 326 28D876E3 modelshaderweightdepthtex.pso
+  10 F12FF905 modelshaderbgs01_xxxxx_depthtex.pso
+  54 E24F2347 modelshaderbgs04_xxxxx_depthtex.pso
+  65 A2CACB31 modelshaderfixeddepthtex.pso
+   7 8F762ED9 modelshaderfixednoalphadepthtex.pso
+  96 42535AE0 modelshaderweightdepth.pso
+   5 A5996EFC modelshadergrs00_xxxxa.pso
+   4 CB8BEC42 modelshaderbgs03_xxxxx.pso
+  49 5EA321BE modelshaderbgs01_xxxxx.pso
+  12 4AC4957B modelshadervtx01_bxxmx.pso
+  33 5CB42FA2 modelshaderobs01_bxxxx.pso
+   2 CD510C23 modelshaderobs05_bxxxx.pso
+  21 441291DA modelshaderobs07_bxnxx.pso
+  26 38108FB8 modelshadervtx00_xxxxx.pso
+  62 0103F1A9 modelshaderbgs04_xxxxx.pso
+  34 D6B9BA20 modelshaderbgs02_xxxxx.pso
+   7 FFE118BE modelshaderbgs09_xxxxx.pso
+  12 07457270 modelshaderbgs05_xxxxx.pso
+   1 205F0663 modelshaderbgs06_xxxxx.pso
+  40 36A9AACF modelshaderobs09_bxxmx.pso
+  47 32CAF330 modelshaderobs04_xxxxx.pso
+  13 8EEBE33D modelshadergls03_bxxxx.pso
+  10 DB234762 modelshaderobs01_bunxx.pso
+   6 69C0ADD7 modelshadervtx02_bxxmx.pso
+   2 49C07FB4 modelshaderobs03_bxxmx.pso
+   3 6C60805C modelshaderpls05_bxnxb.pso
+   3 03A89F89 modelshaderobs00_bxnxx.pso
+   3 51FA4B03 modelshaderpls06_bxnxa.pso
+   4 F0125E48 modelshaderpls03_bxnxa.pso
+  24 2DD61A8F modelshaderpls01_bxxmb.pso
+   2 1D800D3D modelshaderobs04_bxxmx.pso
+   2 19D126CD modelshaderpls09_bxxmx.pso
+   1 8253CA8B modelshaderpls04_bxnxx.pso
+   8 C1D05BC2 modelshaderobs01_bunmx.pso
+  40 9445C9D2 modelshaderetc03_bxxxx.pso
+  34 1847C1F9 modelshadershadowrec00_xxxxx.pso
+  15 A86DCDA5 modelshaderpls02_bxxxx.pso
+  21 3F0F9C5C modelshaderefs02_xxxxx.pso
+  22 7C2F0109 7C2F0109
+   7 E83CDBD7 modelshaderetc01_bxnxx.pso
+  13 DD5F8DF1 espshadershimmer.pso
+   3 BF10C4D1 modelshaderetc00_bxxmx.pso
+   1 6E722DE9 filter00.pso
+   5 84049DCA filter05.pso
+   5 563F5C20 filter02.pso
+   5 0F24B7EF filter01.pso
+   7 B8690130 filtershadercopytex.pso
+
+Pass transitions:
+draw=1 primitives=2 vs=004E872A ps=A6EB54D8 matrix=c8 ortho=1 rt=4DD8B360 8x8 fmt=21 viewport=0,0,8,8 depth=0/0 blend=0/5/6 cull=1
+  filter03.vso / filter03.pso
+draw=2 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E456AE0 128x128 fmt=21 viewport=0,0,128,128 depth=4294967295/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=3 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E456AE0 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=6 primitives=2 vs=CB1E6A15 ps=EDBEB70B matrix=c24 ortho=0 rt=4E456AE0 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshadermask.pso
+draw=106 primitives=2 vs=9FFEA812 ps=EF0C3C98 matrix=c24 ortho=0 rt=4E456AE0 128x128 fmt=21 viewport=0,0,128,128 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmer2.vso / espshadershimmer2.pso
+draw=110 primitives=1158 vs=50463FAE ps=AFB21FEA matrix=c-1 ortho=1 rt=4EE0F000 4096x4096 fmt=21 viewport=0,0,4096,4096 depth=1/1 blend=0/5/6 cull=2
+  modelshadershadowcas00_bxxxx.vso / modelshadershadowcas00_bxxxx.pso
+draw=126 primitives=296 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 126
+  scene checkpoint BEFORE draw 127
+draw=128 primitives=1015 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 128
+  scene checkpoint BEFORE draw 129
+  scene checkpoint BEFORE draw 130
+  scene checkpoint BEFORE draw 131
+  scene checkpoint BEFORE draw 132
+  scene checkpoint BEFORE draw 133
+  scene checkpoint BEFORE draw 134
+  scene checkpoint BEFORE draw 135
+  scene checkpoint BEFORE draw 136
+  scene checkpoint BEFORE draw 137
+  scene checkpoint BEFORE draw 138
+  scene checkpoint BEFORE draw 139
+  scene checkpoint BEFORE draw 140
+  scene checkpoint BEFORE draw 141
+  scene checkpoint BEFORE draw 142
+  scene checkpoint BEFORE draw 143
+  scene checkpoint BEFORE draw 144
+  scene checkpoint BEFORE draw 145
+  scene checkpoint BEFORE draw 146
+  scene checkpoint BEFORE draw 147
+  scene checkpoint BEFORE draw 148
+  scene checkpoint BEFORE draw 149
+  scene checkpoint BEFORE draw 150
+  scene checkpoint BEFORE draw 151
+  scene checkpoint BEFORE draw 152
+  scene checkpoint BEFORE draw 153
+  scene checkpoint BEFORE draw 154
+  scene checkpoint BEFORE draw 155
+  scene checkpoint BEFORE draw 156
+  scene checkpoint BEFORE draw 157
+  scene checkpoint BEFORE draw 158
+  scene checkpoint BEFORE draw 159
+  scene checkpoint BEFORE draw 160
+  scene checkpoint BEFORE draw 161
+  scene checkpoint BEFORE draw 162
+  scene checkpoint BEFORE draw 163
+  scene checkpoint BEFORE draw 164
+  scene checkpoint BEFORE draw 165
+  scene checkpoint BEFORE draw 166
+  scene checkpoint BEFORE draw 167
+  scene checkpoint BEFORE draw 168
+  scene checkpoint BEFORE draw 169
+  scene checkpoint BEFORE draw 170
+  scene checkpoint BEFORE draw 171
+  scene checkpoint BEFORE draw 172
+  scene checkpoint BEFORE draw 173
+  scene checkpoint BEFORE draw 174
+  scene checkpoint BEFORE draw 175
+  scene checkpoint BEFORE draw 176
+  scene checkpoint BEFORE draw 177
+  scene checkpoint BEFORE draw 178
+  scene checkpoint BEFORE draw 179
+  scene checkpoint BEFORE draw 180
+  scene checkpoint BEFORE draw 181
+  scene checkpoint BEFORE draw 182
+  scene checkpoint BEFORE draw 183
+  scene checkpoint BEFORE draw 184
+  scene checkpoint BEFORE draw 185
+  scene checkpoint BEFORE draw 186
+  scene checkpoint BEFORE draw 187
+  scene checkpoint BEFORE draw 188
+draw=189 primitives=1486 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 189
+draw=190 primitives=78 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 190
+  scene checkpoint BEFORE draw 191
+  scene checkpoint BEFORE draw 192
+draw=193 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 193
+  scene checkpoint BEFORE draw 194
+draw=195 primitives=1157 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 195
+draw=196 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 196
+draw=197 primitives=290 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 197
+  scene checkpoint BEFORE draw 198
+  scene checkpoint BEFORE draw 199
+draw=200 primitives=316 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 200
+  scene checkpoint BEFORE draw 201
+draw=202 primitives=4557 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 202
+  scene checkpoint BEFORE draw 203
+  scene checkpoint BEFORE draw 204
+  scene checkpoint BEFORE draw 205
+draw=206 primitives=633 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 206
+draw=207 primitives=156 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 207
+draw=208 primitives=2722 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 208
+  scene checkpoint BEFORE draw 209
+draw=210 primitives=454 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 210
+draw=211 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 211
+  scene checkpoint BEFORE draw 212
+draw=213 primitives=7031 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 213
+  scene checkpoint BEFORE draw 214
+  scene checkpoint BEFORE draw 215
+draw=216 primitives=36 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 216
+draw=217 primitives=3567 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 217
+  scene checkpoint BEFORE draw 218
+  scene checkpoint BEFORE draw 219
+  scene checkpoint BEFORE draw 220
+draw=221 primitives=3395 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 221
+  scene checkpoint BEFORE draw 222
+draw=223 primitives=704 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 223
+draw=224 primitives=359 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 224
+  scene checkpoint BEFORE draw 225
+draw=226 primitives=80 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 226
+  scene checkpoint BEFORE draw 227
+  scene checkpoint BEFORE draw 228
+draw=229 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 229
+  scene checkpoint BEFORE draw 230
+draw=231 primitives=1178 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 231
+draw=232 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 232
+draw=233 primitives=752 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 233
+  scene checkpoint BEFORE draw 234
+draw=235 primitives=212 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 235
+draw=236 primitives=514 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 236
+  scene checkpoint BEFORE draw 237
+  scene checkpoint BEFORE draw 238
+  scene checkpoint BEFORE draw 239
+  scene checkpoint BEFORE draw 240
+draw=241 primitives=608 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 241
+  scene checkpoint BEFORE draw 242
+  scene checkpoint BEFORE draw 243
+  scene checkpoint BEFORE draw 244
+  scene checkpoint BEFORE draw 245
+  scene checkpoint BEFORE draw 246
+  scene checkpoint BEFORE draw 247
+draw=248 primitives=379 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 248
+  scene checkpoint BEFORE draw 249
+  scene checkpoint BEFORE draw 250
+  scene checkpoint BEFORE draw 251
+draw=252 primitives=1223 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 252
+  scene checkpoint BEFORE draw 253
+  scene checkpoint BEFORE draw 254
+draw=255 primitives=161 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 255
+  scene checkpoint BEFORE draw 256
+draw=257 primitives=88 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 257
+draw=258 primitives=1815 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 258
+draw=259 primitives=355 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 259
+  scene checkpoint BEFORE draw 260
+draw=261 primitives=696 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 261
+draw=262 primitives=3746 vs=CA5966C8 ps=F12FF905 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs01_xxxxx_depthtex.vso / modelshaderbgs01_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 262
+  scene checkpoint BEFORE draw 263
+draw=264 primitives=5786 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 264
+draw=265 primitives=454 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 265
+  scene checkpoint BEFORE draw 266
+draw=267 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 267
+  scene checkpoint BEFORE draw 268
+draw=269 primitives=1157 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 269
+draw=270 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 270
+draw=271 primitives=152 vs=2D9FA1E9 ps=E290931D matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx_depthtex.vso / modelshadergrs00_xxxxa_depthtex.pso
+  scene checkpoint BEFORE draw 271
+draw=272 primitives=7465 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 272
+  scene checkpoint BEFORE draw 273
+  scene checkpoint BEFORE draw 274
+  scene checkpoint BEFORE draw 275
+  scene checkpoint BEFORE draw 276
+  scene checkpoint BEFORE draw 277
+  scene checkpoint BEFORE draw 278
+  scene checkpoint BEFORE draw 279
+draw=280 primitives=35 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 280
+  scene checkpoint BEFORE draw 281
+draw=282 primitives=1178 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 282
+draw=283 primitives=1618 vs=6AF2B922 ps=8F762ED9 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixednoalphadepthtex.pso
+  scene checkpoint BEFORE draw 283
+draw=284 primitives=1331 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 284
+  scene checkpoint BEFORE draw 285
+draw=286 primitives=5668 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 286
+draw=287 primitives=7183 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 287
+  scene checkpoint BEFORE draw 288
+  scene checkpoint BEFORE draw 289
+  scene checkpoint BEFORE draw 290
+draw=291 primitives=828 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 291
+draw=292 primitives=73 vs=425AD8D9 ps=E24F2347 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs04_xxxxx_depthtex.vso / modelshaderbgs04_xxxxx_depthtex.pso
+  scene checkpoint BEFORE draw 292
+  scene checkpoint BEFORE draw 293
+draw=294 primitives=340 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 294
+draw=295 primitives=177 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 295
+  scene checkpoint BEFORE draw 296
+  scene checkpoint BEFORE draw 297
+  scene checkpoint BEFORE draw 298
+  scene checkpoint BEFORE draw 299
+  scene checkpoint BEFORE draw 300
+  scene checkpoint BEFORE draw 301
+  scene checkpoint BEFORE draw 302
+  scene checkpoint BEFORE draw 303
+  scene checkpoint BEFORE draw 304
+  scene checkpoint BEFORE draw 305
+  scene checkpoint BEFORE draw 306
+  scene checkpoint BEFORE draw 307
+  scene checkpoint BEFORE draw 308
+  scene checkpoint BEFORE draw 309
+  scene checkpoint BEFORE draw 310
+  scene checkpoint BEFORE draw 311
+  scene checkpoint BEFORE draw 312
+  scene checkpoint BEFORE draw 313
+  scene checkpoint BEFORE draw 314
+  scene checkpoint BEFORE draw 315
+  scene checkpoint BEFORE draw 316
+  scene checkpoint BEFORE draw 317
+  scene checkpoint BEFORE draw 318
+  scene checkpoint BEFORE draw 319
+  scene checkpoint BEFORE draw 320
+  scene checkpoint BEFORE draw 321
+  scene checkpoint BEFORE draw 322
+  scene checkpoint BEFORE draw 323
+  scene checkpoint BEFORE draw 324
+  scene checkpoint BEFORE draw 325
+  scene checkpoint BEFORE draw 326
+  scene checkpoint BEFORE draw 327
+  scene checkpoint BEFORE draw 328
+  scene checkpoint BEFORE draw 329
+  scene checkpoint BEFORE draw 330
+  scene checkpoint BEFORE draw 331
+  scene checkpoint BEFORE draw 332
+  scene checkpoint BEFORE draw 333
+  scene checkpoint BEFORE draw 334
+  scene checkpoint BEFORE draw 335
+  scene checkpoint BEFORE draw 336
+  scene checkpoint BEFORE draw 337
+  scene checkpoint BEFORE draw 338
+  scene checkpoint BEFORE draw 339
+  scene checkpoint BEFORE draw 340
+  scene checkpoint BEFORE draw 341
+  scene checkpoint BEFORE draw 342
+  scene checkpoint BEFORE draw 343
+  scene checkpoint BEFORE draw 344
+  scene checkpoint BEFORE draw 345
+  scene checkpoint BEFORE draw 346
+  scene checkpoint BEFORE draw 347
+  scene checkpoint BEFORE draw 348
+  scene checkpoint BEFORE draw 349
+  scene checkpoint BEFORE draw 350
+  scene checkpoint BEFORE draw 351
+  scene checkpoint BEFORE draw 352
+  scene checkpoint BEFORE draw 353
+  scene checkpoint BEFORE draw 354
+  scene checkpoint BEFORE draw 355
+  scene checkpoint BEFORE draw 356
+  scene checkpoint BEFORE draw 357
+  scene checkpoint BEFORE draw 358
+  scene checkpoint BEFORE draw 359
+  scene checkpoint BEFORE draw 360
+  scene checkpoint BEFORE draw 361
+  scene checkpoint BEFORE draw 362
+  scene checkpoint BEFORE draw 363
+  scene checkpoint BEFORE draw 364
+  scene checkpoint BEFORE draw 365
+  scene checkpoint BEFORE draw 366
+  scene checkpoint BEFORE draw 367
+  scene checkpoint BEFORE draw 368
+  scene checkpoint BEFORE draw 369
+  scene checkpoint BEFORE draw 370
+  scene checkpoint BEFORE draw 371
+  scene checkpoint BEFORE draw 372
+  scene checkpoint BEFORE draw 373
+  scene checkpoint BEFORE draw 374
+  scene checkpoint BEFORE draw 375
+  scene checkpoint BEFORE draw 376
+  scene checkpoint BEFORE draw 377
+  scene checkpoint BEFORE draw 378
+  scene checkpoint BEFORE draw 379
+  scene checkpoint BEFORE draw 380
+  scene checkpoint BEFORE draw 381
+  scene checkpoint BEFORE draw 382
+  scene checkpoint BEFORE draw 383
+  scene checkpoint BEFORE draw 384
+  scene checkpoint BEFORE draw 385
+  scene checkpoint BEFORE draw 386
+  scene checkpoint BEFORE draw 387
+  scene checkpoint BEFORE draw 388
+  scene checkpoint BEFORE draw 389
+  scene checkpoint BEFORE draw 390
+  scene checkpoint BEFORE draw 391
+  scene checkpoint BEFORE draw 392
+  scene checkpoint BEFORE draw 393
+  scene checkpoint BEFORE draw 394
+  scene checkpoint BEFORE draw 395
+  scene checkpoint BEFORE draw 396
+  scene checkpoint BEFORE draw 397
+  scene checkpoint BEFORE draw 398
+  scene checkpoint BEFORE draw 399
+  scene checkpoint BEFORE draw 400
+  scene checkpoint BEFORE draw 401
+  scene checkpoint BEFORE draw 402
+  scene checkpoint BEFORE draw 403
+  scene checkpoint BEFORE draw 404
+  scene checkpoint BEFORE draw 405
+  scene checkpoint BEFORE draw 406
+  scene checkpoint BEFORE draw 407
+  scene checkpoint BEFORE draw 408
+  scene checkpoint BEFORE draw 409
+  scene checkpoint BEFORE draw 410
+  scene checkpoint BEFORE draw 411
+  scene checkpoint BEFORE draw 412
+  scene checkpoint BEFORE draw 413
+  scene checkpoint BEFORE draw 414
+  scene checkpoint BEFORE draw 415
+  scene checkpoint BEFORE draw 416
+  scene checkpoint BEFORE draw 417
+  scene checkpoint BEFORE draw 418
+  scene checkpoint BEFORE draw 419
+  scene checkpoint BEFORE draw 420
+  scene checkpoint BEFORE draw 421
+  scene checkpoint BEFORE draw 422
+  scene checkpoint BEFORE draw 423
+  scene checkpoint BEFORE draw 424
+  scene checkpoint BEFORE draw 425
+  scene checkpoint BEFORE draw 426
+  scene checkpoint BEFORE draw 427
+  scene checkpoint BEFORE draw 428
+  scene checkpoint BEFORE draw 429
+  scene checkpoint BEFORE draw 430
+  scene checkpoint BEFORE draw 431
+  scene checkpoint BEFORE draw 432
+  scene checkpoint BEFORE draw 433
+  scene checkpoint BEFORE draw 434
+  scene checkpoint BEFORE draw 435
+  scene checkpoint BEFORE draw 436
+  scene checkpoint BEFORE draw 437
+  scene checkpoint BEFORE draw 438
+  scene checkpoint BEFORE draw 439
+  scene checkpoint BEFORE draw 440
+  scene checkpoint BEFORE draw 441
+  scene checkpoint BEFORE draw 442
+  scene checkpoint BEFORE draw 443
+  scene checkpoint BEFORE draw 444
+  scene checkpoint BEFORE draw 445
+  scene checkpoint BEFORE draw 446
+  scene checkpoint BEFORE draw 447
+  scene checkpoint BEFORE draw 448
+  scene checkpoint BEFORE draw 449
+  scene checkpoint BEFORE draw 450
+  scene checkpoint BEFORE draw 451
+  scene checkpoint BEFORE draw 452
+  scene checkpoint BEFORE draw 453
+  scene checkpoint BEFORE draw 454
+  scene checkpoint BEFORE draw 455
+  scene checkpoint BEFORE draw 456
+  scene checkpoint BEFORE draw 457
+  scene checkpoint BEFORE draw 458
+  scene checkpoint BEFORE draw 459
+  scene checkpoint BEFORE draw 460
+  scene checkpoint BEFORE draw 461
+  scene checkpoint BEFORE draw 462
+  scene checkpoint BEFORE draw 463
+  scene checkpoint BEFORE draw 464
+  scene checkpoint BEFORE draw 465
+  scene checkpoint BEFORE draw 466
+  scene checkpoint BEFORE draw 467
+  scene checkpoint BEFORE draw 468
+  scene checkpoint BEFORE draw 469
+  scene checkpoint BEFORE draw 470
+  scene checkpoint BEFORE draw 471
+  scene checkpoint BEFORE draw 472
+  scene checkpoint BEFORE draw 473
+  scene checkpoint BEFORE draw 474
+  scene checkpoint BEFORE draw 475
+  scene checkpoint BEFORE draw 476
+  scene checkpoint BEFORE draw 477
+  scene checkpoint BEFORE draw 478
+  scene checkpoint BEFORE draw 479
+  scene checkpoint BEFORE draw 480
+  scene checkpoint BEFORE draw 481
+  scene checkpoint BEFORE draw 482
+  scene checkpoint BEFORE draw 483
+  scene checkpoint BEFORE draw 484
+  scene checkpoint BEFORE draw 485
+  scene checkpoint BEFORE draw 486
+  scene checkpoint BEFORE draw 487
+  scene checkpoint BEFORE draw 488
+  scene checkpoint BEFORE draw 489
+  scene checkpoint BEFORE draw 490
+  scene checkpoint BEFORE draw 491
+  scene checkpoint BEFORE draw 492
+  scene checkpoint BEFORE draw 493
+  scene checkpoint BEFORE draw 494
+  scene checkpoint BEFORE draw 495
+  scene checkpoint BEFORE draw 496
+  scene checkpoint BEFORE draw 497
+  scene checkpoint BEFORE draw 498
+  scene checkpoint BEFORE draw 499
+  scene checkpoint BEFORE draw 500
+  scene checkpoint BEFORE draw 501
+  scene checkpoint BEFORE draw 502
+  scene checkpoint BEFORE draw 503
+  scene checkpoint BEFORE draw 504
+  scene checkpoint BEFORE draw 505
+  scene checkpoint BEFORE draw 506
+  scene checkpoint BEFORE draw 507
+  scene checkpoint BEFORE draw 508
+  scene checkpoint BEFORE draw 509
+  scene checkpoint BEFORE draw 510
+  scene checkpoint BEFORE draw 511
+  scene checkpoint BEFORE draw 512
+  scene checkpoint BEFORE draw 513
+  scene checkpoint BEFORE draw 514
+  scene checkpoint BEFORE draw 515
+  scene checkpoint BEFORE draw 516
+  scene checkpoint BEFORE draw 517
+  scene checkpoint BEFORE draw 518
+  scene checkpoint BEFORE draw 519
+  scene checkpoint BEFORE draw 520
+  scene checkpoint BEFORE draw 521
+  scene checkpoint BEFORE draw 522
+  scene checkpoint BEFORE draw 523
+  scene checkpoint BEFORE draw 524
+  scene checkpoint BEFORE draw 525
+  scene checkpoint BEFORE draw 526
+  scene checkpoint BEFORE draw 527
+  scene checkpoint BEFORE draw 528
+  scene checkpoint BEFORE draw 529
+  scene checkpoint BEFORE draw 530
+  scene checkpoint BEFORE draw 531
+  scene checkpoint BEFORE draw 532
+  scene checkpoint BEFORE draw 533
+  scene checkpoint BEFORE draw 534
+  scene checkpoint BEFORE draw 535
+  scene checkpoint BEFORE draw 536
+  scene checkpoint BEFORE draw 537
+  scene checkpoint BEFORE draw 538
+  scene checkpoint BEFORE draw 539
+  scene checkpoint BEFORE draw 540
+  scene checkpoint BEFORE draw 541
+  scene checkpoint BEFORE draw 542
+  scene checkpoint BEFORE draw 543
+  scene checkpoint BEFORE draw 544
+  scene checkpoint BEFORE draw 545
+  scene checkpoint BEFORE draw 546
+  scene checkpoint BEFORE draw 547
+  scene checkpoint BEFORE draw 548
+  scene checkpoint BEFORE draw 549
+  scene checkpoint BEFORE draw 550
+  scene checkpoint BEFORE draw 551
+  scene checkpoint BEFORE draw 552
+  scene checkpoint BEFORE draw 553
+  scene checkpoint BEFORE draw 554
+draw=555 primitives=1759 vs=6AF2B922 ps=A2CACB31 matrix=c24 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixednoalphadepthtex.vso / modelshaderfixeddepthtex.pso
+  scene checkpoint BEFORE draw 555
+  scene checkpoint BEFORE draw 556
+  scene checkpoint BEFORE draw 557
+  scene checkpoint BEFORE draw 558
+  scene checkpoint BEFORE draw 559
+  scene checkpoint BEFORE draw 560
+  scene checkpoint BEFORE draw 561
+  scene checkpoint BEFORE draw 562
+  scene checkpoint BEFORE draw 563
+  scene checkpoint BEFORE draw 564
+  scene checkpoint BEFORE draw 565
+  scene checkpoint BEFORE draw 566
+  scene checkpoint BEFORE draw 567
+  scene checkpoint BEFORE draw 568
+  scene checkpoint BEFORE draw 569
+  scene checkpoint BEFORE draw 570
+  scene checkpoint BEFORE draw 571
+  scene checkpoint BEFORE draw 572
+  scene checkpoint BEFORE draw 573
+  scene checkpoint BEFORE draw 574
+  scene checkpoint BEFORE draw 575
+  scene checkpoint BEFORE draw 576
+  scene checkpoint BEFORE draw 577
+  scene checkpoint BEFORE draw 578
+  scene checkpoint BEFORE draw 579
+  scene checkpoint BEFORE draw 580
+  scene checkpoint BEFORE draw 581
+  scene checkpoint BEFORE draw 582
+  scene checkpoint BEFORE draw 583
+  scene checkpoint BEFORE draw 584
+  scene checkpoint BEFORE draw 585
+  scene checkpoint BEFORE draw 586
+  scene checkpoint BEFORE draw 587
+draw=588 primitives=756 vs=7C2B47E9 ps=28D876E3 matrix=c8 ortho=0 rt=4EB4A3E0 2560x1440 fmt=114 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderweightdepthtex.vso / modelshaderweightdepthtex.pso
+  scene checkpoint BEFORE draw 588
+  scene checkpoint BEFORE draw 589
+  scene checkpoint BEFORE draw 590
+  scene checkpoint BEFORE draw 591
+  scene checkpoint BEFORE draw 592
+draw=593 primitives=1486 vs=15E561A5 ps=42535AE0 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderfixeddepth.vso / modelshaderweightdepth.pso
+draw=689 primitives=296 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+draw=691 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+draw=692 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=693 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+draw=695 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+draw=696 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=697 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=699 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+draw=707 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=709 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+draw=710 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=711 primitives=1015 vs=3C21215E ps=CB8BEC42 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs03_xxxxx.pso
+draw=712 primitives=32 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=713 primitives=787 vs=047A2657 ps=4AC4957B matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx01_bxxmx.pso
+draw=715 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=719 primitives=33 vs=648FD477 ps=CD510C23 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs05_bxxxx.pso
+draw=721 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=725 primitives=2 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=731 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=735 primitives=311 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=737 primitives=620 vs=09C76559 ps=38108FB8 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadervtx00_bxxxx.vso / modelshadervtx00_xxxxx.pso
+draw=738 primitives=9 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=750 primitives=68 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=752 primitives=1486 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=753 primitives=78 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=756 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=758 primitives=1157 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=759 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=760 primitives=290 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=763 primitives=316 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=765 primitives=4557 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=769 primitives=633 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=770 primitives=156 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=771 primitives=2722 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=773 primitives=454 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=774 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=776 primitives=7031 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=779 primitives=36 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=780 primitives=3567 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=784 primitives=3395 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=785 primitives=1759 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+draw=786 primitives=704 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=787 primitives=359 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=789 primitives=80 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=792 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=794 primitives=1178 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=795 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=796 primitives=752 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+draw=798 primitives=212 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=799 primitives=514 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=801 primitives=4780 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=804 primitives=608 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=811 primitives=379 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=812 primitives=176 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=815 primitives=1223 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=818 primitives=161 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=819 primitives=287 vs=F7908A01 ps=205F0663 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs06_xxxxx.pso
+draw=820 primitives=88 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=821 primitives=1815 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=822 primitives=355 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=824 primitives=696 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=825 primitives=3746 vs=7E7B16A7 ps=5EA321BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_xxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=827 primitives=5786 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=828 primitives=454 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=830 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=832 primitives=1157 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=833 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=834 primitives=152 vs=9F0FF12C ps=A5996EFC matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshadergrs00_xxxxx.vso / modelshadergrs00_xxxxa.pso
+draw=835 primitives=7465 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=843 primitives=35 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=845 primitives=1178 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=846 primitives=1618 vs=C860EAEC ps=FFE118BE matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs09_xxxxx.pso
+draw=847 primitives=1331 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=849 primitives=5668 vs=C860EAEC ps=D6B9BA20 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs15_xxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=850 primitives=7183 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=854 primitives=828 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=855 primitives=73 vs=F7908A01 ps=0103F1A9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_xxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=857 primitives=340 vs=FFD8347E ps=07457270 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs11_xxxxx.vso / modelshaderbgs05_xxxxx.pso
+draw=858 primitives=177 vs=F556C85E ps=36A9AACF matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs09_bxxmx.vso / modelshaderobs09_bxxmx.pso
+draw=897 primitives=233 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=898 primitives=213 vs=F556C85E ps=36A9AACF matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs09_bxxmx.vso / modelshaderobs09_bxxmx.pso
+draw=899 primitives=731 vs=EF05A9C9 ps=8EEBE33D matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadergls03_bxxxx.vso / modelshadergls03_bxxxx.pso
+draw=911 primitives=160 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+draw=918 primitives=8196 vs=EF05A9C9 ps=8EEBE33D matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadergls03_bxxxx.vso / modelshadergls03_bxxxx.pso
+draw=919 primitives=170 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=923 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+draw=924 primitives=1856 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=928 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+draw=930 primitives=1531 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=933 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+draw=935 primitives=2862 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=937 primitives=452 vs=047A2657 ps=69C0ADD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx02_bxxmx.vso / modelshadervtx02_bxxmx.pso
+draw=938 primitives=2862 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=942 primitives=2423 vs=67B951BD ps=0103F1A9 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_bxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=946 primitives=273 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=947 primitives=401 vs=BDAFACB9 ps=49C07FB4 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs03_bxxxx.vso / modelshaderobs03_bxxmx.pso
+draw=948 primitives=192 vs=67B951BD ps=0103F1A9 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadermag01_bxxxx.vso / modelshaderbgs04_xxxxx.pso
+draw=952 primitives=268 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=953 primitives=409 vs=BDAFACB9 ps=49C07FB4 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs03_bxxxx.vso / modelshaderobs03_bxxmx.pso
+draw=954 primitives=2862 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=956 primitives=2762 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=967 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=971 primitives=374 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=975 primitives=83 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=979 primitives=2902 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=982 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=983 primitives=1792 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+draw=984 primitives=1579 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+draw=985 primitives=276 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+draw=986 primitives=502 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+draw=987 primitives=2965 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+draw=988 primitives=491 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+draw=989 primitives=258 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+draw=990 primitives=2268 vs=5DD39D91 ps=6C60805C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls05_bxnxb.pso
+draw=991 primitives=87 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=992 primitives=696 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+draw=993 primitives=809 vs=3E33A405 ps=1D800D3D matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxmx.vso / modelshaderobs04_bxxmx.pso
+draw=994 primitives=1252 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+draw=995 primitives=717 vs=3E33A405 ps=1D800D3D matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxmx.vso / modelshaderobs04_bxxmx.pso
+draw=996 primitives=4071 vs=5DD39D91 ps=51FA4B03 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls06_bxnxa.pso
+draw=997 primitives=397 vs=6955BB24 ps=19D126CD matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls09_bxxmx.vso / modelshaderpls09_bxxmx.pso
+draw=999 primitives=1288 vs=5DD39D91 ps=F0125E48 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls03_bxnxa.pso
+draw=1001 primitives=2093 vs=5DD39D91 ps=8253CA8B matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderpls04_bxnxx.pso
+draw=1002 primitives=572 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=1004 primitives=3142 vs=5DD39D91 ps=03A89F89 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs00_bxnxx.pso
+draw=1005 primitives=189 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1006 primitives=227 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=1010 primitives=3037 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=1012 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1013 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=1015 primitives=2762 vs=09E716A8 ps=5EA321BE matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc04_bxxxx.vso / modelshaderbgs01_xxxxx.pso
+draw=1017 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1018 primitives=4905 vs=3C21215E ps=D6B9BA20 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderbgs12_bxxxx.vso / modelshaderbgs02_xxxxx.pso
+draw=1020 primitives=1526 vs=5DD39D91 ps=C1D05BC2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunmx.pso
+draw=1026 primitives=2605 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+draw=1027 primitives=454 vs=AD68C3FE ps=5CB42FA2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs01_bxxxx.vso / modelshaderobs01_bxxxx.pso
+draw=1028 primitives=1424 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+draw=1029 primitives=487 vs=5DD39D91 ps=C1D05BC2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunmx.pso
+draw=1031 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1033 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1034 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1035 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1036 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1037 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1038 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1039 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1040 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1041 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1042 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1043 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1044 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1045 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1046 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1047 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1048 primitives=332 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1049 primitives=132 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1050 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1051 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1052 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1053 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1054 primitives=198 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1055 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1056 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1057 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1058 primitives=229 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1059 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1060 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1061 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1062 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1063 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1064 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1065 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1066 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1067 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1068 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1069 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1070 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1071 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1072 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1073 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1074 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1075 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1076 primitives=328 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1077 primitives=132 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1078 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1079 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1080 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1081 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1082 primitives=232 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1083 primitives=38 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1084 primitives=193 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1085 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1086 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1087 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1088 primitives=230 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1089 primitives=43 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1090 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1091 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1092 primitives=284 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1093 primitives=188 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1094 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1095 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1096 primitives=197 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1097 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1098 primitives=159 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1099 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1100 primitives=328 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1101 primitives=312 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1102 primitives=195 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1103 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1104 primitives=155 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1105 primitives=14 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1106 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1107 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1108 primitives=192 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1109 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1110 primitives=196 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1111 primitives=26 vs=5D442F6F ps=9445C9D2 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc03_bxxxx.vso / modelshaderetc03_bxxxx.pso
+draw=1112 primitives=2229 vs=5DD39D91 ps=DB234762 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs01_bunxx.pso
+draw=1113 primitives=1158 vs=648FD477 ps=32CAF330 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderobs06_bxxxx.vso / modelshaderobs04_xxxxx.pso
+draw=1114 primitives=227 vs=5DD39D91 ps=441291DA matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls06_bxnxb.vso / modelshaderobs07_bxnxx.pso
+draw=1118 primitives=1486 vs=BB5B05C6 ps=1847C1F9 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadershadowrec00_xxxxx.vso / modelshadershadowrec00_xxxxx.pso
+draw=1152 primitives=1759 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+draw=1153 primitives=17 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+draw=1167 primitives=39 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+draw=1168 primitives=55 vs=D835ECCD ps=38108FB8 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshadervtx00_xxxxx.vso / modelshadervtx00_xxxxx.pso
+draw=1178 primitives=4 vs=B5373DE0 ps=3F0F9C5C matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_xxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1185 primitives=756 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+draw=1190 primitives=430 vs=3379538A ps=A86DCDA5 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=3
+  modelshaderpls02_bxxxx.vso / modelshaderpls02_bxxxx.pso
+draw=1198 primitives=48 vs=C187C188 ps=A86DCDA5 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=1
+  modelshaderefs00_xxxxx.vso / modelshaderpls02_bxxxx.pso
+draw=1203 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1204 primitives=545 vs=90241E02 ps=E83CDBD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc01_bxnxx.vso / modelshaderetc01_bxnxx.pso
+draw=1209 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1210 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1211 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1212 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1213 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1214 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1215 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1216 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1218 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1220 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1229 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1231 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1232 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1233 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1234 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1236 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1238 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1239 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1240 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1248 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1249 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1250 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1253 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1254 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1257 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1258 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1261 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1263 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1265 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1266 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1269 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1270 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1271 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1277 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1278 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1280 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1281 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1282 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1283 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1284 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1286 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1287 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1290 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1298 primitives=17 vs=C6ECDB03 ps=3F0F9C5C matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderefs02_bxxxx.vso / modelshaderefs02_xxxxx.pso
+draw=1299 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1302 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1303 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1304 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1307 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1309 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1311 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1313 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1316 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1320 primitives=218 vs=41D36437 ps=2DD61A8F matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderpls01_bxxxz.vso / modelshaderpls01_bxxmb.pso
+draw=1338 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1340 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1346 primitives=154 vs=E06CEE1C ps=BF10C4D1 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc00_bxxmx.vso / modelshaderetc00_bxxmx.pso
+draw=1349 primitives=2 vs=90241E02 ps=E83CDBD7 matrix=c8 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/1 blend=1/5/6 cull=3
+  modelshaderetc01_bxnxx.vso / modelshaderetc01_bxnxx.pso
+draw=1351 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1356 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1357 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1359 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1362 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1363 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1365 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1366 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1367 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1369 primitives=2 vs=C5682B87 ps=DD5F8DF1 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  espshadershimmerblur.vso / espshadershimmer.pso
+draw=1370 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1371 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1373 primitives=2 vs=CB1E6A15 ps=E54B73A3 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / espshaderbase.pso
+draw=1374 primitives=2 vs=4A483974 ps=7C2F0109 matrix=c24 ortho=0 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=1/0 blend=1/5/2 cull=1
+  espshaderpointlight2.vso / 7C2F0109
+draw=1376 primitives=2 vs=8AECB4A6 ps=6E722DE9 matrix=c8 ortho=1 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=0/5/2 cull=1
+  filter07.vso / filter00.pso
+draw=1377 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1378 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1379 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1380 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1381 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1382 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1383 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1384 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1385 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1386 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1387 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1388 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1389 primitives=2 vs=8AECB4A6 ps=84049DCA matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter05.pso
+draw=1390 primitives=2 vs=8AECB4A6 ps=563F5C20 matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter02.pso
+draw=1391 primitives=2 vs=8AECB4A6 ps=0F24B7EF matrix=c8 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  filter07.vso / filter01.pso
+draw=1392 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=0/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1393 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1394 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4DD8AAE0 320x176 fmt=21 viewport=0,0,320,176 depth=0/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1397 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E457620 2560x1440 fmt=21 viewport=0,0,2560,1440 depth=0/0 blend=1/5/2 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso
+draw=1398 primitives=2 vs=CB1E6A15 ps=B8690130 matrix=c24 ortho=1 rt=4E455FA0 2560x1440 fmt=22 viewport=0,0,2560,1440 depth=0/0 blend=0/5/6 cull=1
+  smp_video_yuv_rgb_conv_shader_vs.vso / filtershadercopytex.pso

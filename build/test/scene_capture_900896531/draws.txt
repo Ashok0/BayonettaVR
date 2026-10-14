@@ -1,0 +1,80 @@
+Left-eye draw order. Constants are original game state before HMD adjustment.
+draw=1 primitives=2 vs=00000000 ps=C44BFA68 rt=03EC3600 32x32 fmt=22 viewport=0,0,32,32 depth=0/1 blend=0/2/1
+vc0 0 0 0 0
+vc1 0 0 0 0
+vc2 0 0 0 0
+vc3 0 0 0 0
+vc4 0 0 0 0
+vc5 0 0 0 0
+vc6 0 0 0 0
+vc7 0 0 0 0
+vc8 0 0 0 0
+vc9 0 0 0 0
+vc10 0 0 0 0
+vc11 0 0 0 0
+vc12 0 0 0 0
+vc13 0 0 0 0
+vc14 0 0 0 0
+vc15 0 0 0 0
+vc16 0 0 0 0
+vc17 0 0 0 0
+vc18 0 0 0 0
+vc19 0 0 0 0
+vc20 0 0 0 0
+vc21 0 0 0 0
+vc22 0 0 0 0
+vc23 0 0 0 0
+vc24 0 0 0 0
+vc25 0 0 0 0
+vc26 0 0 0 0
+vc27 0 0 0 0
+vc28 11 22 33 44
+vc29 0 0 0 0
+vc30 0 0 0 0
+vc31 0 0 0 0
+vc32 0 0 0 0
+vc33 0 0 0 0
+vc34 0 0 0 0
+vc35 0 0 0 0
+pc0 0 0 0 0
+pc1 0 0 0 0
+pc2 0 0 0 0
+pc3 0 0 0 0
+pc4 0 0 0 0
+pc5 0 0 0 0
+pc6 0 0 0 0
+pc7 0 0 0 0
+pc8 0 0 0 0
+pc9 0 0 0 0
+pc10 0 0 0 0
+pc11 0 0 0 0
+pc12 0 0 0 0
+pc13 0 0 0 0
+pc14 0 0 0 0
+pc15 0 0 0 0
+pc184 0 0 0 0
+pc185 0 0 0 0
+pc186 0 0 0 0
+pc187 0 0 0 0
+pc188 0 0 0 0
+pc189 0 0 0 0
+pc190 0 0 0 0
+pc191 0 0 0 0
+pc192 0 0 0 0
+pc193 0 0 0 0
+pc194 0 0 0 0
+pc195 0 0 0 0
+pc196 0 0 0 0
+pc197 0 0 0 0
+pc198 0 0 0 0
+pc199 0 0 0 0
+pc200 0 0 0 0
+pc201 0 0 0 0
+pc202 0 0 0 0
+pc203 0 0 0 0
+s0=03E88AC0 32x32 fmt=21 usage=1
+image=0 draw=1 label=input_s0_03E88AC0 surface=03E837E0 size=32x32 format=21 png=00000000 dds=00000001
+image=1 draw=1 label=before surface=03EC3600 size=32x32 format=22 png=00000000 dds=00000001
+image=2 draw=1 label=after surface=03EC3600 size=32x32 format=22 png=00000000 dds=00000001
+image=3 draw=1 label=finished_target surface=03EC3600 size=32x32 format=22 png=00000000 dds=00000001
+end draws=1 images=4 estimatedRawBytes=65536

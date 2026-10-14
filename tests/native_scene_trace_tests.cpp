@@ -96,6 +96,37 @@ int main(){
         const bool transparent=entry.path().filename()==L"draw0064_texture0.bmp";
         Require(scene?pixel==0xff405060:transparent?pixel==0xff000000:(pixel&0xffff00)==0x113300,"scene RGB ignores alpha; texture RGB includes alpha");++previews;
     }
-    Require(previews==2112,"preview file count");trace.Finish(nullptr);DestroyWindow(window);
+    Require(previews==2112,"preview file count");trace.Finish(nullptr);
+    // The real room's color target is NOT texture-backed. Preserve both
+    // checkpoints at use inside BeginScene, before the same surface changes.
+    ComPtr<IDirect3DSurface9> standalone;
+    Check(d->CreateRenderTarget(640,360,D3DFMT_A8R8G8B8,D3DMULTISAMPLE_NONE,0,FALSE,&standalone,nullptr));
+    Check(d->SetRenderTarget(0,standalone.Get()));Check(d->ColorFill(standalone.Get(),nullptr,0x00123456));
+    ComPtr<IDirect3DCubeTexture9> cube;
+    Check(d->CreateCubeTexture(64,1,0,D3DFMT_A8R8G8B8,D3DPOOL_DEFAULT,&cube,nullptr));
+    Check(d->SetTexture(5,cube.Get()));Check(d->SetTexture(12,textures[0].Get()));
+    float vc[64]{},pc[96]{};for(int i=0;i<64;++i)vc[i]=float(i);for(int i=0;i<96;++i)pc[i]=float(i+100);
+    Check(d->SetVertexShaderConstantF(0,vc,16));Check(d->SetPixelShaderConstantF(40,pc,24));
+    const auto standalonePath=path/L"standalone";Require(trace.Begin(d.Get(),standalonePath.c_str(),nullptr),"standalone trace starts");
+    Check(d->BeginScene());trace.Record(d.Get(),64,8,Identity(),false);
+    Check(d->ColorFill(standalone.Get(),nullptr,0xff654321));trace.Record(d.Get(),64,8,Identity(),false);
+    Require(trace.Finish(d.Get())==2,"standalone color checkpoints work inside native scene");Check(d->EndScene());
+    for(unsigned i=1;i<=2;++i) {
+        const auto name=i==1?L"draw0001_scene.bmp":L"draw0002_scene.bmp";
+        std::ifstream f(standalonePath/name,std::ios::binary);Require(f.good(),"standalone color image saved");
+        f.seekg(54);DWORD pixel=0;
+        for(unsigned p=0;p<256*144;++p){f.read(reinterpret_cast<char*>(&pixel),4);Require((pixel&0xffffff)==(i==1?0x123456u:0x654321u),"snapshot contains color at that draw, regardless of alpha");}
+    }
+    ComPtr<IDirect3DSurface9> current;Check(d->GetRenderTarget(0,&current));Require(current.Get()==standalone.Get(),"standalone target still bound");
+    Check(d->GetRenderTarget(1,&current));Require(current.Get()==secondary.Get(),"standalone capture preserves MRT binding");
+    Check(d->GetRenderTargetData(secondary.Get(),read.Get()));Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY));
+    for(int y=0;y<360;++y)for(int x=0;x<640;++x)Require(reinterpret_cast<DWORD*>(static_cast<char*>(locked.pBits)+y*locked.Pitch)[x]==0xff405060,"standalone capture preserves secondary pixels");
+    Check(read->UnlockRect());
+    float afterVC[64]{},afterPC[96]{};Check(d->GetVertexShaderConstantF(0,afterVC,16));Check(d->GetPixelShaderConstantF(40,afterPC,24));
+    Require(!memcmp(vc,afterVC,sizeof(vc))&&!memcmp(pc,afterPC,sizeof(pc)),"additional captured constants unchanged");
+    std::ifstream extraMetadata(standalonePath/L"draws.txt");const std::string extra((std::istreambuf_iterator<char>(extraMetadata)),{});
+    Require(extra.find("cube5=")!=std::string::npos&&extra.find("texture12=")!=std::string::npos,"cube and higher sampler slots recorded");
+    Require(extra.find("vc12 48 49 50 51")!=std::string::npos&&extra.find("pc40 100 101 102 103")!=std::string::npos,"view and material constants recorded");
+    DestroyWindow(window);
     printf("native scene trace: 2048 draw cap, 64 texture and 2048 scene checkpoints, texture alpha visibility, scene RGB, both MRT images/bindings and scene/depth/texture/viewport/scissor/layout/constants preserved; explicit arm/disarm passed\n");
 }

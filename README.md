@@ -3,6 +3,82 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Floating-piece material camera (build 20261014.73)
+
+The expanded F12 capture `20261014_005030_1` includes the floating-piece
+archway's color draws. Its front material samples an animated 128x128 render
+texture. The capture also exposes a 128x128 texture-generation pass with its
+own local perspective camera; the mod was applying the VR camera to this
+pass, distorting the painted image with eye position and headset movement.
+
+Build `.73` preserves that pass's native camera. Recognition requires the
+captured vertex and pixel shader signatures, matrix register c24, local
+camera depth rows, a 128x128 viewport and a 128x128 A8R8G8B8 render target.
+The floating pieces and normal world geometry still receive stereo/6DOF.
+**Ctrl+Alt+F1** temporarily toggles this correction together with the `.71`
+reflection-camera correction; both start enabled. **Alt+F1** remains the
+separate practice-arena correction.
+
+`tests/build_material_texture_checks.cmd` exercises the unchanged native
+shaders against the captured local camera. The native material image stays
+pixel-identical over 12 GPU eye/head-turn/lean cases (196,608 pixels), while
+the previous VR transform corrupts it. Negative shader, matrix, viewport and
+target matches, state-block binding and reset are checked. Visual confirmation
+on the reported archway is still pending; `.71` did not resolve it.
+
+The Release/Win32 build and full regression suite pass, including the
+first-person jump concurrency checks. Build .73 is installed with SHA256 verification;
+INI settings are preserved. Previous DLL, host and INI are backed up in
+.diagnostics/before73-installed-20261014-011718.
+
+## Reflection camera correction (build 20261014.71)
+
+The user reports **no change** to the floating-piece wall with `.71`; that
+wall's stereo issue remains unresolved. The camera correction below fixes a
+shader-input mismatch, but is not a confirmed fix for this particular wall.
+
+Build `.72` expands the F12 diagnostic: color checkpoints now also capture
+standalone A8R8G8B8/X8R8G8B8 render targets with a GPU copy. The earlier wall
+capture omitted that main color buffer because it was not texture-backed.
+The trace also records all 16 texture slots (including cube-map metadata),
+vertex constants c0-c15 and material constants c40-c63. Normal rendering is
+unchanged from `.71`. Native-scene trace tests pass for in-scene standalone
+color copies, content at each draw, MRT/state preservation and the extra
+metadata. The resulting wall capture informed the `.73` material-camera change.
+Build `.72` was installed with SHA256 verification; INI settings were preserved.
+The previous DLL, host and INI are backed up in
+`.diagnostics/before72-installed-20261014-001903`.
+
+The wall capture `20261013_235325_1` shows the reported archway with floating
+rectangular pieces. Its captured material shaders include environment
+reflection calculations that read the original game camera position even
+after the mod replaces their projection for VR. Build `.71` supplies each
+eye's world-space optical center to those camera-dependent shaders. It derives
+the position from the exact adjusted projection used for that draw, including
+headset translation, first-person camera placement and stick turning.
+
+The correction is enabled by default. **Ctrl+Alt+F1** toggles it temporarily
+for comparison; **Alt+F1** still controls the separate practice-arena fix.
+Only 11 verified native vertex-shader bytecode signatures are eligible. Their
+camera-position entries (`c12.w`, `c13.w`, `c14.w`) are changed for the draw and
+restored immediately. Shader bytecode, material textures and geometry remain
+intact. Environment textures retain their original content; this change does
+not create geometry or depth that was never present in those textures.
+
+`tests/build_reflection_camera_checks.cmd` checks 36 native camera cases,
+all 11 shader fingerprints and 12 GPU stereo/room-scale cases (49,152 pixels)
+using the unchanged captured glass/reflection vertex shader. The old shared
+camera gives different reflection vectors; the correction matches an
+independently supplied eye position. Disabled/invalid inputs, live state-block
+constants and exact constant restoration are also checked. Fixtures can be
+extracted with `tools/extract_reflection_camera_fixtures.py`.
+
+The Release/Win32 build and full regression suite passed. Build `.71` was
+installed with SHA256 verification and existing INI settings preserved. The
+previous DLL, host and INI are in
+`.diagnostics/before71-installed-20261014-000219`. The user subsequently reported
+no change on the archway. The `.70` first-person jump-crash synchronization fix is retained.
+
 ## Exploration first person (build 20261013.70)
 
 Build `.70` fixes a concurrent access bug introduced by `.69` that crashed

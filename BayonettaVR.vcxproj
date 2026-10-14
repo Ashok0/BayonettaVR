@@ -49,6 +49,8 @@
   <ItemGroup><ClInclude Include="src\WorldHud.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MenuPanel9.h"/><ClCompile Include="src\MenuPanel9.cpp"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\ShaderAnalysis.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\ReflectionCamera.h"/></ItemGroup>
+  <ItemGroup><ClInclude Include="src\MaterialTextureCamera.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\MotionBlur.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\AmbientOcclusion.h"/></ItemGroup>
   <ItemGroup><ClInclude Include="src\SoftParticleDepth.h"/><ClInclude Include="src\SoftParticleDepthBytecode.h"/></ItemGroup>

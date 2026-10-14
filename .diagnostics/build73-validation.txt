@@ -1,0 +1,18 @@
+Build 20261014.73
+Release/Win32 build: PASS
+Full tests/build_checks.cmd: PASS
+Log: .diagnostics/checks73.log
+Installation: verified SHA256; INI unchanged. Backup: C:\dev\BayonettaVR\.diagnostics\before73-installed-20261014-011718
+
+
+Algorithm : SHA256
+Hash      : 5ACEDA639A6DAD987B57FE38AF5C33C379E93D68CA86F6D8C5C1A5EC83C073A5
+Path      : C:\dev\BayonettaVR\build\Win32\Release\d3d9.dll
+
+Algorithm : SHA256
+Hash      : 8C66DEF9E7EE742526DBB99458FA903CD7B7CCA94C97931906D6E030F94D9174
+Path      : C:\dev\BayonettaVR\build\Win32\Release\BayonettaVRHost.exe
+
+
+
+
