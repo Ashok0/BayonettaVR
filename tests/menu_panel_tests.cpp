@@ -111,6 +111,62 @@ int main() {
         panel.BeginFrame();Require(!panel.Ready(0)&&!panel.Ready(1),"no stale menus on next frame");
         panel.Reset();
     }
+    // Inventory background uses the early list, options use Id, text uses
+    // IdFont. Check their common physical plane against independent eye rays.
+    unsigned inventoryPixels=0,inventoryCases=0;
+    for(int cycle=0;cycle<2;++cycle) {
+        panel.BeginFrame();
+        Check(d->BeginScene(),"inventory capture");
+        for(int layer:{2,0,1}) {
+            d->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE);
+            Require(panel.Begin(d.Get(),layer),"inventory layer capture");
+            capturingPanel=&panel;captureLayer=layer;FlatUi(d.Get());
+            if(layer==2) {
+                const RECT bounds={16,16,112,112};d->SetScissorRect(&bounds);
+                d->SetRenderState(D3DRS_SCISSORTESTENABLE,TRUE);
+                Rectangle(d.Get(),-64,-64,256,0xffffff00);
+            } else Rectangle(d.Get(),54,layer==0?54.f:10.f,20,layer==0?0xff00ff00:0xffffffff);
+            panel.End(d.Get(),layer);capturingPanel=nullptr;
+        }
+        Check(d->EndScene(),"inventory captured");
+        for(int turn=-1;turn<=1;++turn)for(int eye=0;eye<2;++eye)for(float lean:{-.2f,.2f}) {
+            const float angle=turn*.25f;
+            Mat4 head=Identity();head.m[0][0]=head.m[2][2]=std::cos(angle);
+            head.m[0][2]=std::sin(angle);head.m[2][0]=-std::sin(angle);head.m[0][3]=lean;
+            Mat4 offset=Identity();offset.m[0][3]=eye?.032f:-.032f;
+            const auto eyePose=Mul(head,offset);
+            const auto clip=Mul(PerspectiveFovLH(1.57079632679f,1,.1f,100),
+                Mul(InvertRigid(eyePose),HudPanelFromClip(1,2,2,0)));
+            d->SetRenderState(D3DRS_SCISSORTESTENABLE,FALSE);
+            Check(d->Clear(0,nullptr,D3DCLEAR_TARGET,0xff0000ff,1,0),"inventory scene");
+            Check(d->BeginScene(),"inventory eye");
+            for(int layer:{2,0,1})Check(panel.Draw(d.Get(),layer,clip),"inventory layer replay");
+            Check(d->EndScene(),"inventory eye complete");
+            Check(d->GetRenderTargetData(back.Get(),read.Get()),"inventory readback");
+            D3DLOCKED_RECT locked{};Check(read->LockRect(&locked,nullptr,D3DLOCK_READONLY),"inventory pixels");
+            for(int y=0;y<128;++y)for(int x=0;x<128;++x) {
+                const float dx=2.f*(x+.5f)/128-1,dy=1-2.f*(y+.5f)/128;
+                const float rx=eyePose.m[0][0]*dx+eyePose.m[0][2];
+                const float rz=eyePose.m[2][0]*dx+eyePose.m[2][2];
+                const float t=(2-eyePose.m[2][3])/rz;
+                const float u=(eyePose.m[0][3]+t*rx+1)*64,v=(1-t*dy)*64;
+                bool edge=false;
+                for(float b:{10.f,16.f,30.f,54.f,74.f,112.f})if(std::fabs(u-b)<3||std::fabs(v-b)<3)edge=true;
+                if(edge)continue; // Raster/filter boundary; test solid interiors.
+                DWORD expected=0x000000ff;
+                if(u>16&&u<112&&v>16&&v<112)expected=0x00ffff00;
+                if(u>54&&u<74&&v>54&&v<74)expected=0x0000ff00;
+                if(u>54&&u<74&&v>10&&v<30)expected=0x00ffffff;
+                const DWORD actual=*reinterpret_cast<const DWORD*>(static_cast<const char*>(locked.pBits)+y*locked.Pitch+x*4)&0x00ffffff;
+                Require(actual==expected,"early parchment and later options/font share bounded panel under eye/turn/lean");
+                ++inventoryPixels;
+            }
+            Check(read->UnlockRect(),"inventory unmap");++inventoryCases;
+        }
+        panel.BeginFrame();for(int layer=0;layer<MenuPanel9::LayerCount;++layer)Require(!panel.Ready(layer),"all three layers cleared after closing menu");
+        panel.Reset();
+    }
+    printf("Inventory panel: %u eye/turn/lean/recreation cases, %u ray-checked pixels; early background clipping and all three layers aligned.\n",inventoryCases,inventoryPixels);
     // Compare capture/composite with direct D3D9 rendering over the same scene.
     // Unselected labels can multiply destination RGB; the previous transparent
     // black capture erased that contribution and produced black rectangles.

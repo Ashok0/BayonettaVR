@@ -18,7 +18,7 @@ void MenuPanel9::Reset() {
     width_=height_=0; BeginFrame();
 }
 void MenuPanel9::BeginFrame() {
-    ready_[0]=ready_[1]=false;
+    for(auto& ready:ready_)ready=false;
     // Do not retain game scratch textures after the game stops using them.
     for(auto it=feedback_.begin();it!=feedback_.end();) {
         if(!it->ready) {
@@ -55,7 +55,7 @@ bool MenuPanel9::Ensure(IDirect3DDevice9* device, UINT width, UINT height) {
     const D3DVERTEXELEMENT9 elements[]={{0,0,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT,D3DDECLUSAGE_POSITION,0},
         {0,8,D3DDECLTYPE_FLOAT2,D3DDECLMETHOD_DEFAULT,D3DDECLUSAGE_TEXCOORD,0},D3DDECL_END()};
     if(SUCCEEDED(hr)) hr=device->CreateVertexDeclaration(elements,&declaration_);
-    for(int i=0;i<2 && SUCCEEDED(hr);++i) for(int basis=0;basis<2 && SUCCEEDED(hr);++basis) {
+    for(int i=0;i<LayerCount && SUCCEEDED(hr);++i) for(int basis=0;basis<2 && SUCCEEDED(hr);++basis) {
         // Float targets retain additive values above one and subtractive values
         // below zero. UNORM clipping would corrupt white-minus-black transmission.
         hr=device->CreateTexture(width,height,1,D3DUSAGE_RENDERTARGET,D3DFMT_A16B16G16R16F,D3DPOOL_DEFAULT,&textures_[i][basis],nullptr);

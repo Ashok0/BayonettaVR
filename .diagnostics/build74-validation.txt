@@ -1,0 +1,21 @@
+Build 20261014.74
+Release/Win32: PASS
+Full tests/build_checks.cmd: PASS
+Menu native hook verification: PASS
+Inventory: 24 GPU cases, 293314 independently ray-checked pixels
+Installed DLL/host: SHA256 verified
+INI: unchanged
+Backup: C:\dev\BayonettaVR\.diagnostics\before74-installed-20261014-153040
+
+
+Algorithm : SHA256
+Hash      : 1B2927FFA5A878D8A9A79C8B4466BA2ABC19FBF884F1AFB4CE099055FD9CDC5D
+Path      : C:\Program Files (x86)\Steam\steamapps\common\Bayonetta\d3d9.dll
+
+Algorithm : SHA256
+Hash      : 0E5297476E468981E52B3AF3538AC3AF4FE2E8E368E0B63BD0FDC8B0D6EA5AB5
+Path      : C:\Program Files (x86)\Steam\steamapps\common\Bayonetta\BayonettaVRHost.exe
+
+
+
+

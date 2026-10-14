@@ -8,6 +8,7 @@ namespace bvr {
 // transmission separately. Alpha alone cannot represent destination-color UI.
 class MenuPanel9 {
 public:
+    static constexpr int LayerCount = 3; // Id, IdFont, and the early Id list.
     ~MenuPanel9() { Reset(); }
     void Reset();
     void BeginFrame();
@@ -48,8 +49,8 @@ private:
     };
     std::vector<FeedbackTexture> feedback_;
     IDirect3DBaseTexture9* savedTextures_[16]{};
-    IDirect3DTexture9* textures_[2][2]{};
-    IDirect3DSurface9* surfaces_[2][2]{};
+    IDirect3DTexture9* textures_[LayerCount][2]{};
+    IDirect3DSurface9* surfaces_[LayerCount][2]{};
     IDirect3DSurface9* depth_[2]{};
     IDirect3DSurface9* drawDepth_ = nullptr;
     D3DVIEWPORT9 drawViewport_{};
@@ -64,6 +65,6 @@ private:
     IDirect3DVertexDeclaration9* declaration_ = nullptr;
     IDirect3DStateBlock9* state_ = nullptr;
     UINT width_ = 0, height_ = 0;
-    bool ready_[2]{};
+    bool ready_[LayerCount]{};
 };
 }

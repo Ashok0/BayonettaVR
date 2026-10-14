@@ -129,7 +129,7 @@ MapCinema9 g_mapCinema;
 bool g_nativeSceneTracePending=false;
 bool g_menuHooksInstalled = false;
 MenuPanel9 g_menuPanel;
-unsigned long long g_menuCaptures[2]{}, g_menuEyeDraws[2]{};
+unsigned long long g_menuCaptures[MenuPanel9::LayerCount]{}, g_menuEyeDraws[2]{};
 struct ClipCacheEntry {
     UINT width = 0;
     UINT height = 0;
@@ -1026,6 +1026,7 @@ void DrawMenuList(void* self, int layer) {
 }
 void __fastcall HookIdList(void* self, void*) { DrawMenuList(self, 0); }
 void __fastcall HookIdFontList(void* self, void*) { DrawMenuList(self, 1); }
+void __fastcall HookEarlyIdList(void* self, void*) { DrawMenuList(self, 2); }
 void __fastcall HookMovieList(void* self, void*) {
     if(g_flatMovieFrame || !g_insideNativeDraw || !Cfg().worldLockedMovies || !g_device){g_drawMovieList(self);return;}
     if(VR().Eye()==0) {
@@ -1119,7 +1120,7 @@ bool InstallEffectHooks(unsigned char* image) {
     Log("effects: stereo stream replay installed at %zu post-draw clear sites", _countof(kEffectClearSites));
     return true;
 }
-MenuCallPatch g_menuPatches[7]{};
+MenuCallPatch g_menuPatches[9]{};
 void RemoveMenuHooks() {
     g_movieQueue=nullptr;
     for (auto& patch : g_menuPatches) if (patch.address) {
@@ -1137,10 +1138,14 @@ bool InstallMenuHooks(unsigned char* image) {
     // Steam 0x591AD330 cOtManager::draw: explicit Id/IdFont passes followed
     // by ClearBuffer and deferred texture/material releases. These call sites
     // are checked before any mutation; no global function hook is necessary.
-    const uintptr_t sites[] = {0xE5358,0xE53E0,0xE5459,0xE5463,0xE54C3,0xE54C8,0xE5311};
-    const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50,0x8706E0};
+    // The early Id queue (VA 05A7DC78) draws the inventory parchment and
+    // tabs before postprocessing. The two sites are mutually exclusive,
+    // selected by native flag 0x10; both must share one retained layer.
+    const uintptr_t sites[] = {0xE5358,0xE53E0,0xE5459,0xE5463,0xE54C3,0xE54C8,0xE5311,0xE4A0D,0xE4CD7};
+    const uintptr_t targets[] = {0x8706E0,0x8706E0,0x1899E0,0x876B0,0xAE850,0x86DF50,0x8706E0,0x8706E0,0x8706E0};
     const void* hooks[] = {&HookIdList,&HookIdFontList,&HookRotateUiBuffers,
-        &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials,&HookMovieList};
+        &HookRotateFontBuffers,&HookReleaseUiTextures,&HookReleaseMaterials,&HookMovieList,
+        &HookEarlyIdList,&HookEarlyIdList};
     // Verify the MovieDraw identity and the OT layout used by Pending before
     // reading its bank heads. These are specific to the supported Steam build.
     const unsigned char movieThis[]={0xB9,0xB8,0xDB,0xA7,0x05};
@@ -1149,7 +1154,12 @@ bool InstallMenuHooks(unsigned char* image) {
        memcmp(image+0x8706E0,otLayout,sizeof(otLayout))) {
         Log("movies: queue layout signature mismatch");return false;
     }
-    for (int i=0;i<7;++i) {
+    const unsigned char earlyIdThis[]={0xB9,0x78,0xDC,0xA7,0x05};
+    if(memcmp(image+0xE4A08,earlyIdThis,sizeof(earlyIdThis)) ||
+       memcmp(image+0xE4CD2,earlyIdThis,sizeof(earlyIdThis))) {
+        Log("menu: early Id queue identity mismatch");return false;
+    }
+    for (size_t i=0;i<_countof(sites);++i) {
         auto* site = image + sites[i];
         int32_t displacement = 0; memcpy(&displacement, site+1, 4);
         if (site[0] != 0xE8 || site+5+displacement != image+targets[i]) {
@@ -1162,7 +1172,7 @@ bool InstallMenuHooks(unsigned char* image) {
     g_rotateFontBuffers = reinterpret_cast<GameThisCall>(image+targets[3]);
     g_releaseUiTextures = reinterpret_cast<GameThisCall>(image+targets[4]);
     g_releaseMaterials = reinterpret_cast<GameCall>(image+targets[5]);
-    for (int i=0;i<7;++i) {
+    for (size_t i=0;i<_countof(sites);++i) {
         auto* site = image + sites[i];
         DWORD old = 0;
         if (!VirtualProtect(site, 5, PAGE_EXECUTE_READWRITE, &old)) { RemoveMenuHooks(); return false; }
@@ -1174,7 +1184,7 @@ bool InstallMenuHooks(unsigned char* image) {
     }
     g_menuHooksInstalled = true;
     g_movieQueue=reinterpret_cast<const MovieDrawQueue*>(image+0x567DBB8);
-    Log("menu: Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair");
+    Log("menu: early Id/Id/IdFont dual-background capture + stereo replay installed; buffer cleanup runs once per pair");
     Log("movies: verified MovieDraw queue; complete cinematic composition captured once for both eyes");
     return true;
 }
@@ -1540,8 +1550,8 @@ bool CaptureAndSubmit(IDirect3DDevice9* device, bool early) {
         previousReportFrame = presents;
         previousReportTick = reportTick;
         VR().LogFrameTiming();
-        if (g_menuHooksInstalled) Log("menu: captures=%llu/%llu eyeComposites=%llu/%llu",
-            g_menuCaptures[0], g_menuCaptures[1], g_menuEyeDraws[0], g_menuEyeDraws[1]);
+        if (g_menuHooksInstalled) Log("menu: captures=%llu/%llu early=%llu eyeComposites=%llu/%llu",
+            g_menuCaptures[0], g_menuCaptures[1], g_menuCaptures[2], g_menuEyeDraws[0], g_menuEyeDraws[1]);
         if (g_effectHooksInstalled) Log("effects: replayFrames=%llu streamsRestored=%llu",
             g_effectReplayFrames, g_effectStreamsRestored);
         if (nativePair) Log("vr pipeline: early=%d wait=%.2fms pair=%.2fms queue=%.2fms transfer=%.2fms submit=%.2fms poseAgeAtSubmit=%.2fms",

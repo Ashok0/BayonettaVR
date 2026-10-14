@@ -3,6 +3,31 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Inventory menu backgrounds (build 20261014.74)
+
+The Equip / Item / File / Exit capture `20261014_152418_2` shows the
+parchment and tab artwork drawn before the existing Id/IdFont passes. Those
+earlier draws remained full-screen while the options were placed on the
+smaller VR panel. Build `.74` captures the early Id list as a third menu
+layer and replays it using the same HUD panel size, position and eye pose
+as the later options and text. Scissor/stencil clipping and blending happen
+in the flat capture before projection; native postprocessing retains its order.
+
+Both native branches that draw the early list are hooked, after verifying
+their call targets and queue identity. The early layer is captured once per
+stereo pair and cleared with the other layers on the next frame. Movies and
+the map sequence retain their existing complete-frame projection.
+
+`tools/verify_menu_hooks.py` checks all nine call sites against the supported
+Steam executable, including the two mutually exclusive early-list branches.
+The menu GPU regression checks all three layers against independent eye rays,
+including head turns, leaning, clipping, menu exit and resource recreation.
+Release/Win32 and the full regression suite pass (24 inventory cases,
+293,314 ray-checked pixels). Build .74 is installed with SHA256 verification;
+INI settings are preserved. Previous files are in
+.diagnostics/before74-installed-20261014-153040.
+In-game confirmation of the inventory menu appearance is pending.
+
 ## Floating-piece material camera (build 20261014.73)
 
 The expanded F12 capture `20261014_005030_1` includes the floating-piece
