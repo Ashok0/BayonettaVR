@@ -8,6 +8,8 @@
 #include <cstring>
 #include <atomic>
 #include <thread>
+#include <vector>
+#include "FirstPersonCostumeFixture.h"
 using namespace bvr;
 static std::atomic<bool> quiet{false};
 namespace bvr {void Log(const char* f,...){if(quiet)return;va_list a;va_start(a,f);vprintf(f,a);va_end(a);puts("");}}
@@ -18,6 +20,8 @@ static thread_local void* expectedCamera=nullptr;
 static std::atomic<bool> pauseSubmission{false};
 static HANDLE submissionEntered=nullptr,submissionRelease=nullptr;
 static float observedYaw=0,observedX=0,observedY=0;
+static bool checkCostume=false;
+static uint64_t expectedCostumeVisible=0;
 static void __fastcall RecordRoot(unsigned char* p,void*) {observedYaw=*reinterpret_cast<float*>(p+0xE4);}
 static float __fastcall RecordJoy(unsigned char* p,void*) {
     observedX=*reinterpret_cast<float*>(p+0x94B54);observedY=*reinterpret_cast<float*>(p+0x94B58);return 1.234f;
@@ -37,6 +41,7 @@ static void __fastcall Record(unsigned char* player,void*,void* camera) {
     auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
     for(int i=0;i<count;++i) {
         auto* frame=*reinterpret_cast<unsigned char**>(meshes[i]+0x70);
+        if(checkCostume)assert(bool(*reinterpret_cast<uint32_t*>(frame+0x10)&1)==bool(expectedCostumeVisible&(1ull<<i)));
         if(!(*reinterpret_cast<uint32_t*>(frame+0x10)&1))continue;
         const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
         if(!strcmp(name,"face_game"))++faces;
@@ -308,6 +313,66 @@ int main() {
         assert(!GetFirstPersonCorrection(invP,correction));
     }
     Put(image,0xB2DAE0+0x778,1);
+    // Every installed human costume, including generic/dummy face names and
+    // body0/body2. Reverse native material order to verify topology matching.
+    unsigned costumeCases=0,costumeRules=0;
+    for(const auto& costume:kFirstPersonCostumes) {
+        const unsigned index=unsigned(&costume-kFirstPersonCostumes);
+        unsigned char modelData[128]{};memcpy(modelData,"WMB\0",4);Put(modelData,12,costume.vertices);
+        Put(modelData,92,costume.polygons);Put(modelData,96,costume.shaders);Put(modelData,88,costume.meshData);
+        std::vector<unsigned char> meshData(64*0xB0),frameData(64*0xA8),fixedData(64*0xBC),batchData(64*64*0x60);
+        unsigned char* table[64]{};
+        for(unsigned i=0;i<costume.meshCount;++i) {
+            table[i]=meshData.data()+i*0xB0;
+            Put(table[i],0x48,kCostumeFixtureNames[index][i]);
+            Put(table[i],0x70,frameData.data()+i*0xA8);Put(frameData.data()+i*0xA8,0x10,0x04001031u);
+            Put(table[i],0x6C,fixedData.data()+i*0xBC);
+        }
+        for(unsigned n=0;n<costume.ruleCount;++n) {
+            const auto& rule=kFirstPersonBodyRules[costume.ruleStart+n];
+            auto* fixed=fixedData.data()+rule.mesh*0xBC;
+            auto* batches=batchData.data()+rule.mesh*64*0x60;
+            Put(fixed,0x98,rule.meshBatches);Put(fixed,0x9C,batches);
+            auto* batch=batches+(rule.meshBatches-1-rule.batch)*0x60;
+            Put(batch,0,reinterpret_cast<void*>(0x10000+rule.mesh*0x100+rule.batch));
+            Put(batch,4,1000+rule.batch*20000);Put(batch,0xC,rule.indexCount);Put(batch,0x20,rule.primitiveType);
+            Put(batch,0x2C,rule.vertexMax);Put(batch,0x30,rule.vertexMin);
+        }
+        Put(player,0x1B0,modelData);Put(player,0x1E8,int(costume.meshCount));Put(player,0x1E4,table);
+        const uint64_t all=(1ull<<costume.meshCount)-1;
+        checkCostume=true;expectedCostumeVisible=all&~costume.headMask;
+        enter();assert(FirstPersonCostumeDrawsActive()==bool(costume.ruleCount));
+        for(unsigned n=0;n<costume.ruleCount;++n) {
+            const auto& rule=kFirstPersonBodyRules[costume.ruleStart+n];
+            auto* buffer=reinterpret_cast<void*>(0x10000+rule.mesh*0x100+rule.batch);
+            const unsigned start=1000+rule.batch*20000,primitives=rule.primitiveType==5?rule.indexCount-2:rule.indexCount/3;
+            const auto* actual=GetFirstPersonCostumeDraw(buffer,rule.primitiveType,start,primitives);
+            assert(actual&&actual->rangeCount==rule.rangeCount&&actual->vertexMin==rule.vertexMin&&actual->vertexMax==rule.vertexMax);
+            assert(!memcmp(kFirstPersonRanges+actual->rangeStart,kFirstPersonRanges+rule.rangeStart,rule.rangeCount*sizeof(FirstPersonDrawRange)));
+            assert(!GetFirstPersonCostumeDraw(buffer,rule.primitiveType,start+1,primitives));
+            assert(!GetFirstPersonCostumeDraw(buffer,rule.primitiveType,start,primitives+1));
+            assert(!GetFirstPersonCostumeDraw(reinterpret_cast<void*>(1),rule.primitiveType,start,primitives));
+            ++costumeRules;
+        }
+        for(unsigned i=0;i<costume.meshCount;++i)assert(*reinterpret_cast<uint32_t*>(frameData.data()+i*0xA8+0x10)==0x04001031);
+        Put(player,0x34C,11);expectedCostumeVisible=0;call(player);BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+        Put(player,0x34C,0);expectedCostumeVisible=all&~costume.headMask;call(player);BeginFirstPersonFrame();
+        Put(frameData.data()+8*0xA8,0x10,0x04001030u);expectedCostumeVisible&=~(1ull<<8);
+        call(player);BeginFirstPersonFrame();assert(*reinterpret_cast<uint32_t*>(frameData.data()+8*0xA8+0x10)==0x04001030u);
+        Put(frameData.data()+8*0xA8,0x10,0x04001031u);
+        ToggleFirstPerson();expectedCostumeVisible=all;call(player);BeginFirstPersonFrame();assert(!FirstPersonCostumeDrawsActive());
+        if(costume.ruleCount) {
+            const auto& rule=kFirstPersonBodyRules[costume.ruleStart];
+            // A changed/missing native material table cannot leave a partial
+            // head mask paired with an active first-person camera.
+            Put(fixedData.data()+rule.mesh*0xBC,0x98,0u);
+            ToggleFirstPerson();call(player);BeginFirstPersonFrame();
+            assert(!GetFirstPersonCorrection(invP,correction)&&!FirstPersonCostumeDrawsActive());
+        }
+        checkCostume=false;++costumeCases;
+    }
+    Put(player,0x1B0,static_cast<unsigned char*>(nullptr));Put(player,0x1E8,3);Put(player,0x1E4,meshes);
+    printf("Costumes: %u complete layouts, %u reordered native batch matches, jumps/landing/toggle and exact visibility restoration passed.\n",costumeCases,costumeRules);
     // Run the actual Steam transMesh body for unloaded/empty models. Its
     // early exit still performs ret 4, which caused .58 to corrupt the stack.
     FILE* native=nullptr;fopen_s(&native,"tests/fixtures/firstperson/trans_mesh.bin","rb");assert(native);

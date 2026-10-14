@@ -29,6 +29,9 @@ float eyeHeight=0;
 Mat4 fixedHeading=Identity(),trackedHead=Identity();
 Mat4 renderHeading=Identity();
 bool renderHeadingValid=false;
+struct CostumeDraw { void* buffer; unsigned start; const FirstPersonBodyRule* rule; };
+CostumeDraw queuedCostumeDraws[128]{},renderCostumeDraws[128]{};
+unsigned queuedCostumeCount=0,renderCostumeCount=0;
 bool headingValid=false,trackingValid=false;
 uint64_t turnTick=0;
 bool turnSampleValid=false;
@@ -140,6 +143,64 @@ bool Undo(unsigned char* entry,unsigned char*& relay,unsigned size) {
     FlushInstructionCache(GetCurrentProcess(),entry,size);VirtualFree(relay,0,MEM_RELEASE);relay=nullptr;return true;
 }
 
+const FirstPersonCostume* PlayerCostume(unsigned char* player) {
+    // The complete ordered mesh-name signature plus vertex count identifies
+    // installed costume topology. Never apply triangle ranges to unknown mods.
+    __try {
+        const int count=*reinterpret_cast<int*>(player+0x1E8);
+        auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
+        auto* data=*reinterpret_cast<unsigned char**>(player+0x1B0);
+        if(!data||memcmp(data,"WMB\0",4)||!meshes||count<1||count>64)return nullptr;
+        uint64_t hash=14695981039346656037ull;
+        for(int i=0;i<count;++i) {
+            if(!meshes[i])return nullptr;
+            const auto* name=*reinterpret_cast<const unsigned char**>(meshes[i]+0x48);
+            if(!name)return nullptr;
+            unsigned n=0;
+            do {hash=(hash^name[n])*1099511628211ull;}while(name[n++]&&n<32);
+            if(name[n-1])return nullptr;
+        }
+        const auto vertices=*reinterpret_cast<unsigned*>(data+12);
+        for(const auto& costume:kFirstPersonCostumes)
+            if(costume.namesHash==hash&&costume.meshCount==unsigned(count)&&costume.vertices==vertices&&
+               costume.polygons==*reinterpret_cast<unsigned*>(data+92)&&
+               costume.shaders==*reinterpret_cast<unsigned*>(data+96)&&
+               costume.meshData==*reinterpret_cast<unsigned*>(data+88))return &costume;
+    } __except(EXCEPTION_EXECUTE_HANDLER) {}
+    return nullptr;
+}
+bool CollectCostumeDraws(unsigned char* player,const FirstPersonCostume& costume) {
+    queuedCostumeCount=0;
+    __try {
+        auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
+        for(unsigned n=0;n<costume.ruleCount;++n) {
+            const auto& rule=kFirstPersonBodyRules[costume.ruleStart+n];
+            auto* fixed=*reinterpret_cast<unsigned char**>(meshes[rule.mesh]+0x6C);
+            // Steam cDrawMeshParamFixed: 32-byte vertex buffers; shader count
+            // at 98, table at 9C. Each cShaderSetParam is 60 hex bytes.
+            if(!fixed||*reinterpret_cast<unsigned*>(fixed+0x98)!=rule.meshBatches)return false;
+            auto* table=*reinterpret_cast<unsigned char**>(fixed+0x9C);
+            if(!table)return false;
+            bool found=false;
+            // Native material grouping may reorder batches. Match topology,
+            // not the WMB batch ordinal.
+            for(unsigned j=0;j<rule.meshBatches;++j) {
+                auto* batch=table+j*0x60;
+                if(*reinterpret_cast<unsigned*>(batch+0x20)!=rule.primitiveType||
+                   *reinterpret_cast<unsigned*>(batch+0x0C)!=rule.indexCount||
+                   *reinterpret_cast<unsigned*>(batch+0x2C)!=rule.vertexMax||
+                   *reinterpret_cast<unsigned*>(batch+0x30)!=rule.vertexMin)continue;
+                void* buffer=*reinterpret_cast<void**>(batch);
+                if(!buffer||queuedCostumeCount>=128)return false;
+                // Native getStart (C6F310) returns +4 directly to DIP StartIndex.
+                queuedCostumeDraws[queuedCostumeCount++]={buffer,*reinterpret_cast<unsigned*>(batch+4),&rule};
+                found=true;
+            }
+            if(!found)return false;
+        }
+        return true;
+    } __except(EXCEPTION_EXECUTE_HANDLER) {return false;}
+}
 bool ReadPlayer(unsigned char*& player,float* eyes,const char*& reason,int& cameraMode) {
     // Live pointers only; never retain skeleton or mesh pointers across frames.
     __try {
@@ -185,6 +246,7 @@ bool ReadPlayer(unsigned char*& player,float* eyes,const char*& reason,int& came
         const int count=*reinterpret_cast<int*>(player+0x1E8);
         auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
         if(!meshes||count<1||count>512)return false;
+        if(PlayerCostume(player))return true;
         bool body=false,face=false;
         for(int i=0;i<count;++i)if(meshes[i]) {
             const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
@@ -215,15 +277,18 @@ struct PlayerMeshMask {
     uint32_t* flags[512]{};
     uint32_t visible[512]{};
     unsigned count=0;
-    bool Collect(unsigned char* player,bool wholeBody) {
+    bool Collect(unsigned char* player,bool wholeBody,const FirstPersonCostume* costume=nullptr) {
         __try {
             const int meshCount=*reinterpret_cast<int*>(player+0x1E8);
             auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
             if(meshCount<1||meshCount>512||!meshes)return false;
             for(int i=0;i<meshCount;++i)if(meshes[i]) {
                 if(!wholeBody) {
-                    const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
-                    if(!name||!FirstPersonHeadMesh(name))continue;
+                    if(costume) {if(i>=64||!(costume->headMask&(1ull<<i)))continue;}
+                    else {
+                        const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
+                        if(!name||!FirstPersonHeadMesh(name))continue;
+                    }
                 }
                 auto* frame=*reinterpret_cast<unsigned char**>(meshes[i]+0x70);
                 if(!frame)return false;
@@ -246,6 +311,12 @@ void __fastcall Queue(void* self,void*,void* camera) {
         unsigned char* player=nullptr;float eyes[3]{};
         const char* reason="player changed during queue";int cameraMode=-1;
         if(ReadPlayer(player,eyes,reason,cameraMode) && player==sessionPlayer) {
+            queuedCostumeCount=0;
+            const auto* costume=PlayerCostume(player);
+            if(costume&&!CollectCostumeDraws(player,*costume)) {
+                queuedCostumeCount=0;ExitExploration("costume draw topology unavailable");
+                original(self,camera);return;
+            }
             // Weapons can precede the body in the native submission order.
             // Prepare the same validated camera/mask state from either one.
             prepared=queued=true;queuedPlayer=player;memcpy(queuedEyes,eyes,sizeof(eyes));
@@ -259,7 +330,7 @@ void __fastcall Queue(void* self,void*,void* camera) {
     const bool wholeBody=queued&&FirstPersonHideJumpBody(*reinterpret_cast<int*>(queuedPlayer+0x34C));
     if(queued&&(self==queuedPlayer||(weapon&&wholeBody))) {
         PlayerMeshMask mask;
-        if(mask.Collect(static_cast<unsigned char*>(self),wholeBody)) {
+        if(mask.Collect(static_cast<unsigned char*>(self),wholeBody,self==queuedPlayer?PlayerCostume(queuedPlayer):nullptr)) {
             // The engine's mesh-enabled bit gates color, alpha, extra material
             // and shadow queues. Restore immediately after submission so no
             // visibility setting survives a toggle, costume change or unload.
@@ -273,6 +344,17 @@ void __fastcall Queue(void* self,void*,void* camera) {
 }
 }
 bool FirstPersonAvailable(){std::lock_guard<std::recursive_mutex> lock(stateMutex);return original&&enabled&&enabled();}
+bool FirstPersonCostumeDrawsActive(){std::lock_guard<std::recursive_mutex> lock(stateMutex);return rendering&&renderCostumeCount!=0;}
+const FirstPersonBodyRule* GetFirstPersonCostumeDraw(void* buffer,unsigned type,unsigned start,unsigned primitives) {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
+    if(!rendering)return nullptr;
+    for(unsigned i=0;i<renderCostumeCount;++i) {
+        const auto& draw=renderCostumeDraws[i];const auto& rule=*draw.rule;
+        const unsigned expected=rule.primitiveType==5?rule.indexCount-2:rule.indexCount/3;
+        if(draw.buffer==buffer&&draw.start==start&&rule.primitiveType==type&&expected==primitives)return &rule;
+    }
+    return nullptr;
+}
 void UpdateFirstPersonTracking(const Mat4& relativeGameHead,bool valid) {
     std::lock_guard<std::recursive_mutex> lock(stateMutex);
     trackedHead=relativeGameHead;trackingValid=valid;
@@ -310,6 +392,9 @@ void BeginFirstPersonFrame() {
     const bool next=queued&&FirstPersonAvailable();
     if(next!=rendering)Log("first person: %s",next?"head camera + head mask (whole body during jumps) active":"original camera + complete model active");
     rendering=next;memcpy(renderEyes,queuedEyes,sizeof(renderEyes));
+    renderCostumeCount=next?queuedCostumeCount:0;
+    memcpy(renderCostumeDraws,queuedCostumeDraws,renderCostumeCount*sizeof(CostumeDraw));
+    queuedCostumeCount=0;
     renderHeading=fixedHeading;renderHeadingValid=headingValid;
     queued=prepared=false;queuedPlayer=nullptr;
 }
@@ -375,5 +460,6 @@ void RemoveFirstPerson() {
     FlushInstructionCache(GetCurrentProcess(),entry,6);VirtualFree(trampoline,0,MEM_RELEASE);
     original=nullptr;imageBase=trampoline=nullptr;enabled=nullptr;
     requested=queued=prepared=rendering=false;queuedPlayer=nullptr;
+    queuedCostumeCount=renderCostumeCount=0;
 }
 }

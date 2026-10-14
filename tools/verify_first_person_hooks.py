@@ -35,6 +35,13 @@ checks = {
     0x454B6C: '89 86 20 01 00 00',
     0xA23803: '8b 86 70 03 00 00 3d 20 00 03 00',
     0xA2390A: '8b ce e8 ff 11 a3 ff',
+    # Steam fixed mesh and shader parameter layout (PC buffers are 32 bytes).
+    0x4A0057: '8b 43 6c 89 4c 24 08 39 88 98 00 00 00',
+    0x4A0071: '8b b0 9c 00 00 00',
+    0x4A00D2: '83 44 24 10 60',
+    0xC5DA05: '8b 06',  # SetIndices takes the buffer at +0.
+    0xC6F300: '8b 41 0c c3',  # Native index count.
+    0xC6F310: '8b 41 04 c3',  # Native StartIndex (no byte conversion).
 }
 for va, hex_bytes in checks.items():
     signature = bytes.fromhex(hex_bytes)

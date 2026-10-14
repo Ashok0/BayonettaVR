@@ -25,6 +25,7 @@
 #include "MaterialTextureCamera.h"
 #include "LiveFilmScene9.h"
 #include "FirstPerson.h"
+#include "FirstPersonDraw9.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
 #include <dxgi.h>
@@ -1757,7 +1758,20 @@ HRESULT STDMETHODCALLTYPE HookSetConst(IDirect3DDevice9* d,UINT start,const floa
     return g_setConst(d,start,data,count);
 }
 HRESULT STDMETHODCALLTYPE HookDrawPrimitive(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT s,UINT n){return DrawWithTrackedCamera(d,n,[&]{return g_drawPrimitive(d,t,s,n);});}
-HRESULT STDMETHODCALLTYPE HookDrawIndexed(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,INT b,UINT mi,UINT nv,UINT si,UINT pc){return DrawWithTrackedCamera(d,pc,[&]{return g_drawIndexed(d,t,b,mi,nv,si,pc);});}
+HRESULT STDMETHODCALLTYPE HookDrawIndexed(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,INT b,UINT mi,UINT nv,UINT si,UINT pc){
+    const FirstPersonBodyRule* costume=nullptr;
+    if(g_insideNativeDraw&&!g_flatMovieFrame&&FirstPersonCostumeDrawsActive()) {
+        IDirect3DIndexBuffer9* indices=nullptr;
+        if(SUCCEEDED(d->GetIndices(&indices))&&indices) {
+            costume=GetFirstPersonCostumeDraw(indices,unsigned(t),si,pc);
+            indices->Release();
+        }
+    }
+    return DrawWithTrackedCamera(d,pc,[&]{
+        if(costume)return DrawFirstPersonCostumeRanges(d,si,*costume,[&](UINT start,UINT count){return g_drawIndexed(d,t,b,mi,nv,start,count);});
+        return g_drawIndexed(d,t,b,mi,nv,si,pc);
+    });
+}
 HRESULT STDMETHODCALLTYPE HookDrawPrimitiveUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT n,const void*v,UINT st){return DrawWithTrackedCamera(d,n,[&]{return g_drawPrimitiveUP(d,t,n,v,st);});}
 HRESULT STDMETHODCALLTYPE HookDrawIndexedUP(IDirect3DDevice9*d,D3DPRIMITIVETYPE t,UINT mv,UINT nv,UINT pc,const void*i,D3DFORMAT f,const void*v,UINT st){return DrawWithTrackedCamera(d,pc,[&]{return g_drawIndexedUP(d,t,mv,nv,pc,i,f,v,st);});}
 HRESULT STDMETHODCALLTYPE HookPresentEx(IDirect3DDevice9Ex*d,const RECT*a,const RECT*b,HWND c,const RGNDATA*e,DWORD f) {

@@ -1,0 +1,27 @@
+Build 20261014.77 — first-person costume heads and coverings
+
+Release/Win32 MSBuild: passed (DeployToGame=false).
+tests/build_first_person_checks.cmd: passed.
+tests/build_checks.cmd: passed, exit 0; log checks77.log.
+Native hook checks: 30 human costume layouts, 188 batch rules, reordered
+material tables, invalid tables, jump/landing/toggle, flag restoration.
+Concurrency regression: 20,000 submissions and 10,000 frame resets passed.
+Camera GPU checks: 18 cases, 294,912 pixels.
+Costume GPU checks: 96 eye/yaw/cull cases, 1,572,864 pixels; original costume
+geometry matches independently assembled retained body triangles.
+Includes Witch hat removal with waist trim retained, Nun veil removal,
+strip winding, unchanged index buffer, and state restoration on failure.
+
+Installed while Bayonetta and BayonettaVRHost were closed.
+Destination: C:\Program Files (x86)\Steam\steamapps\common\Bayonetta
+Backup: .diagnostics/before77-installed-20261014-171242
+Installed DLL and host hashes verified against tested Release artifacts:
+d3d9.dll SHA256:
+1831DFC86E8C5B124FEE0736D672C1C85889F9D427515199EA003C12DD8C4B29
+BayonettaVRHost.exe SHA256:
+FDE8DFA56DD652B4195EC819C05FD07DA9BAC75FB46FDBCF74B920F7B1858F12
+BayonettaVR.ini preserved, SHA256:
+BF54572016332571CD66B6783392BCD93BB08734C92C53ADBEEA0D51396DF93A
+
+In-headset visual confirmation remains pending. Custom replacement costume
+assets are outside the built-in catalog.

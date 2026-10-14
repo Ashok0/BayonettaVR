@@ -1,0 +1,7059 @@
+[
+  {
+    "model": "pl0010",
+    "hash": 17999510138882079851,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon1",
+      "change_hair",
+      "boin_hair",
+      "boin_hair2",
+      "front_hair_ura",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game",
+      "face_event2",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote",
+      "chain",
+      "glass_renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots",
+      "watch",
+      "juwel",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ],
+    "vertices": 22407,
+    "polygons": 62348,
+    "shaders": 64,
+    "mesh_data": 908864,
+    "mask": 939573190,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 19,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 1783,
+        "kind": 5,
+        "indices": 2270,
+        "ranges": [
+          [
+            0,
+            951
+          ],
+          [
+            956,
+            9
+          ],
+          [
+            973,
+            6
+          ],
+          [
+            1009,
+            11
+          ],
+          [
+            1023,
+            34
+          ],
+          [
+            1084,
+            47
+          ],
+          [
+            1162,
+            284
+          ],
+          [
+            1450,
+            6
+          ],
+          [
+            1563,
+            11
+          ],
+          [
+            1581,
+            10
+          ],
+          [
+            1633,
+            63
+          ],
+          [
+            1700,
+            172
+          ],
+          [
+            1884,
+            84
+          ],
+          [
+            1984,
+            9
+          ],
+          [
+            1994,
+            9
+          ],
+          [
+            2004,
+            149
+          ],
+          [
+            2154,
+            114
+          ]
+        ],
+        "removed": 178,
+        "kept": 1020
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 19,
+        "batch": 6,
+        "vmin": 2552,
+        "vmax": 2656,
+        "kind": 5,
+        "indices": 278,
+        "ranges": [
+          [
+            3,
+            71
+          ],
+          [
+            77,
+            199
+          ]
+        ],
+        "removed": 6,
+        "kept": 134
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 19,
+        "batch": 10,
+        "vmin": 20843,
+        "vmax": 22407,
+        "kind": 5,
+        "indices": 1546,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            319
+          ]
+        ],
+        "removed": 28,
+        "kept": 756
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 19,
+        "batch": 16,
+        "vmin": 21741,
+        "vmax": 22032,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 19,
+        "batch": 17,
+        "vmin": 22032,
+        "vmax": 22134,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 3,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 5273,
+        "vmax": 6832,
+        "kind": 5,
+        "indices": 5105,
+        "ranges": [
+          [
+            0,
+            2090
+          ],
+          [
+            2102,
+            14
+          ],
+          [
+            2120,
+            6
+          ],
+          [
+            2130,
+            7
+          ],
+          [
+            2147,
+            8
+          ],
+          [
+            2193,
+            63
+          ],
+          [
+            2272,
+            217
+          ],
+          [
+            2498,
+            6
+          ],
+          [
+            2506,
+            86
+          ],
+          [
+            2607,
+            133
+          ],
+          [
+            2763,
+            381
+          ],
+          [
+            3212,
+            48
+          ],
+          [
+            3269,
+            51
+          ],
+          [
+            3334,
+            31
+          ],
+          [
+            3368,
+            5
+          ],
+          [
+            3374,
+            20
+          ],
+          [
+            3444,
+            1198
+          ],
+          [
+            4653,
+            450
+          ]
+        ],
+        "removed": 178,
+        "kept": 2614
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 2,
+        "batch": 0,
+        "vmin": 14235,
+        "vmax": 14752,
+        "kind": 5,
+        "indices": 1194,
+        "ranges": [
+          [
+            0,
+            36
+          ],
+          [
+            59,
+            7
+          ],
+          [
+            184,
+            94
+          ],
+          [
+            301,
+            7
+          ],
+          [
+            334,
+            150
+          ],
+          [
+            534,
+            208
+          ],
+          [
+            777,
+            5
+          ],
+          [
+            792,
+            78
+          ],
+          [
+            918,
+            183
+          ],
+          [
+            1152,
+            14
+          ],
+          [
+            1177,
+            9
+          ],
+          [
+            1187,
+            5
+          ]
+        ],
+        "removed": 244,
+        "kept": 338
+      }
+    ]
+  },
+  {
+    "model": "pl0020",
+    "hash": 3587712578039362922,
+    "names": [
+      "body",
+      "polymsh",
+      "dammy1",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "dammy5",
+      "dammy6",
+      "face_game",
+      "eye_kage",
+      "face_event1",
+      "eye_kage_event1",
+      "hair",
+      "baletta",
+      "dammy7",
+      "dammy8",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots4",
+      "cylinder21",
+      "dammy9",
+      "dammy10",
+      "grass",
+      "renz",
+      "gyazar",
+      "gyazar6",
+      "far18"
+    ],
+    "vertices": 21918,
+    "polygons": 61232,
+    "shaders": 93,
+    "mesh_data": 888640,
+    "mask": 1006698494,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 1727,
+        "kind": 5,
+        "indices": 5616,
+        "ranges": [
+          [
+            0,
+            84
+          ],
+          [
+            86,
+            457
+          ],
+          [
+            544,
+            27
+          ],
+          [
+            573,
+            435
+          ],
+          [
+            1010,
+            406
+          ],
+          [
+            1420,
+            6
+          ],
+          [
+            1428,
+            5
+          ],
+          [
+            1443,
+            646
+          ],
+          [
+            2101,
+            699
+          ],
+          [
+            2802,
+            10
+          ],
+          [
+            2817,
+            215
+          ],
+          [
+            3049,
+            1955
+          ],
+          [
+            5022,
+            296
+          ],
+          [
+            5319,
+            64
+          ],
+          [
+            5384,
+            230
+          ]
+        ],
+        "removed": 53,
+        "kept": 2966
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 3,
+        "vmin": 2422,
+        "vmax": 2929,
+        "kind": 5,
+        "indices": 1191,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 6,
+        "vmin": 20041,
+        "vmax": 21250,
+        "kind": 5,
+        "indices": 2990,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            115
+          ],
+          [
+            1759,
+            1229
+          ]
+        ],
+        "removed": 178,
+        "kept": 1230
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 8,
+        "vmin": 20695,
+        "vmax": 20707,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 13,
+        "vmin": 21568,
+        "vmax": 21918,
+        "kind": 5,
+        "indices": 982,
+        "ranges": [],
+        "removed": 528,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 14,
+        "vmin": 21743,
+        "vmax": 21917,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 30,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 17065,
+        "vmax": 17890,
+        "kind": 5,
+        "indices": 2377,
+        "ranges": [
+          [
+            2,
+            16
+          ],
+          [
+            20,
+            16
+          ],
+          [
+            38,
+            16
+          ],
+          [
+            56,
+            16
+          ],
+          [
+            74,
+            6
+          ],
+          [
+            82,
+            6
+          ],
+          [
+            90,
+            10
+          ],
+          [
+            102,
+            16
+          ],
+          [
+            120,
+            16
+          ],
+          [
+            138,
+            34
+          ],
+          [
+            204,
+            212
+          ],
+          [
+            418,
+            104
+          ],
+          [
+            524,
+            10
+          ],
+          [
+            536,
+            10
+          ],
+          [
+            548,
+            10
+          ],
+          [
+            566,
+            28
+          ],
+          [
+            596,
+            10
+          ],
+          [
+            608,
+            10
+          ],
+          [
+            626,
+            265
+          ],
+          [
+            899,
+            7
+          ],
+          [
+            909,
+            127
+          ],
+          [
+            1068,
+            98
+          ],
+          [
+            1178,
+            72
+          ],
+          [
+            1258,
+            22
+          ],
+          [
+            1294,
+            32
+          ],
+          [
+            1328,
+            12
+          ],
+          [
+            1342,
+            12
+          ],
+          [
+            1356,
+            12
+          ],
+          [
+            1370,
+            12
+          ],
+          [
+            1384,
+            12
+          ],
+          [
+            1398,
+            46
+          ],
+          [
+            1446,
+            10
+          ],
+          [
+            1458,
+            142
+          ],
+          [
+            1602,
+            14
+          ],
+          [
+            1618,
+            14
+          ],
+          [
+            1634,
+            14
+          ],
+          [
+            1650,
+            14
+          ],
+          [
+            1666,
+            14
+          ],
+          [
+            1682,
+            9
+          ],
+          [
+            1693,
+            8
+          ],
+          [
+            1737,
+            36
+          ],
+          [
+            1781,
+            9
+          ],
+          [
+            1792,
+            12
+          ],
+          [
+            1806,
+            12
+          ],
+          [
+            1820,
+            12
+          ],
+          [
+            1834,
+            10
+          ],
+          [
+            1846,
+            12
+          ],
+          [
+            1860,
+            6
+          ],
+          [
+            1868,
+            18
+          ],
+          [
+            1897,
+            323
+          ],
+          [
+            2221,
+            138
+          ],
+          [
+            2365,
+            10
+          ]
+        ],
+        "removed": 216,
+        "kept": 1296
+      }
+    ]
+  },
+  {
+    "model": "pl0025",
+    "hash": 7878979735132563967,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain5",
+      "dummy5",
+      "polymsh415",
+      "polymsh416",
+      "polymsh484",
+      "polymsh417",
+      "polymsh485",
+      "polymsh418",
+      "polymsh486",
+      "polymsh419",
+      "boots",
+      "dummy3",
+      "dummy4",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ],
+    "vertices": 20611,
+    "polygons": 58170,
+    "shaders": 63,
+    "mesh_data": 835904,
+    "mask": 939540422,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 4,
+        "vmin": 19047,
+        "vmax": 19490,
+        "kind": 5,
+        "indices": 1327,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            100
+          ]
+        ],
+        "removed": 28,
+        "kept": 630
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 11,
+        "vmin": 19945,
+        "vmax": 20236,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 12,
+        "vmin": 20236,
+        "vmax": 20338,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 11079,
+        "vmax": 11280,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl0026",
+    "hash": 7878979735132563967,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain5",
+      "dummy5",
+      "polymsh415",
+      "polymsh416",
+      "polymsh484",
+      "polymsh417",
+      "polymsh485",
+      "polymsh418",
+      "polymsh486",
+      "polymsh419",
+      "boots",
+      "dummy3",
+      "dummy4",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ],
+    "vertices": 20611,
+    "polygons": 58170,
+    "shaders": 63,
+    "mesh_data": 835904,
+    "mask": 939540422,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 4,
+        "vmin": 19047,
+        "vmax": 19490,
+        "kind": 5,
+        "indices": 1327,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            100
+          ]
+        ],
+        "removed": 28,
+        "kept": 630
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 11,
+        "vmin": 19945,
+        "vmax": 20236,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 12,
+        "vmin": 20236,
+        "vmax": 20338,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 11079,
+        "vmax": 11280,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl0027",
+    "hash": 7878979735132563967,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain5",
+      "dummy5",
+      "polymsh415",
+      "polymsh416",
+      "polymsh484",
+      "polymsh417",
+      "polymsh485",
+      "polymsh418",
+      "polymsh486",
+      "polymsh419",
+      "boots",
+      "dummy3",
+      "dummy4",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ],
+    "vertices": 20611,
+    "polygons": 58170,
+    "shaders": 63,
+    "mesh_data": 835904,
+    "mask": 939540422,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 4,
+        "vmin": 19047,
+        "vmax": 19490,
+        "kind": 5,
+        "indices": 1327,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            100
+          ]
+        ],
+        "removed": 28,
+        "kept": 630
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 11,
+        "vmin": 19945,
+        "vmax": 20236,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 16,
+        "batch": 12,
+        "vmin": 20236,
+        "vmax": 20338,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 11079,
+        "vmax": 11280,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl002a",
+    "hash": 16879962836970019900,
+    "names": [
+      "body",
+      "watch",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "dammy5",
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy14",
+      "dammy15",
+      "dammy16",
+      "dammy17",
+      "dammy18",
+      "dammy19",
+      "dammy20",
+      "dammy21",
+      "dammy22",
+      "dammy23",
+      "dammy24",
+      "dammy25",
+      "dammy26",
+      "dammy27",
+      "glass2",
+      "glass_renz1",
+      "gyazar",
+      "gyazar11",
+      "far18"
+    ],
+    "vertices": 22333,
+    "polygons": 61297,
+    "shaders": 79,
+    "mesh_data": 906848,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 1730,
+        "kind": 5,
+        "indices": 5616,
+        "ranges": [
+          [
+            0,
+            84
+          ],
+          [
+            86,
+            457
+          ],
+          [
+            544,
+            27
+          ],
+          [
+            573,
+            435
+          ],
+          [
+            1010,
+            406
+          ],
+          [
+            1420,
+            6
+          ],
+          [
+            1428,
+            5
+          ],
+          [
+            1443,
+            646
+          ],
+          [
+            2101,
+            699
+          ],
+          [
+            2802,
+            10
+          ],
+          [
+            2817,
+            215
+          ],
+          [
+            3049,
+            1955
+          ],
+          [
+            5022,
+            296
+          ],
+          [
+            5319,
+            64
+          ],
+          [
+            5384,
+            230
+          ]
+        ],
+        "removed": 53,
+        "kept": 2966
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 5,
+        "vmin": 3153,
+        "vmax": 3261,
+        "kind": 5,
+        "indices": 315,
+        "ranges": [
+          [
+            94,
+            6
+          ],
+          [
+            112,
+            10
+          ],
+          [
+            257,
+            7
+          ]
+        ],
+        "removed": 156,
+        "kept": 6
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 7,
+        "vmin": 20602,
+        "vmax": 22333,
+        "kind": 5,
+        "indices": 4487,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            399
+          ],
+          [
+            3033,
+            1452
+          ]
+        ],
+        "removed": 720,
+        "kept": 1378
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 1,
+        "vmin": 3790,
+        "vmax": 4002,
+        "kind": 5,
+        "indices": 635,
+        "ranges": [],
+        "removed": 338,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 2,
+        "vmin": 4002,
+        "vmax": 4041,
+        "kind": 5,
+        "indices": 83,
+        "ranges": [],
+        "removed": 41,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 3,
+        "vmin": 4041,
+        "vmax": 4078,
+        "kind": 5,
+        "indices": 89,
+        "ranges": [],
+        "removed": 33,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 4,
+        "vmin": 4078,
+        "vmax": 4562,
+        "kind": 5,
+        "indices": 1320,
+        "ranges": [],
+        "removed": 664,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 5,
+        "vmin": 4562,
+        "vmax": 4598,
+        "kind": 5,
+        "indices": 56,
+        "ranges": [],
+        "removed": 34,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 11185,
+        "vmax": 11396,
+        "kind": 5,
+        "indices": 414,
+        "ranges": [
+          [
+            250,
+            7
+          ],
+          [
+            348,
+            6
+          ],
+          [
+            365,
+            7
+          ],
+          [
+            407,
+            5
+          ]
+        ],
+        "removed": 232,
+        "kept": 8
+      },
+      {
+        "mesh": 30,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 17626,
+        "vmax": 18451,
+        "kind": 5,
+        "indices": 2377,
+        "ranges": [
+          [
+            2,
+            16
+          ],
+          [
+            20,
+            16
+          ],
+          [
+            38,
+            16
+          ],
+          [
+            56,
+            16
+          ],
+          [
+            74,
+            6
+          ],
+          [
+            82,
+            6
+          ],
+          [
+            90,
+            10
+          ],
+          [
+            102,
+            16
+          ],
+          [
+            120,
+            16
+          ],
+          [
+            138,
+            34
+          ],
+          [
+            204,
+            212
+          ],
+          [
+            418,
+            104
+          ],
+          [
+            524,
+            10
+          ],
+          [
+            536,
+            10
+          ],
+          [
+            548,
+            10
+          ],
+          [
+            566,
+            28
+          ],
+          [
+            596,
+            10
+          ],
+          [
+            608,
+            10
+          ],
+          [
+            626,
+            265
+          ],
+          [
+            899,
+            7
+          ],
+          [
+            909,
+            127
+          ],
+          [
+            1068,
+            98
+          ],
+          [
+            1178,
+            72
+          ],
+          [
+            1258,
+            22
+          ],
+          [
+            1294,
+            32
+          ],
+          [
+            1328,
+            12
+          ],
+          [
+            1342,
+            12
+          ],
+          [
+            1356,
+            12
+          ],
+          [
+            1370,
+            12
+          ],
+          [
+            1384,
+            12
+          ],
+          [
+            1398,
+            46
+          ],
+          [
+            1446,
+            10
+          ],
+          [
+            1458,
+            142
+          ],
+          [
+            1602,
+            14
+          ],
+          [
+            1618,
+            14
+          ],
+          [
+            1634,
+            14
+          ],
+          [
+            1650,
+            14
+          ],
+          [
+            1666,
+            14
+          ],
+          [
+            1682,
+            9
+          ],
+          [
+            1693,
+            8
+          ],
+          [
+            1737,
+            36
+          ],
+          [
+            1781,
+            9
+          ],
+          [
+            1792,
+            12
+          ],
+          [
+            1806,
+            12
+          ],
+          [
+            1820,
+            12
+          ],
+          [
+            1834,
+            10
+          ],
+          [
+            1846,
+            12
+          ],
+          [
+            1860,
+            6
+          ],
+          [
+            1868,
+            18
+          ],
+          [
+            1897,
+            323
+          ],
+          [
+            2221,
+            138
+          ],
+          [
+            2365,
+            10
+          ]
+        ],
+        "removed": 216,
+        "kept": 1296
+      }
+    ]
+  },
+  {
+    "model": "pl002c",
+    "hash": 2770431530933050730,
+    "names": [
+      "body",
+      "watch",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "dammy5",
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy14",
+      "dammy15",
+      "dammy16",
+      "dammy17",
+      "dammy18",
+      "dammy19",
+      "dammy20",
+      "dammy21",
+      "dammy22",
+      "dammy23",
+      "dammy24",
+      "dammy25",
+      "dammy26",
+      "dammy27",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 19131,
+    "polygons": 53129,
+    "shaders": 77,
+    "mesh_data": 776736,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 2939,
+        "kind": 5,
+        "indices": 7262,
+        "ranges": [
+          [
+            0,
+            412
+          ],
+          [
+            417,
+            13
+          ],
+          [
+            433,
+            917
+          ],
+          [
+            1354,
+            9
+          ],
+          [
+            1371,
+            8
+          ],
+          [
+            1407,
+            5
+          ],
+          [
+            1427,
+            52
+          ],
+          [
+            1480,
+            6
+          ],
+          [
+            1495,
+            39
+          ],
+          [
+            1543,
+            803
+          ],
+          [
+            2374,
+            6
+          ],
+          [
+            2383,
+            78
+          ],
+          [
+            2468,
+            1315
+          ],
+          [
+            3789,
+            49
+          ],
+          [
+            3839,
+            175
+          ],
+          [
+            4018,
+            14
+          ],
+          [
+            4036,
+            14
+          ],
+          [
+            4061,
+            7
+          ],
+          [
+            4080,
+            135
+          ],
+          [
+            4233,
+            301
+          ],
+          [
+            4538,
+            14
+          ],
+          [
+            4556,
+            28
+          ],
+          [
+            4586,
+            6
+          ],
+          [
+            4595,
+            119
+          ],
+          [
+            4749,
+            417
+          ],
+          [
+            5264,
+            38
+          ],
+          [
+            5303,
+            44
+          ],
+          [
+            5348,
+            19
+          ],
+          [
+            5368,
+            14
+          ],
+          [
+            5383,
+            413
+          ],
+          [
+            5928,
+            16
+          ],
+          [
+            5958,
+            12
+          ],
+          [
+            5972,
+            1288
+          ]
+        ],
+        "removed": 278,
+        "kept": 3532
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 2,
+        "vmin": 1706,
+        "vmax": 3493,
+        "kind": 5,
+        "indices": 2004,
+        "ranges": [
+          [
+            0,
+            68
+          ],
+          [
+            109,
+            39
+          ],
+          [
+            168,
+            34
+          ],
+          [
+            205,
+            25
+          ],
+          [
+            257,
+            33
+          ],
+          [
+            344,
+            5
+          ],
+          [
+            365,
+            11
+          ],
+          [
+            386,
+            10
+          ],
+          [
+            399,
+            107
+          ],
+          [
+            509,
+            89
+          ],
+          [
+            608,
+            10
+          ],
+          [
+            620,
+            6
+          ],
+          [
+            649,
+            21
+          ],
+          [
+            672,
+            108
+          ],
+          [
+            785,
+            563
+          ],
+          [
+            1349,
+            44
+          ],
+          [
+            1394,
+            14
+          ],
+          [
+            1414,
+            19
+          ],
+          [
+            1434,
+            9
+          ],
+          [
+            1444,
+            558
+          ]
+        ],
+        "removed": 132,
+        "kept": 906
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 7,
+        "vmin": 17400,
+        "vmax": 19131,
+        "kind": 5,
+        "indices": 4487,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            399
+          ],
+          [
+            3033,
+            1452
+          ]
+        ],
+        "removed": 720,
+        "kept": 1378
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 1,
+        "vmin": 3584,
+        "vmax": 3798,
+        "kind": 5,
+        "indices": 640,
+        "ranges": [],
+        "removed": 340,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 2,
+        "vmin": 3798,
+        "vmax": 4236,
+        "kind": 5,
+        "indices": 852,
+        "ranges": [],
+        "removed": 395,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 3,
+        "vmin": 3837,
+        "vmax": 3874,
+        "kind": 5,
+        "indices": 89,
+        "ranges": [],
+        "removed": 33,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 4,
+        "vmin": 4236,
+        "vmax": 4720,
+        "kind": 5,
+        "indices": 1320,
+        "ranges": [],
+        "removed": 664,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 6,
+        "batch": 5,
+        "vmin": 4720,
+        "vmax": 4756,
+        "kind": 5,
+        "indices": 56,
+        "ranges": [],
+        "removed": 34,
+        "kept": 0
+      },
+      {
+        "mesh": 2,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 4759,
+        "vmax": 5097,
+        "kind": 5,
+        "indices": 709,
+        "ranges": [],
+        "removed": 330,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 11918,
+        "vmax": 12149,
+        "kind": 5,
+        "indices": 444,
+        "ranges": [
+          [
+            51,
+            9
+          ],
+          [
+            69,
+            7
+          ],
+          [
+            88,
+            5
+          ],
+          [
+            244,
+            6
+          ],
+          [
+            259,
+            10
+          ],
+          [
+            376,
+            6
+          ],
+          [
+            394,
+            6
+          ],
+          [
+            417,
+            9
+          ],
+          [
+            427,
+            9
+          ]
+        ],
+        "removed": 244,
+        "kept": 20
+      }
+    ]
+  },
+  {
+    "model": "pl002d",
+    "hash": 1086765316000679746,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh682",
+      "eye_kage_game",
+      "polymsh677",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain5",
+      "glass_renz",
+      "R_hand_10",
+      "L_hand_9",
+      "R_hand_8",
+      "L_hand_10",
+      "R_hand_9",
+      "L_hand_8",
+      "R_hand_11",
+      "L_hand_11",
+      "boots2",
+      "dummy3",
+      "dummy4",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 20385,
+    "polygons": 57334,
+    "shaders": 56,
+    "mesh_data": 827904,
+    "mask": 939573190,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 2,
+        "vmin": 18821,
+        "vmax": 20385,
+        "kind": 5,
+        "indices": 2520,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1293
+          ]
+        ],
+        "removed": 28,
+        "kept": 1194
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 4,
+        "vmin": 19719,
+        "vmax": 20010,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 5,
+        "vmin": 20010,
+        "vmax": 20112,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 10372,
+        "vmax": 10573,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl002e",
+    "hash": 10351393935833898924,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh413",
+      "eye_kage_game",
+      "face_event1",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain",
+      "glass_renz",
+      "R_hand_10",
+      "L_hand_9",
+      "R_hand_8",
+      "L_hand_10",
+      "R_hand_9",
+      "L_hand_8",
+      "R_hand_11",
+      "L_hand_11",
+      "boots2",
+      "watch",
+      "dummy4",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 20750,
+    "polygons": 58140,
+    "shaders": 63,
+    "mesh_data": 843136,
+    "mask": 939573190,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 9,
+        "vmin": 19186,
+        "vmax": 20750,
+        "kind": 5,
+        "indices": 2520,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1293
+          ]
+        ],
+        "removed": 28,
+        "kept": 1194
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 11,
+        "vmin": 20084,
+        "vmax": 20375,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 12,
+        "vmin": 20375,
+        "vmax": 20477,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 10737,
+        "vmax": 10938,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl002f",
+    "hash": 1174026673839779898,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon3",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh413",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "chain5",
+      "glass_renz",
+      "R_hand_10",
+      "L_hand_9",
+      "R_hand_8",
+      "L_hand_10",
+      "R_hand_9",
+      "L_hand_8",
+      "R_hand_11",
+      "L_hand_11",
+      "boots2",
+      "watch",
+      "juwel",
+      "face_event3",
+      "glass2",
+      "glass_renz1",
+      "pon"
+    ],
+    "vertices": 26195,
+    "polygons": 65707,
+    "shaders": 65,
+    "mesh_data": 1061376,
+    "mask": 939573190,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 9,
+        "vmin": 24631,
+        "vmax": 26195,
+        "kind": 5,
+        "indices": 2520,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1293
+          ]
+        ],
+        "removed": 28,
+        "kept": 1194
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 11,
+        "vmin": 25529,
+        "vmax": 25820,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 14,
+        "batch": 12,
+        "vmin": 25820,
+        "vmax": 25922,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 12025,
+        "vmax": 12226,
+        "kind": 5,
+        "indices": 451,
+        "ranges": [
+          [
+            27,
+            10
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            82,
+            20
+          ],
+          [
+            130,
+            5
+          ],
+          [
+            325,
+            21
+          ],
+          [
+            387,
+            5
+          ],
+          [
+            402,
+            16
+          ],
+          [
+            419,
+            9
+          ],
+          [
+            429,
+            9
+          ]
+        ],
+        "removed": 220,
+        "kept": 32
+      }
+    ]
+  },
+  {
+    "model": "pl0030",
+    "hash": 13876686175236983990,
+    "names": [
+      "body",
+      "watch",
+      "dammy1",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "front_hair2",
+      "dammy5",
+      "face_game",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "dammy6",
+      "front_hair_omote",
+      "dammy7",
+      "dammy8",
+      "R_hand_00",
+      "L_hand_00",
+      "R_hand_01",
+      "L_hand_01",
+      "R_hand_02",
+      "L_hand_02",
+      "R_hand_03",
+      "L_hand_03",
+      "boots",
+      "dammy9",
+      "dammy_juwel",
+      "dammy_hokuro",
+      "dammy_grass",
+      "dammy_renz"
+    ],
+    "vertices": 18249,
+    "polygons": 52048,
+    "shaders": 58,
+    "mesh_data": 740448,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 11,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 2125,
+        "kind": 5,
+        "indices": 5222,
+        "ranges": [
+          [
+            10,
+            8
+          ],
+          [
+            31,
+            15
+          ],
+          [
+            49,
+            8
+          ],
+          [
+            81,
+            5
+          ],
+          [
+            107,
+            237
+          ],
+          [
+            346,
+            78
+          ],
+          [
+            435,
+            715
+          ],
+          [
+            1157,
+            7
+          ],
+          [
+            1165,
+            12
+          ],
+          [
+            1239,
+            5
+          ],
+          [
+            1247,
+            801
+          ],
+          [
+            2068,
+            107
+          ],
+          [
+            2178,
+            9
+          ],
+          [
+            2190,
+            50
+          ],
+          [
+            2242,
+            36
+          ],
+          [
+            2280,
+            440
+          ],
+          [
+            2722,
+            174
+          ],
+          [
+            2897,
+            164
+          ],
+          [
+            3062,
+            49
+          ],
+          [
+            3112,
+            29
+          ],
+          [
+            3142,
+            34
+          ],
+          [
+            3177,
+            2043
+          ]
+        ],
+        "removed": 127,
+        "kept": 2601
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 11,
+        "batch": 9,
+        "vmin": 16685,
+        "vmax": 18249,
+        "kind": 5,
+        "indices": 4297,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            391
+          ],
+          [
+            2871,
+            1424
+          ]
+        ],
+        "removed": 720,
+        "kept": 1378
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 2494,
+        "vmax": 2603,
+        "kind": 5,
+        "indices": 339,
+        "ranges": [],
+        "removed": 174,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0060",
+    "hash": 10912734949431930496,
+    "names": [
+      "body",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "dummy14",
+      "R_hand_4",
+      "L_hand_4",
+      "R_hand_5",
+      "L_hand_5",
+      "R_hand_6",
+      "L_hand_6",
+      "R_hand_7",
+      "L_hand_7",
+      "boots7",
+      "dummy11",
+      "dummy12",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 19339,
+    "polygons": 55032,
+    "shaders": 61,
+    "mesh_data": 784928,
+    "mask": 2013282240,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 2106,
+        "kind": 5,
+        "indices": 4381,
+        "ranges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            31,
+            615
+          ],
+          [
+            649,
+            13
+          ],
+          [
+            663,
+            3590
+          ],
+          [
+            4254,
+            125
+          ]
+        ],
+        "removed": 13,
+        "kept": 2310
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 758,
+        "kind": 5,
+        "indices": 1424,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 10,
+        "vmin": 3128,
+        "vmax": 3251,
+        "kind": 5,
+        "indices": 319,
+        "ranges": [
+          [
+            0,
+            32
+          ],
+          [
+            36,
+            12
+          ],
+          [
+            49,
+            88
+          ],
+          [
+            147,
+            7
+          ],
+          [
+            155,
+            131
+          ],
+          [
+            287,
+            14
+          ],
+          [
+            302,
+            15
+          ]
+        ],
+        "removed": 14,
+        "kept": 120
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 11,
+        "vmin": 17122,
+        "vmax": 19339,
+        "kind": 5,
+        "indices": 4723,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            1279
+          ],
+          [
+            2923,
+            171
+          ],
+          [
+            4106,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 12,
+        "vmin": 18171,
+        "vmax": 18183,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 14,
+        "vmin": 18846,
+        "vmax": 19020,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3254,
+        "vmax": 3532,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0061",
+    "hash": 10912734949431930496,
+    "names": [
+      "body",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "dummy14",
+      "R_hand_4",
+      "L_hand_4",
+      "R_hand_5",
+      "L_hand_5",
+      "R_hand_6",
+      "L_hand_6",
+      "R_hand_7",
+      "L_hand_7",
+      "boots7",
+      "dummy11",
+      "dummy12",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 19339,
+    "polygons": 55032,
+    "shaders": 61,
+    "mesh_data": 784928,
+    "mask": 2013282240,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 2106,
+        "kind": 5,
+        "indices": 4381,
+        "ranges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            31,
+            615
+          ],
+          [
+            649,
+            13
+          ],
+          [
+            663,
+            3590
+          ],
+          [
+            4254,
+            125
+          ]
+        ],
+        "removed": 13,
+        "kept": 2310
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 758,
+        "kind": 5,
+        "indices": 1424,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 10,
+        "vmin": 3128,
+        "vmax": 3251,
+        "kind": 5,
+        "indices": 319,
+        "ranges": [
+          [
+            0,
+            32
+          ],
+          [
+            36,
+            12
+          ],
+          [
+            49,
+            88
+          ],
+          [
+            147,
+            7
+          ],
+          [
+            155,
+            131
+          ],
+          [
+            287,
+            14
+          ],
+          [
+            302,
+            15
+          ]
+        ],
+        "removed": 14,
+        "kept": 120
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 11,
+        "vmin": 17122,
+        "vmax": 19339,
+        "kind": 5,
+        "indices": 4723,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            1279
+          ],
+          [
+            2923,
+            171
+          ],
+          [
+            4106,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 12,
+        "vmin": 18171,
+        "vmax": 18183,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 14,
+        "vmin": 18846,
+        "vmax": 19020,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3254,
+        "vmax": 3532,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0062",
+    "hash": 10912734949431930496,
+    "names": [
+      "body",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "dummy14",
+      "R_hand_4",
+      "L_hand_4",
+      "R_hand_5",
+      "L_hand_5",
+      "R_hand_6",
+      "L_hand_6",
+      "R_hand_7",
+      "L_hand_7",
+      "boots7",
+      "dummy11",
+      "dummy12",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 19339,
+    "polygons": 55032,
+    "shaders": 61,
+    "mesh_data": 784928,
+    "mask": 2013282240,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 2106,
+        "kind": 5,
+        "indices": 4381,
+        "ranges": [
+          [
+            0,
+            6
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            31,
+            615
+          ],
+          [
+            649,
+            13
+          ],
+          [
+            663,
+            3590
+          ],
+          [
+            4254,
+            125
+          ]
+        ],
+        "removed": 13,
+        "kept": 2310
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 758,
+        "kind": 5,
+        "indices": 1424,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 10,
+        "vmin": 3128,
+        "vmax": 3251,
+        "kind": 5,
+        "indices": 319,
+        "ranges": [
+          [
+            0,
+            32
+          ],
+          [
+            36,
+            12
+          ],
+          [
+            49,
+            88
+          ],
+          [
+            147,
+            7
+          ],
+          [
+            155,
+            131
+          ],
+          [
+            287,
+            14
+          ],
+          [
+            302,
+            15
+          ]
+        ],
+        "removed": 14,
+        "kept": 120
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 11,
+        "vmin": 17122,
+        "vmax": 19339,
+        "kind": 5,
+        "indices": 4723,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            1279
+          ],
+          [
+            2923,
+            171
+          ],
+          [
+            4106,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 12,
+        "vmin": 18171,
+        "vmax": 18183,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 14,
+        "vmin": 18846,
+        "vmax": 19020,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3254,
+        "vmax": 3532,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0064",
+    "hash": 3801087029127547367,
+    "names": [
+      "body",
+      "grid7",
+      "grid",
+      "change_hair",
+      "boin_hair",
+      "polymsh405",
+      "grid2",
+      "grid3",
+      "face_game",
+      "eye_kage1",
+      "face_event1",
+      "eye_kage_event2",
+      "polymsh664",
+      "mimi_URA",
+      "chain",
+      "grid6",
+      "R_hand_4",
+      "L_hand_4",
+      "L_hand_5",
+      "R_hand_5",
+      "L_hand_6",
+      "R_hand_6",
+      "L_hand_7",
+      "R_hand_7",
+      "boots",
+      "watch",
+      "grid4",
+      "grid5",
+      "grid8",
+      "grid9"
+    ],
+    "vertices": 18089,
+    "polygons": 52132,
+    "shaders": 72,
+    "mesh_data": 735744,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 1583,
+        "kind": 5,
+        "indices": 1959,
+        "ranges": [
+          [
+            0,
+            517
+          ],
+          [
+            526,
+            5
+          ],
+          [
+            562,
+            178
+          ],
+          [
+            746,
+            6
+          ],
+          [
+            759,
+            9
+          ],
+          [
+            774,
+            52
+          ],
+          [
+            836,
+            24
+          ],
+          [
+            903,
+            91
+          ],
+          [
+            1006,
+            22
+          ],
+          [
+            1030,
+            367
+          ],
+          [
+            1405,
+            8
+          ],
+          [
+            1433,
+            129
+          ],
+          [
+            1570,
+            6
+          ],
+          [
+            1579,
+            35
+          ],
+          [
+            1625,
+            7
+          ],
+          [
+            1639,
+            5
+          ],
+          [
+            1654,
+            29
+          ],
+          [
+            1684,
+            5
+          ],
+          [
+            1721,
+            9
+          ],
+          [
+            1772,
+            9
+          ],
+          [
+            1782,
+            175
+          ]
+        ],
+        "removed": 178,
+        "kept": 832
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 4,
+        "vmin": 1677,
+        "vmax": 1781,
+        "kind": 5,
+        "indices": 278,
+        "ranges": [
+          [
+            3,
+            71
+          ],
+          [
+            77,
+            199
+          ]
+        ],
+        "removed": 6,
+        "kept": 134
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 12,
+        "vmin": 16411,
+        "vmax": 16874,
+        "kind": 5,
+        "indices": 1369,
+        "ranges": [
+          [
+            0,
+            401
+          ],
+          [
+            403,
+            20
+          ],
+          [
+            427,
+            101
+          ],
+          [
+            532,
+            18
+          ],
+          [
+            552,
+            262
+          ],
+          [
+            816,
+            6
+          ],
+          [
+            836,
+            138
+          ],
+          [
+            976,
+            28
+          ],
+          [
+            1012,
+            269
+          ],
+          [
+            1282,
+            74
+          ],
+          [
+            1357,
+            10
+          ]
+        ],
+        "removed": 28,
+        "kept": 666
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 19,
+        "vmin": 17295,
+        "vmax": 17378,
+        "kind": 5,
+        "indices": 260,
+        "ranges": [],
+        "removed": 150,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 20,
+        "vmin": 17378,
+        "vmax": 17384,
+        "kind": 5,
+        "indices": 6,
+        "ranges": [],
+        "removed": 4,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3752,
+        "vmax": 4861,
+        "kind": 5,
+        "indices": 3035,
+        "ranges": [],
+        "removed": 1656,
+        "kept": 0
+      },
+      {
+        "mesh": 2,
+        "mesh_batches": 4,
+        "batch": 1,
+        "vmin": 17384,
+        "vmax": 17390,
+        "kind": 5,
+        "indices": 6,
+        "ranges": [],
+        "removed": 4,
+        "kept": 0
+      },
+      {
+        "mesh": 3,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 4864,
+        "vmax": 6349,
+        "kind": 5,
+        "indices": 4813,
+        "ranges": [
+          [
+            0,
+            970
+          ],
+          [
+            976,
+            10
+          ],
+          [
+            1036,
+            264
+          ],
+          [
+            1302,
+            207
+          ],
+          [
+            1521,
+            89
+          ],
+          [
+            1612,
+            8
+          ],
+          [
+            1638,
+            8
+          ],
+          [
+            1652,
+            6
+          ],
+          [
+            1704,
+            16
+          ],
+          [
+            1723,
+            7
+          ],
+          [
+            1753,
+            124
+          ],
+          [
+            1904,
+            58
+          ],
+          [
+            1969,
+            939
+          ],
+          [
+            2911,
+            11
+          ],
+          [
+            2924,
+            216
+          ],
+          [
+            3146,
+            625
+          ],
+          [
+            3814,
+            586
+          ],
+          [
+            4406,
+            239
+          ],
+          [
+            4646,
+            14
+          ],
+          [
+            4661,
+            150
+          ]
+        ],
+        "removed": 178,
+        "kept": 2474
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 2,
+        "batch": 0,
+        "vmin": 11213,
+        "vmax": 11737,
+        "kind": 5,
+        "indices": 1161,
+        "ranges": [
+          [
+            0,
+            36
+          ],
+          [
+            51,
+            7
+          ],
+          [
+            64,
+            10
+          ],
+          [
+            79,
+            69
+          ],
+          [
+            160,
+            166
+          ],
+          [
+            351,
+            259
+          ],
+          [
+            622,
+            204
+          ],
+          [
+            857,
+            9
+          ],
+          [
+            867,
+            29
+          ],
+          [
+            902,
+            14
+          ],
+          [
+            928,
+            32
+          ],
+          [
+            995,
+            23
+          ],
+          [
+            1024,
+            10
+          ],
+          [
+            1039,
+            19
+          ],
+          [
+            1064,
+            9
+          ],
+          [
+            1079,
+            41
+          ],
+          [
+            1126,
+            5
+          ],
+          [
+            1137,
+            16
+          ]
+        ],
+        "removed": 144,
+        "kept": 394
+      }
+    ]
+  },
+  {
+    "model": "pl0066",
+    "hash": 6096184096691147792,
+    "names": [
+      "body0",
+      "cylinder",
+      "dummy0",
+      "dummy1",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "dummy6",
+      "head3",
+      "dummy7",
+      "dummy8",
+      "R_hand_00",
+      "L_hand_00",
+      "R_hand_01",
+      "L_hand_01",
+      "R_hand_02",
+      "L_hand_02",
+      "R_hand_03",
+      "L_hand_03",
+      "boots_L",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13"
+    ],
+    "vertices": 22844,
+    "polygons": 58204,
+    "shaders": 75,
+    "mesh_data": 925664,
+    "mask": 939540418,
+    "rules": []
+  },
+  {
+    "model": "pl0067",
+    "hash": 633221617854581840,
+    "names": [
+      "body",
+      "dammy1",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "dammy5",
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy14",
+      "dammy15",
+      "dammy16",
+      "dammy17",
+      "dammy18",
+      "dammy19",
+      "dammy20",
+      "dammy21",
+      "dammy22",
+      "dammy23",
+      "dammy24",
+      "dammy25",
+      "dammy26",
+      "dammy27",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 17666,
+    "polygons": 50707,
+    "shaders": 74,
+    "mesh_data": 718656,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 8,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 3493,
+        "kind": 5,
+        "indices": 2010,
+        "ranges": [
+          [
+            0,
+            74
+          ],
+          [
+            115,
+            39
+          ],
+          [
+            174,
+            34
+          ],
+          [
+            211,
+            25
+          ],
+          [
+            263,
+            33
+          ],
+          [
+            350,
+            5
+          ],
+          [
+            371,
+            11
+          ],
+          [
+            392,
+            10
+          ],
+          [
+            405,
+            107
+          ],
+          [
+            515,
+            89
+          ],
+          [
+            614,
+            10
+          ],
+          [
+            626,
+            6
+          ],
+          [
+            655,
+            21
+          ],
+          [
+            678,
+            108
+          ],
+          [
+            791,
+            563
+          ],
+          [
+            1355,
+            44
+          ],
+          [
+            1400,
+            14
+          ],
+          [
+            1420,
+            19
+          ],
+          [
+            1440,
+            9
+          ],
+          [
+            1450,
+            558
+          ]
+        ],
+        "removed": 132,
+        "kept": 907
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 8,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 2939,
+        "kind": 5,
+        "indices": 7262,
+        "ranges": [
+          [
+            0,
+            412
+          ],
+          [
+            417,
+            13
+          ],
+          [
+            433,
+            917
+          ],
+          [
+            1354,
+            9
+          ],
+          [
+            1371,
+            8
+          ],
+          [
+            1407,
+            5
+          ],
+          [
+            1427,
+            52
+          ],
+          [
+            1480,
+            6
+          ],
+          [
+            1495,
+            39
+          ],
+          [
+            1543,
+            803
+          ],
+          [
+            2374,
+            6
+          ],
+          [
+            2383,
+            78
+          ],
+          [
+            2468,
+            1315
+          ],
+          [
+            3789,
+            49
+          ],
+          [
+            3839,
+            175
+          ],
+          [
+            4018,
+            14
+          ],
+          [
+            4036,
+            14
+          ],
+          [
+            4061,
+            7
+          ],
+          [
+            4080,
+            135
+          ],
+          [
+            4233,
+            301
+          ],
+          [
+            4538,
+            14
+          ],
+          [
+            4556,
+            28
+          ],
+          [
+            4586,
+            6
+          ],
+          [
+            4595,
+            119
+          ],
+          [
+            4749,
+            417
+          ],
+          [
+            5264,
+            38
+          ],
+          [
+            5303,
+            44
+          ],
+          [
+            5348,
+            19
+          ],
+          [
+            5368,
+            14
+          ],
+          [
+            5383,
+            413
+          ],
+          [
+            5928,
+            16
+          ],
+          [
+            5958,
+            12
+          ],
+          [
+            5972,
+            1288
+          ]
+        ],
+        "removed": 278,
+        "kept": 3532
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 8,
+        "batch": 3,
+        "vmin": 15789,
+        "vmax": 17666,
+        "kind": 5,
+        "indices": 4416,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1878,
+            1556
+          ]
+        ],
+        "removed": 714,
+        "kept": 1400
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 8,
+        "batch": 7,
+        "vmin": 17491,
+        "vmax": 17665,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3584,
+        "vmax": 3846,
+        "kind": 5,
+        "indices": 794,
+        "ranges": [],
+        "removed": 424,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0068",
+    "hash": 455626340244132856,
+    "names": [
+      "body",
+      "dummy5",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy6",
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots2",
+      "dummy3",
+      "dummy4",
+      "dummy10",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 19057,
+    "polygons": 54169,
+    "shaders": 56,
+    "mesh_data": 773856,
+    "mask": 939573184,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 2,
+        "vmin": 1778,
+        "vmax": 2491,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 3,
+        "vmin": 16927,
+        "vmax": 19057,
+        "kind": 5,
+        "indices": 4627,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1802,
+            1196
+          ],
+          [
+            4010,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 4,
+        "vmin": 17542,
+        "vmax": 17554,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 7,
+        "batch": 6,
+        "vmin": 18564,
+        "vmax": 18738,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 2594,
+        "vmax": 2872,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0069",
+    "hash": 455626340244132856,
+    "names": [
+      "body",
+      "dummy5",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy6",
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots2",
+      "dummy3",
+      "dummy4",
+      "dummy10",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 19482,
+    "polygons": 55200,
+    "shaders": 62,
+    "mesh_data": 791520,
+    "mask": 939573184,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 13,
+        "batch": 8,
+        "vmin": 2207,
+        "vmax": 2920,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 13,
+        "batch": 9,
+        "vmin": 17356,
+        "vmax": 19482,
+        "kind": 5,
+        "indices": 4616,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1802,
+            1196
+          ],
+          [
+            4010,
+            604
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 13,
+        "batch": 10,
+        "vmin": 17971,
+        "vmax": 17983,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 13,
+        "batch": 12,
+        "vmin": 18993,
+        "vmax": 19167,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 3023,
+        "vmax": 3301,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl006a",
+    "hash": 11154898308695455099,
+    "names": [
+      "body",
+      "dummy5",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy6",
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy9",
+      "renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots2",
+      "watch",
+      "dummy4",
+      "dummy10",
+      "grass1",
+      "renz1",
+      "pon"
+    ],
+    "vertices": 24780,
+    "polygons": 62606,
+    "shaders": 66,
+    "mesh_data": 1003648,
+    "mask": 939573184,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 8,
+        "vmin": 3426,
+        "vmax": 4139,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 11,
+        "vmin": 22650,
+        "vmax": 24780,
+        "kind": 5,
+        "indices": 4627,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            1271
+          ],
+          [
+            2856,
+            142
+          ],
+          [
+            4010,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 12,
+        "vmin": 23644,
+        "vmax": 23656,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 14,
+        "vmin": 24287,
+        "vmax": 24461,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 4242,
+        "vmax": 4520,
+        "kind": 5,
+        "indices": 839,
+        "ranges": [],
+        "removed": 454,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl006e",
+    "hash": 17110124666522493276,
+    "names": [
+      "body",
+      "watch",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "dummy25",
+      "dummy26",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 29804,
+    "polygons": 85250,
+    "shaders": 94,
+    "mesh_data": 1208320,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 7212,
+        "kind": 5,
+        "indices": 3014,
+        "ranges": [
+          [
+            2820,
+            192
+          ]
+        ],
+        "removed": 1756,
+        "kept": 128
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 2,
+        "vmin": 241,
+        "vmax": 6435,
+        "kind": 5,
+        "indices": 2048,
+        "ranges": [
+          [
+            0,
+            594
+          ]
+        ],
+        "removed": 544,
+        "kept": 372
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 5979,
+        "kind": 5,
+        "indices": 958,
+        "ranges": [],
+        "removed": 340,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 7,
+        "vmin": 6435,
+        "vmax": 7148,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 21,
+        "vmin": 28019,
+        "vmax": 29804,
+        "kind": 5,
+        "indices": 4729,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1802,
+            1812
+          ]
+        ],
+        "removed": 746,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 22,
+        "vmin": 28634,
+        "vmax": 28646,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14359,
+        "vmax": 14621,
+        "kind": 5,
+        "indices": 794,
+        "ranges": [],
+        "removed": 424,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0070",
+    "hash": 17110124666522493276,
+    "names": [
+      "body",
+      "watch",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "dummy25",
+      "dummy26",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 29804,
+    "polygons": 85250,
+    "shaders": 94,
+    "mesh_data": 1208320,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 7212,
+        "kind": 5,
+        "indices": 3014,
+        "ranges": [
+          [
+            2820,
+            192
+          ]
+        ],
+        "removed": 1756,
+        "kept": 128
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 2,
+        "vmin": 241,
+        "vmax": 6435,
+        "kind": 5,
+        "indices": 2048,
+        "ranges": [
+          [
+            0,
+            594
+          ]
+        ],
+        "removed": 544,
+        "kept": 372
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 5979,
+        "kind": 5,
+        "indices": 958,
+        "ranges": [],
+        "removed": 340,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 7,
+        "vmin": 6435,
+        "vmax": 7148,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 21,
+        "vmin": 28019,
+        "vmax": 29804,
+        "kind": 5,
+        "indices": 4729,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1802,
+            1812
+          ]
+        ],
+        "removed": 746,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 22,
+        "vmin": 28634,
+        "vmax": 28646,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14359,
+        "vmax": 14621,
+        "kind": 5,
+        "indices": 794,
+        "ranges": [],
+        "removed": 424,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0072",
+    "hash": 17110124666522493276,
+    "names": [
+      "body",
+      "watch",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "dummy25",
+      "dummy26",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ],
+    "vertices": 29804,
+    "polygons": 85249,
+    "shaders": 94,
+    "mesh_data": 1208320,
+    "mask": 939540416,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 7212,
+        "kind": 5,
+        "indices": 4836,
+        "ranges": [
+          [
+            782,
+            598
+          ],
+          [
+            4642,
+            192
+          ]
+        ],
+        "removed": 2142,
+        "kept": 500
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 2,
+        "vmin": 464,
+        "vmax": 547,
+        "kind": 5,
+        "indices": 225,
+        "ranges": [],
+        "removed": 158,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 5979,
+        "kind": 5,
+        "indices": 958,
+        "ranges": [],
+        "removed": 340,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 7,
+        "vmin": 6435,
+        "vmax": 7148,
+        "kind": 5,
+        "indices": 1418,
+        "ranges": [],
+        "removed": 530,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 21,
+        "vmin": 28019,
+        "vmax": 29804,
+        "kind": 5,
+        "indices": 4729,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1802,
+            1812
+          ]
+        ],
+        "removed": 746,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 24,
+        "batch": 22,
+        "vmin": 28634,
+        "vmax": 28646,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 1,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14359,
+        "vmax": 14621,
+        "kind": 5,
+        "indices": 794,
+        "ranges": [],
+        "removed": 424,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0074",
+    "hash": 5277046117970579089,
+    "names": [
+      "body",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "renz1",
+      "L_hand_4",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots5",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "grass2",
+      "renz2"
+    ],
+    "vertices": 15576,
+    "polygons": 45384,
+    "shaders": 53,
+    "mesh_data": 633216,
+    "mask": 939573184,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 3,
+        "vmin": 2797,
+        "vmax": 3279,
+        "kind": 5,
+        "indices": 1452,
+        "ranges": [],
+        "removed": 837,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 4,
+        "vmin": 3279,
+        "vmax": 3761,
+        "kind": 5,
+        "indices": 1503,
+        "ranges": [],
+        "removed": 837,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 5,
+        "vmin": 13359,
+        "vmax": 15576,
+        "kind": 5,
+        "indices": 4723,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            217
+          ],
+          [
+            1861,
+            1233
+          ],
+          [
+            4106,
+            615
+          ]
+        ],
+        "removed": 706,
+        "kept": 1498
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 6,
+        "vmin": 14013,
+        "vmax": 14025,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 9,
+        "batch": 8,
+        "vmin": 15083,
+        "vmax": 15257,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0075",
+    "hash": 6445311159651944368,
+    "names": [
+      "body",
+      "piass",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy3",
+      "polymsh10",
+      "hair61",
+      "face_game",
+      "eye_kage",
+      "face_event1",
+      "eye_kage_event1",
+      "hair50",
+      "dummy4",
+      "chain",
+      "glass_renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots",
+      "watch",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "dummy8"
+    ],
+    "vertices": 23310,
+    "polygons": 63895,
+    "shaders": 80,
+    "mesh_data": 945376,
+    "mask": 939540354,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 3346,
+        "kind": 5,
+        "indices": 4054,
+        "ranges": [
+          [
+            0,
+            76
+          ],
+          [
+            210,
+            434
+          ],
+          [
+            697,
+            12
+          ],
+          [
+            718,
+            722
+          ],
+          [
+            1453,
+            5
+          ],
+          [
+            1463,
+            13
+          ],
+          [
+            1477,
+            43
+          ],
+          [
+            1528,
+            7
+          ],
+          [
+            1544,
+            81
+          ],
+          [
+            1670,
+            6
+          ],
+          [
+            1687,
+            5
+          ],
+          [
+            1723,
+            71
+          ],
+          [
+            1816,
+            6
+          ],
+          [
+            1841,
+            19
+          ],
+          [
+            1892,
+            27
+          ],
+          [
+            1928,
+            58
+          ],
+          [
+            1997,
+            174
+          ],
+          [
+            2172,
+            1604
+          ],
+          [
+            3779,
+            71
+          ],
+          [
+            3853,
+            199
+          ]
+        ],
+        "removed": 237,
+        "kept": 1844
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 7,
+        "vmin": 1873,
+        "vmax": 3521,
+        "kind": 5,
+        "indices": 328,
+        "ranges": [
+          [
+            206,
+            120
+          ]
+        ],
+        "removed": 90,
+        "kept": 72
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 10,
+        "vmin": 21093,
+        "vmax": 23307,
+        "kind": 5,
+        "indices": 4432,
+        "ranges": [
+          [
+            0,
+            616
+          ],
+          [
+            620,
+            22
+          ],
+          [
+            644,
+            5
+          ],
+          [
+            651,
+            143
+          ],
+          [
+            802,
+            20
+          ],
+          [
+            824,
+            244
+          ],
+          [
+            1080,
+            12
+          ],
+          [
+            1102,
+            14
+          ],
+          [
+            1117,
+            209
+          ],
+          [
+            1327,
+            1279
+          ],
+          [
+            2923,
+            171
+          ],
+          [
+            4106,
+            324
+          ]
+        ],
+        "removed": 706,
+        "kept": 1400
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 11,
+        "vmin": 22142,
+        "vmax": 22154,
+        "kind": 5,
+        "indices": 14,
+        "ranges": [],
+        "removed": 8,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 15,
+        "batch": 13,
+        "vmin": 22817,
+        "vmax": 22991,
+        "kind": 5,
+        "indices": 99,
+        "ranges": [],
+        "removed": 40,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 16150,
+        "vmax": 16494,
+        "kind": 5,
+        "indices": 733,
+        "ranges": [
+          [
+            0,
+            37
+          ],
+          [
+            49,
+            33
+          ],
+          [
+            107,
+            67
+          ],
+          [
+            209,
+            35
+          ],
+          [
+            256,
+            123
+          ],
+          [
+            397,
+            61
+          ],
+          [
+            464,
+            9
+          ],
+          [
+            474,
+            9
+          ],
+          [
+            500,
+            32
+          ],
+          [
+            567,
+            23
+          ],
+          [
+            596,
+            10
+          ],
+          [
+            611,
+            19
+          ],
+          [
+            636,
+            9
+          ],
+          [
+            651,
+            41
+          ],
+          [
+            698,
+            5
+          ],
+          [
+            709,
+            16
+          ]
+        ],
+        "removed": 139,
+        "kept": 217
+      }
+    ]
+  },
+  {
+    "model": "pl0083",
+    "hash": 14498433979749766979,
+    "names": [
+      "body",
+      "hair_drill",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "watch",
+      "dummy26",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 31309,
+    "polygons": 88143,
+    "shaders": 78,
+    "mesh_data": 1268640,
+    "mask": 939540418,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 6499,
+        "kind": 5,
+        "indices": 3014,
+        "ranges": [
+          [
+            2820,
+            192
+          ]
+        ],
+        "removed": 1756,
+        "kept": 128
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 2,
+        "vmin": 241,
+        "vmax": 6435,
+        "kind": 5,
+        "indices": 2048,
+        "ranges": [
+          [
+            0,
+            594
+          ]
+        ],
+        "removed": 544,
+        "kept": 372
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 13398,
+        "kind": 5,
+        "indices": 10916,
+        "ranges": [
+          [
+            956,
+            9958
+          ]
+        ],
+        "removed": 340,
+        "kept": 5662
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 19,
+        "vmin": 29745,
+        "vmax": 31309,
+        "kind": 5,
+        "indices": 4298,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1159
+          ],
+          [
+            3639,
+            657
+          ]
+        ],
+        "removed": 720,
+        "kept": 1378
+      },
+      {
+        "mesh": 2,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14679,
+        "vmax": 15015,
+        "kind": 5,
+        "indices": 719,
+        "ranges": [],
+        "removed": 330,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0085",
+    "hash": 14498433979749766979,
+    "names": [
+      "body",
+      "hair_drill",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "watch",
+      "dummy26",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 31309,
+    "polygons": 88143,
+    "shaders": 77,
+    "mesh_data": 1268416,
+    "mask": 939540418,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 6499,
+        "kind": 5,
+        "indices": 3014,
+        "ranges": [
+          [
+            2820,
+            192
+          ]
+        ],
+        "removed": 1756,
+        "kept": 128
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 2,
+        "vmin": 241,
+        "vmax": 6435,
+        "kind": 5,
+        "indices": 2048,
+        "ranges": [
+          [
+            0,
+            594
+          ]
+        ],
+        "removed": 544,
+        "kept": 372
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 13398,
+        "kind": 5,
+        "indices": 9308,
+        "ranges": [
+          [
+            956,
+            8350
+          ]
+        ],
+        "removed": 340,
+        "kept": 4795
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 21,
+        "batch": 19,
+        "vmin": 29745,
+        "vmax": 31309,
+        "kind": 5,
+        "indices": 4297,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            391
+          ],
+          [
+            2871,
+            1424
+          ]
+        ],
+        "removed": 720,
+        "kept": 1378
+      },
+      {
+        "mesh": 2,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14679,
+        "vmax": 15015,
+        "kind": 5,
+        "indices": 719,
+        "ranges": [],
+        "removed": 330,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0087",
+    "hash": 14498433979749766979,
+    "names": [
+      "body",
+      "hair_drill",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy14",
+      "dummy15",
+      "dummy16",
+      "dummy17",
+      "dummy18",
+      "dummy19",
+      "dummy20",
+      "dummy21",
+      "dummy22",
+      "dummy23",
+      "dummy24",
+      "watch",
+      "dummy26",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 31309,
+    "polygons": 88141,
+    "shaders": 78,
+    "mesh_data": 1268800,
+    "mask": 939540418,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 1,
+        "vmin": 3,
+        "vmax": 6499,
+        "kind": 5,
+        "indices": 4836,
+        "ranges": [
+          [
+            782,
+            598
+          ],
+          [
+            4642,
+            192
+          ]
+        ],
+        "removed": 2142,
+        "kept": 500
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 2,
+        "vmin": 464,
+        "vmax": 547,
+        "kind": 5,
+        "indices": 225,
+        "ranges": [],
+        "removed": 158,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 3,
+        "vmin": 859,
+        "vmax": 3075,
+        "kind": 5,
+        "indices": 220,
+        "ranges": [],
+        "removed": 64,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 4,
+        "vmin": 915,
+        "vmax": 3971,
+        "kind": 5,
+        "indices": 5902,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 5,
+        "vmin": 1811,
+        "vmax": 4867,
+        "kind": 5,
+        "indices": 5901,
+        "ranges": [],
+        "removed": 2880,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 6,
+        "vmin": 5339,
+        "vmax": 13643,
+        "kind": 5,
+        "indices": 9308,
+        "ranges": [
+          [
+            956,
+            8350
+          ]
+        ],
+        "removed": 340,
+        "kept": 4795
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 19,
+        "vmin": 29745,
+        "vmax": 30188,
+        "kind": 5,
+        "indices": 1327,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            100
+          ]
+        ],
+        "removed": 28,
+        "kept": 630
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 22,
+        "batch": 20,
+        "vmin": 30188,
+        "vmax": 31309,
+        "kind": 5,
+        "indices": 2968,
+        "ranges": [
+          [
+            0,
+            1054
+          ],
+          [
+            2309,
+            657
+          ]
+        ],
+        "removed": 692,
+        "kept": 748
+      },
+      {
+        "mesh": 2,
+        "mesh_batches": 2,
+        "batch": 1,
+        "vmin": 14679,
+        "vmax": 15015,
+        "kind": 5,
+        "indices": 719,
+        "ranges": [],
+        "removed": 330,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl0089",
+    "hash": 8768888076049752770,
+    "names": [
+      "body2",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "face_game",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "dummy7",
+      "dummy8",
+      "dummy9",
+      "polymsh",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "boots2",
+      "dummy10",
+      "dummy11",
+      "face_event3",
+      "glass",
+      "polymsh420"
+    ],
+    "vertices": 16156,
+    "polygons": 47709,
+    "shaders": 55,
+    "mesh_data": 656704,
+    "mask": 1040252926,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 4,
+        "vmin": 2711,
+        "vmax": 3193,
+        "kind": 5,
+        "indices": 1452,
+        "ranges": [],
+        "removed": 837,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 5,
+        "vmin": 3193,
+        "vmax": 3675,
+        "kind": 5,
+        "indices": 1503,
+        "ranges": [],
+        "removed": 837,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 6,
+        "vmin": 14425,
+        "vmax": 16156,
+        "kind": 5,
+        "indices": 2556,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1329
+          ]
+        ],
+        "removed": 28,
+        "kept": 1194
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 8,
+        "vmin": 15339,
+        "vmax": 15749,
+        "kind": 5,
+        "indices": 1107,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 9,
+        "vmin": 15749,
+        "vmax": 15851,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      }
+    ]
+  },
+  {
+    "model": "pl008a",
+    "hash": 3133267071116272945,
+    "names": [
+      "body",
+      "hair_drill",
+      "ribon1",
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "front_hair_ura",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game",
+      "face_event2",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote",
+      "chain",
+      "glass_renz",
+      "R_hand_0",
+      "L_hand_0",
+      "R_hand_1",
+      "L_hand_1",
+      "R_hand_2",
+      "L_hand_2",
+      "R_hand_3",
+      "L_hand_3",
+      "dummy3",
+      "watch1",
+      "watch2",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ],
+    "vertices": 25280,
+    "polygons": 70131,
+    "shaders": 80,
+    "mesh_data": 1025472,
+    "mask": 939573190,
+    "rules": [
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 0,
+        "vmin": 0,
+        "vmax": 4038,
+        "kind": 5,
+        "indices": 5610,
+        "ranges": [
+          [
+            0,
+            66
+          ],
+          [
+            175,
+            2704
+          ],
+          [
+            2882,
+            24
+          ],
+          [
+            2960,
+            117
+          ],
+          [
+            3082,
+            28
+          ],
+          [
+            3154,
+            5
+          ],
+          [
+            3160,
+            666
+          ],
+          [
+            3831,
+            6
+          ],
+          [
+            3855,
+            5
+          ],
+          [
+            3865,
+            13
+          ],
+          [
+            3879,
+            67
+          ],
+          [
+            3978,
+            291
+          ],
+          [
+            4277,
+            13
+          ],
+          [
+            4293,
+            287
+          ],
+          [
+            4596,
+            114
+          ],
+          [
+            4760,
+            18
+          ],
+          [
+            4779,
+            8
+          ],
+          [
+            4789,
+            53
+          ],
+          [
+            4863,
+            9
+          ],
+          [
+            4878,
+            454
+          ],
+          [
+            5335,
+            71
+          ],
+          [
+            5409,
+            199
+          ]
+        ],
+        "removed": 240,
+        "kept": 2789
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 2,
+        "vmin": 31,
+        "vmax": 2124,
+        "kind": 5,
+        "indices": 328,
+        "ranges": [
+          [
+            206,
+            120
+          ]
+        ],
+        "removed": 90,
+        "kept": 72
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 7,
+        "vmin": 23716,
+        "vmax": 25280,
+        "kind": 5,
+        "indices": 2520,
+        "ranges": [
+          [
+            3,
+            705
+          ],
+          [
+            715,
+            10
+          ],
+          [
+            728,
+            5
+          ],
+          [
+            737,
+            16
+          ],
+          [
+            760,
+            208
+          ],
+          [
+            980,
+            219
+          ],
+          [
+            1210,
+            14
+          ],
+          [
+            1225,
+            1293
+          ]
+        ],
+        "removed": 28,
+        "kept": 1194
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 9,
+        "vmin": 24614,
+        "vmax": 24905,
+        "kind": 5,
+        "indices": 953,
+        "ranges": [],
+        "removed": 516,
+        "kept": 0
+      },
+      {
+        "mesh": 0,
+        "mesh_batches": 12,
+        "batch": 10,
+        "vmin": 24905,
+        "vmax": 25007,
+        "kind": 5,
+        "indices": 301,
+        "ranges": [],
+        "removed": 176,
+        "kept": 0
+      },
+      {
+        "mesh": 14,
+        "mesh_batches": 1,
+        "batch": 0,
+        "vmin": 17447,
+        "vmax": 17722,
+        "kind": 5,
+        "indices": 589,
+        "ranges": [
+          [
+            0,
+            42
+          ],
+          [
+            65,
+            7
+          ],
+          [
+            89,
+            31
+          ],
+          [
+            132,
+            66
+          ],
+          [
+            210,
+            28
+          ],
+          [
+            272,
+            67
+          ],
+          [
+            370,
+            42
+          ],
+          [
+            464,
+            50
+          ],
+          [
+            537,
+            7
+          ],
+          [
+            567,
+            9
+          ]
+        ],
+        "removed": 136,
+        "kept": 157
+      }
+    ]
+  }
+]

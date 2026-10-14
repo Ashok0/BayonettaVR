@@ -3,6 +3,43 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## First-person heads and costume coverings (build 20261014.77)
+
+First person now recognizes all 30 installed human costume model assets for
+Bayonetta and Jeanne, including generic `dummy` face/hair names and the Nun's
+`body2` mesh. Heads, hair, glasses and head coverings are hidden. The Witch
+hat shares a body draw with waist trim; only the hat triangles are removed,
+so the trim remains. Both sides of the Nun veil are removed as well.
+
+The masks come from the installed WMB mesh layouts, head-bone skin weights
+and triangle topology. Complete head meshes use the existing temporary native
+visibility mask. Mixed meshes retain their body triangles using original
+index-buffer ranges, with winding preserved when a triangle strip starts on
+an odd triangle. No game asset, vertex or index buffer is modified.
+
+Native material tables are checked against the recognized costume's topology.
+Draw ranges are matched to the player's queued index buffer, start index and
+primitive count, then committed together for both eyes. Missing or changed
+native material tables return to third person. Jump/fall body and weapon
+masking, combat restrictions, stick turning and walking behavior remain.
+Custom replacement costumes are not covered by the built-in asset catalog.
+
+Validation covers every extracted costume layout, reordered native material
+tables, jumps, landing, toggles, already-hidden meshes and invalid tables.
+The existing concurrent queue/frame-reset crash regression also passes.
+GPU comparisons use original Witch, Nun and other costume geometry: 96
+eye/yaw/culling cases and 1,572,864 pixels match independently assembled body
+triangles, including the Witch waist trim, odd strip winding and render-state
+restoration. Release/Win32 build and the full check suite pass. Build `.77` is
+installed, with settings preserved and the previous mod backed up in
+`.diagnostics/before77-installed-20261014-171242`.
+In-headset costume appearance still needs confirmation.
+
+To regenerate the catalog from a local Steam installation, run
+`python tools/extract_first_person_costumes.py` followed by
+`python tools/generate_first_person_costumes.py`. Source asset hashes are in
+`tests/fixtures/firstperson_costumes/provenance.json`.
+
 ## Direct VR view for live film-strip scenes (build 20261014.76)
 
 The user prefers viewing the live 3D scene directly in VR, without its

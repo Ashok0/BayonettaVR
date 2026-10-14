@@ -1,0 +1,621 @@
+[
+  {
+    "model": "pl0010",
+    "sha256": "5fcec2ac9acb29f4ad11582475a5b9508291731928c730b3ee23f03ccc7a3414",
+    "meshes": 30,
+    "vertices": 22407,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon1",
+      "front_hair_ura",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game",
+      "face_event2",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote",
+      "glass_renz",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0020",
+    "sha256": "78c310429f48f5c2e4cbd0366d8834900de91b81825370a74961f136f937ac5e",
+    "meshes": 33,
+    "vertices": 21918,
+    "hidden_meshes": [
+      "polymsh",
+      "dammy1",
+      "dammy2",
+      "dammy3",
+      "dammy4",
+      "dammy5",
+      "dammy6",
+      "face_game",
+      "eye_kage",
+      "face_event1",
+      "eye_kage_event1",
+      "hair",
+      "baletta",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "grass",
+      "renz"
+    ]
+  },
+  {
+    "model": "pl0025",
+    "sha256": "e7ea717129a370c31113a9fb6e5863c558123460a11687760dd53c963d8c671c",
+    "meshes": 30,
+    "vertices": 20611,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0026",
+    "sha256": "e7ea717129a370c31113a9fb6e5863c558123460a11687760dd53c963d8c671c",
+    "meshes": 30,
+    "vertices": 20611,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0027",
+    "sha256": "e7ea717129a370c31113a9fb6e5863c558123460a11687760dd53c963d8c671c",
+    "meshes": 30,
+    "vertices": 20611,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair_drill3",
+      "front_hair_omote6",
+      "hokuro_cover",
+      "glass",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl002a",
+    "sha256": "984f5c6f6eccb70992f21382dc956bb9f651f0aad4119378446b5c5e26161312",
+    "meshes": 33,
+    "vertices": 22333,
+    "hidden_meshes": [
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy27",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl002c",
+    "sha256": "affcb504cdd85053ea934f42894bd0ef57555a2a5d27d1cb8e548154ea740fdb",
+    "meshes": 30,
+    "vertices": 19131,
+    "hidden_meshes": [
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy27",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl002d",
+    "sha256": "0842ec621e313cd3eaea1b105e940f1e2b2d14d6208d72216435c757ed6a1092",
+    "meshes": 30,
+    "vertices": 20385,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh682",
+      "eye_kage_game",
+      "polymsh677",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "glass_renz",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl002e",
+    "sha256": "a58564e4a5ff08279104f4c5d93110eef2e4d54b72de17743dc8465772402aed",
+    "meshes": 30,
+    "vertices": 20750,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh413",
+      "eye_kage_game",
+      "face_event1",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "glass_renz",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl002f",
+    "sha256": "63935cef91a3355872d10cf2a79c1a44ff50200f725ceaa2f0a723a76a091f36",
+    "meshes": 31,
+    "vertices": 26195,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon3",
+      "front_hair_ura6",
+      "back_hair_ura",
+      "polymsh413",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote6",
+      "glass_renz",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0030",
+    "sha256": "710ec0bf03b5d52fb5417c3aa5b37b14370ee769367e410b2a5cb2db79da9992",
+    "meshes": 30,
+    "vertices": 18249,
+    "hidden_meshes": [
+      "front_hair2",
+      "dammy5",
+      "face_game",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "dammy6",
+      "front_hair_omote",
+      "dammy_hokuro",
+      "dammy_grass",
+      "dammy_renz"
+    ]
+  },
+  {
+    "model": "pl0060",
+    "sha256": "8babc17b4b8180b99e93905304922aeca094131bb791001cf1c62fca88c13a06",
+    "meshes": 31,
+    "vertices": 19339,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0061",
+    "sha256": "8babc17b4b8180b99e93905304922aeca094131bb791001cf1c62fca88c13a06",
+    "meshes": 31,
+    "vertices": 19339,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0062",
+    "sha256": "8babc17b4b8180b99e93905304922aeca094131bb791001cf1c62fca88c13a06",
+    "meshes": 31,
+    "vertices": 19339,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy13",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "dummy10",
+      "renz",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0064",
+    "sha256": "323695fd08fe6f0956d9c9971f6a500b1bfc866258a4f7babc0e0ea6b8607c4f",
+    "meshes": 30,
+    "vertices": 18089,
+    "hidden_meshes": [
+      "grid2",
+      "grid3",
+      "face_game",
+      "eye_kage1",
+      "face_event1",
+      "eye_kage_event2",
+      "polymsh664",
+      "mimi_URA",
+      "grid5",
+      "grid8",
+      "grid9"
+    ]
+  },
+  {
+    "model": "pl0066",
+    "sha256": "1bf3c6286888a05e247cefc897a3416afe366e4672d2d49cea28230682f08297",
+    "meshes": 30,
+    "vertices": 22844,
+    "hidden_meshes": [
+      "cylinder",
+      "dummy4",
+      "dummy5",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "dummy6",
+      "head3",
+      "dummy11",
+      "dummy12",
+      "dummy13"
+    ]
+  },
+  {
+    "model": "pl0067",
+    "sha256": "15e63a00970dcb69e2cde21e327a203a010f615031d1fd5e6983a2ce73c3e1ea",
+    "meshes": 30,
+    "vertices": 17666,
+    "hidden_meshes": [
+      "dammy6",
+      "dammy7",
+      "dammy8",
+      "dammy9",
+      "dammy10",
+      "dammy11",
+      "dammy12",
+      "dammy13",
+      "dammy27",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0068",
+    "sha256": "02765b33d29787e49d04ed853c72d60b688784f0f697f17c222a5a641146babf",
+    "meshes": 30,
+    "vertices": 19057,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "renz",
+      "dummy10",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0069",
+    "sha256": "1d992c7d2a4a3ff14ba705712aa9e66a93184bfc5e30aefa8cc7327a962aad98",
+    "meshes": 30,
+    "vertices": 19482,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "renz",
+      "dummy10",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl006a",
+    "sha256": "fab6c4e91dda992641d45ef2b258af04837d6556b751a109427a3032900cbaba",
+    "meshes": 31,
+    "vertices": 24780,
+    "hidden_meshes": [
+      "dummy7",
+      "dummy8",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "hair",
+      "baletta",
+      "renz",
+      "dummy10",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl006e",
+    "sha256": "d234920d22fb7aa69118d8a6c7a48fec44dacfaaaf3028315b610b8f2e4d16fc",
+    "meshes": 30,
+    "vertices": 29804,
+    "hidden_meshes": [
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0070",
+    "sha256": "88de97a47aa0e5a487e95d17d719ae5febdffe46cf74fd4490e8a2471bb1d4c1",
+    "meshes": 30,
+    "vertices": 29804,
+    "hidden_meshes": [
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0072",
+    "sha256": "d37bbca7ccd7ce4bf29b8f3182633ca724290889a7bf4ef7ad68fac404fa01e7",
+    "meshes": 30,
+    "vertices": 29804,
+    "hidden_meshes": [
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "grass1",
+      "renz1"
+    ]
+  },
+  {
+    "model": "pl0074",
+    "sha256": "079825e2393074f577f4abc8fdbaff083b97ebe0710129be54fa61f0fbb7d488",
+    "meshes": 30,
+    "vertices": 15576,
+    "hidden_meshes": [
+      "dummy16",
+      "dummy17",
+      "face_game1",
+      "eye_kage1",
+      "face_event2",
+      "eye_kage_event2",
+      "dummy18",
+      "dummy19",
+      "renz1",
+      "dummy23",
+      "grass2",
+      "renz2"
+    ]
+  },
+  {
+    "model": "pl0075",
+    "sha256": "29a9134a089c5528ee003b8100ed8e6bef103a3ba92525c909a4b08eaf5844cd",
+    "meshes": 30,
+    "vertices": 23310,
+    "hidden_meshes": [
+      "piass",
+      "hair61",
+      "face_game",
+      "eye_kage",
+      "face_event1",
+      "eye_kage_event1",
+      "hair50",
+      "dummy4",
+      "dummy6",
+      "dummy7",
+      "dummy8"
+    ]
+  },
+  {
+    "model": "pl0083",
+    "sha256": "3bd92dd20524d6c4fa15dd923d92f1bc5732c7e5951223d653a0cec793cdb74c",
+    "meshes": 30,
+    "vertices": 31309,
+    "hidden_meshes": [
+      "hair_drill",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0085",
+    "sha256": "3a5cea0130ac6c629506ff316dab1dfb3b4cd1847d90666f307a8d4203c9c41d",
+    "meshes": 30,
+    "vertices": 31309,
+    "hidden_meshes": [
+      "hair_drill",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0087",
+    "sha256": "0e093f873ea6cdc86b20303b89fa1d080208f00b6aa06451eebf356030f32ed5",
+    "meshes": 30,
+    "vertices": 31309,
+    "hidden_meshes": [
+      "hair_drill",
+      "dummy6",
+      "dummy7",
+      "face_game",
+      "dummy9",
+      "dummy10",
+      "dummy11",
+      "dummy12",
+      "dummy13",
+      "dummy27",
+      "glass2",
+      "glass_renz1"
+    ]
+  },
+  {
+    "model": "pl0089",
+    "sha256": "2693a0491e7ddbfa71858c1b08e195e5120f3073d9664bfb8c0aa53686f83ea5",
+    "meshes": 30,
+    "vertices": 16156,
+    "hidden_meshes": [
+      "dummy",
+      "dummy1",
+      "dummy2",
+      "dummy3",
+      "dummy4",
+      "dummy5",
+      "dummy6",
+      "face_game",
+      "eye_kage_game",
+      "face_event",
+      "eye_kage_event1",
+      "dummy7",
+      "dummy8",
+      "dummy9",
+      "polymsh",
+      "dummy10",
+      "dummy11",
+      "face_event3",
+      "glass",
+      "polymsh420"
+    ]
+  },
+  {
+    "model": "pl008a",
+    "sha256": "c28dc715c612d67ad286fdad00c12fef2618fcb1ba5d21c031ba7d6faa38631c",
+    "meshes": 30,
+    "vertices": 25280,
+    "hidden_meshes": [
+      "hair_drill",
+      "ribon1",
+      "front_hair_ura",
+      "back_hair_ura",
+      "face_game",
+      "eye_kage_game",
+      "face_event2",
+      "eye_kage_event1",
+      "hair_drill3",
+      "front_hair_omote",
+      "glass_renz",
+      "face_event3",
+      "glass2",
+      "glass_renz1"
+    ]
+  }
+]
