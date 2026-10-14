@@ -1,4 +1,6 @@
 @echo off
+call tests\build_first_person_checks.cmd
+if errorlevel 1 exit /b 1
 call tests\build_practice_reflection_checks.cmd
 if errorlevel 1 exit /b 1
 setlocal

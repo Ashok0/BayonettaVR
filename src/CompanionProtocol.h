@@ -8,7 +8,7 @@
 #include "ControllerInput.h"
 
 namespace bvr::ipc {
-constexpr uint32_t Magic = 0x42565248, Version = 2, SlotCount = 3;
+constexpr uint32_t Magic = 0x42565248, Version = 3, SlotCount = 3;
 enum SlotState : LONG { Free, Writing, Ready, Reading };
 struct Tracking {
     uint64_t sample = 0, tick = 0;

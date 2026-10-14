@@ -1,0 +1,8 @@
+Extracted from installed Steam Bayonetta data13.cpk/shader.dat.
+Original bytecode and CTAB retained. These shaders use g_InvOldWVP/g_InvNewWVP for motion blur.
+modelshaderblur.pso CDE775FA 1288 bytes
+modelshaderblurcm4.pso 27B1EC05 1492 bytes
+modelshaderblurcm8.pso 7C993BC7 1740 bytes
+modelshaderblurcme.pso 9FCFAC0F 1744 bytes
+modelshaderblurcmx.pso 24EA099A 1832 bytes
+modelshaderblurcmy.pso 24EA099A 1832 bytes

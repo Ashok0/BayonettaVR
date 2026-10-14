@@ -10,7 +10,9 @@ SetStateFn originalSet=nullptr;
 SRWLOCK inputLock=SRWLOCK_INIT;
 XboxInputBridge bridge;
 RecenterHold gamepadHold;
+CameraTogglePress gamepadToggle;
 bool calibrationActive=false;
+bool cameraShortcutActive=false;
 constexpr WORD stickChord=XINPUT_GAMEPAD_LEFT_THUMB|XINPUT_GAMEPAD_RIGHT_THUMB;
 DWORD WINAPI GetState(DWORD index,XINPUT_STATE* state) {
     if(!state)return ERROR_BAD_ARGUMENTS;
@@ -20,6 +22,7 @@ DWORD WINAPI GetState(DWORD index,XINPUT_STATE* state) {
     if(index==0 && calibrationActive && (state->Gamepad.wButtons&stickChord)==stickChord)
         state->Gamepad.wButtons&=~stickChord;
     const bool supplied=bridge.Read(index,*state,result==ERROR_SUCCESS,GetTickCount64());
+    if(index==0&&cameraShortcutActive)state->Gamepad.wButtons&=~XINPUT_GAMEPAD_RIGHT_THUMB;
     ReleaseSRWLockExclusive(&inputLock);
     return supplied?ERROR_SUCCESS:result;
 }
@@ -43,13 +46,17 @@ template<class T> bool Patch(ULONG_PTR* slot,T hook,T& original) {
 void UpdateControllerInput(const ControllerInput& input) {
     AcquireSRWLockExclusive(&inputLock);bridge.Update(input);ReleaseSRWLockExclusive(&inputLock);
 }
-bool PollGamepadRecenter(bool active,uint64_t now) {
+bool PollGamepadRecenter(bool active,uint64_t now,bool* cameraToggle,bool cameraShortcut) {
     // Call the unhooked export, so the consumed game buttons and virtual pad
     // cannot hide a physical chord or produce duplicate Touch events.
     XINPUT_STATE state{};
     const bool connected=originalGet && originalGet(0,&state)==ERROR_SUCCESS;
     AcquireSRWLockExclusive(&inputLock);
     calibrationActive=active;
+    cameraShortcutActive=active&&cameraShortcut;
+    const bool toggled=gamepadToggle.Update(connected&&(state.Gamepad.wButtons&XINPUT_GAMEPAD_RIGHT_THUMB),
+        connected&&(state.Gamepad.wButtons&XINPUT_GAMEPAD_LEFT_THUMB),active&&connected&&cameraShortcut,now);
+    if(cameraToggle)*cameraToggle=toggled;
     const bool fired=gamepadHold.Update(connected&&(state.Gamepad.wButtons&stickChord)==stickChord,
         active&&connected,now);
     ReleaseSRWLockExclusive(&inputLock);return fired;

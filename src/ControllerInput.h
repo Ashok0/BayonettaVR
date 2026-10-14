@@ -24,12 +24,32 @@ private:
     uint64_t start_=0,last_=0;
     bool holding_=false,fired_=false;
 };
+// R3 release toggles; either ordering of L3+R3 reserves the recenter chord.
+class CameraTogglePress {
+public:
+    bool Update(bool right,bool left,bool active,uint64_t now) {
+        const bool interrupted=!active || (seen_&&(now<last_ || now-last_>250));
+        last_=now;seen_=true;
+        if(interrupted){armed_=false;blocked_=right;}
+        if(!active)return false;
+        if(left){armed_=false;blocked_=right;}
+        if(right) {
+            if(!down_&&!blocked_&&!left)armed_=true;
+            down_=true;return false;
+        }
+        const bool fire=down_&&armed_&&!left&&!interrupted;
+        down_=armed_=blocked_=false;return fire;
+    }
+private:
+    uint64_t last_=0;
+    bool seen_=false,down_=false,armed_=false,blocked_=false;
+};
 struct TouchHand {
     bool connected=false, primary=false, secondary=false, stickClick=false, system=false;
     float x=0,y=0,trigger=0,grip=0;
 };
 struct ControllerInput {
-    uint64_t tick=0,recenterSequence=0;
+    uint64_t tick=0,recenterSequence=0,cameraToggleSequence=0;
     uint32_t connected=0,active=0;
     XINPUT_GAMEPAD pad{};
 };
@@ -37,15 +57,19 @@ class TouchMapper {
 public:
     ControllerInput Map(const TouchHand& left,const TouchHand& right,bool focused,uint64_t now) {
         ControllerInput output{};output.tick=now;output.recenterSequence=recenterSequence_;
+        output.cameraToggleSequence=cameraToggleSequence_;
         output.connected=left.connected||right.connected;
         output.active=output.connected&&focused;
-        if(!output.active) {hold_.Update(false,false,now);systemDown_=false;return output;}
+        if(!output.active) {hold_.Update(false,false,now);toggle_.Update(right.stickClick,left.stickClick,false,now);systemDown_=false;return output;}
         const bool both=left.connected&&right.connected&&left.stickClick&&right.stickClick;
         const bool system=right.connected&&right.system;
         if(system&&!systemDown_)++recenterSequence_;
         systemDown_=system;
         if(hold_.Update(both,true,now))++recenterSequence_;
+        if(toggle_.Update(right.stickClick,left.stickClick||right.grip>.55f,
+            right.connected,now))++cameraToggleSequence_;
         output.recenterSequence=recenterSequence_;
+        output.cameraToggleSequence=cameraToggleSequence_;
         auto& p=output.pad;
         if(left.connected) {
             Stick(left.x,left.y,p.sThumbLX,p.sThumbLY);
@@ -91,6 +115,8 @@ private:
     }
     uint64_t recenterSequence_=0;
     RecenterHold hold_;
+    CameraTogglePress toggle_;
+    uint64_t cameraToggleSequence_=0;
     bool systemDown_=false;
 };
 // Called under the input hook's lock; monotonic packets describe the merged pad.

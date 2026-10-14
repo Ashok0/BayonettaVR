@@ -17,6 +17,7 @@ struct Config {
     bool externalCompositor = false;
     bool nativeStereo = true;
     bool fixCameraCulling = true;
+    bool firstPersonToggle = true;
     bool forceHalfRate = false;
     bool uncapPresent = true;
     bool positionalTracking = true;

@@ -3,6 +3,53 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
+## Exploration first person (build 20261013.66)
+
+Tap and release **R3** on a gamepad or VR controller to switch between third
+and first person. `FirstPersonToggle=1` enables the shortcut and is the default
+when the key is absent. **L3+R3 held for one second** remains recenter; that
+chord does not toggle first person. The game's stationary, invisible-body
+first-person mode is not used.
+
+First person is restricted to exploration. Live enemies force third person
+and block entry; this deliberately includes enemies registered before they
+start attacking. Dead enemies and empty enemy-list slots do not block it.
+Attacks, jumps, dodges, transformations, wall walking, cutscenes, loading,
+loss of tracking/focus and an unrecognized costume also leave first person.
+Tap R3 again when normal exploration resumes; it does not re-enter on its own.
+
+Bayonetta's body follows your headset's horizontal heading, with her head
+meshes hidden and the rest of her body retained. Existing room-scale headset
+translation remains active. The first-person view keeps its entry heading as
+its base so the game's automatic camera cannot feed body turns back into the
+view. Turn physically to look around. The eye anchor follows the character's
+root at a height sampled on entry, removing animated head bob and sway while
+still following changes in ground elevation.
+
+Movement is capped to walking in the game's combined input snapshot, covering
+keyboard, physical gamepads and VR controllers. The radial cap preserves
+direction and prevents diagonals from exceeding walking speed. Other actions
+return to third person instead of retaining the head camera through acrobatics.
+Normal third-person input and speed are restored automatically.
+
+The restored `.60` code retains its corrected camera argument/stack cleanup.
+New signature-checked hooks run before native root/skeleton construction and
+native movement decoding. The enemy list is scanned for live enemy objects;
+the cumulative player `enemyCount` field is not used. Run
+`tools/verify_first_person_hooks.py` against the Steam executable and
+`tests/build_first_person_checks.cmd` for camera/GPU, x86 hook, combat exit,
+tracking, body yaw, walk-cap and map-unload regressions.
+
+Headset play testing of these new exploration behaviors is still pending.
+Release/Win32, the full regression suite and the companion transport tests
+pass. The companion protocol is version 3; install the matching DLL and host
+together. Existing INI settings are preserved.
+Build `.66` is installed with SHA256 verification. The previous installed
+DLL, host and INI are backed up in
+`.diagnostics/before66-installed-20261013-195615`.
+The confirmed `.65` red-streak fix, grading removal and black startup display
+are retained.
+
 ## Confirmed red-streak fix (build 20261013.65)
 
 The user confirmed on **2026-10-13** that build **.65** fixes the red streaks

@@ -59,6 +59,7 @@ void LoadConfig() {
     Log("config: external compositor=%d", g_cfg.externalCompositor);
     g_cfg.nativeStereo = ReadInt(path, L"NativeStereo", 1) != 0;
     g_cfg.fixCameraCulling = ReadInt(path, L"FixCameraCulling", 1) != 0;
+    g_cfg.firstPersonToggle = ReadInt(path, L"FirstPersonToggle", 1) != 0;
     Log("camera culling: FixCameraCulling=%d",g_cfg.fixCameraCulling);
     g_cfg.forceHalfRate = ReadInt(path, L"ForceHalfRate", 0) != 0;
     g_cfg.uncapPresent = ReadInt(path, L"UncapPresent", 1) != 0;
@@ -92,7 +93,7 @@ void LoadConfig() {
     g_cfg.farClip = ReadFloat(path, L"FarClip", 100000.0f);
     g_cfg.projectionMode = ReadInt(path, L"ProjectionMode", 0);
     g_cfg.matrixRegisterOverride = ReadInt(path, L"MatrixRegisterOverride", -1);
-    Log("config: build=20261013.65 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
+    Log("config: build=20261013.66 enabled=%d native=%d halfRate=%d uncapPresent=%d positional=%d compositorPoseDiagnostic=%d units/m=%.3f stereo=%.3f fov=%.2f projection=%d matrixOverride=%d compositorRotation=%d turnDegrees=%.1f autoTurn=%d directPoseTurning=%d earlySubmit=%d explicitNativePose=%d",
         g_cfg.enabled, g_cfg.nativeStereo, g_cfg.forceHalfRate, g_cfg.uncapPresent,
         g_cfg.positionalTracking, g_cfg.compositorPoseDiagnostic,
         g_cfg.worldUnitsPerMetre,

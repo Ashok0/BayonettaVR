@@ -1,0 +1,48 @@
+#pragma once
+
+namespace bvr {
+struct Config {
+    bool enabled = true;
+    bool disableDepthOfField = true;
+    bool disableMotionBlur = true;
+    bool disableAmbientOcclusion = true;
+    bool disableColorGrading = true;
+    bool disablePracticeReflection = true;
+    bool fixSoftParticleDepth = true;
+    bool worldLockedMovies = true;
+    bool worldLockedMapSequence = true;
+    float movieDistanceMetres = 3.0f;
+    float movieWidthMetres = 4.0f;
+    bool vrControllers = true;
+    bool externalCompositor = false;
+    bool nativeStereo = true;
+    bool fixCameraCulling = true;
+    bool forceHalfRate = false;
+    bool uncapPresent = true;
+    bool positionalTracking = true;
+    bool compositorRotation = true;
+    bool automaticTurning = false;
+    bool directPoseTurning = true;
+    bool nativeEarlySubmit = false;
+    bool nativeExplicitPose = true;
+    float compositorTurnDegrees = 12.0f;
+    bool applyToUi = false;
+    bool worldLockedHud = true;
+    float hudDistanceMetres = 2.0f;
+    float hudWidthMetres = 3.2f;
+    float hudVerticalOffsetMetres = 0.0f;
+    bool swapEyes = false;
+    bool mirrorSideBySide = false;
+    bool compositorPoseDiagnostic = false;
+    float worldUnitsPerMetre = 1.0f;
+    float stereoScale = 1.0f;
+    float gameVerticalFovDegrees = 60.0f;
+    float nearClip = 0.1f;
+    float farClip = 100000.0f;
+    int projectionMode = 0;
+    int matrixRegisterOverride = -1;
+};
+
+const Config& Cfg();
+void LoadConfig();
+}

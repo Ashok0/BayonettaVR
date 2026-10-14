@@ -2,6 +2,7 @@
 #include "IndependentGrid.h"
 #include "CompanionClient.h"
 #include "ControllerHooks.h"
+#include "FirstPerson.h"
 #include "TouchControllers.h"
 
 extern "C" IMAGE_DOS_HEADER __ImageBase;
@@ -319,14 +320,24 @@ void VRRuntime::WaitForPose() {
 
 void VRRuntime::ApplyGamepadCalibration() {
     DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
-    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),GetTickCount64())) {
+    UpdateFirstPersonTracking(ToGameCoordinates(Mul(InvertRigid(origin_),headPose_),1.f),
+        poseValid_&&originValid_&&Active()&&foreground==GetCurrentProcessId());
+    bool toggle=false;
+    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),GetTickCount64(),
+        &toggle,FirstPersonAvailable())) {
         Recenter();Log("controllers: physical gamepad L3+R3 recenter");
     }
+    if(toggle)ToggleFirstPerson();
 }
 
 void VRRuntime::ApplyControllers(const ControllerInput& input) {
     if(!Cfg().vrControllers)return;
     UpdateControllerInput(input);
+    if(input.cameraToggleSequence!=controllerCameraSequence_) {
+        controllerCameraSequence_=input.cameraToggleSequence;
+        const auto now=GetTickCount64();
+        if(poseValid_&&input.active&&now>=input.tick&&now-input.tick<=250)ToggleFirstPerson();
+    }
     if(input.recenterSequence!=controllerRecenterSequence_) {
         controllerRecenterSequence_=input.recenterSequence;
         const auto now=GetTickCount64();
@@ -400,6 +411,9 @@ Mat4 VRRuntime::ClipTransform(float gameAspect) const {
     if (!Invert(gameProjection, invGame)) return Identity();
     // Existing clip = Pgame * modelView * vertex. Replace the camera/projection
     // portion without needing Bayonetta's model or view matrices separately.
+    Mat4 correction{};
+    if(GetFirstPersonCorrection(invGame,correction))
+        return EyeViewProjection(eye_,Cfg().worldUnitsPerMetre,Mul(correction,invGame),&gameProjection);
     return EyeViewProjection(eye_, Cfg().worldUnitsPerMetre, invGame, &gameProjection);
 }
 

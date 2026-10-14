@@ -21,6 +21,7 @@
 #include "AmbientOcclusion.h"
 #include "ColorGrading.h"
 #include "PracticeReflection.h"
+#include "FirstPerson.h"
 #include "SoftParticleDepth.h"
 #include <d3d11.h>
 #include <dxgi.h>
@@ -1166,6 +1167,7 @@ void __fastcall HookOtManagerDraw(void* self, void*) {
     }
 
     g_insideNativeDraw = true;
+    BeginFirstPersonFrame();
     // Sample the compositor's predicted pose at the last game-level point
     // before either eye is rendered. Both eyes then use this exact pose.
     g_pipeline.waitStart = PipelineSeconds();
@@ -1333,10 +1335,14 @@ bool InstallNativeStereoHook() {
     if(Cfg().fixCameraCulling)InstallCameraCullingHook(image,[] {
         return Cfg().enabled && Cfg().nativeStereo && VR().Active();
     });
+    if(Cfg().firstPersonToggle)InstallFirstPerson(image,[] {
+        return Cfg().enabled&&Cfg().nativeStereo&&VR().Active()&&!IndependentVRGrid().OwnsFrames();
+    });
     return true;
 }
 
 void RemoveNativeStereoHook() {
+    RemoveFirstPerson();
     RemoveCameraCullingHook();
     RemoveEffectHooks();
     RemoveMenuHooks();

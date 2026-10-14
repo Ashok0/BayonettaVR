@@ -17,6 +17,15 @@ int main() {
     if(XInputGetState(0,&state)!=ERROR_SUCCESS||state.dwPacketNumber!=packet)return 5;
     if(XInputGetState(3,&untouched)!=before)return 6;
     if(XInputGetState(0,nullptr)!=ERROR_BAD_ARGUMENTS)return 7;
+    input.tick=GetTickCount64();input.pad.wButtons=XINPUT_GAMEPAD_A|XINPUT_GAMEPAD_RIGHT_THUMB;
+    input.pad.sThumbLX=12001;input.pad.sThumbLY=-21002;input.pad.sThumbRX=-8001;input.pad.sThumbRY=3002;
+    UpdateControllerInput(input);bool toggle=false;
+    PollGamepadRecenter(true,input.tick,&toggle,true);
+    if(XInputGetState(0,&state)!=ERROR_SUCCESS||(state.Gamepad.wButtons&XINPUT_GAMEPAD_RIGHT_THUMB)||
+       !(state.Gamepad.wButtons&XINPUT_GAMEPAD_A)||state.Gamepad.sThumbLX!=12001||state.Gamepad.sThumbLY!=-21002||
+       state.Gamepad.sThumbRX!=-8001||state.Gamepad.sThumbRY!=3002)return 9;
+    PollGamepadRecenter(false,GetTickCount64());
+    if(XInputGetState(0,&state)!=ERROR_SUCCESS||!(state.Gamepad.wButtons&XINPUT_GAMEPAD_RIGHT_THUMB))return 10;
     UpdateControllerInput({});
     // Verify disconnect follows the original DLL's real result.
     auto real=reinterpret_cast<DWORD(WINAPI*)(DWORD,XINPUT_STATE*)>(GetProcAddress(GetModuleHandleW(L"xinput1_3.dll"),"XInputGetState"));

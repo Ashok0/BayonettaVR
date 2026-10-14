@@ -1,0 +1,1 @@
+Original Steam Bayonetta data13.cpk/shader.dat filtershaderssao.pso, CRC32 46871F68, 8172 bytes.
