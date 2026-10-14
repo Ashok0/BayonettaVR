@@ -4,9 +4,14 @@
 #include <windows.h>
 #include <cstdint>
 #include <cstring>
+#include <mutex>
 
 namespace bvr {
 namespace {
+// Native mesh submission runs on worker threads while frame setup resets
+// queued state. Keep the player, eyes and queue flags as one transaction.
+// Recursive because public helpers and native queue callbacks may re-enter.
+std::recursive_mutex stateMutex;
 // cModel::transMesh(cCamera*): ECX is the model, [ebp+8] is the
 // caller's camera, and the native function returns with ret 4.
 using QueueFn=void(__thiscall*)(void*,void*);
@@ -25,6 +30,8 @@ Mat4 fixedHeading=Identity(),trackedHead=Identity();
 Mat4 renderHeading=Identity();
 bool renderHeadingValid=false;
 bool headingValid=false,trackingValid=false;
+uint64_t turnTick=0;
+bool turnSampleValid=false;
 using RootFn=void(__thiscall*)(void*);
 using JoyFn=float(__thiscall*)(void*);
 RootFn originalRoot=nullptr;
@@ -40,6 +47,7 @@ constexpr unsigned char partsSignature[]={0x8B,0x44,0x24,0x04,0x56,0x8B,0xF1,0x8
 void ExitExploration(const char* reason) {
     if(requested)Log("first person: returned to third person: %s; tap R3 to re-enter",reason);
     requested=queued=false;sessionPlayer=nullptr;headingValid=false;eyeHeight=0;
+    turnSampleValid=false;
 }
 bool ExplorationPlayer(unsigned char*& player,const char*& reason) {
     __try {
@@ -54,7 +62,7 @@ bool ExplorationPlayer(unsigned char*& player,const char*& reason) {
            *reinterpret_cast<int*>(player+0x6B4)<=0)return false;
         reason="action, transformation or wall walking";
         const int move=*reinterpret_cast<int*>(player+0x34C);
-        if(move<0||move>7 || *reinterpret_cast<int*>(player+0x96B24)!=0 ||
+        if(!FirstPersonTraversal(move) || *reinterpret_cast<int*>(player+0x96B24)!=0 ||
            *reinterpret_cast<unsigned char*>(player+0x95ED4)!=0)return false;
         // emList: 512 slots, high-water count at +0x800. Removal leaves
         // holes, so count alone is not an active-enemy count. Verified at
@@ -83,23 +91,32 @@ bool ControlPlayer(void* self) {
     return player==self;
 }
 void __fastcall Root(void* self,void*) {
-    float yaw=0;
-    if(ControlPlayer(self)&&headingValid&&FirstPersonBodyYaw(fixedHeading,trackedHead,yaw)) {
-        // cModel::calcMatrix builds the root and skeleton from rot at +E0.
-        // Apply before that work, never rotate already-queued mesh pointers.
-        *reinterpret_cast<float*>(static_cast<unsigned char*>(self)+0xE4)=yaw;
+    {
+        std::lock_guard<std::recursive_mutex> lock(stateMutex);
+        float yaw=0;
+        if(ControlPlayer(self)&&headingValid&&FirstPersonBodyYaw(fixedHeading,trackedHead,yaw)) {
+            // cModel::calcMatrix builds the root and skeleton from rot at +E0.
+            // Apply before that work, never rotate already-queued mesh pointers.
+            *reinterpret_cast<float*>(static_cast<unsigned char*>(self)+0xE4)=yaw;
+        }
     }
     originalRoot(self);
 }
 float __fastcall Joy(void* self,void*) {
-    if(ControlPlayer(self)) {
-        auto* p=static_cast<unsigned char*>(self);
-        // This snapshot is copied anew by the player update before getJoyDir.
-        // All input devices have already been combined; no global input or
-        // persistent speed/animation values are changed.
-        auto& x=*reinterpret_cast<float*>(p+0x94B54);
-        auto& y=*reinterpret_cast<float*>(p+0x94B58);
-        FirstPersonWalkVector(x,y);
+    {
+        std::lock_guard<std::recursive_mutex> lock(stateMutex);
+        if(ControlPlayer(self)) {
+            auto* p=static_cast<unsigned char*>(self);
+            // This snapshot is copied anew by the player update before getJoyDir.
+            // All input devices have already been combined; no global input or
+            // persistent speed/animation values are changed.
+            auto& x=*reinterpret_cast<float*>(p+0x94B54);
+            auto& y=*reinterpret_cast<float*>(p+0x94B58);
+            // Keep native air steering/jump range. The walking cap applies to
+            // grounded locomotion; airborne camera height still follows the root.
+            const int move=*reinterpret_cast<int*>(p+0x34C);
+            if(move>=0&&move<=7)FirstPersonWalkVector(x,y);
+        }
     }
     return originalJoy(self);
 }
@@ -179,18 +196,35 @@ bool ReadPlayer(unsigned char*& player,float* eyes,const char*& reason,int& came
         return body&&face;
     } __except(EXCEPTION_EXECUTE_HANDLER) {reason="player/camera data could not be read";return false;}
 }
-struct HeadMask {
+bool PlayerWeapon(void* self,unsigned char* player) {
+    if(!self||!player||self==player)return false;
+    __try {
+        auto* model=static_cast<unsigned char*>(self);
+        // Native weapon objects use the 0x30000 ID family. cGameObj's
+        // parent accessor (451AC0) returns +A00; 454B10 resolves its bone
+        // into +120 unless attachment is disabled (+A08 bit 0). Require
+        // a live attachment, so dropped weapons and projectiles remain.
+        const unsigned id=*reinterpret_cast<unsigned*>(model+0x370);
+        return (id&0xFFFF0000u)==0x30000u &&
+            *reinterpret_cast<unsigned char**>(model+0xA00)==player &&
+            !(*reinterpret_cast<unsigned*>(model+0xA08)&1u) &&
+            *reinterpret_cast<void**>(model+0x120)!=nullptr;
+    } __except(EXCEPTION_EXECUTE_HANDLER) {return false;}
+}
+struct PlayerMeshMask {
     uint32_t* flags[512]{};
     uint32_t visible[512]{};
     unsigned count=0;
-    bool Collect(unsigned char* player) {
+    bool Collect(unsigned char* player,bool wholeBody) {
         __try {
             const int meshCount=*reinterpret_cast<int*>(player+0x1E8);
             auto** meshes=*reinterpret_cast<unsigned char***>(player+0x1E4);
             if(meshCount<1||meshCount>512||!meshes)return false;
             for(int i=0;i<meshCount;++i)if(meshes[i]) {
-                const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
-                if(!name||!FirstPersonHeadMesh(name))continue;
+                if(!wholeBody) {
+                    const char* name=*reinterpret_cast<const char**>(meshes[i]+0x48);
+                    if(!name||!FirstPersonHeadMesh(name))continue;
+                }
                 auto* frame=*reinterpret_cast<unsigned char**>(meshes[i]+0x70);
                 if(!frame)return false;
                 flags[count]=reinterpret_cast<uint32_t*>(frame+0x10);
@@ -203,12 +237,17 @@ struct HeadMask {
     void Restore(){for(unsigned i=0;i<count;++i)*flags[i]=(*flags[i]&~1u)|visible[i];}
 };
 void __fastcall Queue(void* self,void*,void* camera) {
-    if(requested&&!prepared&&self==sessionPlayer)ControlPlayer(self);
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
+    const bool weapon=requested&&PlayerWeapon(self,sessionPlayer);
+    const bool playerModel=self==sessionPlayer;
+    if(requested&&!prepared&&(playerModel||weapon))ControlPlayer(sessionPlayer);
     if(!prepared && requested && enabled() &&
-       self==*reinterpret_cast<void**>(imageBase+0xAF5A60)) {
+       (playerModel||weapon)) {
         unsigned char* player=nullptr;float eyes[3]{};
         const char* reason="player changed during queue";int cameraMode=-1;
-        if(ReadPlayer(player,eyes,reason,cameraMode) && self==player) {
+        if(ReadPlayer(player,eyes,reason,cameraMode) && player==sessionPlayer) {
+            // Weapons can precede the body in the native submission order.
+            // Prepare the same validated camera/mask state from either one.
             prepared=queued=true;queuedPlayer=player;memcpy(queuedEyes,eyes,sizeof(eyes));
             loggedUnavailable=false;
         } else if(!loggedUnavailable) {
@@ -217,25 +256,40 @@ void __fastcall Queue(void* self,void*,void* camera) {
             ExitExploration(reason);
         }
     }
-    if(queued&&self==queuedPlayer) {
-        HeadMask mask;
-        if(mask.Collect(queuedPlayer)) {
+    const bool wholeBody=queued&&FirstPersonHideJumpBody(*reinterpret_cast<int*>(queuedPlayer+0x34C));
+    if(queued&&(self==queuedPlayer||(weapon&&wholeBody))) {
+        PlayerMeshMask mask;
+        if(mask.Collect(static_cast<unsigned char*>(self),wholeBody)) {
             // The engine's mesh-enabled bit gates color, alpha, extra material
             // and shadow queues. Restore immediately after submission so no
             // visibility setting survives a toggle, costume change or unload.
             mask.Hide();original(self,camera);mask.Restore();return;
         }
-        queued=false;
+        if(self==queuedPlayer)queued=false;
     }
+    // Serialize unmasked submissions too: another worker must not mask
+    // this model while its normal submission is still reading the flags.
     original(self,camera);
 }
 }
-bool FirstPersonAvailable(){return original&&enabled&&enabled();}
+bool FirstPersonAvailable(){std::lock_guard<std::recursive_mutex> lock(stateMutex);return original&&enabled&&enabled();}
 void UpdateFirstPersonTracking(const Mat4& relativeGameHead,bool valid) {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     trackedHead=relativeGameHead;trackingValid=valid;
     if(!valid&&requested)ExitExploration("tracking or game focus lost");
 }
+void UpdateFirstPersonTurn(float horizontal,uint64_t now) {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
+    if(!requested||!headingValid||!trackingValid){turnSampleValid=false;return;}
+    const bool continuous=turnSampleValid&&now>=turnTick&&now-turnTick<=250;
+    const float dt=continuous?float(now-turnTick)*.001f:0.f;
+    turnTick=now;turnSampleValid=true;
+    // renderHeading remains the snapshot for both eyes. The new heading is
+    // used by the next player update/queue, keeping body and camera together.
+    FirstPersonTurnHeading(fixedHeading,FirstPersonTurnDelta(horizontal,dt));
+}
 void ToggleFirstPerson() {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     if(!FirstPersonAvailable())return;
     if(requested){ExitExploration("R3");return;}
     unsigned char* player=nullptr;float eyes[3]{};const char* reason="tracking unavailable";int mode=-1;
@@ -243,22 +297,24 @@ void ToggleFirstPerson() {
     if(!trackingValid||!ReadPlayer(player,eyes,reason,mode)) {
         eyeHeight=0;Log("first person: R3 blocked: %s",reason);return;
     }
-    requested=true;sessionPlayer=player;headingValid=false;
+    requested=true;sessionPlayer=player;headingValid=false;turnSampleValid=false;
     loggedUnavailable=false;
     Log("first person: requested %s; applies with next player render queue",requested?"head camera":"third person");
 }
 void BeginFirstPersonFrame() {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     if(requested) {
         unsigned char* player=nullptr;const char* reason="player not queued";
         if(!queued||!ExplorationPlayer(player,reason))ExitExploration(reason);
     }
     const bool next=queued&&FirstPersonAvailable();
-    if(next!=rendering)Log("first person: %s",next?"head camera + head-only mesh mask active":"original camera + complete model active");
+    if(next!=rendering)Log("first person: %s",next?"head camera + head mask (whole body during jumps) active":"original camera + complete model active");
     rendering=next;memcpy(renderEyes,queuedEyes,sizeof(renderEyes));
     renderHeading=fixedHeading;renderHeadingValid=headingValid;
     queued=prepared=false;queuedPlayer=nullptr;
 }
 bool GetFirstPersonCorrection(const Mat4& inverseProjection,Mat4& correction) {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     if(!rendering)return false;
     const auto& row=*reinterpret_cast<const Mat4*>(imageBase+0xB2DCE0);
     Mat4 vp{};for(int r=0;r<4;++r)for(int c=0;c<4;++c)vp.m[r][c]=row.m[c][r];
@@ -270,6 +326,7 @@ bool GetFirstPersonCorrection(const Mat4& inverseProjection,Mat4& correction) {
     return ok;
 }
 bool InstallFirstPerson(unsigned char* image,bool (*active)()) {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     if(original)return true;
     if(!image||!active)return false;
     const auto* dos=reinterpret_cast<const IMAGE_DOS_HEADER*>(image);
@@ -304,9 +361,10 @@ bool InstallFirstPerson(unsigned char* image,bool (*active)()) {
     *reinterpret_cast<int32_t*>(patch+1)=static_cast<int32_t>(reinterpret_cast<unsigned char*>(&Queue)-(entry+5));
     memcpy(entry,patch,6);DWORD ignored=0;VirtualProtect(entry,6,protection,&ignored);
     FlushInstructionCache(GetCurrentProcess(),entry,6);
-    Log("first person: exploration only; R3 toggle; native walk radius=450; tracked body yaw; stable root eye height");return true;
+    Log("first person: exploration + jumps/falls; R3 toggle; grounded walk radius=450; HMD + right-stick yaw; stable root eye height");return true;
 }
 void RemoveFirstPerson() {
+    std::lock_guard<std::recursive_mutex> lock(stateMutex);
     if(!original)return;
     ExitExploration("uninstall");
     if(!Undo(imageBase+0xA41C0,rootRelay,5)||!Undo(imageBase+0x5CDA00,joyRelay,6))return;

@@ -322,12 +322,13 @@ void VRRuntime::ApplyGamepadCalibration() {
     DWORD foreground=0;GetWindowThreadProcessId(GetForegroundWindow(),&foreground);
     UpdateFirstPersonTracking(ToGameCoordinates(Mul(InvertRigid(origin_),headPose_),1.f),
         poseValid_&&originValid_&&Active()&&foreground==GetCurrentProcessId());
-    bool toggle=false;
-    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),GetTickCount64(),
-        &toggle,FirstPersonAvailable())) {
+    bool toggle=false;float turnX=0;const auto now=GetTickCount64();
+    if(PollGamepadRecenter(poseValid_&&Active()&&foreground==GetCurrentProcessId(),now,
+        &toggle,FirstPersonAvailable(),&turnX)) {
         Recenter();Log("controllers: physical gamepad L3+R3 recenter");
     }
     if(toggle)ToggleFirstPerson();
+    UpdateFirstPersonTurn(turnX,now);
 }
 
 void VRRuntime::ApplyControllers(const ControllerInput& input) {

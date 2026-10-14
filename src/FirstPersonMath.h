@@ -3,6 +3,21 @@
 #include <cstring>
 
 namespace bvr {
+inline bool FirstPersonHideJumpBody(int move) {
+    // Jump (including descent), dodge-limit jump, wind fall and special
+    // jump. Landing/ledge/ground states restore the ordinary head-only mask.
+    return move==11||move==18||move==22||move==25;
+}
+inline bool FirstPersonTraversal(int move) {
+    // Steam pl0000 move IDs, named in the local BayoHook SDK. Keep the
+    // ordinary jump/fall, landing and ledge traversal chain, not air attacks.
+    if(move>=0&&move<=7)return true;
+    switch(move) {
+    case 9: case 10: case 11: case 12: case 13: case 14: case 16:
+    case 18: case 22: case 24: case 25: case 26:return true;
+    default:return false;
+    }
+}
 inline float CameraBasisDeterminant(const Mat4& a) {
     return a.m[0][0]*(a.m[1][1]*a.m[2][2]-a.m[1][2]*a.m[2][1])
           -a.m[0][1]*(a.m[1][0]*a.m[2][2]-a.m[1][2]*a.m[2][0])
@@ -57,6 +72,23 @@ inline bool FirstPersonBodyYaw(const Mat4& heading,const Mat4& tracked,float& ya
     const float x=gaze.m[0][2],z=gaze.m[2][2];
     if(!std::isfinite(x)||!std::isfinite(z)||x*x+z*z<.0001f)return false;
     yaw=std::atan2(x,z);return true;
+}
+inline float FirstPersonTurnDelta(float axis,float seconds) {
+    if(!std::isfinite(axis)||!std::isfinite(seconds)||seconds<=0||seconds>.25f)return 0;
+    const float magnitude=std::fmin(std::fabs(axis),1.f);
+    if(magnitude<=.2f)return 0;
+    return std::copysign((magnitude-.2f)/.8f,axis)*1.57079632679f*seconds;
+}
+inline void FirstPersonTurnHeading(Mat4& heading,float radians) {
+    if(!std::isfinite(radians)||radians==0)return;
+    const float sign=CameraBasisDeterminant(heading)<0?-1.f:1.f;
+    // Positive stick X turns toward camera-right even for the native
+    // reflected camera basis. Rebuild a level basis to avoid drift/roll.
+    const float yaw=std::atan2(heading.m[0][2],heading.m[2][2])+sign*radians;
+    const float x=std::sin(yaw),z=std::cos(yaw);
+    heading=Identity();
+    heading.m[0][0]=sign*z;heading.m[2][0]=-sign*x;
+    heading.m[0][2]=x;heading.m[2][2]=z;
 }
 inline bool FirstPersonHeadMesh(const char* name) {
     // Names from the installed pl0010 WMB. In particular body, change_hair,

@@ -3,7 +3,32 @@
 Experimental native-stereo 6DOF OpenVR mod for the 32-bit Steam release of
 Bayonetta (executable timestamp `0x591AD330`).
 
-## Exploration first person (build 20261013.66)
+## Exploration first person (build 20261013.70)
+
+Build `.70` fixes a concurrent access bug introduced by `.69` that crashed
+when jumping in first person. Both reported crashes were access violations
+at `d3d9.dll+0x1C734`; the saved dump shows a null player pointer in the jump
+state read. Mesh queue workers and frame setup previously shared unprotected
+state. A recursive mutex now protects first-person state and keeps mesh
+submission/visibility restoration together with respect to frame reset,
+tracking updates and R3 changes. Body and attached-gun jump hiding remain.
+
+Build `.69` also hides Bayonetta's attached gun/weapon models during
+first-person jumps and falls. These are submitted separately from her body;
+the mask checks their native parent and active attachment and handles either
+submission order. Landing or leaving first person restores weapon visibility.
+Other characters' weapons and detached weapons retain their normal visibility.
+
+Build `.68` hides Bayonetta's entire model during first-person jump/fall
+states. Landing restores the body with only the head hidden; leaving first
+person restores normal full-model visibility immediately. Mesh visibility
+flags are restored after every submission, including already-hidden meshes.
+
+Build `.67` keeps first person through jumps, falls, ledge traversal and
+landings outside combat. The right analog stick now turns the first-person
+view and body horizontally on a physical gamepad or VR controller. Turning
+is smooth, up to 90 degrees/second, with a 20% deadzone. Headset turning still
+adds to stick turning; pitch and roll remain controlled by the headset.
 
 Tap and release **R3** on a gamepad or VR controller to switch between third
 and first person. `FirstPersonToggle=1` enables the shortcut and is the default
@@ -14,22 +39,24 @@ first-person mode is not used.
 First person is restricted to exploration. Live enemies force third person
 and block entry; this deliberately includes enemies registered before they
 start attacking. Dead enemies and empty enemy-list slots do not block it.
-Attacks, jumps, dodges, transformations, wall walking, cutscenes, loading,
+Attacks, dodges, transformations, wall walking, cutscenes, loading,
 loss of tracking/focus and an unrecognized costume also leave first person.
 Tap R3 again when normal exploration resumes; it does not re-enter on its own.
 
 Bayonetta's body follows your headset's horizontal heading, with her head
-meshes hidden and the rest of her body retained. Existing room-scale headset
+meshes hidden and the rest of her body retained while grounded. Jump/fall
+states hide the whole model and its attached weapons. Existing room-scale headset
 translation remains active. The first-person view keeps its entry heading as
 its base so the game's automatic camera cannot feed body turns back into the
-view. Turn physically to look around. The eye anchor follows the character's
+view. Turn physically or use the right stick to look around. The eye anchor follows the character's
 root at a height sampled on entry, removing animated head bob and sway while
-still following changes in ground elevation.
+still following changes in ground elevation and jump/fall height.
 
-Movement is capped to walking in the game's combined input snapshot, covering
+Grounded movement is capped to walking in the game's combined input snapshot, covering
 keyboard, physical gamepads and VR controllers. The radial cap preserves
-direction and prevents diagonals from exceeding walking speed. Other actions
-return to third person instead of retaining the head camera through acrobatics.
+direction and prevents diagonals from exceeding walking speed. Native air
+steering remains unrestricted so jumping/falling retains its movement range.
+Air attacks still return to third person.
 Normal third-person input and speed are restored automatically.
 
 The restored `.60` code retains its corrected camera argument/stack cleanup.
@@ -40,13 +67,22 @@ the cumulative player `enemyCount` field is not used. Run
 `tests/build_first_person_checks.cmd` for camera/GPU, x86 hook, combat exit,
 tracking, body yaw, walk-cap and map-unload regressions.
 
-Headset play testing of these new exploration behaviors is still pending.
-Release/Win32, the full regression suite and the companion transport tests
-pass. The companion protocol is version 3; install the matching DLL and host
+The user confirmed that `.66` works well. Headset play testing of the new
+`.67` jump/fall support and stick turning is pending.
+Release/Win32 and the first-person camera/GPU/native-hook tests pass for `.70`,
+including whole-body jump masking, landing restoration, R3 exit during a jump,
+unnamed/already-hidden meshes, attached weapons in both submission orders,
+owner/detachment isolation and combat/player-replacement exits. A concurrent
+frame-reset regression fails on `.69` and passes on `.70`, including optimized
+builds. The stress check runs 20,000 mesh submissions across two workers with
+10,000 frame resets, tracking/turn updates and R3 changes. In-game confirmation
+of the crash fix is pending. The full regression
+suite and companion transport tests passed for `.67`.
+The companion protocol is version 3; install the matching DLL and host
 together. Existing INI settings are preserved.
-Build `.66` is installed with SHA256 verification. The previous installed
+Build `.70` is installed with SHA256 verification. The previous installed
 DLL, host and INI are backed up in
-`.diagnostics/before66-installed-20261013-195615`.
+`.diagnostics/before70-installed-20261013-234050`.
 The confirmed `.65` red-streak fix, grading removal and black startup display
 are retained.
 

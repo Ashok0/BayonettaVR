@@ -27,6 +27,14 @@ checks = {
     0xAAA2C0: '8b 41 08 c3',
     # Native player-camera behavior checks CAM_MODE_PL (1), not MAIN (0).
     0xA95CAC: '83 be 78 07 00 00 01',
+    # cGameObj parent getter and live bone attachment used by weapon postMove.
+    0x451AC0: '8b 81 00 0a 00 00 c3',
+    0x454B16: 'f6 86 08 0a 00 00 01',
+    0x454B25: '8b 8e 00 0a 00 00',
+    0x454B5C: '8b 96 04 0a 00 00 52 e8 58 02 05 00',
+    0x454B6C: '89 86 20 01 00 00',
+    0xA23803: '8b 86 70 03 00 00 3d 20 00 03 00',
+    0xA2390A: '8b ce e8 ff 11 a3 ff',
 }
 for va, hex_bytes in checks.items():
     signature = bytes.fromhex(hex_bytes)

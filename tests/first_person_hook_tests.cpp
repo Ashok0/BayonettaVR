@@ -6,18 +6,27 @@
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
+#include <atomic>
+#include <thread>
 using namespace bvr;
-namespace bvr {void Log(const char* f,...){va_list a;va_start(a,f);vprintf(f,a);va_end(a);puts("");}}
+static std::atomic<bool> quiet{false};
+namespace bvr {void Log(const char* f,...){if(quiet)return;va_list a;va_start(a,f);vprintf(f,a);va_end(a);puts("");}}
 static bool active=true;
 static unsigned passed=0;
-static unsigned faces=0,bodies=0,chestHairs=0;
-static void* expectedCamera=nullptr;
+static unsigned faces=0,bodies=0,chestHairs=0,guns=0;
+static thread_local void* expectedCamera=nullptr;
+static std::atomic<bool> pauseSubmission{false};
+static HANDLE submissionEntered=nullptr,submissionRelease=nullptr;
 static float observedYaw=0,observedX=0,observedY=0;
 static void __fastcall RecordRoot(unsigned char* p,void*) {observedYaw=*reinterpret_cast<float*>(p+0xE4);}
 static float __fastcall RecordJoy(unsigned char* p,void*) {
     observedX=*reinterpret_cast<float*>(p+0x94B54);observedY=*reinterpret_cast<float*>(p+0x94B58);return 1.234f;
 }
 static void __fastcall Record(unsigned char* player,void*,void* camera) {
+    if(pauseSubmission.exchange(false)) {
+        SetEvent(submissionEntered);
+        assert(WaitForSingleObject(submissionRelease,5000)==WAIT_OBJECT_0);
+    }
     if(camera!=expectedCamera) {
         puts("FAIL: transMesh dropped or changed its stack camera argument");
         fflush(stdout);
@@ -33,6 +42,7 @@ static void __fastcall Record(unsigned char* player,void*,void* camera) {
         if(!strcmp(name,"face_game"))++faces;
         if(!strcmp(name,"body"))++bodies;
         if(!strcmp(name,"boin_hair"))++chestHairs;
+        if(!strcmp(name,"gun"))++guns;
     }
 }
 template<class T> static void Put(unsigned char* p,size_t o,T value){memcpy(p+o,&value,sizeof(value));}
@@ -145,6 +155,14 @@ int main() {
     assert(std::fabs(correction.m[0][3]+2.f)<.001f&&std::fabs(correction.m[1][3]+2.7f)<.001f);
     Mat4 turn=Identity();turn.m[0][0]=turn.m[2][2]=0;turn.m[0][2]=1;turn.m[2][0]=-1;
     UpdateFirstPersonTracking(turn,true);rootCall(player);assert(std::fabs(observedYaw-1.5707963f)<.001f);
+    assert(GetFirstPersonCorrection(invP,correction));const auto beforeTurn=correction;
+    UpdateFirstPersonTurn(1,1000);UpdateFirstPersonTurn(1,1100);
+    rootCall(player);assert(std::fabs(observedYaw-1.727876f)<.001f); // HMD 90 + stick 9 degrees.
+    assert(GetFirstPersonCorrection(invP,correction));assert(!memcmp(&beforeTurn,&correction,sizeof(correction)));
+    call(player);BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    assert(std::fabs(correction.m[0][2])>.1f); // Both eyes commit the turn on the next queue.
+    UpdateFirstPersonTurn(1,2000);rootCall(player);assert(std::fabs(observedYaw-1.727876f)<.001f); // No catch-up after stall.
+    UpdateFirstPersonTurn(-1,2100);rootCall(player);assert(std::fabs(observedYaw-1.5707963f)<.001f);
     Put(otherPlayer,0xE4,.25f);rootCall(otherPlayer);assert(observedYaw==.25f);
     Put(player,0x94B54,1000.f);Put(player,0x94B58,1000.f);
     assert(std::fabs(joyCall(player)-1.234f)<.001f);
@@ -166,7 +184,113 @@ int main() {
     Put(image,0x56569F0+0x800,1);enter();
     Put(image,0xAF5A60,otherPlayer);rootCall(player);BeginFirstPersonFrame();
     assert(!GetFirstPersonCorrection(invP,correction));Put(image,0xAF5A60,player);enter();
-    Put(player,0x34C,11);rootCall(player);call(player);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
+    const int traversal[]={11,11,22,16,10,12,13,14,18,24,25,26,0};
+    for(unsigned i=0;i<sizeof(traversal)/sizeof(traversal[0]);++i) {
+        Put(player,0x34C,traversal[i]);Put(player,0xD4,1.f+float(i%4));
+        Put(head,0x34,2.4f+float(i%4));
+        Put(player,0x94B54,1000.f);Put(player,0x94B58,0.f);joyCall(player);
+        assert(observedX==(traversal[i]==0?450.f:1000.f));
+        const auto beforeBodies=bodies,beforeFaces=faces,beforeHair=chestHairs;
+        rootCall(player);call(player);BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+        const bool jumping=traversal[i]==11||traversal[i]==18||traversal[i]==22||traversal[i]==25;
+        assert(faces==beforeFaces);
+        assert(bodies==beforeBodies+(jumping?0:1)&&chestHairs==beforeHair+(jumping?0:1));
+        for(int n=0;n<3;++n)assert(*reinterpret_cast<uint32_t*>(frames[n]+0x10)==0x04001031);
+        assert(std::fabs(correction.m[1][3]+2.4f+float(i%4))<.001f);
+    }
+    // Full-body masking also covers unnamed mesh entries, restores a mesh
+    // that was already hidden, and never affects another model or third person.
+    Put(player,0x34C,11);Put(chestHair,0x48,static_cast<const char*>(nullptr));
+    auto visibleBodies=bodies;call(player);assert(bodies==visibleBodies);
+    Put(frames[2],0x10,uint32_t(0x04001030));
+    call(player);assert(bodies==visibleBodies);
+    assert(*reinterpret_cast<uint32_t*>(frames[2]+0x10)==0x04001030);
+    Put(chestHair,0x48,"boin_hair");Put(frames[2],0x10,uint32_t(0x04001031));
+    call(otherPlayer);assert(bodies==visibleBodies+1);
+    BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    ToggleFirstPerson();visibleBodies=bodies;call(player);assert(bodies==visibleBodies+1);
+    BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
+    enter();visibleBodies=bodies;call(player);assert(bodies==visibleBodies);
+    BeginFirstPersonFrame();Put(player,0x34C,12);call(player);assert(bodies==visibleBodies+1);
+    BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    // Hand/heel guns are separate weapon models. Exercise both native
+    // submission orders and every hidden air state, then landing/toggle.
+    unsigned char weapons[4][0xB00]{},gunMeshes[4][0xB0]{},gunFrames[4][0x20]{};
+    unsigned char* gunTables[4][1]{};
+    for(int i=0;i<4;++i) {
+        gunTables[i][0]=gunMeshes[i];Put(gunMeshes[i],0x48,"gun");Put(gunMeshes[i],0x70,gunFrames[i]);
+        Put(gunFrames[i],0x10,uint32_t(0x04001031));
+        Put(weapons[i],0x1E8,1);Put(weapons[i],0x1E4,gunTables[i]);
+        Put(weapons[i],0x370,0x30000u+unsigned(i));Put(weapons[i],0xA00,player);Put(weapons[i],0x120,head);
+    }
+    auto gunCall=[&](int i,bool visible) {
+        const auto before=guns;call(weapons[i]);assert(guns==before+(visible?1:0));
+        assert(*reinterpret_cast<uint32_t*>(gunFrames[i]+0x10)==0x04001031);
+    };
+    const int gunMoves[]={11,18,22,25,12,0};
+    for(int move:gunMoves) {
+        Put(player,0x34C,move);const bool jumping=move==11||move==18||move==22||move==25;
+        gunCall(0,!jumping);gunCall(1,!jumping);call(player);gunCall(2,!jumping);gunCall(3,!jumping);
+        BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    }
+    Put(player,0x34C,11);
+    Put(weapons[0],0xA00,otherPlayer);gunCall(0,true); // Another character's gun.
+    Put(weapons[0],0xA00,static_cast<unsigned char*>(nullptr));gunCall(0,true);
+    Put(weapons[0],0xA00,player);Put(weapons[0],0x120,static_cast<unsigned char*>(nullptr));gunCall(0,true);
+    Put(weapons[0],0x120,head);Put(weapons[0],0xA08,1u);gunCall(0,true); // Detached/thrown.
+    Put(weapons[0],0xA08,0u);Put(weapons[0],0x370,0x20000u);gunCall(0,true); // Non-weapon.
+    Put(weapons[0],0x370,0x30000u);gunCall(0,false);
+    Put(gunFrames[0],0x10,uint32_t(0x04001030));const auto beforeHidden=guns;
+    call(weapons[0]);assert(guns==beforeHidden&&*reinterpret_cast<uint32_t*>(gunFrames[0]+0x10)==0x04001030);
+    Put(gunFrames[0],0x10,uint32_t(0x04001031));
+    BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    ToggleFirstPerson();gunCall(0,true);call(player);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
+    ToggleFirstPerson();gunCall(0,false);call(player);BeginFirstPersonFrame();assert(GetFirstPersonCorrection(invP,correction));
+    // An attachment arriving first still validates combat and scene changes.
+    Put(enemy,0x6B4,100);gunCall(0,true);call(player);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
+    Put(enemy,0x6B4,0);enter();Put(image,0xAF5A60,otherPlayer);
+    gunCall(0,true);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
+    Put(image,0xAF5A60,player);enter();
+    // Deterministically overlap a masked worker submission with frame reset.
+    // .69 let BeginFirstPersonFrame clear queuedPlayer while Queue still
+    // depended on it. Reset must wait until submission and flag restore finish.
+    submissionEntered=CreateEvent(nullptr,TRUE,FALSE,nullptr);
+    submissionRelease=CreateEvent(nullptr,TRUE,FALSE,nullptr);
+    HANDLE frameEntered=CreateEvent(nullptr,TRUE,FALSE,nullptr);
+    HANDLE frameDone=CreateEvent(nullptr,TRUE,FALSE,nullptr);
+    pauseSubmission=true;
+    std::thread submitter([&]{call(weapons[0]);});
+    assert(WaitForSingleObject(submissionEntered,5000)==WAIT_OBJECT_0);
+    std::thread resetter([&]{SetEvent(frameEntered);BeginFirstPersonFrame();SetEvent(frameDone);});
+    assert(WaitForSingleObject(frameEntered,5000)==WAIT_OBJECT_0);
+    const bool resetBlocked=WaitForSingleObject(frameDone,50)==WAIT_TIMEOUT;
+    SetEvent(submissionRelease);submitter.join();resetter.join();
+    if(!resetBlocked){puts("FAIL: frame reset overlapped an unfinished masked submission");ExitProcess(42);}
+    assert(*reinterpret_cast<uint32_t*>(gunFrames[0]+0x10)==0x04001031);
+    CloseHandle(submissionEntered);CloseHandle(submissionRelease);CloseHandle(frameEntered);CloseHandle(frameDone);
+    // Stress queue workers against reset, tracking, turning and R3 changes.
+    // Immutable scene fixtures isolate synchronization inside FirstPerson.
+    quiet=true;
+    std::atomic<bool> start{false};
+    auto worker=[&](void* model) {
+        expectedCamera=image+0xB2DAE0;
+        while(!start.load())std::this_thread::yield();
+        for(int i=0;i<10000;++i)assert(CheckedCall(image+0xA6990,model,expectedCamera));
+    };
+    const auto beforeConcurrent=passed;
+    std::thread bodyWorker(worker,player),gunWorker(worker,weapons[0]);
+    start=true;
+    for(int i=0;i<10000;++i) {
+        BeginFirstPersonFrame();UpdateFirstPersonTracking(Identity(),true);
+        if(i%8==0)ToggleFirstPerson();
+        UpdateFirstPersonTurn(.5f,3000+i);GetFirstPersonCorrection(invP,correction);
+    }
+    bodyWorker.join();gunWorker.join();quiet=false;
+    assert(passed==beforeConcurrent+20000);
+    for(int i=0;i<3;++i)assert(*reinterpret_cast<uint32_t*>(frames[i]+0x10)==0x04001031);
+    assert(*reinterpret_cast<uint32_t*>(gunFrames[0]+0x10)==0x04001031);
+    UpdateFirstPersonTracking(Identity(),false);UpdateFirstPersonTracking(Identity(),true);enter();
+    Put(player,0x34C,56);rootCall(player);call(player);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction)); // Air attack still exits.
     Put(player,0x34C,0);enter();
     UpdateFirstPersonTracking(Identity(),false);call(player);BeginFirstPersonFrame();assert(!GetFirstPersonCorrection(invP,correction));
     UpdateFirstPersonTracking(Identity(),true);enter();
@@ -198,5 +322,5 @@ int main() {
     RemoveFirstPerson();assert(!FirstPersonAvailable());assert(!memcmp(image+0xA6990,queue,6));
     assert(!memcmp(image+0xA41C0,root,5)&&!memcmp(image+0x5CDA00,joy,6));
     VirtualFree(image,0,MEM_RELEASE);
-    puts("First person hook: x86 trampoline/ABI, head-only suppression, body/other models, paired transitions, cutscene/menu/unknown-model fallback and restoration passed.");
+    puts("First person hook: x86 ABI, body/gun masking, owner isolation, blocked concurrent frame reset, 20000 worker submissions with 10000 frame resets, scene fallback and restoration passed.");
 }

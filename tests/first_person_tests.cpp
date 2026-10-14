@@ -12,6 +12,22 @@ static Mat4 RecoverProjection(const Mat4& row) {
     p.m[2][2]=depth;p.m[2][3]=row.m[3][2]-depth*row.m[3][3];p.m[3][2]=1;return p;
 }
 int main() {
+    for(int move:{0,7,9,10,11,12,13,14,16,18,22,24,25,26})assert(FirstPersonTraversal(move));
+    for(int move:{-1,8,15,17,19,23,27,31,55,56,458,999})assert(!FirstPersonTraversal(move));
+    Near(FirstPersonTurnDelta(1,1.f/60)*60,1.57079632679f);
+    Near(FirstPersonTurnDelta(-1,1.f/90)*90,-1.57079632679f);
+    Near(FirstPersonTurnDelta(.1f,.1f),0);Near(FirstPersonTurnDelta(1,1),0);
+    Near(FirstPersonTurnDelta(std::numeric_limits<float>::quiet_NaN(),.1f),0);
+    for(float sign:{-1.f,1.f}) {
+        Mat4 heading=Identity();heading.m[0][0]=sign;
+        FirstPersonTurnHeading(heading,1.57079632679f);
+        Near(heading.m[0][2],sign);Near(heading.m[2][2],0);
+        FirstPersonTurnHeading(heading,-1.57079632679f);
+        Near(heading.m[0][2],0);Near(heading.m[2][2],1);
+        for(int n=0;n<10000;++n)FirstPersonTurnHeading(heading,.01f);
+        assert(ValidCameraBasis(heading));Near(CameraBasisDeterminant(heading),sign);
+        Near(heading.m[1][1],1);Near(heading.m[1][2],0);Near(heading.m[1][0],0);
+    }
     for(float x:{-1000.f,-350.f,0.f,350.f,1000.f})for(float y:{-1000.f,-350.f,0.f,350.f,1000.f}) {
         float a=x,b=y;FirstPersonWalkVector(a,b);
         assert(std::hypot(a,b)<=450.01f);

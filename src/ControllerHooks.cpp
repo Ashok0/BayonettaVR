@@ -46,7 +46,7 @@ template<class T> bool Patch(ULONG_PTR* slot,T hook,T& original) {
 void UpdateControllerInput(const ControllerInput& input) {
     AcquireSRWLockExclusive(&inputLock);bridge.Update(input);ReleaseSRWLockExclusive(&inputLock);
 }
-bool PollGamepadRecenter(bool active,uint64_t now,bool* cameraToggle,bool cameraShortcut) {
+bool PollGamepadRecenter(bool active,uint64_t now,bool* cameraToggle,bool cameraShortcut,float* turnX) {
     // Call the unhooked export, so the consumed game buttons and virtual pad
     // cannot hide a physical chord or produce duplicate Touch events.
     XINPUT_STATE state{};
@@ -59,6 +59,12 @@ bool PollGamepadRecenter(bool active,uint64_t now,bool* cameraToggle,bool camera
     if(cameraToggle)*cameraToggle=toggled;
     const bool fired=gamepadHold.Update(connected&&(state.Gamepad.wButtons&stickChord)==stickChord,
         active&&connected,now);
+    if(turnX) {
+        XINPUT_STATE merged=connected?state:XINPUT_STATE{};
+        const bool supplied=bridge.Read(0,merged,connected,now);
+        const SHORT x=merged.Gamepad.sThumbRX;
+        *turnX=active&&(connected||supplied)?float(x)/(x<0?32768.f:32767.f):0.f;
+    }
     ReleaseSRWLockExclusive(&inputLock);return fired;
 }
 bool InstallControllerHooks() {
