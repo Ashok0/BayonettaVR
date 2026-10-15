@@ -1295,12 +1295,20 @@ The build output is `build\Win32\Release\d3d9.dll`.
 ## Install and test
 
 1. Exit Bayonetta.
-2. Copy the built `d3d9.dll`, `BayonettaVR.ini`, and the **32-bit**
-   `openvr_api.dll` into the folder containing `Bayonetta.exe`.
+2. Copy the matching built `d3d9.dll`, `BayonettaVRHost.exe`,
+   `BayonettaVR.ini`, and the **32-bit** `openvr_api.dll` into the folder
+   containing `Bayonetta.exe`. The host EXE must be beside `d3d9.dll`,
+   not inside a nested extraction folder.
 3. Start SteamVR, then launch Bayonetta normally.
 4. Inspect `BayonettaVR.log` in the game folder. A successful run reports the
    D3D9 hooks, detected shader matrix registers, shared eye textures, and
    compositor submit results.
+
+If the log reports `companion: launch failed 2`, Windows could not find the
+companion executable at launch. Check that `BayonettaVRHost.exe` was extracted
+beside `d3d9.dll`; if it disappeared, check antivirus quarantine history.
+With `ExternalCompositor=1`, the host is required for VR even when the game
+reports that its D3D9 and native stereo hooks installed successfully.
 
 Remove or rename the local `d3d9.dll` to uninstall. Existing game files are not
 patched.
